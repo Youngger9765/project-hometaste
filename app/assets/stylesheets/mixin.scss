@@ -1,0 +1,8 @@
+@mixin square-icon($pixel: 2em){
+  color: $main_red;
+  background-color: #FFFFFF;
+  border-radius: $main_radius;
+  height: $pixel;
+  line-height: $pixel;
+  width: $pixel;
+}

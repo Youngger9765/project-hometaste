@@ -43,4 +43,4 @@
 @import "varible";
 @import "mixin";
 @import "my_style";
-@import "main";
+@import "welcome";
