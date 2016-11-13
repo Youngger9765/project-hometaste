@@ -1,19 +1,10 @@
-<div class="row navbar" style="background-color: red; color: white;">
-	<div class="left col-md-6">
-		<p>HOMETASTE</p>
-	</div>
-	<div class="right col-md-6 ">
-		<div class="col-md-2">
-			<%= link_to "Help","" %>
-		</div>
-		<div class="col-md-4">
-			<%= link_to "Become a chef","" %>
-		</div>
-		<div class="col-md-2">
-			<%= link_to "Log in","" %>
-		</div>
-		<div class="col-md-2">
-			<%= link_to "Sign up","" %>
-		</div>
-	</div>
+<div class="container-fluid" style>
+	<% if current_user %>
+		<%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+		<%= link_to('修改密碼', edit_registration_path(:user)) %>
+	<% else %>
+		<%= link_to('註冊', new_registration_path(:user)) %> |
+		<%= link_to('登入', new_session_path(:user)) %>
+	<% end %>
+
 </div>
