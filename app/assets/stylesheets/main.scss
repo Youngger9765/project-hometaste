@@ -9,13 +9,41 @@
 	a {
 		color: white;
 	}
+	.dropdown {
+		position: relative;
+	    display: block;
+	    padding: 15px 15px;
+	    .dropdown-menu {
+    	    width: 300%;
+		    padding-left: 50%;
+		    left: -150%;
+			background-color: red;
+			input {
+			    background-color: red;
+			    color: white;
+			    margin-top: 15px;
+		        border-color: white;
+			    border-width: 0px 0px 1px 0px;
+			}
+			#sign_up_btn, #login_btn {
+				background-color: red;
+			    color: white;
+			    margin-top: 15px;
+			    margin-left: 20%;
+		        border-color: white;
+			    border-width: 1px 1px 1px 1px;
+			    border-radius: 5px;
+			}
+	    }
+	}
 }
 
-.dropdown {
-	position: relative;
-    display: block;
-    padding: 15px 15px;
+.navbar a:hover{
+	background-color: red !important;
+	text-decoration: underline !important;
 }
+
+
 
 .content {
 	margin-top: 50px;

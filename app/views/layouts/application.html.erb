@@ -17,16 +17,20 @@
 			<div class="right col-md-4 nav navbar-header navbar-nav">
 				<li><%= link_to "Help","" %></li>
 				<li><%= link_to "Become a chef","" %></li>
-				<li><%= link_to "Log in","" %></li>
 				<li class="dropdown">
-			    <div class="dropdown-toggle" data-toggle="dropdown"><%= link_to "Sign up","" %>
-			    </div>
-			    <ul class="dropdown-menu">
-			      <li><a href="#">HTML</a></li>
-			      <li><a href="#">CSS</a></li>
-			      <li><a href="#">JavaScript</a></li>
-			    </ul>
-			  </li>
+				    <div class="dropdown-toggle" data-toggle="dropdown"><%= link_to "Log in","" %>
+				    </div>
+				    <ul class="dropdown-menu">
+				      <%= render :partial => "main/login_form"%>
+				    </ul>
+				</li>
+				<li class="dropdown">
+				    <div class="dropdown-toggle" data-toggle="dropdown"><%= link_to "Sign up","" %>
+				    </div>
+				    <ul class="dropdown-menu">
+				      <%= render :partial => "main/sign_up_form"%>
+				    </ul>
+				</li>
 			</div>
 		</ul>
 

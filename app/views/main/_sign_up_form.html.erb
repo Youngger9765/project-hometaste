@@ -1,0 +1,33 @@
+<%= form_for(@user, url: registration_path(@user)) do |f| %>
+
+  <div class="field">
+    <%= f.text_field :name, :placeholder => "Your Name"%>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :user_name, :placeholder => "User Name"%>
+  </div>
+
+  <div class="field">
+    <%= f.email_field :email, autofocus: true , :placeholder => "Email"%>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :phone_number, :placeholder => "Phone Number"%>
+  </div>
+
+  <div class="field">
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "off", :placeholder => "Password"%>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Confirm Password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" , :id =>"sign_up_btn"%>
+  </div>
+<% end %>
