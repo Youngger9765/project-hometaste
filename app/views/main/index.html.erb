@@ -1,0 +1,278 @@
+<div class="col-xs-12 banner">
+  <div class="row">
+    <div class="title">
+      <h1>HUNGRY?</h1>
+      <h3>Don't feel like cooking?</h3>
+      <h3>We ot you coverd.</h3>
+    </div>
+    <div class="search_wrap">
+      <div class="ui form">
+        <div class="ui fluid search selection dropdown">
+          <input type="hidden" name="country">
+          <i class="dropdown icon"></i>
+          <div class="default text">Search</div>
+          <div class="menu">
+            <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+            <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+          </div>
+        </div>
+        <div class="ui fluid search selection dropdown">
+          <input type="hidden" name="country">
+          <i class="dropdown icon"></i>
+          <div class="default text">Near</div>
+          <div class="menu">
+            <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+            <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+          </div>
+        </div>
+
+        <button class="ui button" type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-xs-12 filters ui accordion">
+  <div class="row">
+    <div class="ui icon button title pull-left" data-tooltip="Filter" data-inverted="">
+      <i class="fa fa-filter fa-2x" aria-hidden="true"></i>
+    </div>
+    <div class="content">
+      <div class="container transition hidden filter_menu  ui form">
+        <div class="row">
+          <div class="col-xs-6 col-sm-2 col-sm-offset-1">
+            <p>Sort By</p>
+            <hr>
+            <a href="">BestMatch</a>
+            <a href="">Highest Rated</a>
+            <a href="">Most Reviewed</a>
+            <a href="">New</a>
+          </div>
+          <div class="col-xs-6 col-sm-2">
+            <p>Distance</p>
+            <hr>
+            <a href="">Driving-5min</a>
+            <a href="">Biking-5min</a>
+            <a href="">Walking-1min</a>
+            Custom:<input type="number" name="custom_min" class="my_form">min
+          </div>
+          <div class="clearfix hidden-xs-up"></div>
+          <div class="col-xs-4 col-sm-2">
+            <p>Price</p>
+            <hr>
+            <div class="grouped fields">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="price" checked="" tabindex="0" class="hidden">
+                  <label>$</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="price" tabindex="0" class="hidden">
+                  <label>$$</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="price" tabindex="0" class="hidden">
+                  <label>$$$</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="price" tabindex="0" class="hidden">
+                  <label>$$$$</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-2">
+            <p>Cuisine</p>
+            <hr>
+            <div class="grouped fields">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Cuisine" checked="" tabindex="0" class="hidden">
+                  <label>Any Cuisine</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Cuisine" tabindex="0" class="hidden">
+                  <label>African</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Cuisine" tabindex="0" class="hidden">
+                  <label>American</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Cuisine" tabindex="0" class="hidden">
+                  <label>Asian Fusion</label>
+                </div>
+              </div>
+              <div class="field">
+                <p href="" name="more_cuisine">More cuisine</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-2">
+            <p>Features</p>
+            <hr>
+            <div class="grouped fields">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Fearures" checked="" tabindex="0" class="hidden">
+                  <label>Today's Meal</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Fearures" tabindex="0" class="hidden">
+                  <label>Bulk Buy</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Fearures" tabindex="0" class="hidden">
+                  <label>Delivery</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="Fearures" tabindex="0" class="hidden">
+                  <label>Offer BigBun</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui icon button pull-right" data-tooltip="Map view" data-inverted="">
+      <i class="fa fa-street-view fa-2x" aria-hidden="true"></i>
+    </div>
+    <div class="ui icon button pull-right hidden" data-tooltip="Product list" data-inverted="">
+      <i class="fa fa-th fa-2x" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>
+
+<div class="location_map hidden">
+  <%= image_tag 'map.png', class:'img-responsive' %>
+</div>
+
+<div class="container">
+  <div class="row product_cards">
+    <%= content_for :card_hover_link do %>
+        <div class="sold_num">
+          <i class="fa fa-heart" aria-hidden="true">
+            <span><p>123</p></span>
+          </i>
+        </div>
+        <span name="sold_p">sold last week</span>
+        <div class="wrapping_div">
+          <i class="fa fa-external-link ui custom button" aria-hidden="true"></i>
+        </div>
+        <div class="ui custom popup top left transition hidden">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <i class="fa fa-weixin" aria-hidden="true"></i>
+        </div>
+    <% end %>
+    <% 9.times do %>
+        <div class="col-md-4 col-xs-6">
+          <div class="ui fluid card">
+            <div class="image">
+              <%= image_tag 'BB_DHD.png',class:'food_status' %>
+              <%= image_tag 'product.png' %>
+              <div class="card_hover_link hidden hidden-xs">
+                <%= content_for :card_hover_link %>
+              </div>
+            </div>
+            <div class="content">
+              <div class="ui icon button address" data-tooltip="Address" data-inverted="">
+                <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+              </div>
+              <p class="description">Mr.chans Kitchen</p>
+              <hr>
+              <div class="address_detail hidden">
+                <p>全家家就是你家你家就是我家 我家不是你家</p>
+                <hr>
+              </div>
+              <p class="header">Roasted Duck</p>
+              <p class="description" href="#">$7.00/ Half</p>
+              <div class="meta hidden-xs">
+                <span>Vegan</span><span>Soup</span><span>Pumkim</span><span>Autum</span>
+              </div>
+              <div class="ui rating " data-rating="3" data-max-rating="5"></div>
+              <div class="card_hover_link visible-xs">
+                <%= content_for :card_hover_link %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    <% end %>
+  </div>
+  <div class="load_more">
+    <button class="ui button my_btn">Load more</button>
+  </div>
+</div>
+
+<div class="ui small modal" name="more_cuisine">
+  <i class="close icon"></i>
+  <div class="header text-center">
+    Cuisine
+  </div>
+  <div class="image content">
+    <div class="description">
+
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+            <label>Apples</label>
+          </div>
+        </div>
+        <% 10.times do %>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                <label>Orangesasdasdas</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                <label>Pears</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                <label>Grapefruit</label>
+              </div>
+            </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button my_btn">Search</div>
+    <div class="ui deny button my_btn_reserve">Cancel</div>
+  </div>
+</div>
+
+
+
+<%= javascript_include_tag 'main' %>

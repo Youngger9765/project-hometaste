@@ -8,13 +8,30 @@ a:hover{
 hr{
   color: $main_black;
 }
-button.ui.button.my_btn{
-  display: block;
+.ui.button.my_btn{
   background-color: $main_red;
   color: #FFFFFF;
   font-weight: inherit;
   border-radius: $main_radius;
   font-size:1em;
+}
+.ui.button.my_btn_reserve{
+  background-color: #FFFFFF;
+  color: $main_red;
+  font-weight: inherit;
+  border-radius: $main_radius;
+  font-size:1em;
+  border: 1px solid $main_red;
+}
+.ui.form input[type='text'].my_form,
+.ui.form input[type='number'].my_form{
+  border-radius: 0;
+  color: #FFFFFF;
+  background-color: transparent;
+  border:none;
+  padding: 0;
+  padding-left: 5px;
+  border-bottom: 1px solid #FFFFFF;
 }
 .under_line{
   border-bottom: 1px solid $main_black;
@@ -33,8 +50,24 @@ button.ui.button.my_btn{
   @include square-icon;
 }
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: white;
+  opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: white;
+  opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+
 //---------- navbar ---------//
-.my_navbar{
+.navbar{
   background-color: $main_red;
   border:0;
   a{
@@ -45,51 +78,10 @@ button.ui.button.my_btn{
     padding-top: 0;
     padding-bottom: 0;
   }
-}
-.ui.fluid.card {
-  overflow: hidden;
-  border-radius: $card_radius;
-  .content {
-    position: relative;
+  .dropdown-menu{
+    background-color: $main_red;
+    transform: translateX(-50%);
   }
-  .header {
-    margin-top: 10px;
-  }
-  p {
-    font-weight: 500;
-  }
-  hr {
-    width: 70%;
-    margin: 0 0 10px 0;
-  }
-  img{
-    width: 100%;
-  }
-  i.fa {
-    color: $main_red;
-    right: 20px;
-    top: 10px;
-  }
-  .fa-map-marker{
-    position: absolute;
-  }
-  .image{
-    position: relative;
-  }
-  .ui.rating {
-    margin-top: 1em;
-    .active.icon {
-      color: $main_red;
-    }
-  }
-  .meta span {
-    text-decoration: underline;
-    color: #3A618D;
-  }
-}
-.my_cards .ui.card:last-child, .my_cards .ui.card:first-child {
-  margin-top: 1em;
-  margin-bottom: 1em;
 }
 //---------- footer ---------//
 .footer{
@@ -141,7 +133,7 @@ button.ui.button.my_btn{
 }
 
 @media (max-width: $xs-width) {
-  .my_cards{
+  .product_cards{
     .col-xs-6:nth-child(2n){
       padding-left: 7px;
     }
@@ -170,5 +162,10 @@ button.ui.button.my_btn{
       margin-top: 15px;
       padding-top: 15px;
     }
+  }
+}
+@media (min-width: $xs-width) {
+  .nav.navbar-nav{
+    float: right;
   }
 }

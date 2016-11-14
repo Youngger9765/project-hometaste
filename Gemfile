@@ -10,7 +10,6 @@ gem 'mysql2', '~> 0.3.20'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -34,7 +33,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 
 # front tools
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
+gem 'therubyracer'
+gem 'bootstrap-sass', '~> 3.3.5'
 
 
 # Use Capistrano for deployment

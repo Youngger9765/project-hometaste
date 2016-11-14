@@ -2,7 +2,7 @@
 // !!! AUTOMATICALLY GENERATED FILE. BE CAREFUL WHEN YOU MERGING CHANGES !!! //
 ///////////////////////////////////////////////////////////////////////////////
 
-// require semantic_ui/definitions/modules/accordion.js
+//= require semantic_ui/definitions/modules/accordion.js
 // require semantic_ui/definitions/behaviors/api.js
 //= require semantic_ui/definitions/modules/checkbox.js
 // require semantic_ui/definitions/behaviors/colorize.js

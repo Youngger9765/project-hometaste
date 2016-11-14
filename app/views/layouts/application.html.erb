@@ -1,56 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hometaste</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Hometaste</title>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=1" />
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<body>
+<%= render 'layouts/navbar' %>
+<%= yield %>
 
-  <body>
-	<div class="container">
-		<ul class="container-fluid navbar navbar-fixed-top">
-			<div id="logo" class="left col-md-offset-2 col-md-6 navbar-brand">
-				<p>HOMETASTE</p>
-			</div>
-			<div class="right col-md-4 nav navbar-header navbar-nav">
-				<li><%= link_to "Help","" %></li>
-				<li><%= link_to "Become a chef","" %></li>
-				<li class="dropdown">
-				    <div class="dropdown-toggle" data-toggle="dropdown"><%= link_to "Log in","" %>
-				    </div>
-				    <ul class="dropdown-menu">
-				      <%= render :partial => "main/login_form"%>
-				    </ul>
-				</li>
-				<li class="dropdown">
-				    <div class="dropdown-toggle" data-toggle="dropdown"><%= link_to "Sign up","" %>
-				    </div>
-				    <ul class="dropdown-menu">
-				      <%= render :partial => "main/sign_up_form"%>
-				    </ul>
-				</li>
-			</div>
-		</ul>
+<div class="col-md-12">
+  <div class="row content">
+    <% if flash[:notice].present? %>
+        <div style = "color: green" class = "alert-success">
+          <%= flash[:notice]%>
+        </div>
+    <% end %>
+    <% if flash[:alert].present? %>
+        <div style = "color: red" class = "alert-danger">
+          <%= flash[:alert]%>
+        </div>
+    <% end %>
+  </div>
+</div>
 
-	  <div class="row content">
-	    <div class="col-md-12">
-	      <% if flash[:notice].present? %>
-	        <div style = "color: green" class = "alert-success">
-	          <%= flash[:notice]%>
-	        </div>
-	      <% end %>
-
-	      <% if flash[:alert].present? %>
-	        <div style = "color: red" class = "alert-danger">
-	          <%= flash[:alert]%>
-	        </div>
-	      <% end %>
-
-	      <%= yield %>
-	    </div>
-	  </div>
-	</div>
-  </body>
+<%= render 'layouts/footer' %>
+<%= render 'layouts/back_to_top' %>
+</body>
 </html>
