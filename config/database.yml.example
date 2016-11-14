@@ -1,0 +1,23 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: hometaste_dev
+  host: localhost
+  username: root
+  password:
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: hometaste_test
+  host: localhost
+  username: root
+  password:
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: hometaste
+  host: localhost
+  username: root
+  password:
