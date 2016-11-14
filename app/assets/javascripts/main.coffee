@@ -10,9 +10,9 @@ $(document).ready ->
     $(this).hover ->
       $(this).find('.card_hover_link').toggleClass('hidden')
     if (index+1) % 2 == 0
-      $(this).parent().after("<div class='clearfix visible-sm'></div>")
+      $(this).parent().after("<div class='clearfix visible-sm visible-xs'></div>")
     if (index+1) % 3 == 0
-      $(this).parent().after("<div class='clearfix hidden-sm'></div>")
+      $(this).parent().after("<div class='clearfix hidden-sm hidden-xs'></div>")
 
 
   $('p[name="more_cuisine"]').click ->
