@@ -14,7 +14,10 @@
 
 <p>Log in with</p>
 <div class="row outh_logo">
-  <i class="fa fa-facebook-square" aria-hidden="true"></i>
+  <%= link_to user_facebook_omniauth_authorize_path do %>
+    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+  <% end %>
+
   <i class="fa fa-twitter-square" aria-hidden="true"></i>
   <i class="fa fa-weixin" aria-hidden="true"></i>
 </div>

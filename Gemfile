@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 # register
 gem 'devise'
+gem 'omniauth-facebook'
 
 # front tools
 gem "font-awesome-rails"
