@@ -114,6 +114,7 @@
 }
 .product_cards .ui.fluid.card {
   overflow: hidden;
+  display: none;
   border-radius: $card_radius;
   .content {
     position: relative;
