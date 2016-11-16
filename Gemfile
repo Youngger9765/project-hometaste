@@ -39,7 +39,7 @@ gem 'less-rails-semantic_ui'
 gem 'autoprefixer-rails'
 gem 'therubyracer'
 gem 'bootstrap-sass', '~> 3.3.5'
-
+gem 'sprockets', '3.6.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
