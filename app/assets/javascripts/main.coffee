@@ -14,6 +14,18 @@ $(document).ready ->
     if (index+1) % 3 == 0
       $(this).parent().after("<div class='clearfix hidden-sm hidden-xs'></div>")
 
+  load_num = 9
+  render_product_card=(num) ->
+    card = $('.card:lt('+num+')')
+    card.show()
+    $('.card:lt('+num+') img').each ->
+      $(this).attr('src',$(this).attr("data-src"))
+
+  render_product_card(load_num)
+
+  $('#load_more').click ->
+    load_num += 9
+    render_product_card(load_num)
 
   $('p[name="more_cuisine"]').click ->
     $('.ui.small.modal').modal('show');

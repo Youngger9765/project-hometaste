@@ -188,12 +188,12 @@
           <i class="fa fa-weixin" aria-hidden="true"></i>
         </div>
     <% end %>
-    <% 9.times do %>
+    <% 81.times do %>
         <div class="col-md-4 col-xs-6">
           <div class="ui fluid card">
             <div class="image">
-              <%= image_tag 'BB_DHD.png',class:'food_status' %>
-              <%= image_tag 'product.png' %>
+              <img data-src="<%= image_path 'BB_DHD.png' %>" class="food_status">
+              <img data-src="<%= image_path 'product.png' %>">
               <div class="card_hover_link hidden hidden-xs">
                 <%= content_for :card_hover_link %>
               </div>
@@ -223,7 +223,7 @@
         </div>
     <% end %>
   </div>
-  <div class="load_more">
+  <div class="load_more" id="load_more">
     <button class="ui button my_btn">Load more</button>
   </div>
 </div>
