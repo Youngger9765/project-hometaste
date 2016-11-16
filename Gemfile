@@ -39,6 +39,10 @@ gem 'autoprefixer-rails'
 gem 'therubyracer'
 gem 'bootstrap-sass', '~> 3.3.5'
 
+# google map
+gem 'gmaps4rails'
+gem 'geocoder'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
