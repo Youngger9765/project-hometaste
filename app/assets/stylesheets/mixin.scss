@@ -1,4 +1,5 @@
 @mixin square-icon($pixel: 40px){
+  font-size:$pixel / 2;
   color: $main_red;
   background-color: #FFFFFF;
   border-radius: $main_radius;

@@ -1,42 +1,52 @@
-<%= form_for(@user, url: registration_path(@user)) do |f| %>
+<div class="ui small modal" id="sign_up_modal">
+  <i class="close icon"></i>
+  <div class="content">
+    <form class="ui form my_form">
+      <%= form_for(@user, url: registration_path(@user)) do |f| %>
 
-  <div class="field">
-    <%= f.text_field :name, :placeholder => "Your Name"%>
+          <div class="field">
+            <%= f.text_field :name, :placeholder => "Your Name"%>
+          </div>
+
+          <div class="field">
+            <%= f.text_field :user_name, :placeholder => "User Name"%>
+          </div>
+
+          <div class="field">
+            <%= f.email_field :email, autofocus: true , :placeholder => "Email"%>
+          </div>
+
+          <div class="field">
+            <%= f.text_field :phone_number, :placeholder => "Phone Number"%>
+          </div>
+
+          <div class="field">
+            <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "off", :placeholder => "Password"%>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Confirm Password" %>
+          </div>
+          <span name="term">By singing up,you agree with our <a href="">terms and conditions.</a></span>
+          <div class="actions">
+            <%= f.submit "Sign up" ,class:'ui button my_btn', :id =>"sign_up_btn"%>
+          </div>
+      <% end %>
+    </form>
+
   </div>
+  <div class="col-xs-12">
+    <div class="row outh_logo">
+      <p >Sign up with</p>
+      <%= link_to user_facebook_omniauth_authorize_path do %>
+          <i class="fa fa-facebook square-icon" aria-hidden="true"></i>
+      <% end %>
 
-  <div class="field">
-    <%= f.text_field :user_name, :placeholder => "User Name"%>
+      <i class="fa fa-twitter square-icon" aria-hidden="true"></i>
+      <i class="fa fa-weixin square-icon" aria-hidden="true"></i>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.email_field :email, autofocus: true , :placeholder => "Email"%>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :phone_number, :placeholder => "Phone Number"%>
-  </div>
-
-  <div class="field">
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "off", :placeholder => "Password"%>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Confirm Password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" , :id =>"sign_up_btn"%>
-  </div>
-<% end %>
-
-<p>Sign up with</p>
-<div class="row outh_logo">
-  <%= link_to user_facebook_omniauth_authorize_path do %>
-    <i class="fa fa-facebook-square" aria-hidden="true"></i>
-  <% end %>
-  <i class="fa fa-twitter-square" aria-hidden="true"></i>
-  <i class="fa fa-weixin" aria-hidden="true"></i>
 </div>

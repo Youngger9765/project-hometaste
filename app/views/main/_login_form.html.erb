@@ -1,23 +1,33 @@
-<%= form_for(@user, url: session_path(@user)) do |f| %>
-  <div class="field">
-    <%= f.email_field :email, autofocus: true, placeholder: "Email" %>
+<div class="ui small modal" id="login_modal">
+  <i class="close icon"></i>
+  <div class="content">
+    <form class="ui form my_form">
+      <%= form_for(@user, url: session_path(@user)) do |f| %>
+          <div class="field">
+            <%= f.email_field :email, autofocus: true, placeholder: "Email" %>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password, autocomplete: "off" , placeholder: "Password"%>
+          </div>
+          <%= link_to "Forgot your password?", new_password_path(@user) ,name:'forgot_password'%>
+          <div class="actions">
+            <%= f.submit "Log in" , :id => "login_btn"%>
+          </div>
+      <% end %>
+
+    </form>
+
   </div>
+  <div class="col-xs-12">
+    <div class="row outh_logo">
+      <p>Log in with</p>
+      <%= link_to user_facebook_omniauth_authorize_path do %>
+          <i class="fa fa-facebook square-icon" aria-hidden="true"></i>
+      <% end %>
 
-  <div class="field">
-    <%= f.password_field :password, autocomplete: "off" , placeholder: "Password"%>
+      <i class="fa fa-twitter square-icon" aria-hidden="true"></i>
+      <i class="fa fa-weixin square-icon" aria-hidden="true"></i>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Log in" , :id => "login_btn"%>
-  </div>
-<% end %>
-
-<p>Log in with</p>
-<div class="row outh_logo">
-  <%= link_to user_facebook_omniauth_authorize_path do %>
-    <i class="fa fa-facebook-square" aria-hidden="true"></i>
-  <% end %>
-
-  <i class="fa fa-twitter-square" aria-hidden="true"></i>
-  <i class="fa fa-weixin" aria-hidden="true"></i>
 </div>

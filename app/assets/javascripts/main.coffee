@@ -28,7 +28,7 @@ $(document).ready ->
     render_product_card(load_num)
 
   $('p[name="more_cuisine"]').click ->
-    $('.ui.small.modal').modal('show');
+    $('.ui.modal[name="more_cuisine"]').modal('show');
 
   $('div[data-tooltip="Address"]').click ->
     $(this).siblings('.address_detail').toggleClass('hidden')

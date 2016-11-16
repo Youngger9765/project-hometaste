@@ -14,6 +14,7 @@ hr{
   font-weight: inherit;
   border-radius: $main_radius;
   font-size:1em;
+  border: 1px solid $main_red ;
 }
 .ui.button.my_btn_reserve{
   background-color: #FFFFFF;
@@ -21,17 +22,91 @@ hr{
   font-weight: inherit;
   border-radius: $main_radius;
   font-size:1em;
-  border: 1px solid $main_red;
+  border: 1px solid $main_red ;
 }
+
 .ui.form input[type='text'].my_form,
-.ui.form input[type='number'].my_form{
-  border-radius: 0;
+.ui.form input[type='number'].my_form,
+.ui.form input[type='email'].my_form,
+.ui.form.my_form input{
+  border-radius: 0 ;
   color: #FFFFFF;
   background-color: transparent;
   border:none;
   padding: 0;
   padding-left: 5px;
   border-bottom: 1px solid #FFFFFF;
+  &:focus{
+    border-radius: 0 ;
+    background-color: transparent;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+  //&:-webkit-text-fill-color{
+  //  color: #fff !important;
+  //  border-color: #FFFFFF;
+  //}
+}
+.ui.form .field.field input:-webkit-autofill {
+  box-shadow: 0px 0px 0px 100px $main_red inset !important;
+  border-color: #FFFFFF !important;
+}
+.ui.form .field.field input:-webkit-autofill:focus {
+  box-shadow: 0px 0px 0px 100px $main_red inset !important;
+  border-color: #FFFFFF !important;
+}
+
+.ui.modal#login_modal,.ui.modal#sign_up_modal{
+  width: 300px;
+  text-align: center;
+  background-color: $main_red;
+  color: #FFFFFF;
+  bottom:inherit;
+  left: 0;
+  border-radius: $main_radius;
+  margin:0 auto ;
+  padding:0 15px 20px;
+  input{
+    height: 40px;
+  }
+  input[type='submit']{
+    border:1px solid #FFFFFF;
+    font-weight:bold;
+    border-radius: $main_radius;
+    padding:5px 25px;
+    margin-top: 15px;
+  }
+  span{
+    text-align: left;
+  }
+  .content{
+    background-color: transparent;
+  }
+  .close.icon{
+    color: #FFFFFF;
+  }
+  a[name='forgot_password']{
+    text-align: right;
+    display: inherit;
+  }
+  a{
+    color: #FFFFFF;
+  }
+  span[name="term"]{
+    display: inherit;
+    a{
+      text-decoration: underline;
+    }
+  }
+  .outh_logo{
+    p{
+      margin-left: 35px;
+      text-align: left;
+    }
+    i{
+      margin:0 20px;
+    }
+  }
 }
 .under_line{
   border-bottom: 1px solid $main_black;
@@ -51,18 +126,18 @@ hr{
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-  color: white;
+  color: white !important;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: white;
+  color: white !important;
   opacity:  1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: white;
+  color: white !important;
   opacity:  1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: white;
+  color: white !important;
 }
 
 
@@ -78,9 +153,8 @@ hr{
     padding-top: 0;
     padding-bottom: 0;
   }
-  .dropdown-menu{
-    background-color: $main_red;
-    transform: translateX(-50%);
+  li,a{
+    cursor: pointer;
   }
 }
 //---------- footer ---------//
