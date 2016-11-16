@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get "main/index" => "main#index"
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
-  	get "/getDishesByFilter" => "main#getByFilter"
-  	get "/getRestaurantsByMap" => "restaurant#getByMap"
+  	get "/getDishesByFilter" => "mains#getDishesByFilter"
+  	get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"
 	end
 
 
