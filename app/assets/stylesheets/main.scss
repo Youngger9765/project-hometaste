@@ -286,8 +286,8 @@
 .load_more {
   button.ui.button.my_btn {
     margin: 15px auto;
-    width: 180px;
-    height: 50px;
+    width: 175px;
+    height: 40px;
     display: block;
   }
 }
@@ -296,10 +296,10 @@
   .filters{
     margin-top:0;
     margin-bottom: -10px;
-    //.content{
-    //  padding-left: 1em !important;
-    //  padding-right: 1em !important;
-    //}
+    .content{
+      padding-left: 1em !important;
+      padding-right: 1em !important;
+    }
   }
   .product_cards{
     .content{
@@ -364,15 +364,43 @@
 }
 @media (min-width: $xs-width){
   .filters{
+    height: 50px;
     .clearfix::before,
     .clearfix::after{
       content:none !important;
     }
-    //div[data-tooltip="Filter"]{
-    //  margin-left:55px;
-    //}
-    //div[data-tooltip="Map view"],div[data-tooltip="Product list"]{
-    //  margin-right: 55px;
-    //}
+    div[data-tooltip="Filter"]{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: -320px;
+    }
+    div[data-tooltip="Map view"],div[data-tooltip="Product list"]{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 320px;
+    }
+  }
+}
+@media (min-width: 992px){
+  .filters{
+    div[data-tooltip="Filter"]{
+      margin-left: -440px;
+    }
+    div[data-tooltip="Map view"],div[data-tooltip="Product list"]{
+      margin-left: 440px;
+    }
+  }
+}
+
+@media (min-width: 1200px){
+  .filters{
+    div[data-tooltip="Filter"]{
+      margin-left: -530px;
+    }
+    div[data-tooltip="Map view"],div[data-tooltip="Product list"]{
+      margin-left: 530px;
+    }
   }
 }

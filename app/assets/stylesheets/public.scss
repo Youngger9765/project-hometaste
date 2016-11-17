@@ -175,6 +175,18 @@ hr{
       margin-right: 10px;
     }
   }
+  .navbar-toggle{
+    padding-right: 0;
+  }
+  &.navbar-default .navbar-toggle .icon-bar{
+    background-color: #FFFFFF;
+  }
+  &.navbar-default .navbar-toggle:hover{
+    background-color: #FFFFFF;
+    .icon-bar{
+      background-color: $main_red;
+    }
+  }
 }
 //---------- footer ---------//
 .footer{

@@ -15,15 +15,15 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">Help</a><span>|</span></li>
-        <li><a href="#about">Become a chef</a><span>|</span></li>
+        <li><a href="#">Help</a><span class="hidden-xs">|</span></li>
+        <li><a href="#about">Become a chef</a><span class="hidden-xs">|</span></li>
 
         <% if current_user %>
             <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
             <li><%= link_to('修改密碼', edit_registration_path(:user)) %></li>
 
         <% else %>
-            <li><a id="sign_up">Sign up</a><span>|</span></li>
+            <li><a id="sign_up">Sign up</a><span class="hidden-xs">|</span></li>
             <li><a id="login">Log In</a></li>
         <% end %>
       </ul>

@@ -1,4 +1,5 @@
 $(document).ready ->
+  $('.ui.rating').rating('disable');
   $('.card').each (index) ->
     button = $(this).find('.custom.button')
     popup = $(this).find('.custom.popup')
