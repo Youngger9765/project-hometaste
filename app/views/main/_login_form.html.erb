@@ -1,7 +1,7 @@
 <div class="ui small modal" id="login_modal">
   <i class="close icon"></i>
   <div class="content">
-    <form class="ui form my_form">
+    <div class="ui form my_form">
       <%= form_for(@user, url: session_path(@user)) do |f| %>
           <div class="field">
             <%= f.email_field :email, autofocus: true, placeholder: "Email" %>
@@ -16,7 +16,7 @@
           </div>
       <% end %>
 
-    </form>
+    </div>
 
   </div>
   <div class="col-xs-12">

@@ -1,7 +1,7 @@
 <div class="ui small modal" id="sign_up_modal">
   <i class="close icon"></i>
   <div class="content">
-    <form class="ui form my_form">
+    <div class="ui form my_form">
       <%= form_for(@user, url: registration_path(@user)) do |f| %>
 
           <div class="field">
@@ -35,7 +35,7 @@
             <%= f.submit "Sign up" ,class:'ui button my_btn', :id =>"sign_up_btn"%>
           </div>
       <% end %>
-    </form>
+    </div>
 
   </div>
   <div class="col-xs-12">
