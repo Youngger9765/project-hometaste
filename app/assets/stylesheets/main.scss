@@ -87,6 +87,9 @@
   .image{
     position: relative;
   }
+  a{
+    color: inherit;
+  }
   .ui.rating {
     margin-top: 1em;
     .active.icon {
@@ -121,6 +124,9 @@
     &:hover{
       background-color:inherit;
     }
+  }
+  img{
+    height: 30px;
   }
   .filter_menu{
     padding: 15px;
@@ -290,10 +296,10 @@
   .filters{
     margin-top:0;
     margin-bottom: -10px;
-    .content{
-      padding-left: 1em !important;
-      padding-right: 1em !important;
-    }
+    //.content{
+    //  padding-left: 1em !important;
+    //  padding-right: 1em !important;
+    //}
   }
   .product_cards{
     .content{
@@ -362,11 +368,11 @@
     .clearfix::after{
       content:none !important;
     }
-    div[data-tooltip="Filter"]{
-      margin-left:55px;
-    }
-    div[data-tooltip="Map view"],div[data-tooltip="Product list"]{
-      margin-right: 55px;
-    }
+    //div[data-tooltip="Filter"]{
+    //  margin-left:55px;
+    //}
+    //div[data-tooltip="Map view"],div[data-tooltip="Product list"]{
+    //  margin-right: 55px;
+    //}
   }
 }

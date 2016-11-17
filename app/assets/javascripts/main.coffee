@@ -16,6 +16,7 @@ $(document).ready ->
 
   load_num = 9
   render_product_card=(num) ->
+
     card = $('.card:lt('+num+')')
     card.show()
     $('.card:lt('+num+') img').each ->

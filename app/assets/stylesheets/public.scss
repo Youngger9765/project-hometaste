@@ -1,6 +1,7 @@
 //---------- public setting ---------//
 body{
   margin-top: 50px;
+  font-family:"Avenir Next";
 }
 a:hover{
   text-decoration: none;
@@ -117,8 +118,8 @@ hr{
   right: 50px;
   bottom: 20px;
   color: red;
-  i{
-    transform: rotate(-90deg);
+  img{
+    height: 35px;
   }
 }
 .square-icon{
@@ -147,14 +148,32 @@ hr{
   border:0;
   a{
     color: #fff !important;
+    font-weight: 500;
+  }
+  span{
+    color: #FFFFFF;
+    font-size: 10px;
+    margin-right: 10px;
   }
   .nav.navbar-nav li > a{
     line-height: 50px;
     padding-top: 0;
     padding-bottom: 0;
+    display: inline-block;
   }
   li,a{
     cursor: pointer;
+  }
+  .navbar-brand{
+    font-family:"Times New Roman";
+    img{
+      float: left;
+      height: 50px;
+      background-color: #FFFFFF;
+      margin-top: -15px;
+      padding: 4px 8px 0 10px;
+      margin-right: 10px;
+    }
   }
 }
 //---------- footer ---------//
