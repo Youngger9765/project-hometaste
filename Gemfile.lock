@@ -38,6 +38,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    airbrussh (1.1.1)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
     autoprefixer-rails (6.3.3)
       execjs
@@ -48,6 +50,22 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.6)
+    capistrano (3.6.1)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.3)
+    capistrano-rails (1.2.0)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -71,8 +89,10 @@ GEM
     ffi (1.9.14)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
+    geocoder (1.4.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     hashie (3.4.3)
     i18n (0.7.0)
     jbuilder (2.6.0)
@@ -111,6 +131,9 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.21)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.2.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -182,6 +205,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.11.4)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -213,9 +239,14 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.5)
   byebug
+  capistrano
+  capistrano-rails
+  capistrano3-puma
   coffee-rails (~> 4.2)
   devise
   font-awesome-rails
+  geocoder
+  gmaps4rails
   jbuilder (~> 2.5)
   jquery-rails
   less-rails-semantic_ui
