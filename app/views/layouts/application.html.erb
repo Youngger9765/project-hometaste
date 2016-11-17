@@ -10,23 +10,20 @@
 
 <body>
 <%= render 'layouts/navbar' %>
-<%= yield %>
 
-<div class="col-md-12">
-  <div class="row content">
-    <% if flash[:notice].present? %>
+<% if flash.present? %>
+    <div class="col-md-12">
+      <div class="row content">
         <div style = "color: green" class = "alert-success">
           <%= flash[:notice]%>
         </div>
-    <% end %>
-    <% if flash[:alert].present? %>
         <div style = "color: red" class = "alert-danger">
           <%= flash[:alert]%>
         </div>
-    <% end %>
-  </div>
-</div>
-
+      </div>
+    </div>
+<% end %>
+<%= yield %>
 <%= render 'layouts/footer' %>
 <%= render 'layouts/back_to_top' %>
 </body>
