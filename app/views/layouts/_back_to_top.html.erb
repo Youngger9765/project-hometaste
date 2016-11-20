@@ -1,0 +1,22 @@
+<a href="#top">
+  <div class="back_to_top hidden-xs" data-tooltip="Back to top" data-inverted=""  id="back_to_top">
+    <%= image_tag 'back_top.png' %>
+  </div>
+</a>
+
+<script type="text/javascript" charset="utf-8">
+var back_btn = $('#back_to_top');
+  back_btn.data('top',parseInt(back_btn.css('top')))
+  var hide_back_button;
+  (hide_back_button = function() {
+    $(window).scrollTop() < $(window).height()/2 ? back_btn.hide() : back_btn.show()
+  })();
+  $(window).scroll(function () {
+    hide_back_button()
+    var scroll = $(window).scrollTop();
+    var top = back_btn.data('top')
+    var height = $('body')[0].scrollHeight - 920
+    if(height < scroll ){ var a = scroll-height; }
+    back_btn.css('top',top - a)
+  });
+</script>
