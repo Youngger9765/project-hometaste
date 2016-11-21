@@ -43,10 +43,6 @@ hr{
     color: #FFFFFF;
     border-color: #FFFFFF;
   }
-  //&:-webkit-text-fill-color{
-  //  color: #fff !important;
-  //  border-color: #FFFFFF;
-  //}
 }
 .ui.form .field.field input:-webkit-autofill {
   box-shadow: 0px 0px 0px 100px $main_red inset !important;
@@ -109,6 +105,8 @@ hr{
     }
   }
 }
+
+//---------- tool ---------//
 .under_line{
   border-bottom: 1px solid $main_black;
 }
@@ -122,25 +120,20 @@ hr{
     height: 35px;
   }
 }
-.square-icon{
+.square-icon {
   @include square-icon;
 }
-
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-  color: white !important;
+.flex_center_start{
+  @include flex_(center,flex-start);
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: white !important;
-  opacity:  1;
+.flex_center{
+  @include flex_(center,center);
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: white !important;
-  opacity:  1;
+.absolute_center{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: white !important;
-}
-
 
 //---------- navbar ---------//
 .navbar{
@@ -236,15 +229,42 @@ hr{
     }
   }
 }
-
+.cards .ui.card:last-child, .cards .ui.card:first-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.cards .ui.fluid.card{
+  overflow: hidden;
+  display: none;
+  border-radius: $card_radius;
+  p {
+    font-weight: 500;
+  }
+  img{
+    width: 100%;
+  }
+  .image{
+    position: relative;
+  }
+  a{
+    color: inherit;
+  }
+  .ui.rating {
+    margin-top: 1em;
+    .active.icon {
+      color: $main_red;
+    }
+  }
+  i.fa{
+    color: $main_red;
+  }
+}
 @media (max-width: $xs-width) {
-  .product_cards{
-    .col-xs-6:nth-child(2n){
-      padding-left: 7px;
-    }
-    .col-xs-6:nth-child(2n+1){
-      padding-right: 7px;
-    }
+  .padding_right_7_xs{
+    padding-right: 7px;
+  }
+  .padding_left_7_xs{
+    padding-left: 7px;
   }
   .footer{
     .col-md-3:nth-child(1){

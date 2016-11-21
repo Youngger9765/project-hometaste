@@ -8,3 +8,11 @@
   width: $pixel;
   text-align: center;
 }
+@mixin flex_($vertical,$horizon){
+  display: flex;
+  display : -webkit-flex;
+  -webkit-justify-content: $horizon;
+  justify-content: $horizon;
+  -webkit-align-items: $vertical;
+  align-items: $vertical;
+}
