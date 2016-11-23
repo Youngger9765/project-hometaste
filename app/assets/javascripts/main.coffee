@@ -26,7 +26,6 @@ $(document).ready ->
       num = 8
     else
       num = 9
-    console.log(num)
     return num
 
   render_product_card=(num) ->

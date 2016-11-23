@@ -161,12 +161,13 @@
     </div>
   </div>
 </div>
+<%= render 'map',hash: @hash %>
+
 <div class="location_map hidden">
-  <%= image_tag 'map.png', class:'img-responsive' %>
 </div>
 <div class="container">
 
-  <% @products = nil %>
+  <% @products = 1 %>
   <% if @products %>
       <div class="row products cards">
         <%= content_for :card_hover_link do %>
@@ -221,7 +222,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
         <% end %>
         <div class="load_more" id="load_more">
@@ -317,8 +317,6 @@
     <div class="ui deny button my_btn_reserve">Cancel</div>
   </div>
 </div>
-
-
 
 <%= javascript_include_tag 'main' %>
 

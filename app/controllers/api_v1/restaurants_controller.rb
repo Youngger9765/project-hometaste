@@ -1,4 +1,4 @@
-class ApiV1::RestaurantsController < ApplicationController
+class ApiV1::RestaurantsController < ApiController
 
 	def getRestaurantsByMap
 		
