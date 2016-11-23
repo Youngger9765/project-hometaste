@@ -12,9 +12,6 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     marker.setAttribute 'class', 'marker_container infoBox'
 #    marker.innerHTML = @args.marker_title
     @marker = marker
-
-#      infowindow.setContent(marker.html);
-#      infowindow.open(map, marker);
     { content: marker }
 
 
@@ -43,7 +40,19 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 @buildMap = (markers)->
   handler = Gmaps.build 'Google', { builders: { Marker: RichMarkerBuilder} } #dependency injection
   #then standard use
+#  console.log(google.maps.Map())
   handler.buildMap { provider: {}, internal: {id: 'map'} }, ->
     markers = handler.addMarkers(markers)
     handler.bounds.extendWith(markers)
     handler.fitMapToBounds()
+    google.maps.event.addListener handler.getMap(), 'bounds_changed', ->
+      ne = handler.getMap().getBounds().getNorthEast().toString()
+      sw = handler.getMap().getBounds().getSouthWest().toString()
+      $.ajax
+        type: 'GET',
+        url: '/api/v1/getRestaurantsByMap',
+        data:
+          north_east:ne,
+          south_west:sw
+        success: ()->
+#          buildMap(data.gmap_hash)

@@ -13,7 +13,7 @@ class ApiV1::MainsController < ApiController
 		render json: { gmap_hash: @hash }, status: 200
 	end
 
-	protected
+	private
 
 	def gmap_html(restaurant,rating)
 		group = []
