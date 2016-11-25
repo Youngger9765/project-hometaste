@@ -44,6 +44,7 @@ gem 'sprockets', '3.6.3'
 gem 'gmaps4rails'
 gem 'geocoder'
 
+gem 'faker'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

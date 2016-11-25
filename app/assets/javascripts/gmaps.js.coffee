@@ -37,22 +37,33 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     pane: "floatPane"
     enableEventPropagation: false
 
+
 @buildMap = (markers)->
   handler = Gmaps.build 'Google', { builders: { Marker: RichMarkerBuilder} } #dependency injection
   #then standard use
-#  console.log(google.maps.Map())
   handler.buildMap { provider: {}, internal: {id: 'map'} }, ->
     markers = handler.addMarkers(markers)
     handler.bounds.extendWith(markers)
     handler.fitMapToBounds()
-    google.maps.event.addListener handler.getMap(), 'bounds_changed', ->
-      ne = handler.getMap().getBounds().getNorthEast().toString()
-      sw = handler.getMap().getBounds().getSouthWest().toString()
-      $.ajax
-        type: 'GET',
-        url: '/api/v1/getRestaurantsByMap',
-        data:
-          north_east:ne,
-          south_west:sw
-        success: ()->
-#          buildMap(data.gmap_hash)
+    prevent_prerender = false
+    google.maps.event.addListener handler.getMap(), 'idle', ->
+      show_card_num = $('.gmap_card').size()
+      if prevent_prerender && show_card_num == 0
+        rerender_map(this)
+      prevent_prerender = true
+
+
+rerender_map=(data)->
+  ne = data.getBounds().getNorthEast().toString()
+  sw = data.getBounds().getSouthWest().toString()
+  qty = 9
+  qty = 8 if $(window).width() < 992
+  $.ajax
+    type: 'GET',
+    url: '/api/v1/getRestaurantsByMap',
+    data:
+      north_east:ne,
+      south_west:sw
+      qty:qty
+    success: (data)->
+      buildMap(data.gmap_hash)
