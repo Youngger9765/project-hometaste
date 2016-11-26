@@ -20,3 +20,4 @@
 /config/*.yml
 # Ignore Byebug command history file.
 .byebug_history
+/.idea/
