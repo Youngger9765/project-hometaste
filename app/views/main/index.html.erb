@@ -166,69 +166,111 @@
 </div>
 <div class="container">
 
+  <% @products = nil %>
+  <% if @products %>
+      <div class="row products cards">
+        <%= content_for :card_hover_link do %>
+            <div class="sold_num">
+              <i class="fa fa-heart" aria-hidden="true">
+                <span><p>123</p></span>
+              </i>
+            </div>
+            <span name="sold_p">sold last week</span>
+            <div class="wrapping_div">
+              <i class="fa fa-external-link ui custom button" aria-hidden="true"></i>
+            </div>
+            <div class="ui custom popup top left transition hidden">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+              <i class="fa fa-weixin" aria-hidden="true"></i>
+            </div>
+        <% end %>
+        <% 81.times do %>
+            <div class="col-md-4 col-xs-6">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img data-src="<%= image_path 'BB_DHD.png' %>" class="food_status">
+                  <img data-src="<%= image_path 'product.png' %>">
+                  <div class="card_hover_link hidden hidden-xs">
+                    <%= content_for :card_hover_link %>
+                  </div>
+                </div>
+                <div class="content">
+                  <div class="ui icon button address" data-tooltip="Address" data-inverted="">
+                    <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+                  </div>
 
+                  <p class="description"><a href="">Mr.chans Kitchen</a></p>
 
-  <div class="row product_cards">
-    <%= content_for :card_hover_link do %>
-        <div class="sold_num">
-          <i class="fa fa-heart" aria-hidden="true">
-            <span><p>123</p></span>
-          </i>
+                  <hr>
+                  <div class="address_detail hidden">
+                    <p>全家家就是你家你家就是我家 我家不是你家</p>
+                    <hr>
+                  </div>
+
+                  <p class="header"><a href="">Roasted Duck</a></p>
+
+                  <p class="description" href="#">$7.00/ Half</p>
+                  <div class="meta hidden-xs">
+                    <span><a href="">Vegan</a></span><span><a href="">Soup</a></span><span><a href="">Pumkim</a></span><span><a href="">Autum</a></span>
+                  </div>
+                  <div class="ui rating " data-rating="3" data-max-rating="5"></div>
+                  <div class="card_hover_link visible-xs">
+                    <%= content_for :card_hover_link %>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        <% end %>
+        <div class="load_more" id="load_more">
+          <button class="ui button my_btn absolute_center">Load more</button>
         </div>
-        <span name="sold_p">sold last week</span>
-        <div class="wrapping_div">
-          <i class="fa fa-external-link ui custom button" aria-hidden="true"></i>
-        </div>
-        <div class="ui custom popup top left transition hidden">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
-          <i class="fa fa-instagram" aria-hidden="true"></i>
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-          <i class="fa fa-weixin" aria-hidden="true"></i>
-        </div>
-    <% end %>
-    <% 81.times do %>
-        <div class="col-md-4 col-xs-6">
-          <div class="ui fluid card">
-            <div class="image">
-              <img data-src="<%= image_path 'BB_DHD.png' %>" class="food_status">
-              <img data-src="<%= image_path 'product.png' %>">
-              <div class="card_hover_link hidden hidden-xs">
-                <%= content_for :card_hover_link %>
+      </div>
+  <% else %>
+      <div class="row kitchens cards">
+        <% 81.times do %>
+            <div class="col-md-4 col-xs-6">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img data-src="<%= image_path 'kitchen.png' %>">
+                </div>
+                <div class="content">
+                  <h4><a href="">Mr.chans Kitchen</a></h4>
+                  <div class="rating_wrapping">
+                    <div class="ui rating" data-rating="3" data-max-rating="5"></div>
+                    <span name="reivews">200 Reviews</span>
+                  </div>
+                  <div class="num_counts">
+                    <%= image_tag 'heart_icon.png'%>
+                    <span>102 Likes</span>
+                    <%= image_tag 'plate_icon.png'%>
+                    <span>238 Orders</span>
+                  </div>
+                  <div class="meta hidden-xs">
+                    <span><a href="">Vegan</a></span><span><a href="">Soup</a></span><span><a href="">Pumkim</a></span><span><a href="">Autum</a></span>
+                  </div>
+
+                  <div class="flex_center_start location">
+                    <div class="ui icon button address flex_center" data-tooltip="Address" data-inverted="">
+                      <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="flex_center">
+                      <p>全家家就是你家你家就是我家 我家不是你家</p>
+                    </div>
+                  </div>
+
+                </div>
+
               </div>
             </div>
-            <div class="content">
-              <div class="ui icon button address" data-tooltip="Address" data-inverted="">
-                <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
-              </div>
-
-                <p class="description"><a href="">Mr.chans Kitchen</a></p>
-
-              <hr>
-              <div class="address_detail hidden">
-                <p>全家家就是你家你家就是我家 我家不是你家</p>
-                <hr>
-              </div>
-
-                <p class="header"><a href="">Roasted Duck</a></p>
-
-              <p class="description" href="#">$7.00/ Half</p>
-              <div class="meta hidden-xs">
-                <span><a href="">Vegan</a></span><span><a href="">Soup</a></span><span><a href="">Pumkim</a></span><span><a href="">Autum</a></span>
-              </div>
-              <div class="ui rating " data-rating="3" data-max-rating="5"></div>
-              <div class="card_hover_link visible-xs">
-                <%= content_for :card_hover_link %>
-              </div>
-            </div>
-          </div>
-
+        <% end %>
+        <div class="load_more" id="load_more">
+          <button class="ui button my_btn absolute_center">Load more</button>
         </div>
-    <% end %>
-    <div class="load_more" id="load_more">
-      <button class="ui button my_btn">Load more</button>
-    </div>
-  </div>
-
+      </div>
+  <% end %>
 </div>
 
 <div class="ui small modal" name="more_cuisine">
