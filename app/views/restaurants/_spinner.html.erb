@@ -1,2 +1,14 @@
+<div class="ui form">
+  <div class="count_spinner">
+    <div class="ui mini buttons">
+      <%= button_tag type:"button", class:"ui icon button product_spineer_button", command:"Down" do  %>
+          <%= image_tag 'icon/minus.png',class:'img-responsive' %>
+      <% end %>
+      <%= text_field_tag :qty ,qty, id:"txtNum", min:"1", readonly: true %>
+      <%= button_tag type:"button", class:"ui icon button product_spineer_button", command:"Up" do  %>
+          <%= image_tag 'icon/add.png',class:'img-responsive' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-s

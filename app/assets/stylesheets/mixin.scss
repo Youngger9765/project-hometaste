@@ -16,3 +16,120 @@
   -webkit-align-items: $vertical;
   align-items: $vertical;
 }
+@mixin basic_bg($top,$bottom){
+  border-top-left-radius: $top;
+  border-top-right-radius: $top;
+  border-bottom-right-radius: $bottom;
+  border-bottom-left-radius: $bottom;
+  background-color: #FFFFFF;
+  margin-bottom: 30px;
+  overflow: hidden;
+  width: 100%;
+  padding:15px 30px;
+}
+@mixin text_overflow($font-size,$line-height){
+  font-size: $font-size;
+  line-height: $line-height;
+  $lines-to-show: 3;
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+  margin: 0 auto;
+  font-size: $font-size;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+//---------- tool class ---------//
+
+.square-icon {
+  @include square-icon;
+}
+.flex{
+  display: flex;
+  display : -webkit-flex;
+}
+.flex_center_start{
+  @include flex_(center,flex-start);
+}
+.flex_center{
+  @include flex_(center,center);
+}
+.basic_bg{
+  @include basic_bg(20px,20px);
+  height:calc(100% - 30px);
+}
+.basic_bg_top{
+  @include basic_bg(0,20px);
+  height:calc(100% - 30px);
+}
+.basic_bg_bottom{
+  @include basic_bg(20px,0);
+  margin-bottom: 0;
+}
+.bold{
+  font-weight: bold;
+}
+.red{
+  color: $main_red;
+}
+.under_line{
+  border-bottom: 1px solid $main_black;
+}
+.absolute_center{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: $sm-width) {
+  @mixin basic_bg($top,$bottom){
+    border-top-left-radius: $top;
+    border-top-right-radius: $top;
+    border-bottom-right-radius: $bottom;
+    border-bottom-left-radius: $bottom;
+    background-color: #FFFFFF;
+    margin-bottom: 15px;
+    overflow: hidden;
+    width: 100%;
+    padding:5px 20px;
+  }
+  .basic_bg{
+    @include basic_bg(10px,10px);
+    height:calc(100% - 15px);
+  }
+  .basic_bg_top{
+    @include basic_bg(0,10px);
+    height:calc(100% - 15px);
+  }
+  .basic_bg_bottom{
+    @include basic_bg(10px,0);
+    margin-bottom: 0;
+  }
+}
+@media (max-width: $xs-width) {
+  @mixin basic_bg($top,$bottom){
+    border-top-left-radius: $top;
+    border-top-right-radius: $top;
+    border-bottom-right-radius: $bottom;
+    border-bottom-left-radius: $bottom;
+    background-color: #FFFFFF;
+    margin-bottom: 15px;
+    overflow: hidden;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    padding:5px 20px;
+  }
+  .basic_bg{
+    @include basic_bg(0,0);
+    height:calc(100% - 5px);
+  }
+  .basic_bg_top{
+    @include basic_bg(0,0);
+    height:calc(100% - 5px);
+  }
+  .basic_bg_bottom{
+    @include basic_bg(0,0);
+    margin-bottom: 0;
+  }
+}

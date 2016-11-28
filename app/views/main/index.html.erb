@@ -154,19 +154,19 @@
       </div>
     </div>
     <div class="ui icon button pull-right" data-tooltip="Map view" data-inverted="">
-      <%= image_tag 'map_icon.png' %>
+      <%= image_tag 'icon/map.png' %>
     </div>
     <div class="ui icon button pull-right hidden" data-tooltip="Product list" data-inverted="">
-      <%= image_tag 'list_view_icon.png' %>
+      <%= image_tag 'icon/list_view.png' %>
     </div>
   </div>
 </div>
 <div class="location_map hidden">
-  <%= image_tag 'map.png', class:'img-responsive' %>
+  <%= image_tag 'icon/map.png', class: 'img-responsive' %>
 </div>
 <div class="container">
 
-  <% @products = nil %>
+  <% @products = 1 %>
   <% if @products %>
       <div class="row products cards">
         <%= content_for :card_hover_link do %>
@@ -190,8 +190,8 @@
             <div class="col-md-4 col-xs-6">
               <div class="ui fluid card">
                 <div class="image">
-                  <img data-src="<%= image_path 'BB_DHD.png' %>" class="food_status">
-                  <img data-src="<%= image_path 'product.png' %>">
+                  <img data-src="<%= image_path 'tmp/BB_DHD.png' %>" class="food_status">
+                  <img data-src="<%= image_path 'tmp/product.png' %>">
                   <div class="card_hover_link hidden hidden-xs">
                     <%= content_for :card_hover_link %>
                   </div>
@@ -224,8 +224,12 @@
 
             </div>
         <% end %>
-        <div class="load_more" id="load_more">
-          <button class="ui button my_btn absolute_center">Load more</button>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="load_more" id="load_more">
+              <button class="ui button my_btn absolute_center">Load more</button>
+            </div>
+          </div>
         </div>
       </div>
   <% else %>
@@ -234,7 +238,7 @@
             <div class="col-md-4 col-xs-6">
               <div class="ui fluid card">
                 <div class="image">
-                  <img data-src="<%= image_path 'kitchen.png' %>">
+                  <img data-src="<%= image_path 'tmp/kitchen.png' %>">
                 </div>
                 <div class="content">
                   <h4><a href="">Mr.chans Kitchen</a></h4>
@@ -243,9 +247,9 @@
                     <span name="reivews">200 Reviews</span>
                   </div>
                   <div class="num_counts">
-                    <%= image_tag 'heart_icon.png'%>
+                    <%= image_tag 'icon/heart.png'%>
                     <span>102 Likes</span>
-                    <%= image_tag 'plate_icon.png'%>
+                    <%= image_tag 'icon/plate.png'%>
                     <span>238 Orders</span>
                   </div>
                   <div class="meta hidden-xs">
@@ -266,12 +270,17 @@
               </div>
             </div>
         <% end %>
-        <div class="load_more" id="load_more">
-          <button class="ui button my_btn absolute_center">Load more</button>
+      </div>
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="load_more" id="load_more">
+            <button class="ui button my_btn absolute_center">Load more</button>
+          </div>
         </div>
       </div>
   <% end %>
 </div>
+
 
 <div class="ui small modal" name="more_cuisine">
   <i class="close icon"></i>
