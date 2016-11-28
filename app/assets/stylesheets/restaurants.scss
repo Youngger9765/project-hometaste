@@ -185,9 +185,9 @@
           height: 14px;
           border-bottom: 10px solid $main_red ;
           border-top: none;
-          margin: 0 auto;
+          margin: -15px auto 0;
           padding-bottom: 0;
-          width: 160px;
+          width: 190px;
         }
       }
       .basic_bg_bottom.active{
@@ -344,6 +344,10 @@
     }
     .product_items{
       .basic_bg_top{
+        .fa.fa-list{
+          float: right;
+          font-size: 24px;
+        }
         .product_item{
           margin-bottom: 30px;
         }
@@ -375,6 +379,7 @@
           height: 56px;
           hr{
             padding-top: 2px;
+            margin-top: -10px;
           }
         }
       }
@@ -408,6 +413,7 @@
     }
     .xs_kitchen_info{
       margin-left: 175px;
+      width: calc(100% - 175px);
     }
     .product_items .basic_bg_top{
       .flex{

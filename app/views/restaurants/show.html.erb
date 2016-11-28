@@ -151,62 +151,11 @@
         </div>
       </div>
       <div class="basic_bg_top">
+        <div class="clearfix">
         <i class="fa fa-list fa-2x" aria-hidden="true"></i>
+        </div>
         <% 5.times do |s|%>
-            <div class="product_item flex">
-              <div class="product_item_img">
-                <div id="myCarousel<%= s %>" class="carousel slide" data-ride="carousel">
-                  <!-- Indicators -->
-                  <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                      <div style="background: url('<%= image_path 'tmp/kitchen.png' %>') center;-webkit-background-size: cover;background-size: cover;">
-                      </div></div>
-
-                    <div class="item">
-                      <div style="background: url('<%= image_path 'tmp/kitchen_1.png' %>') center;-webkit-background-size: cover;background-size: cover;">
-                      </div></div>
-
-                    <div class="item">
-                      <div style="background: url('<%= image_path 'tmp/kitchen_2.png' %>') center;-webkit-background-size: cover;background-size: cover;">
-                      </div></div>
-
-                    <div class="item">
-                      <div style="background: url('<%= image_path 'tmp/kitchen.png' %>') center;-webkit-background-size: cover;background-size: cover;">
-                      </div></div>
-                  </div>
-
-                  <!-- Left and right controls -->
-                  <a class="left carousel-control" href="#myCarousel<%= s %>" role="button" data-slide="prev">
-                    <i class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#myCarousel<%= s %>" role="button" data-slide="next">
-                    <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-              </div>
-              <div class="product_item_info">
-                <div>
-                  <h2 class="bold">Roasted Duck</h2>
-                </div>
-                <div>
-                  <h4 class="red">$ 7.00/Half</h4>
-                  <%= render 'spinner', qty: 1  %>
-                  <span>1 orderd</span>
-                </div>
-                <div>
-                  <h4>Ingredents:</h4>
-                  <% a = 'Duck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiatDuck,herb,Stuff,things,this and thiat' %>
-                  <p name="ingredents"><%= truncate(a.gsub('\n',''),omission:'...', length:200 ) %></p>
-                </div>
-                <div>
-                  <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                  <i class="fa fa-external-link fa-2x" aria-hidden="true"></i>
-                  <a href="">More...</a>
-                </div>
-              </div>
-            </div>
+            <%= render 'product_item',s:s %>
         <% end %>
       </div>
     </div>
