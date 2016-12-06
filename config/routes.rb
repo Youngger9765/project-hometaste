@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   root :to => "main#index"
 
   get "main/index" => "main#index"
+  get "admin" => "admin/main#index"
+
+  namespace :admin do
+  	resources :main
+  	resources :users
+  end
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
   	get "/getDishesByFilter" => "mains#getDishesByFilter"

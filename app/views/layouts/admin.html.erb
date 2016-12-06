@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>Hometaste Admin</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application'%>
+  <%= csrf_meta_tags %>
+
+</head>
+
+<body style="margin: 0;">
+
+  <nav class="navbar navbar-inverse admin-navbar">
+    <span class="navbar-brand"><h1 style="margin: 0;">Hometaste Admin</h1></span>
+    <ul class="nav navbar-nav navbar-right col-md-3">
+        <% if current_user %>
+          <span class="h2 pull-right">hello! <%= current_user.name%></span>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete,:class => "btn btn-primary") %> |
+          <%= link_to('Modify Password', edit_registration_path(:user),:class => "btn btn-primary") %> 
+        <% else %>
+          <%= link_to('Login', new_session_path(:user),:class => "btn btn-primary" )%> |
+          <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path,:class => "btn btn-info" %>
+        <% end %>
+    </ul>
+  </nav>
+
+  <% if flash[:notice].present? %>
+    <div style = "color: green" class = "alert-success">
+      <%= flash[:notice]%>
+    </div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div style = "color: red" class = "alert-danger">
+      <%if flash[:alert].class == Hash %>
+        <% flash[:alert].each do |key,value|%>
+          <%if value.present?%>
+            <%= value%> <br>
+          <%end%>
+        <%end%>
+      <%elsif flash[:alert].class == String%>
+        <%= flash[:alert]%>
+      <%end%>
+    </div>
+  <% end %>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+        </li>
+        <li class="active">
+          <a href="#">Users Admin(會員管理)</a>
+        </li>
+        <li>
+          <a href="account.html">System Admin(系統管理)</a>
+        </li>
+        <li>
+          <a href="teachers.html">Restaurants Admin(餐廳管理)</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div id="custom-search-input">
+              <div class="input-group col-md-12">
+                <input type="text" class="form-control input-lg" placeholder="Search" />
+                <span class="input-group-btn">
+                  <button class="btn btn-info btn-lg" type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <h1>Users Admin(會員管理)</h1>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Created_on</th>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>is_admin?</th>
+                  <th>Ban it!</th>
+                  <th>購物記錄</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @users.each do |u|%>
+                <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
+                    <td><%= u.id %></td>
+                    <td><%= u.created_at %></td>
+                    <td><%= u.email %></td>
+                    <td><%= u.user_name %></td>
+                    <td><%= u.is_admin %></td>
+                    <td>
+                      <% if u.is_ban %>
+                        <%= link_to('Rescue', admin_user_path(u,:user[:is_ban] => false),:class => "btn-sm btn-default", :method => "PATCH")%>
+                      <% else%>
+                        <%= link_to('Ban', admin_user_path(u,:is_ban => true),:class => "btn-sm btn-danger", :method => "PATCH")%>
+                      <% end %>
+                    </td>
+                    <td>點擊欄位查看</td>
+                    <td>
+                      <% if u.is_live %>
+                        <%= link_to('Delete', admin_user_path(u),:class => "btn-sm btn-danger", :method => "DELETE", :data => {:confirm => "ARE YOU SURE?" } )%> 
+                      <% else%>
+                        <%= link_to('Rescue', admin_user_path(u,:rescue => true),:class => "btn-sm btn-default", :method => "DELETE")%> 
+                      <% end %>
+                    </td>
+                </tr>
+                <tr >
+                  <td colspan="6" class="hiddenRow">
+                    <div class="accordian-body collapse" id="data1">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>購買日期</th>
+                                <th>訂單編號</th>
+                                <th>內容</th>
+                                <th>開課日期</th>
+                                <th>金額</th>
+                                <th>付款狀態</th>
+                                <th>老師評價</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
+                                <td>2015/12/17</td>
+                                <td>001</td>
+                                <td>4堂/月</td>
+                                <td>2016/01/01</td>
+                                <td>$300</td>
+                                <td>已付款</td>
+                                <td>未評價</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <% end %>
+                <tr data-toggle="collapse" data-target="#data2" class="accordion-toggle">
+                    <td>#2</td>
+                    <td>2015/12/30</td>
+                    <td>oreo@fable</td>
+                    <td>Oreo</td>
+                    <td>點擊欄位查看</td>
+                </tr>
+                <tr >
+                  <td colspan="6" class="hiddenRow">
+                    <div class="accordian-body collapse" id="data2">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>購買日期</th>
+                                <th>訂單編號</th>
+                                <th>內容</th>
+                                <th>開課日期</th>
+                                <th>金額</th>
+                                <th>付款狀態</th>
+                                <th>老師評價</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr data-toggle="collapse" data-target="#data2" class="accordion-toggle">
+                                  <td>2015/12/30</td>
+                                  <td>002</td>
+                                  <td>1堂/月</td>
+                                  <td>2016/12/31</td>
+                                  <td>$30</td>
+                                  <td>已付款</td>
+                                  <td>已評價</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- jQuery -->
+  <script src="http://code.jquery.com/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/bootstrap-filestyle.js"></script>
+
+  <!-- Some Script -->
+  <script>
+    $(document).ready(function(){
+      $(":file").filestyle();
+
+      $(function () {
+        $('#datetimepicker1').datetimepicker();
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>
