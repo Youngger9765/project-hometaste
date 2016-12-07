@@ -22,8 +22,9 @@
               <th>Created_on</th>
               <th>Email</th>
               <th>Name</th>
-              <th>is_admin?</th>
               <th>Orders</th>
+              <th>Total Acount</th>
+              <th>is_admin?</th>
               <th>Ban it!</th>
               <th>Delete</th>
             </tr>
@@ -35,12 +36,17 @@
                   <td><%= u.created_at %></td>
                   <td><%= u.email %></td>
                   <td><%= u.user_name %></td>
-                  <td><%= u.is_admin %></td>
                   <td>
                     <div class="btn btn-success">
                       click to check
                     </div>
                   </td>
+                  <!-- TODO: SUM total user's order acount -->
+                  <th>$100000</th>
+
+                  <!-- TODO: click to check admin -->
+                  <td><%= u.is_admin %></td>
+                  
                   <td>
                     <% if u.is_ban %>
                       <%= link_to('Rescue', admin_user_path(u,:is_ban => 0),:class => "btn-sm btn-default", :method => "PATCH")%>
