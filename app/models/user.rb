@@ -109,4 +109,8 @@ class User < ApplicationRecord
     user.save!
     return user
   end
+
+  def is_admin?
+      self.is_admin
+  end
 end

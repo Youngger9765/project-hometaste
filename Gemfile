@@ -66,9 +66,6 @@ group :development do
   gem 'capistrano'
 	gem 'capistrano-rails'
 	gem 'capistrano3-puma'
-
-	# Use Puma as the app server
-	gem 'puma', '~> 3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
