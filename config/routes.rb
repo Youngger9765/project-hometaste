@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   root :to => "main#index"
 
   get "main/index" => "main#index"
-  get "admin" => "admin/main#index"
+  get "admin" => "admin/users#index"
 
   namespace :admin do
   	resources :main
   	resources :users
+  	resources :restaurants
   end
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do

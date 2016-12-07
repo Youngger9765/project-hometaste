@@ -1,31 +1,45 @@
 class Admin::UsersController < ApplicationController
 
-	before_action :find_user
+	layout "admin"
+
+	before_action :user_admin?
+	before_action :find_user, :only =>[:update, :destroy]
 
 	def index
-		raise
+		@users = User.all
 	end
 
 	def update
-		if @user.update(user_params)
-			redirect_to admin_path
-		else
-			redirect_to :back
+
+		if params[:is_ban]
+
+			if params[:is_ban] == "1"
+				@user.is_ban = true
+				@user.save!
+
+			elsif params[:is_ban] == "0"
+				@user.is_ban = false
+				@user.save!
+			end
 		end
+
+		redirect_to admin_path
 	end
 
 	def destroy
 		@user.is_live = false
 		@user.save!
 
+		if params[:rescue] == "1"
+			@user.is_live = true
+			@user.save!
+		end
+		
+
 		redirect_to admin_path
 	end
 
 	private
-
-	def user_params
-    params.require(:user).permit(:is_ban)
-  end
 
 	def find_user
 		@user = User.find(params[:id])
