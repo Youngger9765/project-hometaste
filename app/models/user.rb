@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :user_name, presence: true
   validates :phone_number, presence: true
 
+  has_one :restaurant
+
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid( auth.uid )

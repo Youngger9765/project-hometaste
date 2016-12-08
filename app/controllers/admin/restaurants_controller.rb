@@ -5,7 +5,7 @@ class Admin::RestaurantsController < ApplicationController
 	before_action :user_admin?
 
 	def index
-		
+		@restaurants = Restaurant.all
 	end
 
 end
