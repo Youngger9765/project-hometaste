@@ -34,7 +34,6 @@ class Admin::UsersController < ApplicationController
 			@user.is_live = true
 			@user.save!
 		end
-		
 
 		redirect_to admin_path
 	end

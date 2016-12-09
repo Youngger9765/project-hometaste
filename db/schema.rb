@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208015047) do
+ActiveRecord::Schema.define(version: 20161209003519) do
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -26,15 +26,19 @@ ActiveRecord::Schema.define(version: 20161208015047) do
   end
 
   create_table "restaurants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                       default: "", null: false
-    t.string   "address",                    default: "", null: false
-    t.string   "phone_number",               default: "", null: false
+    t.string   "name",                       default: "",    null: false
+    t.string   "address",                    default: "",    null: false
+    t.string   "phone_number",               default: "",    null: false
     t.text     "description",  limit: 65535
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.float    "latitude",     limit: 24
     t.float    "longitude",    limit: 24
     t.integer  "user_id"
+    t.boolean  "is_live",                    default: true
+    t.boolean  "is_approved",                default: false
+    t.index ["is_approved"], name: "index_restaurants_on_is_approved", using: :btree
+    t.index ["is_live"], name: "index_restaurants_on_is_live", using: :btree
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
   end
 

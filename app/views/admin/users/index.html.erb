@@ -31,7 +31,7 @@
           </thead>
           <tbody>
             <% @users.each do |u|%>
-              <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
+              <tr data-toggle="collapse" data-target="#data<%=u.id%>" class="accordion-toggle">
                   <td><%= u.id %></td>
                   <td><%= u.created_at %></td>
                   <td><%= u.email %></td>
@@ -64,7 +64,7 @@
               </tr>
               <tr >
                 <td colspan="6" class="hiddenRow">
-                  <div class="accordian-body collapse" id="data1">
+                  <div class="accordian-body collapse" id="data<%=u.id%>">
                     <div class="container-fluid">
                       <div class="row">
                         <table class="table table-bordered">

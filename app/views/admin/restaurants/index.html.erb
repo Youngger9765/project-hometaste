@@ -14,47 +14,61 @@
         </div>
       </div>
       <div class="col-md-12">
-        <h1>Users Admin</h1>
+        <h1>Restaurants List</h1>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
               <th>Restaurant ID</th>
               <th>Restaurant Name</th>
               <th>Created_on</th>
+              <th>Approved</th>
               <th>Boss ID</th>
               <th>Boss Name</th>
               <th>Boss Email</th>
               <th>Orders Count</th>
               <th>Orders View</th>
               <th>Total Acount</th>
-              <th>Approve!</th>
-              <th>Ban it!</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             <% @restaurants.each do |r|%>
-              <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
-                  <td><%=r.id%></td>
-                  <td><%=r.name%></td>
+              <tr data-toggle="collapse" data-target="#data<%=r.id%>" class="accordion-toggle">
+                  <td>
+                    <%= link_to r.id, admin_restaurant_path(r)%>
+                  </td>
+                  <td>
+                    <%= link_to r.name, admin_restaurant_path(r)%>
+                  </td>
                   <td><%=r.created_at%></td>
+                  <td style="text-align:center;">
+                    <% if r.is_approved%>
+                      <div style="color:white; background-color: green; border-radius: 5px; "><%= r.is_approved %></div>
+                    <% else %>
+                      <div ><%= r.is_approved %></div>
+                    <% end %>
+                  </td>
                   <td><%=r.user.id%></td>
                   <td><%=r.user.name%></td>
                   <td><%=r.user.email%></td>
                   <td>6</td>
                   <td>
                     <div class="btn btn-success">
-                      click to check
+                      check
                     </div>
                   </td>
                   <td>$9999</td>
-                  <td><%= link_to('Approve', "",:class => "btn-sm btn-success", :method => "PATCH")%></td>
-                  <td><%= link_to('Ban', "",:class => "btn-sm btn-danger", :method => "PATCH")%></td>
-                  <td><%= link_to('Delete', "",:class => "btn-sm btn-danger", :method => "PATCH")%></td>
+                  <td style="text-align:center;">
+                    <% if r.is_live%>
+                      <div></div>
+                    <% else %>
+                      <div style="color:white; background-color: red; border-radius: 5px; ">Delete</div>
+                    <% end %>
+                  </td>
               </tr>
               <tr >
                 <td colspan="6" class="hiddenRow">
-                  <div class="accordian-body collapse" id="data1">
+                  <div class="accordian-body collapse" id="data<%=r.id%>">
                     <div class="container-fluid">
                       <div class="row">
                         <table class="table table-bordered">
