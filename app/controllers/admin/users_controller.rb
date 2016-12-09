@@ -3,10 +3,14 @@ class Admin::UsersController < ApplicationController
 	layout "admin"
 
 	before_action :user_admin?
-	before_action :find_user, :only =>[:update, :destroy]
+	before_action :find_user, :only =>[:show, :update, :destroy]
 
 	def index
 		@users = User.all
+	end
+
+	def show
+		
 	end
 
 	def update
@@ -23,7 +27,7 @@ class Admin::UsersController < ApplicationController
 			end
 		end
 
-		redirect_to admin_path
+		redirect_to :back
 	end
 
 	def destroy
@@ -35,7 +39,7 @@ class Admin::UsersController < ApplicationController
 			@user.save!
 		end
 
-		redirect_to admin_path
+		redirect_to :back
 	end
 
 	private

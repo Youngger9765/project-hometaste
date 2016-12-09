@@ -19,9 +19,9 @@
           <thead>
             <tr>
               <th>User ID</th>
-              <th>Created_on</th>
               <th>Email</th>
               <th>Name</th>
+              <th>Created_at</th>
               <th>Orders</th>
               <th>Total Acount</th>
               <th>is_admin?</th>
@@ -32,10 +32,12 @@
           <tbody>
             <% @users.each do |u|%>
               <tr data-toggle="collapse" data-target="#data<%=u.id%>" class="accordion-toggle">
-                  <td><%= u.id %></td>
+                  <td>
+                    <%= link_to u.id, admin_user_path(u) %>
+                  </td>
+                  <td><%= link_to u.email, admin_user_path(u) %></td>
+                  <td><%= link_to u.user_name, admin_user_path(u)  %></td>
                   <td><%= u.created_at %></td>
-                  <td><%= u.email %></td>
-                  <td><%= u.user_name %></td>
                   <td>
                     <div class="btn btn-success">
                       click to check
@@ -47,14 +49,14 @@
                   <!-- TODO: click to check admin -->
                   <td><%= u.is_admin %></td>
                   
-                  <td>
+                  <td style="text-align:center;">
                     <% if u.is_ban %>
                       <%= link_to('Rescue', admin_user_path(u,:is_ban => 0),:class => "btn-sm btn-default", :method => "PATCH")%>
                     <% else%>
                       <%= link_to('Ban', admin_user_path(u,:is_ban => 1),:class => "btn-sm btn-danger", :method => "PATCH")%>
                     <% end %>
                   </td>
-                  <td>
+                  <td style="text-align:center;">
                     <% if u.is_live %>
                       <%= link_to('Delete', admin_user_path(u),:class => "btn-sm btn-danger", :method => "DELETE", :data => {:confirm => "ARE YOU SURE?" } )%> 
                     <% else%>
