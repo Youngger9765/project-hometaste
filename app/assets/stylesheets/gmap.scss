@@ -1,0 +1,117 @@
+.gmap_card{
+  .description a{
+    color: $main_black ;
+  }
+  .ui.card{
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  hr{
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .header a{
+    font-size:20px ;
+    color: $main_black ;
+  }
+  .meta a {
+    text-decoration: underline;
+  }
+}
+.marker_container.infoBox{
+  position: absolute;
+  background: image-url('pointer.png') center;
+  -webkit-background-size:cover; background-size:cover;
+  width: 50px;
+  height: 50px;
+  margin-left: -25px;
+  margin-top: -50px;
+}
+.infoBox > img{
+  position: absolute !important;
+  z-index: 10;
+  right: 10px;
+  top:5px;
+  width: 15px;
+}
+.css_carousel{
+  div.wrap2 {
+    float: left;
+    height: 100%;
+    width: 100%;
+  }
+  div.group input {
+    display: none;
+    left: -100%;
+    position: absolute;
+    top: -100%;
+  }
+  div.group input ~ div.content {
+    display: none;
+    height: 100%;
+    max-height: 190px;
+    min-height: 150px;
+    position: relative;
+    width: 100%;
+  }
+  div.group input:checked ~ div.content {
+    display: block;
+  }
+  div.group input:checked ~ label.previous,
+  div.group input:checked ~ label.next {
+    display: block;
+  }
+  div.group label {
+    background-color: rgba(255,255,255,(0.5));
+    display: none;
+    padding: 0;
+    top: 49%;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    z-index: 100;
+    line-height: 20px;
+    text-align: center;
+  }
+  img {
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    -webkit-background-size: cover; background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+  }
+  p {
+    text-align: center;
+  }
+  label {
+    font-size: 4em;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 15px;
+    color: $main_red;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    moz-osx-font-smoothing: grayscale;
+  }
+  label.previous {
+    &::before{
+      content: "\f053";
+    }
+    left: 5px;
+    float: left;
+    margin-left: 2px;
+    padding: 0 0 30px 5px;
+  }
+  label.next {
+    &::before{
+      content: "\f054";
+    }
+    right:5px;
+    margin-right: 3px;
+    padding: 0 5px 25px 0;
+    text-align: right;
+  }
+}

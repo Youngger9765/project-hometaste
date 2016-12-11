@@ -9,6 +9,7 @@ a:hover{
 hr{
   color: $main_black;
 }
+
 .ui.button.my_btn{
   background-color: $main_red;
   color: #FFFFFF;
@@ -266,6 +267,13 @@ hr{
   .padding_left_7_xs{
     padding-left: 7px;
   }
+}
+@media (min-width: $xs-width) {
+  .nav.navbar-nav{
+    float: right;
+  }
+}
+@media (max-width: $sm-width) {
   .footer{
     .col-md-3:nth-child(1){
       margin-left:0%;
@@ -287,10 +295,5 @@ hr{
       margin-top: 15px;
       padding-top: 15px;
     }
-  }
-}
-@media (min-width: $xs-width) {
-  .nav.navbar-nav{
-    float: right;
   }
 }
