@@ -3,7 +3,7 @@ class ApiV1::RestaurantsController < ApiController
 	def getRestaurantsByMap
 		coordinate
 		@restaurants = Restaurant.where( latitude: coordinate[:south]..coordinate[:north],
-											longitude: coordinate[:west]..coordinate[:east] ).limit(params[:qty]).sample(9)
+																		 longitude: coordinate[:west]..coordinate[:east] ).limit(params[:qty]).sample(9)
 		@hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
 			marker.lat restaurant.latitude
 			marker.lng restaurant.longitude
@@ -16,12 +16,13 @@ class ApiV1::RestaurantsController < ApiController
 	end
 
 	private
+
 	def coordinate
 		coordinate = {}
-		north_east = params[:north_east].match(/(-?\d*\.?\d*), (-?\d*\.?\d*)/)
-		south_west = params[:south_west].match(/(-?\d*\.?\d*), (-?\d*\.?\d*)/)
-		coordinate[:north],coordinate[:east] = north_east[1],north_east[2]
-		coordinate[:south],coordinate[:west] = south_west[1],south_west[2]
+		coordinate[:north] = params[:north].to_f
+		coordinate[:east] = params[:east].to_f
+		coordinate[:south] = params[:south].to_f
+		coordinate[:west] = params[:west].to_f
 		coordinate
 	end
 
@@ -39,7 +40,8 @@ class ApiV1::RestaurantsController < ApiController
           					</div>"
 		end
 
-		html = "<div class='ui fluid card'>
+		html = "<div class='gmap_cards'>
+		<div class='ui fluid card'>
           	<div class='image'>
           		<div class='css_carousel'>
           			<div class='wrap'>
@@ -50,20 +52,31 @@ class ApiV1::RestaurantsController < ApiController
           		</div>
           	</div>
           	<div class='content'>
-          		<p class='description'><a href='/'>#{ restaurant.name }</a></p>
-          		<hr>
-          		<div class='address_detail'>
-          			<p>#{restaurant.address}</p>
-          			<hr>
-          		</div>
-          		<p class='header'><a href='/'> name </a></p>
-          		<p class='description' href='#'>$7.00/ Half餐廳</p>
-          		<div class='meta hidden-xs'>
-          			<span><a href'>Vegan</a></span><span><a href'>Soup</a></span><span><a href'>Pumkim</a></span><span><a href'>Autum</a></span>
-          		</div>
-          		<div class='show_rated_#{ rating.to_s.gsub!('.','_') }'></div>
-          	</div>
-          </div>"
+              <h4><p class='description'><a href='/'>#{ restaurant.name }</a></p></h4>
+									<hr>
+							  <div class='flex_center_start location'>
+											<div class='flex_center'>
+												<p>#{restaurant.address}</p>
+											</div>
+                  </div>
+								<hr>
+                  <div class='rating_wrapping'>
+                    <div class='show_rated_#{ rating.to_s.gsub!('.','_') }'></div>
+                    <span name='reivews'>200 Reviews</span>
+                  </div>
+                  <div class='num_counts'>
+                    #{ActionController::Base.helpers.image_tag 'heart_icon.png'}
+                    <span>102 Likes</span>
+                    #{ActionController::Base.helpers.image_tag 'plate_icon.png'}
+                    <span>238 Orders</span>
+                  </div>
+                  <div class='meta hidden-xs'>
+                    <span><a href'>Vegan</a></span><span><a href'>Soup</a></span><span><a href'>Pumkim</a></span><span><a href'>Autum</a></span>
+                  </div>
+
+                </div>
+          </div>
+</div>"
 		return html
 	end
 end

@@ -48,22 +48,40 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     prevent_prerender = false
     google.maps.event.addListener handler.getMap(), 'idle', ->
       show_card_num = $('.gmap_card').size()
-      if prevent_prerender && show_card_num == 0
-        rerender_map(this)
+      ne = this.getBounds().getNorthEast().toString()
+      sw = this.getBounds().getSouthWest().toString()
+
+      coordinate = deal_coordinate(ne,sw)
+
+      if prevent_prerender && check_in_bound(coordinate) && show_card_num ==0
+        rerender_map(coordinate)
       prevent_prerender = true
 
 
-rerender_map=(data)->
-  ne = data.getBounds().getNorthEast().toString()
-  sw = data.getBounds().getSouthWest().toString()
+check_in_bound=(coordinate) ->
+  console.log(coordinate['n']-coordinate['s'],coordinate['e']-coordinate['w'])
+  a = (coordinate['n']-coordinate['s'] < 0.125 && coordinate['e']-coordinate['w'] < 0.421)
+  b = ( 0.003 < coordinate['n']-coordinate['s'] && 0.015 < coordinate['e']-coordinate['w'])
+  a && b
+
+deal_coordinate=(ne,sw) ->
+  n = +(ne.replace(/\(|\)/g,'').split(',')[0])
+  e = +(ne.replace(/\(|\)/g,'').split(',')[1])
+  s = +(sw.replace(/\(|\)/g,'').split(',')[0])
+  w = +(sw.replace(/\(|\)/g,'').split(',')[1])
+  {n:n,e:e,s:s,w:w}
+
+rerender_map=(coordinate)->
   qty = 9
   qty = 8 if $(window).width() < 992
   $.ajax
     type: 'GET',
     url: '/api/v1/getRestaurantsByMap',
     data:
-      north_east:ne,
-      south_west:sw
+      north:coordinate['n'],
+      east:coordinate['e'],
+      south:coordinate['s'],
+      west:coordinate['w'],
       qty:qty
     success: (data)->
       buildMap(data.gmap_hash)
