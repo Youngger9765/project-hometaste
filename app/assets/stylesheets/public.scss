@@ -1,0 +1,296 @@
+//---------- public setting ---------//
+body{
+  margin-top: 50px;
+  font-family:"Avenir Next";
+}
+a:hover{
+  text-decoration: none;
+}
+hr{
+  color: $main_black;
+}
+.ui.button.my_btn{
+  background-color: $main_red;
+  color: #FFFFFF;
+  font-weight: inherit;
+  border-radius: $main_radius;
+  font-size:1em;
+  border: 1px solid $main_red ;
+}
+.ui.button.my_btn_reserve{
+  background-color: #FFFFFF;
+  color: $main_red;
+  font-weight: inherit;
+  border-radius: $main_radius;
+  font-size:1em;
+  border: 1px solid $main_red ;
+}
+
+.ui.form input[type='text'].my_form,
+.ui.form input[type='number'].my_form,
+.ui.form input[type='email'].my_form,
+.ui.form.my_form input{
+  border-radius: 0 ;
+  color: #FFFFFF;
+  background-color: transparent;
+  border:none;
+  padding: 0;
+  padding-left: 5px;
+  border-bottom: 1px solid #FFFFFF;
+  &:focus{
+    border-radius: 0 ;
+    background-color: transparent;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+}
+.ui.form .field.field input:-webkit-autofill {
+  box-shadow: 0px 0px 0px 100px $main_red inset !important;
+  border-color: #FFFFFF !important;
+}
+.ui.form .field.field input:-webkit-autofill:focus {
+  box-shadow: 0px 0px 0px 100px $main_red inset !important;
+  border-color: #FFFFFF !important;
+}
+
+.ui.modal#login_modal,.ui.modal#sign_up_modal{
+  width: 300px;
+  text-align: center;
+  background-color: $main_red;
+  color: #FFFFFF;
+  bottom:inherit;
+  left: 0;
+  border-radius: $main_radius;
+  margin:0 auto ;
+  padding:0 15px 20px;
+  input{
+    height: 40px;
+  }
+  input[type='submit']{
+    border:1px solid #FFFFFF;
+    font-weight:bold;
+    border-radius: $main_radius;
+    padding:5px 25px;
+    margin-top: 15px;
+  }
+  span{
+    text-align: left;
+  }
+  .content{
+    background-color: transparent;
+  }
+  .close.icon{
+    color: #FFFFFF;
+  }
+  a[name='forgot_password']{
+    text-align: right;
+    display: inherit;
+  }
+  a{
+    color: #FFFFFF;
+  }
+  span[name="term"]{
+    display: inherit;
+    a{
+      text-decoration: underline;
+    }
+  }
+  .outh_logo{
+    p{
+      margin-left: 35px;
+      text-align: left;
+    }
+    i{
+      margin:0 20px;
+    }
+  }
+}
+
+//---------- tool ---------//
+.under_line{
+  border-bottom: 1px solid $main_black;
+}
+.back_to_top{
+  position: fixed;
+  font-size:40px;
+  right: 50px;
+  bottom: 20px;
+  color: red;
+  img{
+    height: 35px;
+  }
+}
+.square-icon {
+  @include square-icon;
+}
+.flex_center_start{
+  @include flex_(center,flex-start);
+}
+.flex_center{
+  @include flex_(center,center);
+}
+.absolute_center{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+//---------- navbar ---------//
+.navbar{
+  background-color: $main_red;
+  border:0;
+  a{
+    color: #fff !important;
+    font-weight: 500;
+  }
+  span{
+    color: #FFFFFF;
+    font-size: 10px;
+    margin-right: 10px;
+  }
+  .nav.navbar-nav li > a{
+    line-height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: inline-block;
+  }
+  li,a{
+    cursor: pointer;
+  }
+  .navbar-brand{
+    font-family:"Times New Roman";
+    img{
+      float: left;
+      height: 50px;
+      background-color: #FFFFFF;
+      margin-top: -15px;
+      padding: 4px 8px 0 10px;
+      margin-right: 10px;
+    }
+  }
+  .navbar-toggle{
+    padding-right: 0;
+  }
+  &.navbar-default .navbar-toggle .icon-bar{
+    background-color: #FFFFFF;
+  }
+  &.navbar-default .navbar-toggle:hover{
+    background-color: #FFFFFF;
+    .icon-bar{
+      background-color: $main_red;
+    }
+  }
+}
+//---------- footer ---------//
+.footer{
+  margin-top: 60px;
+  text-align: center;
+  .col-md-3{
+    height: 100%;
+  }
+  .col-md-3:nth-child(1){
+    margin-left:12.5%;
+  }
+  .col-md-3:nth-child(2){
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+  }
+  .col-md-3:nth-child(3){
+    .col-md-12:nth-child(2){
+      border-top: 1px solid #FFFFFF;
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+  }
+  .footer-first{
+    padding:35px 0;
+    background-color: $main_red;
+    color: #FFFFFF;
+    min-height:220px;
+    a,p{
+      color: #FFFFFF;
+      font-size: 16px;
+      display: block;
+    }
+    a{
+      margin-bottom: 15px;
+    }
+    i{
+      font-size: 1.5em;
+      margin-right: 10px;
+    }
+  }
+  .footer-last{
+    height: 30px;
+    color: $main_red;
+    span{
+      margin: 0 15px;
+      line-height: 30px;
+    }
+  }
+}
+.cards .ui.card:last-child, .cards .ui.card:first-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.cards .ui.fluid.card{
+  overflow: hidden;
+  display: none;
+  border-radius: $card_radius;
+  p {
+    font-weight: 500;
+  }
+  img{
+    width: 100%;
+  }
+  .image{
+    position: relative;
+  }
+  a{
+    color: inherit;
+  }
+  .ui.rating {
+    margin-top: 1em;
+    .active.icon {
+      color: $main_red;
+    }
+  }
+  i.fa{
+    color: $main_red;
+  }
+}
+@media (max-width: $xs-width) {
+  .padding_right_7_xs{
+    padding-right: 7px;
+  }
+  .padding_left_7_xs{
+    padding-left: 7px;
+  }
+  .footer{
+    .col-md-3:nth-child(1){
+      margin-left:0%;
+      border-bottom: 1px ;
+    }
+    .col-md-3:nth-child(2){
+      border-left:none;
+      border-right:none;
+      border-top: 1px solid #FFFFFF;
+      border-bottom: 1px solid #FFFFFF;
+      margin: 15px;
+      padding-top: 15px;
+    }
+    .col-md-3:nth-child(3){
+      margin-top: 15px;
+    }
+    .col-md-12:nth-child(2){
+      border-top: 1px solid #FFFFFF;
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+  }
+}
+@media (min-width: $xs-width) {
+  .nav.navbar-nav{
+    float: right;
+  }
+}

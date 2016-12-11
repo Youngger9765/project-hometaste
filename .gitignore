@@ -16,7 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-.idea/*
+/config/*.yml
 # Ignore Byebug command history file.
 .byebug_history
-/config/facebook.yml
+/.idea/
+

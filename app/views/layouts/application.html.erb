@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hometaste</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Hometaste</title>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=1" />
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<body>
+<%= render 'layouts/navbar' %>
 
-  <body>
-    <%= yield %>
-  </body>
+<% if flash.present? %>
+    <div class="col-md-12">
+      <div class="row content">
+        <div style = "color: green" class = "alert-success">
+          <%= flash[:notice]%>
+        </div>
+        <div style = "color: red" class = "alert-danger">
+          <%= flash[:alert]%>
+        </div>
+      </div>
+    </div>
+<% end %>
+<%= yield %>
+<%= render 'layouts/footer' %>
+<%= render 'layouts/back_to_top' %>
+</body>
 </html>

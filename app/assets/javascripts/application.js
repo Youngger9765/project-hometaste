@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require bootstrap/collapse
+//= require bootstrap/dropdown
+//= require bootstrap/transition
+//= require semantic_ui/semantic_ui
+//= require public

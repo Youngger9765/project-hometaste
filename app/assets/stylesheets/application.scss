@@ -10,6 +10,32 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ *= require font-awesome
+ *= require semantic_ui/semantic_ui
  */
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/normalize";
+@import "bootstrap/print";
+@import "bootstrap/forms";
+@import "bootstrap/scaffolding";
+@import "bootstrap/type";
+@import "bootstrap/grid";
+@import "bootstrap/component-animations";
+@import "bootstrap/dropdowns";
+@import "bootstrap/navs";
+@import "bootstrap/navbar";
+@import "bootstrap/utilities";
+@import "bootstrap/responsive-utilities";
+
+@import "bootstrap";
+
+@import "varible";
+@import "mixin";
+@import "public";
+@import "main";
+
+@import "admin/main";
