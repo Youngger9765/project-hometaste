@@ -1,4 +1,5 @@
 $(document).ready ->
+
   $('.ui.rating').rating('disable');
   $('.cards .col-xs-6:odd').addClass('padding_left_7_xs')
   $('.cards .col-xs-6:even').addClass('padding_right_7_xs')
@@ -43,7 +44,7 @@ $(document).ready ->
     cards_num()
     render_product_card(cards_num() * load_more_times)
 
-# ------------------------------------------
+# -------------- switch map --------------
 
   $('p[name="more_cuisine"]').click ->
     $('.ui.modal[name="more_cuisine"]').modal('show');
@@ -75,4 +76,15 @@ $(document).ready ->
       data:{ids:get_cards_id()},
       success: (data)->
         buildMap(data.gmap_hash)
+
+# ----------------- search -------------------
+  $('#search_submit').click ->
+    text = $('#search_text_input').dropdown('get text');
+    near = $('#near_input').dropdown('get text');
+    $.ajax
+      type: 'GET',
+      url: '/api/v1/search',
+      data:{text:text,near:near},
+      success:(data)->
+        console.log(1)
 

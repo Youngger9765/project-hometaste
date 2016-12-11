@@ -7,26 +7,23 @@
     </div>
     <div class="search_wrap">
       <div class="ui form">
-        <div class="ui fluid search selection dropdown">
+        <div class="ui fluid search selection dropdown" id="search_text_input">
           <input type="hidden" name="country">
           <i class="dropdown icon"></i>
           <div class="default text">Search</div>
-          <div class="menu">
-            <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-            <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-          </div>
         </div>
-        <div class="ui fluid search selection dropdown">
+        <div class="ui fluid search selection dropdown" id="near_input">
           <input type="hidden" name="country">
           <i class="dropdown icon"></i>
           <div class="default text">Near</div>
           <div class="menu">
-            <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-            <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+            <div class="item" data-value="kitchen_chef"></i>Kitchen or chef</div>
+            <div class="item" data-value="most_pop"></i>Most popular</div>
+            <div class="item" data-value="new_store"></i>New in store</div>
           </div>
         </div>
 
-        <button class="ui button" type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
+        <button id='search_submit' class="ui button" type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>

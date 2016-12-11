@@ -14,9 +14,13 @@
       font-weight: lighter;
     }
   }
+  .ui.search.selection.dropdown > input.search{
+    line-height: 29px;
+  }
   .search_wrap {
     margin: 50px auto ;
     max-width: 460px;
+
     .ui.dropdown {
       width: 200px !important;
       height: 46px;
@@ -264,7 +268,7 @@
     background-color: $main_red;
   }
 }
-.kitchens.cards{
+.kitchens.cards,.gmap_cards{
   h4{
     font-weight: bold;
     font-size: 20px;
