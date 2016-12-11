@@ -27,6 +27,23 @@
 		<%= @restaurant.description %>
 	</h3>
 
+	<h3>Foods:</h3>
+	<table class="table table-striped">
+		<thead>
+			<th>Food Name</th>
+			<th>Price</th>
+		</thead>
+		<tbody>
+			<% @foods.each do |f| %>
+				<tr>
+					<td><%= f.name %></td>
+					<td><%= f.price %></td>
+				</tr>
+
+			<% end %>
+		</tbody>
+	</table>
+
 	<h3>created_at:
 		<%= @restaurant.created_at %>
 	</h3>
