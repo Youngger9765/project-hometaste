@@ -10,14 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211144230) do
+ActiveRecord::Schema.define(version: 20161212011256) do
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "restaurant_id"
-    t.decimal  "price",         precision: 10
+    t.decimal  "price",         precision: 5, scale: 2
+  end
+
+  create_table "order_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "order_id"
+    t.integer  "food_id"
+    t.decimal  "quantity",   precision: 5, scale: 2
+    t.decimal  "amount",     precision: 5, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "scheduled_time"
+    t.integer  "user_id"
+    t.integer  "restaurant_id"
+    t.string   "customer_name"
+    t.string   "shipping_method"
+    t.text     "shipping_place",  limit: 65535
+    t.string   "shipping_status"
+    t.decimal  "amount",                        precision: 5, scale: 2
+    t.string   "payment_method"
+    t.string   "payment_status",                                        default: "pendeing", null: false
+    t.string   "order_status"
+    t.datetime "created_at",                                                                 null: false
+    t.datetime "updated_at",                                                                 null: false
   end
 
   create_table "restaurant_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
