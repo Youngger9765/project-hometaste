@@ -12,6 +12,10 @@
             </span>
           </div>
         </div>
+        <%= form_tag admin_restaurants_path do %>
+          <%= text_field_tag "keyword", :class => "form-control input-lg"%>
+          <%= submit_tag "Search",:class => "btn btn-info btn-lg" %>
+        <% end %>
       </div>
       <div class="col-md-12">
         <h1>Restaurants List</h1>
