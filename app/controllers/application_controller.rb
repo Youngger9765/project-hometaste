@@ -15,13 +15,13 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized(exception)
-    redirect_to :back  # 導向筆者剛剛新增的網頁
+    redirect_to root_path  # 導向筆者剛剛新增的網頁
   end
 
   def user_admin?
     if current_user.is_admin?
     else
-      redirect_to :back
+      redirect_to root_path
     end
   end
 end
