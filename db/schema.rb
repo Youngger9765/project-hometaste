@@ -13,9 +13,11 @@
 ActiveRecord::Schema.define(version: 20161209015450) do
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "restaurant_id",              null: false
+    t.string   "name",          default: "", null: false
+    t.integer  "price",         default: 0,  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "restaurant_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
