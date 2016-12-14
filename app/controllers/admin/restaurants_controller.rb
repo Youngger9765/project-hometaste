@@ -10,7 +10,7 @@ class Admin::RestaurantsController < ApplicationController
 	end
 
 	def show
-		
+		@foods = @restaurant.foods.all
 	end
 
 	def update

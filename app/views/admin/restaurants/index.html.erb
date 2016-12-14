@@ -12,6 +12,10 @@
             </span>
           </div>
         </div>
+        <%= form_tag admin_restaurants_path do %>
+          <%= text_field_tag "keyword", :class => "form-control input-lg"%>
+          <%= submit_tag "Search",:class => "btn btn-info btn-lg" %>
+        <% end %>
       </div>
       <div class="col-md-12">
         <h1>Restaurants List</h1>
@@ -67,7 +71,7 @@
                   </td>
               </tr>
               <tr >
-                <td colspan="10" class="hiddenRow">
+                <td colspan="13" class="hiddenRow">
                   <div class="accordian-body collapse" id="data<%=r.id%>">
                     <div class="container-fluid">
                       <div class="row">
@@ -75,31 +79,46 @@
                           <thead>
                             <tr>
                               <th>Order ID</th>
-                              <th>Order Date</th>
+                              <th>Scheduled Datetime</th>
                               <th>Customer ID</th>
                               <th>Customer Name</th>
                               <th>Customer Email</th>
                               <th>Content</th>
-                              <th>Type</th>
-                              <th>Place</th>
+                              <th>Shipping method</th>
+                              <th>Shipping place</th>
                               <th>Total Amount</th>
-                              <th>Order Status</th>
+                              <th>payment method</th>
+                              <th>payment status</th>
+                              <th>shipping status</th>
+                              <th>order status</th>
                             </tr>
                           </thead>
-                          <!-- TODO: Orders.each -->
                           <tbody>
-                            <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
-                              <td>#001</td>
-                              <td>2016/12/17</td>
-                              <td>#201</td>
-                              <td>Young</td>
-                              <td>young@gmail.com</td>
-                              <td>Hambueger/Steak</td>
-                              <td>delivery</td>
-                              <td>white house</td>
-                              <td>$3000</td>
-                              <td>pending</td>
-                            </tr>
+                            <% r.orders.each do |order|%>
+                              <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
+                                <td><%=order.id%></td>
+                                <td><%=order.scheduled_time%></td>
+                                <td><%=order.user.id%></td>
+                                <td><%=order.customer_name%></td>
+                                <td><%=order.user.email%></td>
+                                <td>
+                                  <% order.foods.each do |food|%>
+                                      <%= food.name%>
+                                      *
+                                      <%= order.order_food_ships.find_by(:food_id => food.id).quantity%>
+                                      ($<%=order.order_food_ships.find_by(:food_id => food.id).amount%>)
+                                  <% end %>
+
+                                </td>
+                                <td><%=order.shipping_method%></td>
+                                <td><%=order.shipping_place%></td>
+                                <td><%=order.amount%></td>
+                                <td><%=order.payment_method%></td>
+                                <td><%=order.payment_status%></td>
+                                <td><%=order.shipping_status%></td>
+                                <td><%=order.order_status%></td>
+                              </tr>
+                            <% end %>
                           </tbody>
                         </table>
                       </div>

@@ -28,10 +28,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'ransack'
 
 # register
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'settingslogic' #管理我們的秘密key
+gem 'omniauth-google-oauth2'
 
 # front tools
 gem 'font-awesome-rails'
@@ -67,6 +70,8 @@ group :development do
   gem 'capistrano'
 	gem 'capistrano-rails'
 	gem 'capistrano3-puma'
+  gem 'capistrano-passenger'
+  gem 'capistrano-bundler', '~> 1.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,7 +1,7 @@
 `ssh-add`
 
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '>=3.6.1'
 
 set :application, 'hometaste'
 set :repo_url, 'git@bitbucket.org:smartboss/hometaste.git'
