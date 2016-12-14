@@ -161,12 +161,16 @@
     </div>
   </div>
 </div>
+
+
 <div class="location_map hidden">
-  <%= image_tag 'icon/map.png', class: 'img-responsive' %>
+  <div class="col-xs-12">
+    <div class="row">
+      <%= render 'map' %>
+    </div>
+  </div>
 </div>
 <div class="container">
-
-  <% @products = 1 %>
   <% if @products %>
       <div class="row products cards">
         <%= content_for :card_hover_link do %>
@@ -186,9 +190,9 @@
               <i class="fa fa-weixin" aria-hidden="true"></i>
             </div>
         <% end %>
-        <% 81.times do %>
+        <% @foods.each do |food| %>
             <div class="col-md-4 col-xs-6">
-              <div class="ui fluid card">
+              <div class="ui fluid card" data-id="<%= food.id %>">
                 <div class="image">
                   <img data-src="<%= image_path 'tmp/BB_DHD.png' %>" class="food_status">
                   <img data-src="<%= image_path 'tmp/product.png' %>">
@@ -201,7 +205,7 @@
                     <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
                   </div>
 
-                  <p class="description"><a href="">Mr.chans Kitchen</a></p>
+                  <p class="description"><a href=""><%= food.restaurant.name %></a></p>
 
                   <hr>
                   <div class="address_detail hidden">
@@ -211,7 +215,7 @@
 
                   <p class="header"><a href="">Roasted Duck</a></p>
 
-                  <p class="description" href="#">$7.00/ Half</p>
+                  <p class="description" href="#">$<%= food.price %>/ Half</p>
                   <div class="meta hidden-xs">
                     <span><a href="">Vegan</a></span><span><a href="">Soup</a></span><span><a href="">Pumkim</a></span><span><a href="">Autum</a></span>
                   </div>
@@ -221,7 +225,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
         <% end %>
         <div class="col-xs-12">
@@ -326,8 +329,6 @@
     <div class="ui deny button my_btn_reserve">Cancel</div>
   </div>
 </div>
-
-
 
 <%= javascript_include_tag 'main' %>
 

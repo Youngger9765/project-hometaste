@@ -48,6 +48,14 @@
     }
   }
 }
+.products.cards,.kitchens.cards{
+  .col-md-4,.col-xs-6{
+    min-height: inherit;
+  }
+}
+.ui.fluid.card.visible{
+  display: block !important;
+}
 .products.cards .ui.fluid.card {
   .content {
     position: relative;
@@ -314,6 +322,14 @@
     font-size: 10px;
     text-decoration: underline;
     color: #3A618D;
+  }
+}
+.load_more {
+  min-height: 30px;
+  margin-top: 30px;
+  button.ui.button.my_btn {
+    width: 175px;
+    height: 40px;
   }
 }
 

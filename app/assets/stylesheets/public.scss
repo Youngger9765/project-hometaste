@@ -9,6 +9,7 @@ a:hover{
 hr{
   color: $main_black;
 }
+
 .ui.button.my_btn{
   background-color: $main_red;
   color: #FFFFFF;
@@ -296,7 +297,6 @@ img[name='cert']{
   .padding_left_7_xs{
     padding-left: 7px;
   }
-
 }
 @media (min-width: $xs-width) {
   .nav.navbar-nav{

@@ -18,4 +18,7 @@
 //= require bootstrap/carousel
 // require bootstrap-sprockets
 //= require semantic_ui/semantic_ui
+//= require underscore
+//= require gmaps/google
+//= require gmaps
 //= require public
