@@ -11,6 +11,11 @@
           <input type="hidden" name="country">
           <i class="dropdown icon"></i>
           <div class="default text">Search</div>
+          <div class="menu">
+            <div class="item" data-value="kitchen_chef"></i>Kitchen or chef</div>
+            <div class="item" data-value="most_pop"></i>Most popular</div>
+            <div class="item" data-value="new_store"></i>New in store</div>
+          </div>
         </div>
         <div class="ui fluid search selection dropdown" id="near_input">
           <input type="hidden" name="country">
@@ -33,123 +38,7 @@
     <div class="ui icon button title pull-left" data-tooltip="Filter" data-inverted="">
       <i class="fa fa-filter fa-2x" aria-hidden="true"></i>
     </div>
-    <div class="content">
-      <div class="container transition hidden filter_menu ui form">
-        <div class="row">
-          <div class="col-xs-6 col-sm-2 col-sm-offset-1">
-            <p>Sort By</p>
-            <hr>
-            <a href="">BestMatch</a>
-            <a href="">Highest Rated</a>
-            <a href="">Most Reviewed</a>
-            <a href="">New</a>
-          </div>
-          <div class="col-xs-6 col-sm-2">
-            <p>Distance</p>
-            <hr>
-            <a href="">Driving-5min</a>
-            <a href="">Biking-5min</a>
-            <a href="">Walking-1min</a>
-            Custom:<input type="number" name="custom_min" class="my_form">min
-          </div>
-          <div class="clearfix hidden-xs-up"></div>
-          <div class="col-xs-4 col-sm-2">
-            <p>Price</p>
-            <hr>
-            <div class="grouped fields">
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="price" checked="" tabindex="0" class="hidden">
-                  <label>$</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="price" tabindex="0" class="hidden">
-                  <label>$$</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="price" tabindex="0" class="hidden">
-                  <label>$$$</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="price" tabindex="0" class="hidden">
-                  <label>$$$$</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-4 col-sm-2">
-            <p>Cuisine</p>
-            <hr>
-            <div class="grouped fields">
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Cuisine" checked="" tabindex="0" class="hidden">
-                  <label>Any Cuisine</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Cuisine" tabindex="0" class="hidden">
-                  <label>African</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Cuisine" tabindex="0" class="hidden">
-                  <label>American</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Cuisine" tabindex="0" class="hidden">
-                  <label>Asian Fusion</label>
-                </div>
-              </div>
-              <div class="field">
-                <p href="" name="more_cuisine">More cuisine</p>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-xs-4 col-sm-2">
-            <p>Features</p>
-            <hr>
-            <div class="grouped fields">
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Fearures" checked="" tabindex="0" class="hidden">
-                  <label>Today's Meal</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Fearures" tabindex="0" class="hidden">
-                  <label>Bulk Buy</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Fearures" tabindex="0" class="hidden">
-                  <label>Delivery</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="Fearures" tabindex="0" class="hidden">
-                  <label>Offer BigBun</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'filter_content' %>
     <div class="ui icon button pull-right" data-tooltip="Map view" data-inverted="">
       <%= image_tag 'map_icon.png' %>
     </div>
@@ -273,51 +162,6 @@
         </div>
       </div>
   <% end %>
-</div>
-
-<div class="ui small modal" name="more_cuisine">
-  <i class="close icon"></i>
-  <div class="header text-center">
-    Cuisine
-  </div>
-  <div class="image content">
-    <div class="description">
-
-      <div class="grouped fields">
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
-            <label>Apples</label>
-          </div>
-        </div>
-        <% 10.times do %>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Orangesasdasdas</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Pears</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Grapefruit</label>
-              </div>
-            </div>
-        <% end %>
-      </div>
-
-    </div>
-  </div>
-  <div class="actions">
-    <div class="ui button my_btn">Search</div>
-    <div class="ui deny button my_btn_reserve">Cancel</div>
-  </div>
 </div>
 
 <%= javascript_include_tag 'main' %>

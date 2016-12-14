@@ -1,5 +1,6 @@
 $(document).ready ->
   $('.ui.dropdown').dropdown();
+  $('.ui.checkbox').checkbox();
   $('.ui.accordion').accordion();
   $('.ui.radio.checkbox').checkbox();
   $('#sign_up').click ->
