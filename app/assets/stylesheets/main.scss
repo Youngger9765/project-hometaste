@@ -1,47 +1,49 @@
-.banner {
-  min-height: 400px;
-  background: image-url('banner_HD.png') center;
-  -webkit-background-size:cover;
-  background-size:cover;
-  .title {
-    text-align: center;
-    color: #FFFFFF;
-    margin-top: 50px;
-    h1 {
-      font-weight: bold;
-    }
-    h3 {
-      font-weight: lighter;
-    }
-  }
-  .search_wrap {
-    margin: 50px auto ;
-    max-width: 460px;
-    .ui.dropdown {
-      width: 200px !important;
-      height: 46px;
-      display: inline-block;
-      .dropdown.icon,.text{
-        line-height: 27px;
-      }
-      .item{
-        background-color: $main_red;
-        color: #FFFFFF;
-        border: none;
-      }
-      .default.text{
-        color: $main_black;
+.main_index{
+  .banner {
+    min-height: 400px;
+    background: image-url('banner_HD.png') center;
+    -webkit-background-size:cover;
+    background-size:cover;
+    .title {
+      text-align: center;
+      color: #FFFFFF;
+      margin-top: 50px;
+      h1 {
         font-weight: bold;
       }
+      h3 {
+        font-weight: lighter;
+      }
     }
-    .ui.button {
-      width: 45px;
-      height: 45px;
-      background-color: $main_red;
-      padding: 0;
-      float: right;
-      i {
-        color: #FFFFFF;
+    .search_wrap {
+      margin: 50px auto ;
+      max-width: 460px;
+      .ui.dropdown {
+        width: 200px !important;
+        height: 46px;
+        display: inline-block;
+        .dropdown.icon,.text{
+          line-height: 27px;
+        }
+        .item{
+          background-color: $main_red;
+          color: #FFFFFF;
+          border: none;
+        }
+        .default.text{
+          color: $main_black;
+          font-weight: bold;
+        }
+      }
+      .ui.button {
+        width: 45px;
+        height: 45px;
+        background-color: $main_red;
+        padding: 0;
+        float: right;
+        i {
+          color: #FFFFFF;
+        }
       }
     }
   }
@@ -114,7 +116,7 @@
       margin-bottom: 0;
     }
     .ui.checkbox label:before{
-    border-color: #FFFFFF;
+      border-color: #FFFFFF;
       background-color: transparent;
     }
     p{
@@ -312,13 +314,6 @@
     font-size: 10px;
     text-decoration: underline;
     color: #3A618D;
-  }
-}
-.load_more {
-  min-height: 30px;
-  button.ui.button.my_btn {
-    width: 175px;
-    height: 40px;
   }
 }
 

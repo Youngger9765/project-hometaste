@@ -28,10 +28,11 @@
 @import "bootstrap/dropdowns";
 @import "bootstrap/navs";
 @import "bootstrap/navbar";
+@import "bootstrap/carousel";
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
+//@import "bootstrap";
 
-@import "bootstrap";
 
 @import "varible";
 @import "mixin";
@@ -39,3 +40,5 @@
 @import "main";
 
 @import "admin/main";
+@import "restaurants";
+@import "rated_star";
