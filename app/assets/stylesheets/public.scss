@@ -60,9 +60,9 @@ hr{
   background-color: $main_red;
   color: #FFFFFF;
   bottom:inherit;
-  left: 0;
+  left: 50%;
   border-radius: $main_radius;
-  margin:0 auto ;
+  margin:0 0 0 -150px ;
   padding:0 15px 20px;
   input{
     height: 40px;
@@ -81,6 +81,9 @@ hr{
     background-color: transparent;
   }
   .close.icon{
+    top: 10px;
+    right: 10px;
+    opacity: 1;
     color: #FFFFFF;
   }
   a[name='forgot_password']{
