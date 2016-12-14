@@ -9,7 +9,12 @@ a:hover{
 hr{
   color: $main_black;
 }
-
+.alert_message{
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+}
 .ui.button.my_btn{
   background-color: $main_red;
   color: #FFFFFF;
