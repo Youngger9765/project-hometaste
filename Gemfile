@@ -33,6 +33,8 @@ gem 'ransack'
 # register
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'settingslogic' #管理我們的秘密key
+gem 'omniauth-google-oauth2'
 
 # front tools
 gem 'font-awesome-rails'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212011256) do
+ActiveRecord::Schema.define(version: 20161214015435) do
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -98,9 +98,16 @@ ActiveRecord::Schema.define(version: 20161212011256) do
     t.boolean  "is_live",                              default: true
     t.boolean  "is_ban",                               default: false
     t.text     "address",                limit: 65535
+    t.string   "google_uid"
+    t.string   "google_token"
+    t.text     "google_raw_data",        limit: 65535
+    t.string   "google_email"
+    t.string   "google_name"
+    t.string   "google_head_shot"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
+    t.index ["google_uid"], name: "index_users_on_google_uid", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
