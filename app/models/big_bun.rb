@@ -1,0 +1,2 @@
+class BigBun < ApplicationRecord
+end

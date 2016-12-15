@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215122440) do
+ActiveRecord::Schema.define(version: 20161215144654) do
+
+  create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "restaurant_id",  null: false
+    t.string   "name",           null: false
+    t.integer  "piece"
+    t.datetime "start_datetime"
+    t.datetime "stop_datetime"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "restaurant_id",            null: false
+    t.float    "min_order",     limit: 24
+    t.time     "cut_off_time"
+    t.string   "location"
+    t.time     "pick_up_time"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["restaurant_id"], name: "index_bulk_buys_on_restaurant_id", using: :btree
+  end
+
+  create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "restaurant_id",                           null: false
+    t.float    "min_order",     limit: 24
+    t.string   "area"
+    t.float    "distance",      limit: 24
+    t.decimal  "cost",                     precision: 10
+    t.time     "order_hours"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["restaurant_id"], name: "index_deliveries_on_restaurant_id", using: :btree
+  end
 
   create_table "food_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",                                 null: false
@@ -25,11 +58,12 @@ ActiveRecord::Schema.define(version: 20161215122440) do
   end
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                                  default: "", null: false
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.string   "name",                                  default: "",    null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.integer  "restaurant_id"
     t.decimal  "price",         precision: 5, scale: 2
+    t.boolean  "is_public",                             default: false
   end
 
   create_table "order_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
