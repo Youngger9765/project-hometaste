@@ -9,7 +9,7 @@ class Restaurant < ApplicationRecord
     has_many :bulk_buys
     has_many :big_buns
 
-	belongs_to :user
+	belongs_to :chef
 
 	geocoded_by :address
 	after_validation :geocode # auto-fetch coordinates
