@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :user_name, presence: true
   validates :phone_number, presence: true
 
+  has_one :chef
   has_one :restaurant
 
   has_many :orders

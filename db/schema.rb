@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215150826) do
+ActiveRecord::Schema.define(version: 20161215161652) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 20161215150826) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["restaurant_id"], name: "index_bulk_buys_on_restaurant_id", using: :btree
+  end
+
+  create_table "chefs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",        null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.date     "birthday"
+    t.string   "SSN"
+    t.string   "routing_number"
+    t.string   "account_number"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id"], name: "index_chefs_on_user_id", using: :btree
   end
 
   create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -112,20 +126,28 @@ ActiveRecord::Schema.define(version: 20161215150826) do
   end
 
   create_table "restaurants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                       default: "",    null: false
-    t.string   "address",                    default: "",    null: false
-    t.string   "phone_number",               default: "",    null: false
-    t.text     "description",  limit: 65535
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.float    "latitude",     limit: 24
-    t.float    "longitude",    limit: 24
-    t.integer  "user_id"
-    t.boolean  "is_live",                    default: true
-    t.boolean  "is_approved",                default: false
+    t.string   "name",                               default: "",    null: false
+    t.string   "address",                            default: "",    null: false
+    t.string   "phone_number",                       default: "",    null: false
+    t.text     "description",          limit: 65535
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.float    "latitude",             limit: 24
+    t.float    "longitude",            limit: 24
+    t.integer  "chef_id"
+    t.boolean  "is_live",                            default: true
+    t.boolean  "is_approved",                        default: false
+    t.string   "city"
+    t.string   "state"
+    t.integer  "ZIP"
+    t.string   "tax_ID"
+    t.string   "communication_method"
+    t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
+    t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
+    t.index ["city"], name: "index_restaurants_on_city", using: :btree
     t.index ["is_approved"], name: "index_restaurants_on_is_approved", using: :btree
     t.index ["is_live"], name: "index_restaurants_on_is_live", using: :btree
-    t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
+    t.index ["state"], name: "index_restaurants_on_state", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
