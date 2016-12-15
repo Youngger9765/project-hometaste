@@ -14,8 +14,8 @@ class MainController < ApplicationController
 		delivery_restaurant_ids = Delivery.all.pluck(:restaurant_id).uniq
 		@delivery = Restaurant.find(delivery_restaurant_ids)
 
-		raise
+		big_bun_restaurant_ids = BigBun.all.where(:is_public => true).pluck(:restaurant_id).uniq
+		@offer_big_bun = Restaurant.find(big_bun_restaurant_ids)
 
-		@offer_big_bun
 	end
 end

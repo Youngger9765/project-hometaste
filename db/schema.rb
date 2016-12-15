@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215144654) do
+ActiveRecord::Schema.define(version: 20161215150826) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "restaurant_id",  null: false
-    t.string   "name",           null: false
+    t.integer  "restaurant_id",                  null: false
+    t.string   "name",                           null: false
     t.integer  "piece"
     t.datetime "start_datetime"
     t.datetime "stop_datetime"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "is_public",      default: false
   end
 
   create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
