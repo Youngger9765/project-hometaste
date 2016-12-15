@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215013513) do
+ActiveRecord::Schema.define(version: 20161215122440) do
+
+  create_table "food_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",                                 null: false
+    t.integer  "food_id",                                 null: false
+    t.text     "comment",    limit: 65535,                null: false
+    t.float    "score",      limit: 24
+    t.boolean  "is_public",                default: true, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["food_id"], name: "index_food_comments_on_food_id", using: :btree
+    t.index ["user_id"], name: "index_food_comments_on_user_id", using: :btree
+  end
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                                  default: "", null: false
