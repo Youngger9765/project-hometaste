@@ -8,8 +8,7 @@
   <%= javascript_include_tag 'application' %>
 </head>
 
-<body>
-<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path,:class => "btn btn-info" %>
+<body class="<%= controller_name+'_'+action_name %>">
 
 <%= render 'layouts/navbar' %>
 
@@ -25,8 +24,9 @@
       </div>
     </div>
 <% end %>
+<%= render 'layouts/back_to_top' %>
 <%= yield %>
 <%= render 'layouts/footer' %>
-<%= render 'layouts/back_to_top' %>
+
 </body>
 </html>

@@ -10,8 +10,15 @@
 
 /* Toggle Styles */
 
-.admin-navbar{
+#admin-navbar{
     margin: 0;
+    background-color: black;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-brand h1 {
+    font-size: 34px;
 }
 
 #wrapper {

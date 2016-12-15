@@ -20,31 +20,28 @@ $(document).ready ->
 # ------ show and check card num -----------
 
   load_more_times = 1
-
-  card_num=() ->
+  cards_qty = 9
+  cards_num=() ->
     if $(window).width() < 992
-      num = 8
-    else
-      num = 9
-    console.log(num)
-    return num
+      cards_qty = 8
+    return cards_qty
 
   render_product_card=(num) ->
     card = $('.card:lt('+num+')')
-    card.show()
+    card.addClass('visible')
     $('.card:lt('+num+') img').each ->
       $(this).attr('src',$(this).attr("data-src"))
 
-  render_product_card(card_num())
+  render_product_card(cards_num())
 
   $(window).resize ->
-    card_num()
-    render_product_card(card_num() * load_more_times)
+    cards_num()
+    render_product_card(cards_num() * load_more_times)
 
   $('#load_more').click ->
     load_more_times += 1
-    card_num()
-    render_product_card(card_num() * load_more_times)
+    cards_num()
+    render_product_card(cards_num() * load_more_times)
 
 # ------------------------------------------
 
@@ -60,5 +57,22 @@ $(document).ready ->
     $('div[data-tooltip="Product list"]').toggleClass('hidden')
     $('.products.cards').toggleClass('hidden')
     $('.location_map').toggleClass('hidden')
+    render_google_map()
 
+# --------------- google map -------------
+
+  get_cards_id=() ->
+    ids = []
+    qty = - cards_qty - 1
+    $(".card.visible:gt(" + qty + ")").each () ->
+      ids.push( $(this).data('id') )
+    return ids
+    
+  render_google_map=() ->  
+    $.ajax
+      type: 'GET',
+      url: '/api/v1/getDishesByFilter',
+      data:{ids:get_cards_id()},
+      success: (data)->
+        buildMap(data.gmap_hash)
 

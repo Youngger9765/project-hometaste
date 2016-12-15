@@ -9,6 +9,12 @@ a:hover{
 hr{
   color: $main_black;
 }
+.alert_message{
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+}
 .ui.button.my_btn{
   background-color: $main_red;
   color: #FFFFFF;
@@ -59,9 +65,9 @@ hr{
   background-color: $main_red;
   color: #FFFFFF;
   bottom:inherit;
-  left: 0;
+  left: 50%;
   border-radius: $main_radius;
-  margin:0 auto ;
+  margin:0 0 0 -150px ;
   padding:0 15px 20px;
   input{
     height: 40px;
@@ -80,6 +86,9 @@ hr{
     background-color: transparent;
   }
   .close.icon{
+    top: 10px;
+    right: 10px;
+    opacity: 1;
     color: #FFFFFF;
   }
   a[name='forgot_password']{
@@ -105,36 +114,28 @@ hr{
     }
   }
 }
-
-//---------- tool ---------//
-.under_line{
-  border-bottom: 1px solid $main_black;
+img[name='cart']{
+  height: auto;
+  width: 35px;
+  padding-bottom: 3px;
+  margin: 0 auto;
 }
-.back_to_top{
-  position: fixed;
-  font-size:40px;
-  right: 50px;
-  bottom: 20px;
-  color: red;
-  img{
-    height: 35px;
-  }
+img[name='cart_white']{
+  height: auto;
+  width: 35px;
+  padding-bottom: 7px;
+  margin: 0 auto;
 }
-.square-icon {
-  @include square-icon;
+img[name='moto']{
+  height: auto;
+  width: 40px;
+  padding-bottom: 7px;
+  margin: 0 auto;
 }
-.flex_center_start{
-  @include flex_(center,flex-start);
+img[name='cert']{
+  height: 45px;
+  width: auto;
 }
-.flex_center{
-  @include flex_(center,center);
-}
-.absolute_center{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 //---------- navbar ---------//
 .navbar{
   background-color: $main_red;
@@ -183,13 +184,10 @@ hr{
 }
 //---------- footer ---------//
 .footer{
-  margin-top: 60px;
+  margin-top: 30px;
   text-align: center;
   .col-md-3{
     height: 100%;
-  }
-  .col-md-3:nth-child(1){
-    margin-left:12.5%;
   }
   .col-md-3:nth-child(2){
     border-left: 1px solid #FFFFFF;
@@ -229,6 +227,38 @@ hr{
     }
   }
 }
+.back_to_top{
+  z-index:100;
+  position: fixed;
+  font-size:40px;
+  right: 50px;
+  bottom: 20px;
+  color: red;
+  img{
+    height: 35px;
+  }
+}
+//---------- template ---------//
+.ui.form .count_spinner{
+  .product_spineer_button{
+    background-color: transparent;
+    img{
+      width: 20px;
+    }
+  }
+  .buttons{
+    margin-left: -10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  input{
+    border:none;
+    width: 50px;
+    text-align: center;
+    padding: 0 10px;
+    font-size: 20px;
+  }
+}
 .cards .ui.card:last-child, .cards .ui.card:first-child {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -259,12 +289,67 @@ hr{
     color: $main_red;
   }
 }
+.load_more{
+  height: 40px;
+  display: block;
+  margin-bottom: 30px;
+  button.ui.button.my_btn {
+    width: 175px;
+    height: 40px;
+  }
+}
 @media (max-width: $xs-width) {
   .padding_right_7_xs{
     padding-right: 7px;
   }
   .padding_left_7_xs{
     padding-left: 7px;
+  }
+}
+@media (min-width: $xs-width) {
+  .nav.navbar-nav{
+    float: right;
+  }
+}
+@media (min-width: $sm-width){
+  .footer{
+    .col-md-3:nth-child(1){
+      margin-left:12.5%;
+    }
+  }
+}
+@media (max-width: $sm-width){
+  h2{
+    margin:0 5px;
+    font-size: 18px;
+  }
+  h4{
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size:14px;
+  }
+  h5{
+    margin-bottom: 0;
+    font-size: 12px;
+  }
+  p{
+    font-size: 12px;
+  }
+  .ui.form .count_spinner{
+    .buttons{
+      margin-left: -10px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      img{
+        width: 15px;
+      }
+    }
+    input{
+      font-size: 14px;
+    }
+  }
+  .footer .footer-first a, .footer .footer-first p{
+    font-size: 12px;
   }
   .footer{
     .col-md-3:nth-child(1){
@@ -287,10 +372,5 @@ hr{
       margin-top: 15px;
       padding-top: 15px;
     }
-  }
-}
-@media (min-width: $xs-width) {
-  .nav.navbar-nav{
-    float: right;
   }
 }
