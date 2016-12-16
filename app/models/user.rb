@@ -48,6 +48,14 @@ class User < ApplicationRecord
     existing_user = User.find_by_email( auth.info.email )
     if existing_user
 
+      if existing_user.is_chef
+        return
+      end
+
+      if !existing_user.user_name
+        existing_user.user_name = auth[:info][:name]
+      end
+
       # if existing_user.head_shot_file_name.nil? && auth.info.image.present?
 
       #   if auth[:info][:image].include?"graph.facebook"
@@ -141,6 +149,10 @@ class User < ApplicationRecord
     # Case 2: Find existing user by email
     existing_user = User.find_by_email( auth.info.email )
     if existing_user
+
+      if existing_user.is_chef
+        return
+      end
 
       if !existing_user.user_name
         existing_user.user_name = auth[:info][:name]
