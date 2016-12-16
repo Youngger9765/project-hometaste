@@ -1,0 +1,36 @@
+.chef-container {
+	border: 2px solid black;
+	width: 50em;
+	font-size: 20px;
+
+	input {
+		border: 0;
+    border-bottom: 2px solid;
+	}
+
+	.form_control {
+		margin-bottom: 1em;
+	}
+
+	.col-md-12 input {
+		width: 36em;
+	}
+	.col-md-6 input {
+		width: 15em;
+	}
+
+	.check_box input{
+		width:10px;
+	}
+}
+
+.chef-sub-container {
+	border: 2px solid black;
+	width: 40em;
+	margin: 2em auto;
+  padding: 1em;
+}
+
+#chef-submit-btn {
+	width:100%;
+}
