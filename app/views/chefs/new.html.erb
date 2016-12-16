@@ -1,0 +1,107 @@
+<div class="container chef-container center">
+	<div class="row">
+
+		<%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
+
+			<div class="row container chef-sub-container center">
+				<%= f.fields_for :restaurant do |r| %>
+					<div class="form_control col-md-12">
+				    <%= r.label :name, "Restaurant Name" %> <br>
+				    <%= r.text_field :name %>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :address, "Address" %> <br>
+				    <%= r.text_field :address %>
+			    </div>
+
+			    <div class="form_control col-md-4">
+				    <%= r.label :city, "City" %> <br>
+				    <%= r.text_field :city %>
+			    </div>
+
+			    <div class="form_control col-md-4">
+				    <%= r.label :state, "state" %> <br>
+				    <%= r.text_field :state %>
+			    </div>
+
+			    <div class="form_control col-md-4">
+				    <%= r.label :ZIP, "ZIP" %> <br>
+				    <%= r.text_field :ZIP %>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :tax_ID, "Tax ID" %> <br>
+				    <%= r.text_field :tax_ID %>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :communication_method, "communication_method" %> <br>
+				    <div class="check_box col-md-3">
+				    	<%= check_box_tag 'chef[restaurant_attributes][communication_method]', 'email',:style=>"width:10px;" %> <span>email</span>
+				    </div>
+				    <div class="check_box col-md-3">
+				    	<%= check_box_tag 'chef[restaurant_attributes][communication_method]', 'Text-message' %> Text-message
+				    </div>
+			    </div>
+
+					<!-- 認證 -->
+
+					<!-- cuisine -->
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :description, "About" %> <br>
+				    <%= r.text_field :description %>
+			    </div>
+				<% end %>
+			</div>
+
+			<div class="row container chef-sub-container center">
+				<div class="form_control col-md-6">
+					<%= f.label :first_name, "First_name" %> <br>
+				  <%= f.text_field :first_name %>
+				</div>
+				<div class="form_control col-md-6">
+			    <%= f.label :last_name, "Last_name" %> <br>
+			    <%= f.text_field :last_name %>
+		    </div>
+
+				<!-- user -->
+				<!-- password -->
+				<!-- confirmed password -->
+				<!-- email -->
+
+				<div class="form_control col-md-12">
+			    <%= f.label :phone_number, "Phone" %> <br>
+			    <%= f.text_field :phone_number%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :birthday, "DOB" %> <br>
+			    <%= f.text_field :birthday%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :SSN, "SSN" %> <br>
+			    <%= f.text_field :SSN%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :routing_number, "routing_number" %> <br>
+			    <%= f.text_field :routing_number%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :account_number, "account_number" %> <br>
+			    <%= f.text_field :account_number%>
+		    </div>
+
+	    </div>
+
+			<div class="form_control col-md-12">
+		    <%= f.submit "SUBMIT",:class=>"btn btn-success center", :id=>"chef-submit-btn"  %>
+		  </div>
+		<% end %>
+	</div>
+</div>
+
