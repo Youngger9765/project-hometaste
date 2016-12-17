@@ -24,7 +24,7 @@ class ChefsController < ApplicationController
 			if @user.save
 					@chef.user = @user
 
-				# save chef & restaurant
+				# save chef & restaurant & delivery & bulk_buys
 				if @chef.save
 
 				else
@@ -65,13 +65,15 @@ class ChefsController < ApplicationController
 	  		:delivery_attributes => [
 		  		:id, :min_order, :area, :distance, :cost, :order_hours,
 		  	],
+
+		  	:bulk_buys_attributes => [
+		  		:id, :cut_off_time, :location, :pick_up_time,
+		  	],
 	  	],
 
 	  	:user_attributes => [
 	  		:id, :email, :password,
 	  	],
-
-	  	
 	  )
 	end
 
