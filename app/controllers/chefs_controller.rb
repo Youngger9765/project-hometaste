@@ -26,6 +26,13 @@ class ChefsController < ApplicationController
 
 				# save chef & restaurant & delivery & bulk_buys
 				if @chef.save
+					if !bulk_buy_checked
+						@chef.restaurant.bulk_buys.destroy_all
+					end
+
+					if !delivery_checked && @chef.restaurant.delivery
+						@chef.restaurant.delivery.destroy_all
+					end
 
 				else
 					@user.destroy
@@ -87,5 +94,13 @@ class ChefsController < ApplicationController
 
 	def delivery_params
 		restaurant_params[:delivery_attributes]
+	end
+
+	def delivery_checked
+		params[:delivery_only]
+	end
+
+	def bulk_buy_checked
+		params[:bulk_buy_only]
 	end
 end
