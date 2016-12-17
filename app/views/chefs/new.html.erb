@@ -67,9 +67,22 @@
 		    </div>
 
 				<!-- user -->
-				<!-- password -->
-				<!-- confirmed password -->
-				<!-- email -->
+				<%= f.fields_for :user do |u| %>
+					<div class="form_control col-md-6">
+				    <%= u.label :password, "password" %> <br>
+				    <%= u.password_field :password %>
+			    </div>
+
+			    <div class="form_control col-md-6">
+			    	<label>Confirm Password</label>
+				    <%= password_field_tag 'confirm_password', ''%>
+			    </div>
+
+					<div class="form_control col-md-12">
+				    <%= u.label :email, "Email" %> <br>
+				    <%= u.text_field :name %>
+			    </div>
+				<% end %>
 
 				<div class="form_control col-md-12">
 			    <%= f.label :phone_number, "Phone" %> <br>
@@ -98,10 +111,38 @@
 
 	    </div>
 
-			<div class="form_control col-md-12">
-		    <%= f.submit "SUBMIT",:class=>"btn btn-success center", :id=>"chef-submit-btn"  %>
+			<div class="form_control col-md-12" id="chef-submit-div">
+				<bottum id="chef-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>
+		    <%= f.submit "SUBMIT",:class=>"btn btn-success center hidden", :id=>"chef-submit-btn"%>
 		  </div>
 		<% end %>
 	</div>
 </div>
+
+
+<script>
+	$("#chef-submit-check-btn").click(function(){
+		var check_submit = true;
+		check_submit = check_submit & check_chef_password();
+
+		if (check_submit) {
+			$('#chef-submit-btn').click();
+		}
+	});
+
+	var check_chef_password = function(){
+		var password = $("input#chef_user_attributes_password").val();
+		var confirm_password = $("input#confirm_password").val();
+		if (password && confirm_password && password == confirm_password){
+			return true;
+		} else {
+			alert('Please check password!')
+			return false;
+		};
+	}
+	
+</script>
+
+
+
 
