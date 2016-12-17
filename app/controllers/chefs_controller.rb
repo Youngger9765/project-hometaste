@@ -28,6 +28,7 @@ class ChefsController < ApplicationController
 				if @chef.save
 
 				else
+					@user.destroy
 					create_pass = false
 				end
 
@@ -60,11 +61,17 @@ class ChefsController < ApplicationController
 	  	:restaurant_attributes => [
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
+
+	  		:delivery_attributes => [
+		  		:id, :min_order, :area, :distance, :cost, :order_hours,
+		  	],
 	  	],
 
 	  	:user_attributes => [
 	  		:id, :email, :password,
 	  	],
+
+	  	
 	  )
 	end
 
@@ -74,5 +81,9 @@ class ChefsController < ApplicationController
 
 	def restaurant_params
 		chef_params[:restaurant_attributes]
+	end
+
+	def delivery_params
+		restaurant_params[:delivery_attributes]
 	end
 end

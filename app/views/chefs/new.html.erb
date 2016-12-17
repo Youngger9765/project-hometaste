@@ -3,6 +3,7 @@
 
 		<%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
 
+			<!-- restaurant -->
 			<div class="row container chef-sub-container center">
 				<%= f.fields_for :restaurant do |r| %>
 					<div class="form_control col-md-12">
@@ -61,6 +62,7 @@
 				<% end %>
 			</div>
 
+			<!-- chef -->
 			<div class="row container chef-sub-container center">
 				<div class="form_control col-md-6">
 					<%= f.label :first_name, "First_name" %> <br>
@@ -83,7 +85,7 @@
 				    <%= password_field_tag 'confirm_password', ''%>
 			    </div>
 
-					<div class="form_control col-md-12">
+				  <div class="form_control col-md-12">
 				    <%= u.label :email, "Email" %> <br>
 				    <%= u.text_field :email %>
 			    </div>
@@ -113,6 +115,47 @@
 			    <%= f.label :account_number, "account_number" %> <br>
 			    <%= f.text_field :account_number%>
 		    </div>
+	    </div>
+
+	    <!-- delivery -->
+	    <div class="row container chef-sub-container center">
+
+				<h1>Delivery Type</h1>
+				<%= f.fields_for :restaurant do |r| %>
+					<%= r.fields_for :delivery do |d| %>
+
+						<!-- bulk buy only -->
+						<p>bulk buy only</p>
+
+						<!-- delivery only -->
+						<p>Delivery only</p>
+						<div class="form_control col-md-11">
+							<%= d.label :min_order, "Min. order total for delivery: " %>
+						  <%= d.number_field :min_order, :step => 0.000001 %>
+						</div>
+
+						<div class="form_control col-md-7">
+							<%= d.label :area, "Dilivery area: " %>
+						  <%= d.text_field :area %>
+						</div>
+
+						<div class="form_control col-md-8">
+							<%= d.label :distance, "Dilivery distance: " %>
+						  <%= d.text_field :distance %> mile
+						</div>
+
+						<div class="form_control col-md-7">
+							<%= d.label :cost, "Dilivery cost $" %>
+						  <%= d.text_field :cost %>
+						</div>
+
+						<div class="form_control col-md-7">
+							<%= d.label :order_hours, "Order hour: " %>
+						  <%= d.text_field :order_hours %> hrs
+						</div>
+					<%end%>
+				<%end%>
+				
 
 	    </div>
 
