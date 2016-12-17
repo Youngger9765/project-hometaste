@@ -31,6 +31,11 @@
 			    </div>
 
 			    <div class="form_control col-md-12">
+				    <%= r.label :phone_number, "Phone" %> <br>
+				    <%= r.text_field :phone_number%>
+			    </div>
+
+			    <div class="form_control col-md-12">
 				    <%= r.label :tax_ID, "Tax ID" %> <br>
 				    <%= r.text_field :tax_ID %>
 			    </div>
@@ -51,7 +56,7 @@
 
 			    <div class="form_control col-md-12">
 				    <%= r.label :description, "About" %> <br>
-				    <%= r.text_field :description %>
+				    <%= r.text_area :description %>
 			    </div>
 				<% end %>
 			</div>
@@ -80,7 +85,7 @@
 
 					<div class="form_control col-md-12">
 				    <%= u.label :email, "Email" %> <br>
-				    <%= u.text_field :name %>
+				    <%= u.text_field :email %>
 			    </div>
 				<% end %>
 
@@ -140,7 +145,7 @@
 			return false;
 		};
 	}
-	
+
 </script>
 
 

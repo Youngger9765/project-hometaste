@@ -6,13 +6,45 @@ class ChefsController < ApplicationController
 	end
 
 	def create
-		raise
+		create_pass = true
 		@chef = Chef.new(chef_params)
 
-		if @chef.save
-			@restaurant = @chef.restaurant.build(restaurant_params)
-
+		# check email
+		if User.find_by(:email => user_params[:email])
+			create_pass = false
 		else
+			# create user
+			@user = User.new(user_params)
+			@user.name = chef_params[:first_name]
+			@user.user_name = chef_params[:first_name]
+			@user.phone_number = chef_params[:phone_number]
+			@user.is_chef = true
+
+			# save user pass
+			if @user.save
+					@chef.user = @user
+
+				# save chef & restaurant
+				if @chef.save
+
+				else
+					create_pass = false
+				end
+
+			# save user fail
+			else
+				create_pass = false
+			end
+		end
+
+		if create_pass
+			flash[:notice] = "Chef create done, please confirm by email."
+			redirect_to main_index_path
+		else
+
+			@user = User.new
+			@chef = Chef.new(chef_params)
+			flash[:alert] = "create fail"
 			render :action => :new
 		end
 
@@ -34,6 +66,10 @@ class ChefsController < ApplicationController
 	  		:id, :email, :password,
 	  	],
 	  )
+	end
+
+	def user_params
+		chef_params[:user_attributes]
 	end
 
 	def restaurant_params
