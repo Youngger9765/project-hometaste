@@ -121,61 +121,78 @@
 	    <div class="row container chef-sub-container center">
 
 				<h1>Delivery Type</h1>
+				<!-- bulk buy only -->
+					<div class="check_box">
+						<%= check_box_tag 'both_bulk_buy_delivery'%><span>both bulk buy and delivery</span>
+					</div>
+				<br>
 				<%= f.fields_for :restaurant do |r| %>
 
 					<!-- bulk buy only -->
-					<p>bulk buy only</p>
-					<%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each do |b| %>
-						<div class="row">
-						<div style="margin-right:10px;"><%=b.index + 1%>.</div>
-						<div class="col-md-11">
+					<div class="check_box" style="border-bottom: 2px solid;">
+						<%= check_box_tag 'bulk_buy_only'%><span>bulk buy only</span>
+					</div>
+					<br>
+					<div id="bulk-buy-form">
+						<%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each do |b| %>
+							<div class="row">
+							<div style="margin-right:10px;"><%=b.index + 1%>.</div>
+							<div class="col-md-11">
+								<div class="form_control col-md-11">
+									<%= b.label :cut_off_time, "cut_off_time: " %>
+								  <%= b.time_select :cut_off_time,:minute_step => 30, :ampm => true%>
+								</div>
+
+								<div class="form_control col-md-11">
+									<%= b.label :location, "location: " %>
+								  <%= b.text_field :location%>
+								</div>
+
+								<div class="form_control col-md-11">
+									<%= b.label :pick_up_time, "pick_up_time: " %>
+								  <%= b.time_select :pick_up_time,:minute_step => 30, :ampm => true%>
+								</div>
+							</div>
+							</div>
+						<%end%>
+					</div>
+					
+
+<br>
+<br>
+					<!-- delivery only -->
+					<div class="check_box" style="border-bottom: 2px solid;">
+						<%= check_box_tag 'delivery_only'%><span>Delivery only</span>
+					</div>
+					<br>
+					<div id="delivery-form">
+						<%= r.fields_for :delivery do |d| %>
 							<div class="form_control col-md-11">
-								<%= b.label :cut_off_time, "cut_off_time: " %>
-							  <%= b.time_select :cut_off_time,:minute_step => 30, :ampm => true%>
+								<%= d.label :min_order, "Min. order total for delivery: " %>
+							  <%= d.number_field :min_order, :step => 0.000001 %>
 							</div>
 
-							<div class="form_control col-md-11">
-								<%= b.label :location, "location: " %>
-							  <%= b.text_field :location%>
+							<div class="form_control col-md-7">
+								<%= d.label :area, "Dilivery area: " %>
+							  <%= d.text_field :area %>
 							</div>
 
-							<div class="form_control col-md-11">
-								<%= b.label :pick_up_time, "pick_up_time: " %>
-							  <%= b.time_select :pick_up_time,:minute_step => 30, :ampm => true%>
+							<div class="form_control col-md-8">
+								<%= d.label :distance, "Dilivery distance: " %>
+							  <%= d.text_field :distance %> mile
 							</div>
-						</div>
-						</div>
-					<%end%>
 
-					<%= r.fields_for :delivery do |d| %>
+							<div class="form_control col-md-7">
+								<%= d.label :cost, "Dilivery cost $" %>
+							  <%= d.text_field :cost %>
+							</div>
 
-						<!-- delivery only -->
-						<p>Delivery only</p>
-						<div class="form_control col-md-11">
-							<%= d.label :min_order, "Min. order total for delivery: " %>
-						  <%= d.number_field :min_order, :step => 0.000001 %>
-						</div>
-
-						<div class="form_control col-md-7">
-							<%= d.label :area, "Dilivery area: " %>
-						  <%= d.text_field :area %>
-						</div>
-
-						<div class="form_control col-md-8">
-							<%= d.label :distance, "Dilivery distance: " %>
-						  <%= d.text_field :distance %> mile
-						</div>
-
-						<div class="form_control col-md-7">
-							<%= d.label :cost, "Dilivery cost $" %>
-						  <%= d.text_field :cost %>
-						</div>
-
-						<div class="form_control col-md-7">
-							<%= d.label :order_hours, "Order hour: " %>
-						  <%= d.text_field :order_hours %> hrs
-						</div>
-					<%end%>
+							<div class="form_control col-md-7">
+								<%= d.label :order_hours, "Order hour: " %>
+							  <%= d.text_field :order_hours %> hrs
+							</div>
+						<%end%>
+					</div>
 				<%end%>
 
 	    </div>
@@ -209,6 +226,43 @@
 			return false;
 		};
 	}
+
+	$('#bulk-buy-form').hide();
+	$('#delivery-form').hide();
+
+	$('#both_bulk_buy_delivery').click(function(){
+		var checked_both = $('#both_bulk_buy_delivery').prop("checked");
+		if (checked_both) {
+			$('#bulk_buy_only').prop("checked",true);
+			$('#delivery_only').prop("checked",true);
+			$('#bulk-buy-form').show();
+			$('#delivery-form').show();
+		}else{
+			$('#bulk_buy_only').prop("checked",false);
+			$('#delivery_only').prop("checked",false);
+			$('#bulk-buy-form').hide();
+			$('#delivery-form').hide();
+		}
+	})
+
+	$('#bulk_buy_only').change(function(){
+		var checked = $('#bulk_buy_only').prop("checked");
+		if (checked) {
+			$('#bulk-buy-form').show();
+		} else {
+			$('#bulk-buy-form').hide();
+		}
+	})
+
+	$('#delivery_only').change(function(){
+		var checked = $('#delivery_only').prop("checked");
+		if (checked) {
+			$('#delivery-form').show();
+		} else {
+			$('#delivery-form').hide();
+		}
+	})
+
 
 </script>
 
