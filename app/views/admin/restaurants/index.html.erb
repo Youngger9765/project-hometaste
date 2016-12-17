@@ -52,9 +52,9 @@
                       <div ><%= r.is_approved %></div>
                     <% end %>
                   </td>
-                  <td><%=r.user.id%></td>
-                  <td><%=r.user.name%></td>
-                  <td><%=r.user.email%></td>
+                  <td><%=r.chef.id%></td>
+                  <td><%=r.chef.first_name %> <%= r.chef.last_name %></td>
+                  <td><%=r.chef.user.email%></td>
                   <td>6</td>
                   <td>
                     <div class="btn btn-success">
