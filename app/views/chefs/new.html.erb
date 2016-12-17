@@ -131,7 +131,7 @@
 						<div class="col-md-11">
 							<div class="form_control col-md-11">
 								<%= b.label :cut_off_time, "cut_off_time: " %>
-							  <%= b.time_field :cut_off_time%>
+							  <%= b.time_select :cut_off_time,:minute_step => 30, :ampm => true%>
 							</div>
 
 							<div class="form_control col-md-11">
@@ -141,7 +141,7 @@
 
 							<div class="form_control col-md-11">
 								<%= b.label :pick_up_time, "pick_up_time: " %>
-							  <%= b.time_field :pick_up_time%>
+							  <%= b.time_select :pick_up_time,:minute_step => 30, :ampm => true%>
 							</div>
 						</div>
 						</div>
@@ -177,7 +177,6 @@
 						</div>
 					<%end%>
 				<%end%>
-				
 
 	    </div>
 
