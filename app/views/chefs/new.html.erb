@@ -96,7 +96,7 @@
 
 		    <div class="form_control col-md-12">
 			    <%= f.label :birthday, "DOB" %> <br>
-			    <%= f.text_field :birthday%>
+			    <%= f.date_select :birthday, {order: [:year, :month, :day], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 10, end_year: Date.today.year - 100}, {required: true} %>
 		    </div>
 
 		    <div class="form_control col-md-12">
