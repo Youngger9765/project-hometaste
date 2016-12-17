@@ -11,6 +11,14 @@ class Restaurant < ApplicationRecord
 
 	belongs_to :chef
 
+    accepts_nested_attributes_for :delivery,
+        :allow_destroy => true,
+      :reject_if => :all_blank
+
+    accepts_nested_attributes_for :bulk_buys,
+        :allow_destroy => true,
+      :reject_if => :all_blank
+
 	geocoded_by :address
 	after_validation :geocode # auto-fetch coordinates
 end

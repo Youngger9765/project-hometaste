@@ -24,10 +24,11 @@ class ChefsController < ApplicationController
 			if @user.save
 					@chef.user = @user
 
-				# save chef & restaurant
+				# save chef & restaurant & delivery & bulk_buys
 				if @chef.save
 
 				else
+					@user.destroy
 					create_pass = false
 				end
 
@@ -60,6 +61,14 @@ class ChefsController < ApplicationController
 	  	:restaurant_attributes => [
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
+
+	  		:delivery_attributes => [
+		  		:id, :min_order, :area, :distance, :cost, :order_hours,
+		  	],
+
+		  	:bulk_buys_attributes => [
+		  		:id, :cut_off_time, :location, :pick_up_time,
+		  	],
 	  	],
 
 	  	:user_attributes => [
@@ -74,5 +83,9 @@ class ChefsController < ApplicationController
 
 	def restaurant_params
 		chef_params[:restaurant_attributes]
+	end
+
+	def delivery_params
+		restaurant_params[:delivery_attributes]
 	end
 end
