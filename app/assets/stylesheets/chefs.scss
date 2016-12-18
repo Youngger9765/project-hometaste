@@ -33,15 +33,27 @@
 		width: 100%;
 		height: 8em;
 	}
-}
 
-.chef-sub-container {
-	border: 2px solid black;
-	width: 40em;
-	margin: 2em auto;
-  padding: 1em;
-}
+	#restaurant-main-photo {
+	    height: 10em;
+	    border: 2px solid;
+	    background-color: azure;
 
-#chef-submit-btn {
-	width:100%;
+	    input {
+	    	margin: 10% 0%;
+    	    border: 0;
+	    }
+	}
+
+	.chef-sub-container {
+		border: 2px solid black;
+		width: 40em;
+		margin: 2em auto;
+	  padding: 1em;
+	}
+
+	#chef-submit-btn {
+		width:100%;
+	}
+
 }

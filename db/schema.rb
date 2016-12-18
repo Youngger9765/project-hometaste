@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218045158) do
+ActiveRecord::Schema.define(version: 20161218052326) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -155,6 +155,10 @@ ActiveRecord::Schema.define(version: 20161218045158) do
     t.string   "certificated_img_content_type"
     t.integer  "certificated_img_file_size"
     t.datetime "certificated_img_updated_at"
+    t.string   "main_photo_file_name"
+    t.string   "main_photo_content_type"
+    t.integer  "main_photo_file_size"
+    t.datetime "main_photo_updated_at"
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
     t.index ["city"], name: "index_restaurants_on_city", using: :btree
