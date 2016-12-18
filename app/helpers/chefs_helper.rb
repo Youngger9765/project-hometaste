@@ -5,6 +5,7 @@ module ChefsHelper
 	  chef.build_restaurant.build_delivery unless chef.restaurant.delivery
 	  2.times{chef.restaurant.bulk_buys.build}
 	  3.times{chef.restaurant.restaurant_cuisine_ships.build}
+	  3.times{chef.restaurant.restaurant_dish_photos.build}
 	  chef
 	end
 end

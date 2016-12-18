@@ -6,6 +6,7 @@ class Restaurant < ApplicationRecord
   has_one  :delivery
   has_many :bulk_buys
   has_many :big_buns
+  has_many :restaurant_dish_photos, dependent: :destroy
 
   belongs_to :chef
 
@@ -21,6 +22,10 @@ class Restaurant < ApplicationRecord
       :reject_if => :all_blank
 
   accepts_nested_attributes_for :restaurant_cuisine_ships,
+    :allow_destroy => true,
+      :reject_if => :all_blank
+
+  accepts_nested_attributes_for :restaurant_dish_photos,
     :allow_destroy => true,
       :reject_if => :all_blank
 
