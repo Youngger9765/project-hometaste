@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217081520) do
+ActiveRecord::Schema.define(version: 20161218035825) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20161217081520) do
     t.integer  "ZIP"
     t.string   "tax_ID"
     t.string   "communication_method"
+    t.string   "certificated_num"
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
     t.index ["city"], name: "index_restaurants_on_city", using: :btree

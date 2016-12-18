@@ -51,7 +51,13 @@
 				    </div>
 			    </div>
 
-					<!-- 認證 -->
+					<!-- certificate -->
+					<div class="check_box col-md-11" style="margin-top: 2em;">
+						<%= check_box_tag 'certificated_check'%><span style="font-size: 14px;">  I or someone cooking with me had the food handling safty class in my state</span>
+					</div>
+					<div class="form_control col-md-6">
+				    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
+			    </div>
 
 					<!-- cuisine -->
 
@@ -133,6 +139,7 @@
 						<%= check_box_tag 'bulk_buy_only'%><span>bulk buy only</span>
 					</div>
 					<br>
+
 					<div id="bulk-buy-form">
 						<%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each do |b| %>
 							<div class="row">
@@ -156,10 +163,8 @@
 							</div>
 						<%end%>
 					</div>
-					
-
-<br>
-<br>
+					<br>
+					<br>
 					<!-- delivery only -->
 					<div class="check_box" style="border-bottom: 2px solid;">
 						<%= check_box_tag 'delivery_only'%><span>Delivery only</span>
