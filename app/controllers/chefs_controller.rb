@@ -26,6 +26,7 @@ class ChefsController < ApplicationController
 
 				# save chef & restaurant & delivery & bulk_buys
 				if @chef.save
+					raise
 					if !bulk_buy_checked
 						@chef.restaurant.bulk_buys.destroy_all
 					end
@@ -68,6 +69,7 @@ class ChefsController < ApplicationController
 	  	:restaurant_attributes => [
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
+	  		:certificated_img,:certificated_num,
 
 	  		:delivery_attributes => [
 		  		:id, :min_order, :area, :distance, :cost, :order_hours,

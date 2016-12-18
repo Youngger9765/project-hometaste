@@ -45,6 +45,9 @@ gem 'therubyracer'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sprockets', '3.6.3'
 
+# image tools
+gem "paperclip", "~> 4.3"
+
 # google map
 gem 'gmaps4rails'
 gem 'geocoder'

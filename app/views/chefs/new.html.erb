@@ -58,9 +58,14 @@
 					<div class="form_control col-md-6">
 				    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
 			    </div>
+			    <div class="form-group col-md-6">
+				    <%=r.file_field :certificated_img%>
+					</div>
 
 					<!-- cuisine -->
+					
 
+					<!-- ABOUT -->
 			    <div class="form_control col-md-12">
 				    <%= r.label :description, "About" %> <br>
 				    <%= r.text_area :description %>
@@ -215,7 +220,7 @@
 	$("#chef-submit-check-btn").click(function(){
 		var check_submit = true;
 		check_submit = check_submit & check_chef_password();
-		check_submit = check_submit & check_certified();
+		check_submit = check_submit & check_certificated();
 
 		if (check_submit) {
 			$('#chef-submit-btn').click();
@@ -233,7 +238,7 @@
 		};
 	}
 
-	var check_certified = function(){
+	var check_certificated = function(){
 		var checked = $("#certificated_check").prop('checked');
 		if (checked) {
 			return true;
