@@ -69,7 +69,7 @@ class ChefsController < ApplicationController
 	  	:restaurant_attributes => [
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
-	  		:certificated_img,:certificated_num,
+	  		:certificated_img, :certificated_num,
 
 	  		:delivery_attributes => [
 		  		:id, :min_order, :area, :distance, :cost, :order_hours,
@@ -77,6 +77,10 @@ class ChefsController < ApplicationController
 
 		  	:bulk_buys_attributes => [
 		  		:id, :cut_off_time, :location, :pick_up_time,
+		  	],
+
+		  	:restaurant_cuisine_ships_attributes => [
+		  		:id, :restaurant_id, :cuisine_id,
 		  	],
 	  	],
 
