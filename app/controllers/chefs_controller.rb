@@ -82,6 +82,10 @@ class ChefsController < ApplicationController
 		  	:restaurant_cuisine_ships_attributes => [
 		  		:id, :restaurant_id, :cuisine_id,
 		  	],
+
+		  	:restaurant_dish_photos_attributes => [
+		  		:id, :restaurant_id, :photo, :comment,
+		  	],
 	  	],
 
 	  	:user_attributes => [

@@ -228,6 +228,24 @@
 
 	    </div>
 
+			<!-- restaurant dish photos -->
+			<div class="row container chef-sub-container center">
+
+				<h3>Please upload three dishes that was make by you or your team</h3>
+				<br>
+				<br>
+				<%= f.fields_for :restaurant do |r| %>
+					<%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
+						<div class="form-group col-md-4 restaurant-dish-photo-div">
+							<div class="restaurant-dish-photo">
+								<%= photo.file_field :photo %>
+							</div>
+						    <%= photo.text_area :comment %>
+						</div>
+					<%end%>
+				<%end%>
+			</div>
+
 			<div class="form_control col-md-12" id="chef-submit-div">
 				<bottum id="chef-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>
 		    <%= f.submit "SUBMIT",:class=>"btn btn-success center hidden", :id=>"chef-submit-btn"%>

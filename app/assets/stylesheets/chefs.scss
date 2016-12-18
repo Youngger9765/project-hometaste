@@ -45,6 +45,21 @@
 	    }
 	}
 
+	.restaurant-dish-photo-div {
+
+		.restaurant-dish-photo {
+			height: 10em;
+		    border: 2px solid;
+			background-color: azure;
+		    margin-bottom: 10px;
+
+		    input{
+		    	margin: 40% 0;
+		    	border: 0;
+		    }
+		}
+	}
+
 	.chef-sub-container {
 		border: 2px solid black;
 		width: 40em;
