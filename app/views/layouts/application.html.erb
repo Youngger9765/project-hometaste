@@ -13,7 +13,7 @@
 <%= render 'layouts/navbar' %>
 
 <% if flash.present? %>
-    <div class="col-md-12">
+    <div class="col-md-12 alert_message">
       <div class="row content">
         <div style = "color: green" class = "alert-success">
           <%= flash[:notice]%>
