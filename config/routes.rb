@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :chefs
   resources :restaurants
+  resources :foods
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
   	get "/getDishesByFilter" => "mains#getDishesByFilter"
