@@ -51,10 +51,21 @@
 				    </div>
 			    </div>
 
-					<!-- 認證 -->
+					<!-- certificate -->
+					<div class="check_box col-md-11" style="margin-top: 2em;">
+						<%= check_box_tag 'certificated_check'%><span style="font-size: 14px;">  I or someone cooking with me had the food handling safty class in my state</span>
+					</div>
+					<div class="form_control col-md-6">
+				    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
+			    </div>
+			    <div class="form-group col-md-6">
+				    <%=r.file_field :certificated_img%>
+					</div>
 
 					<!-- cuisine -->
+					
 
+					<!-- ABOUT -->
 			    <div class="form_control col-md-12">
 				    <%= r.label :description, "About" %> <br>
 				    <%= r.text_area :description %>
@@ -133,6 +144,7 @@
 						<%= check_box_tag 'bulk_buy_only'%><span>bulk buy only</span>
 					</div>
 					<br>
+
 					<div id="bulk-buy-form">
 						<%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each do |b| %>
 							<div class="row">
@@ -156,10 +168,8 @@
 							</div>
 						<%end%>
 					</div>
-					
-
-<br>
-<br>
+					<br>
+					<br>
 					<!-- delivery only -->
 					<div class="check_box" style="border-bottom: 2px solid;">
 						<%= check_box_tag 'delivery_only'%><span>Delivery only</span>
@@ -210,6 +220,7 @@
 	$("#chef-submit-check-btn").click(function(){
 		var check_submit = true;
 		check_submit = check_submit & check_chef_password();
+		check_submit = check_submit & check_certificated();
 
 		if (check_submit) {
 			$('#chef-submit-btn').click();
@@ -225,6 +236,16 @@
 			alert('Please check password!')
 			return false;
 		};
+	}
+
+	var check_certificated = function(){
+		var checked = $("#certificated_check").prop('checked');
+		if (checked) {
+			return true;
+		} else {
+			alert('Please check certified!')
+			return false;
+		}
 	}
 
 	$('#bulk-buy-form').hide();

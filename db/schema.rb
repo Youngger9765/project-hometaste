@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217081520) do
+ActiveRecord::Schema.define(version: 20161218041648) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -132,22 +132,27 @@ ActiveRecord::Schema.define(version: 20161217081520) do
   end
 
   create_table "restaurants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                               default: "",    null: false
-    t.string   "address",                            default: "",    null: false
-    t.string   "phone_number",                       default: "",    null: false
-    t.text     "description",          limit: 65535
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.float    "latitude",             limit: 24
-    t.float    "longitude",            limit: 24
+    t.string   "name",                                        default: "",    null: false
+    t.string   "address",                                     default: "",    null: false
+    t.string   "phone_number",                                default: "",    null: false
+    t.text     "description",                   limit: 65535
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.float    "latitude",                      limit: 24
+    t.float    "longitude",                     limit: 24
     t.integer  "chef_id"
-    t.boolean  "is_live",                            default: true
-    t.boolean  "is_approved",                        default: false
+    t.boolean  "is_live",                                     default: true
+    t.boolean  "is_approved",                                 default: false
     t.string   "city"
     t.string   "state"
     t.integer  "ZIP"
     t.string   "tax_ID"
     t.string   "communication_method"
+    t.string   "certificated_num"
+    t.string   "certificated_img_file_name"
+    t.string   "certificated_img_content_type"
+    t.integer  "certificated_img_file_size"
+    t.datetime "certificated_img_updated_at"
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
     t.index ["city"], name: "index_restaurants_on_city", using: :btree
