@@ -1,0 +1,77 @@
+<div class="admin-show-table">
+	<div class="row">
+		<h1>Restaurant show</h1>
+	</div>
+
+	<h3>ID:
+		<%= @restaurant.id %>
+	</h3>
+
+	<h3>Name:
+		<%= @restaurant.name %>
+	</h3>
+
+	<h3>Boss:
+		<%= @restaurant.chef.first_name %> <%= @restaurant.chef.last_name %>
+	</h3>
+
+	<h3>Address:
+		<%= @restaurant.address %>
+	</h3>
+
+	<h3>phone_number:
+		<%= @restaurant.phone_number %>
+	</h3>
+
+	<h3>description:
+		<%= @restaurant.description %>
+	</h3>
+
+	<h3>Foods:</h3>
+	<table class="table table-striped">
+		<thead>
+			<th>Food Name</th>
+			<th>Price</th>
+		</thead>
+		<tbody>
+			<% @foods.each do |f| %>
+				<tr>
+					<td><%= f.name %></td>
+					<td><%= f.price %></td>
+				</tr>
+
+			<% end %>
+		</tbody>
+	</table>
+
+	<h3>created_at:
+		<%= @restaurant.created_at %>
+	</h3>
+
+	<h3>updated_at:
+		<%= @restaurant.updated_at %>
+	</h3>
+
+	<h3>is_live:
+		<%= @restaurant.is_live %>
+		<% if @restaurant.is_live%>
+      <%= link_to('Delete', admin_restaurant_path(@restaurant),:class => "btn-sm btn-danger", :method => "DELETE")%>
+    <% else %>
+      <%= link_to('Rescue', admin_restaurant_path(@restaurant,:rescue => 1),:class => "btn-sm btn-default", :method => "DELETE")%>
+    <% end %>
+	</h3>
+
+	<h3>is_approved:
+		<%= @restaurant.is_approved %>
+
+		<% if @restaurant.is_approved%>
+	    <%= link_to('Ban', admin_restaurant_path(@restaurant,:is_approved => 0),:class => "btn-sm btn-danger", :method => "PATCH")%>
+	  <% else %>
+	    <%= link_to('Approved', admin_restaurant_path(@restaurant,:is_approved => 1),:class => "btn-sm btn-success", :method => "PATCH")%>
+	  <% end %>
+	</h3>
+
+</div>
+
+
+

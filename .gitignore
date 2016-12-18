@@ -16,7 +16,10 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/config/*.yml
 .idea/*
 /config/*.yml
 # Ignore Byebug command history file.
 .byebug_history
+/.idea/
+/public/system/*

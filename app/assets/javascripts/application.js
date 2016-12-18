@@ -15,6 +15,8 @@
 //= require bootstrap/collapse
 //= require bootstrap/dropdown
 //= require bootstrap/transition
+//= require bootstrap/carousel
+// require bootstrap-sprockets
 //= require semantic_ui/semantic_ui
 //= require underscore
 //= require gmaps/google

@@ -34,7 +34,7 @@
  *= require semantic_ui/definitions/modules/modal.less
  * require semantic_ui/definitions/modules/nag.less
  *= require semantic_ui/definitions/modules/popup.less
- * require semantic_ui/definitions/modules/progress.less
+ *= require semantic_ui/definitions/modules/progress.less
  * require semantic_ui/definitions/elements/rail.less
  *= require semantic_ui/definitions/modules/rating.less
  *= require semantic_ui/definitions/globals/reset.less

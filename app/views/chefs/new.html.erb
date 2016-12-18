@@ -1,0 +1,313 @@
+<div class="container chef-container center">
+	<div class="row">
+
+		<div class="row container chef-sub-container center">
+			<div class="form_control col-md-12">
+		    <label class="center">Notice</label>
+		    <p>
+		    	restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......
+		    </p>
+	    </div>
+		</div>
+
+		<%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
+
+			<!-- restaurant -->
+			<div class="row container chef-sub-container center">
+				<%= f.fields_for :restaurant do |r| %>
+					<div id="restaurant-main-photo" class="form_control col-md-12">
+				    <%= r.file_field :main_photo %>
+			    </div>
+
+					<div class="form_control col-md-12">
+				    <%= r.label :name, "Restaurant Name" %> <br>
+				    <%= r.text_field :name %>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :address, "Address" %> <br>
+				    <%= r.text_field :address %>
+			    </div>
+
+			    <div class="form_control col-md-4">
+				    <%= r.label :city, "City" %> <br>
+				    <%= r.text_field :city %>
+			    </div>
+
+			    <div class="form_control col-md-4">
+				    <%= r.label :state, "state" %> <br>
+				    <%= r.text_field :state %>
+			    </div>
+
+			    <div class="form_control col-md-4">
+				    <%= r.label :ZIP, "ZIP" %> <br>
+				    <%= r.text_field :ZIP %>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :phone_number, "Phone" %> <br>
+				    <%= r.text_field :phone_number%>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :tax_ID, "Tax ID" %> <br>
+				    <%= r.text_field :tax_ID %>
+			    </div>
+
+			    <div class="form_control col-md-12">
+				    <%= r.label :communication_method, "communication_method" %> <br>
+				    <div class="check_box col-md-3">
+				    	<%= check_box_tag 'chef[restaurant_attributes][communication_method]', 'email',:style=>"width:10px;" %> <span>email</span>
+				    </div>
+				    <div class="check_box col-md-3">
+				    	<%= check_box_tag 'chef[restaurant_attributes][communication_method]', 'Text-message' %> Text-message
+				    </div>
+			    </div>
+
+					<!-- certificate -->
+					<div class="check_box col-md-11" style="margin-top: 2em;">
+						<%= check_box_tag 'certificated_check'%><span style="font-size: 14px;">  I or someone cooking with me had the food handling safty class in my state</span>
+					</div>
+					<div class="form_control col-md-6">
+				    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
+			    </div>
+			    <div class="form-group col-md-6">
+				    <%=r.file_field :certificated_img%>
+					</div>
+
+					<br>
+					<!-- cuisine -->
+					<h3 class="form-group col-md-12">Cuisine Type</h3>
+
+					<%= r.fields_for :restaurant_cuisine_ships, @chef.restaurant.restaurant_cuisine_ships.each do |cuisine_ship| %>
+						<div class="form-group col-md-4">
+					    <%=cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name, :class=>"form_control", :include_blank => "please select"%>
+						</div>
+					<%end%>
+					
+
+					<!-- ABOUT -->
+			    <div class="form_control col-md-12">
+				    <%= r.label :description, "About" %> <br>
+				    <%= r.text_area :description %>
+			    </div>
+				<% end %>
+			</div>
+
+			<!-- chef -->
+			<div class="row container chef-sub-container center">
+				<div class="form_control col-md-6">
+					<%= f.label :first_name, "First_name" %> <br>
+				  <%= f.text_field :first_name %>
+				</div>
+				<div class="form_control col-md-6">
+			    <%= f.label :last_name, "Last_name" %> <br>
+			    <%= f.text_field :last_name %>
+		    </div>
+
+				<!-- user -->
+				<%= f.fields_for :user do |u| %>
+					<div class="form_control col-md-6">
+				    <%= u.label :password, "password" %> <br>
+				    <%= u.password_field :password %>
+			    </div>
+
+			    <div class="form_control col-md-6">
+			    	<label>Confirm Password</label>
+				    <%= password_field_tag 'confirm_password', ''%>
+			    </div>
+
+				  <div class="form_control col-md-12">
+				    <%= u.label :email, "Email" %> <br>
+				    <%= u.text_field :email %>
+			    </div>
+				<% end %>
+
+				<div class="form_control col-md-12">
+			    <%= f.label :phone_number, "Phone" %> <br>
+			    <%= f.text_field :phone_number%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :birthday, "DOB" %> <br>
+			    <%= f.date_select :birthday, {order: [:year, :month, :day], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 10, end_year: Date.today.year - 100}, {required: true} %>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :SSN, "SSN" %> <br>
+			    <%= f.text_field :SSN%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :routing_number, "routing_number" %> <br>
+			    <%= f.text_field :routing_number%>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :account_number, "account_number" %> <br>
+			    <%= f.text_field :account_number%>
+		    </div>
+	    </div>
+
+	    <!-- delivery -->
+	    <div class="row container chef-sub-container center">
+
+				<h1>Delivery Type</h1>
+				<!-- bulk buy only -->
+					<div class="check_box">
+						<%= check_box_tag 'both_bulk_buy_delivery'%><span>both bulk buy and delivery</span>
+					</div>
+				<br>
+				<%= f.fields_for :restaurant do |r| %>
+
+					<!-- bulk buy only -->
+					<div class="check_box" style="border-bottom: 2px solid;">
+						<%= check_box_tag 'bulk_buy_only'%><span>bulk buy only</span>
+					</div>
+					<br>
+
+					<div id="bulk-buy-form">
+						<%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each do |b| %>
+							<div class="row">
+							<div style="margin-right:10px;"><%=b.index + 1%>.</div>
+							<div class="col-md-11">
+								<div class="form_control col-md-11">
+									<%= b.label :cut_off_time, "cut_off_time: " %>
+								  <%= b.time_select :cut_off_time,:minute_step => 30, :ampm => true%>
+								</div>
+
+								<div class="form_control col-md-11">
+									<%= b.label :location, "location: " %>
+								  <%= b.text_field :location%>
+								</div>
+
+								<div class="form_control col-md-11">
+									<%= b.label :pick_up_time, "pick_up_time: " %>
+								  <%= b.time_select :pick_up_time,:minute_step => 30, :ampm => true%>
+								</div>
+							</div>
+							</div>
+						<%end%>
+					</div>
+					<br>
+					<br>
+					<!-- delivery only -->
+					<div class="check_box" style="border-bottom: 2px solid;">
+						<%= check_box_tag 'delivery_only'%><span>Delivery only</span>
+					</div>
+					<br>
+					<div id="delivery-form">
+						<%= r.fields_for :delivery do |d| %>
+							<div class="form_control col-md-11">
+								<%= d.label :min_order, "Min. order total for delivery: " %>
+							  <%= d.number_field :min_order, :step => 0.000001 %>
+							</div>
+
+							<div class="form_control col-md-7">
+								<%= d.label :area, "Dilivery area: " %>
+							  <%= d.text_field :area %>
+							</div>
+
+							<div class="form_control col-md-8">
+								<%= d.label :distance, "Dilivery distance: " %>
+							  <%= d.text_field :distance %> mile
+							</div>
+
+							<div class="form_control col-md-7">
+								<%= d.label :cost, "Dilivery cost $" %>
+							  <%= d.text_field :cost %>
+							</div>
+
+							<div class="form_control col-md-7">
+								<%= d.label :order_hours, "Order hour: " %>
+							  <%= d.text_field :order_hours %> hrs
+							</div>
+						<%end%>
+					</div>
+				<%end%>
+
+	    </div>
+
+			<div class="form_control col-md-12" id="chef-submit-div">
+				<bottum id="chef-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>
+		    <%= f.submit "SUBMIT",:class=>"btn btn-success center hidden", :id=>"chef-submit-btn"%>
+		  </div>
+		<% end %>
+	</div>
+</div>
+
+
+<script>
+	$("#chef-submit-check-btn").click(function(){
+		var check_submit = true;
+		check_submit = check_submit & check_chef_password();
+		check_submit = check_submit & check_certificated();
+
+		if (check_submit) {
+			$('#chef-submit-btn').click();
+		}
+	});
+
+	var check_chef_password = function(){
+		var password = $("input#chef_user_attributes_password").val();
+		var confirm_password = $("input#confirm_password").val();
+		if (password && confirm_password && password == confirm_password){
+			return true;
+		} else {
+			alert('Please check password!')
+			return false;
+		};
+	}
+
+	var check_certificated = function(){
+		var checked = $("#certificated_check").prop('checked');
+		if (checked) {
+			return true;
+		} else {
+			alert('Please check certified!')
+			return false;
+		}
+	}
+
+	$('#bulk-buy-form').hide();
+	$('#delivery-form').hide();
+
+	$('#both_bulk_buy_delivery').click(function(){
+		var checked_both = $('#both_bulk_buy_delivery').prop("checked");
+		if (checked_both) {
+			$('#bulk_buy_only').prop("checked",true);
+			$('#delivery_only').prop("checked",true);
+			$('#bulk-buy-form').show();
+			$('#delivery-form').show();
+		}else{
+			$('#bulk_buy_only').prop("checked",false);
+			$('#delivery_only').prop("checked",false);
+			$('#bulk-buy-form').hide();
+			$('#delivery-form').hide();
+		}
+	});
+
+	$('#bulk_buy_only').change(function(){
+		var checked = $('#bulk_buy_only').prop("checked");
+		if (checked) {
+			$('#bulk-buy-form').show();
+		} else {
+			$('#bulk-buy-form').hide();
+		}
+	});
+
+	$('#delivery_only').change(function(){
+		var checked = $('#delivery_only').prop("checked");
+		if (checked) {
+			$('#delivery-form').show();
+		} else {
+			$('#delivery-form').hide();
+		}
+	});
+
+
+</script>
+
+
+
+

@@ -1,3 +1,34 @@
-100.times {Restaurant.create(name:Faker::Name.name, latitude:Faker::Address.latitude,longitude:Faker::Address.longitude) }
+# Cuisines Table seeds
+all_cuisines_name = [
+	"Sandwiches",
+	"African",
+	"American",
+	"Breakfast & Brunch",
+	"Burgers",
+	"BBQ",
+	"Caribbean",
+	"Chinese",
+	"East European",
+	"French",
+	"Greek",
+	"Halal",
+	"Indian",
+	"Italian",
+	"Japanese",
+	"Lebanese",
+	"Mexican",
+	"Moroccan",
+	"Pizza",
+	"Seafood",
+	"Spanish",
+	"Salad",
+	"Thai",
+	"Turkish",
+	"Vegan",
+	"Vegetarian",
+	"Vietnamese",
+]
 
-1000.times {Food.create(restaurant_id: Restaurant.all.ids.sample,name:Faker::Pokemon.name,price:Faker::Number.between(100, 1000)) }
+all_cuisines_name.each do |cuisine|
+	Cuisine.create!(:name => cuisine)
+end

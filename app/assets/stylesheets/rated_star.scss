@@ -1,4 +1,4 @@
-div[class^="show_rated_"]{
+[class^="show_rated_"]{
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 15px;
@@ -23,6 +23,9 @@ div[class^="show_rated_"]{
 }
 .show_rated_4::before{
   content: "\f005 \f005 \f005 \f005 \f006";
+}
+.show_rated_4_5::before{
+  content: "\f005 \f005 \f005 \f005 \f123";
 }
 .show_rated_5::before{
   content: "\f005 \f005 \f005 \f005 \f005";

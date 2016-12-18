@@ -1,51 +1,49 @@
-.banner {
-  min-height: 400px;
-  background: image-url('banner_HD.png') center;
-  -webkit-background-size:cover;
-  background-size:cover;
-  .title {
-    text-align: center;
-    color: #FFFFFF;
-    margin-top: 50px;
-    h1 {
-      font-weight: bold;
-    }
-    h3 {
-      font-weight: lighter;
-    }
-  }
-  .ui.search.selection.dropdown > input.search{
-    line-height: 29px;
-  }
-  .search_wrap {
-    margin: 50px auto ;
-    max-width: 460px;
-
-    .ui.dropdown {
-      width: 200px !important;
-      height: 46px;
-      display: inline-block;
-      .dropdown.icon,.text{
-        line-height: 27px;
-      }
-      .item{
-        background-color: $main_red;
-        color: #FFFFFF;
-        border: none;
-      }
-      .default.text{
-        color: $main_black;
+.main_index{
+  .banner {
+    min-height: 400px;
+    background: image-url('banner_HD.png') center;
+    -webkit-background-size:cover;
+    background-size:cover;
+    .title {
+      text-align: center;
+      color: #FFFFFF;
+      margin-top: 50px;
+      h1 {
         font-weight: bold;
       }
+      h3 {
+        font-weight: lighter;
+      }
     }
-    .ui.button {
-      width: 45px;
-      height: 45px;
-      background-color: $main_red;
-      padding: 0;
-      float: right;
-      i {
-        color: #FFFFFF;
+    .search_wrap {
+      margin: 50px auto ;
+      max-width: 460px;
+      .ui.dropdown {
+        width: 200px !important;
+        height: 46px;
+        display: inline-block;
+        .dropdown.icon,.text{
+          line-height: 27px;
+        }
+        .item{
+          background-color: $main_red;
+          color: #FFFFFF;
+          border: none;
+        }
+        .default.text{
+          color: $main_black;
+          font-weight: bold;
+        }
+      }
+      .ui.button {
+        width: 45px;
+        height: 45px;
+        background-color: $main_red;
+        padding: 0;
+        float: right;
+        i {
+          color: #FFFFFF;
+        }
       }
     }
   }
@@ -126,7 +124,7 @@
       margin-bottom: 0;
     }
     .ui.checkbox label:before{
-    border-color: #FFFFFF;
+      border-color: #FFFFFF;
       background-color: transparent;
     }
     p{
@@ -334,7 +332,6 @@
     height: 40px;
   }
 }
-
 @media (max-width: $xs-width){
   .filters{
     margin-top:0;
@@ -342,6 +339,16 @@
     .content{
       padding-left: 1em !important;
       padding-right: 1em !important;
+    }
+  }
+  .main_index{
+    .banner {
+      .search_wrap{
+        .ui.button{
+          float: initial;
+        }
+        max-width:200px !important;
+      }
     }
   }
   .products.cards{
@@ -375,7 +382,6 @@
       .ui.dropdown {
         display: block;
         margin: auto auto 15px;
-
       }
       .ui.button {
         margin: auto;

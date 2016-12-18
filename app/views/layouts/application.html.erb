@@ -8,7 +8,8 @@
   <%= javascript_include_tag 'application' %>
 </head>
 
-<body>
+<body class="<%= controller_name+'_'+action_name %>">
+
 <%= render 'layouts/navbar' %>
 
 <% if flash.present? %>
@@ -23,8 +24,9 @@
       </div>
     </div>
 <% end %>
+<%= render 'layouts/back_to_top' %>
 <%= yield %>
 <%= render 'layouts/footer' %>
-<%= render 'layouts/back_to_top' %>
+
 </body>
 </html>
