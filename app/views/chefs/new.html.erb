@@ -84,7 +84,6 @@
 					    <%=cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name, :class=>"form_control", :include_blank => "please select"%>
 						</div>
 					<%end%>
-					
 
 					<!-- ABOUT -->
 			    <div class="form_control col-md-12">
@@ -118,8 +117,9 @@
 			    </div>
 
 				  <div class="form_control col-md-12">
-				    <%= u.label :email, "Email" %> <br>
-				    <%= u.text_field :email %>
+				    <%= u.label :email, "Your Email Address" %> <br>
+				    <p style="color:gray;">we'll send you an email to verify your address</p>
+				    <%= u.text_field :email, :placeholder=>"Email" %>
 			    </div>
 				<% end %>
 
@@ -240,7 +240,7 @@
 							<div class="restaurant-dish-photo">
 								<%= photo.file_field :photo %>
 							</div>
-						    <%= photo.text_area :comment %>
+						    <%= photo.text_area :comment, :placeholder => "dish photo comment" %>
 						</div>
 					<%end%>
 				<%end%>
