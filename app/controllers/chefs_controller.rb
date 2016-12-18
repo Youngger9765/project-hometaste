@@ -26,7 +26,7 @@ class ChefsController < ApplicationController
 
 				# save chef & restaurant & delivery & bulk_buys
 				if @chef.save
-					raise
+
 					if !bulk_buy_checked
 						@chef.restaurant.bulk_buys.destroy_all
 					end
