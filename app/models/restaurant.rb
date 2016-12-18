@@ -20,6 +20,10 @@ class Restaurant < ApplicationRecord
     :allow_destroy => true,
       :reject_if => :all_blank
 
+  accepts_nested_attributes_for :restaurant_cuisine_ships,
+    :allow_destroy => true,
+      :reject_if => :all_blank
+
   geocoded_by :address
   after_validation :geocode # auto-fetch coordinates
 

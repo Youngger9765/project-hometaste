@@ -62,7 +62,15 @@
 				    <%=r.file_field :certificated_img%>
 					</div>
 
+					<br>
 					<!-- cuisine -->
+					<h3 class="form-group col-md-12">Cuisine Type</h3>
+
+					<%= r.fields_for :restaurant_cuisine_ships, @chef.restaurant.restaurant_cuisine_ships.each do |cuisine_ship| %>
+						<div class="form-group col-md-4">
+					    <%=cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name, :class=>"form_control", :include_blank => "please select"%>
+						</div>
+					<%end%>
 					
 
 					<!-- ABOUT -->
