@@ -19,9 +19,9 @@
           <thead>
             <tr>
               <th>User ID</th>
-              <th>Created_on</th>
               <th>Email</th>
               <th>Name</th>
+              <th>Created_at</th>
               <th>Orders</th>
               <th>Total Acount</th>
               <th>is_admin?</th>
@@ -31,11 +31,13 @@
           </thead>
           <tbody>
             <% @users.each do |u|%>
-              <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
-                  <td><%= u.id %></td>
+              <tr data-toggle="collapse" data-target="#data<%=u.id%>" class="accordion-toggle">
+                  <td>
+                    <%= link_to u.id, admin_user_path(u) %>
+                  </td>
+                  <td><%= link_to u.email, admin_user_path(u) %></td>
+                  <td><%= link_to u.user_name, admin_user_path(u)  %></td>
                   <td><%= u.created_at %></td>
-                  <td><%= u.email %></td>
-                  <td><%= u.user_name %></td>
                   <td>
                     <div class="btn btn-success">
                       click to check
@@ -47,14 +49,14 @@
                   <!-- TODO: click to check admin -->
                   <td><%= u.is_admin %></td>
                   
-                  <td>
+                  <td style="text-align:center;">
                     <% if u.is_ban %>
                       <%= link_to('Rescue', admin_user_path(u,:is_ban => 0),:class => "btn-sm btn-default", :method => "PATCH")%>
                     <% else%>
                       <%= link_to('Ban', admin_user_path(u,:is_ban => 1),:class => "btn-sm btn-danger", :method => "PATCH")%>
                     <% end %>
                   </td>
-                  <td>
+                  <td style="text-align:center;">
                     <% if u.is_live %>
                       <%= link_to('Delete', admin_user_path(u),:class => "btn-sm btn-danger", :method => "DELETE", :data => {:confirm => "ARE YOU SURE?" } )%> 
                     <% else%>
@@ -63,33 +65,53 @@
                   </td>
               </tr>
               <tr >
-                <td colspan="6" class="hiddenRow">
-                  <div class="accordian-body collapse" id="data1">
+                <td colspan="12" class="hiddenRow">
+                  <div class="accordian-body collapse" id="data<%=u.id%>">
                     <div class="container-fluid">
                       <div class="row">
                         <table class="table table-bordered">
                           <thead>
                             <tr>
-                              <th>Order Date</th>
                               <th>Order ID</th>
+                              <th>Scheduled Datetime</th>
+                              <th>Restaurant ID</th>
+                              <th>Restaurant Name</th>
                               <th>Content</th>
-                              <th>Type</th>
-                              <th>Place</th>
+                              <th>Shipping method</th>
+                              <th>Shipping place</th>
                               <th>Total Amount</th>
-                              <th>Order Status</th>
+                              <th>payment method</th>
+                              <th>payment status</th>
+                              <th>shipping status</th>
+                              <th>order status</th>
                             </tr>
                           </thead>
                           <!-- TODO: Orders.each -->
                           <tbody>
-                            <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
-                              <td>2016/12/17</td>
-                              <td>#001</td>
-                              <td>Hambueger/Steak</td>
-                              <td>delivery</td>
-                              <td>white house</td>
-                              <td>$3000</td>
-                              <td>pending</td>
-                            </tr>
+                            <% u.orders.each do |order|%>
+                              <tr data-toggle="collapse" data-target="#data1" class="accordion-toggle">
+                                <td><%=order.id%></td>
+                                <td><%=order.scheduled_time%></td>
+                                <td><%=order.restaurant.id%></td>
+                                <td><%=order.restaurant.name%></td>
+                                <td>
+                                  <% order.foods.each do |food|%>
+                                      <%= food.name%>
+                                      *
+                                      <%= order.order_food_ships.find_by(:food_id => food.id).quantity%>
+                                      ($<%=order.order_food_ships.find_by(:food_id => food.id).amount%>)
+                                  <% end %>
+
+                                </td>
+                                <td><%=order.shipping_method%></td>
+                                <td><%=order.shipping_place%></td>
+                                <td><%=order.amount%></td>
+                                <td><%=order.payment_method%></td>
+                                <td><%=order.payment_status%></td>
+                                <td><%=order.shipping_status%></td>
+                                <td><%=order.order_status%></td>
+                              </tr>
+                            <% end %>
                           </tbody>
                         </table>
                       </div>

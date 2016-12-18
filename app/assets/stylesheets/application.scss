@@ -31,14 +31,18 @@
 @import "bootstrap/carousel";
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
-//@import "bootstrap";
+@import "bootstrap";
 
 
 @import "varible";
 @import "mixin";
 @import "public";
 @import "main";
+@import "chefs";
+
 @import "admin/main";
+@import "admin/restaurants";
+@import "admin/users";
+@import "gmap";
 @import "restaurants";
 @import "rated_star";
-@import "gmap";

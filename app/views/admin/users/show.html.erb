@@ -1,0 +1,56 @@
+<div class="admin-show-table">
+	<div class="row">
+		<h1>User show</h1>
+	</div>
+
+	<h3>ID:
+		<%= @user.id %>
+	</h3>
+
+	<h3>Name:
+		<%= @user.name %>
+	</h3>
+
+	<h3>user_name
+		<%=@user.user_name%>
+	</h3>
+
+	<h3>Address:
+		<%= @user.address %>
+	</h3>
+
+	<h3>phone_number:
+		<%= @user.phone_number %>
+	</h3>
+
+	<h3>confirmed_at:
+		<%= @user.confirmed_at %>
+	</h3>
+
+	<h3>is_admin:
+		<%= @user.is_admin%>
+	</h3>
+
+	<h3>is_ban:
+		<%= @user.is_ban %>
+
+		<% if !@user.is_ban%>
+	    <%= link_to('Ban', admin_user_path(@user,:is_ban => 1),:class => "btn-sm btn-danger", :method => "PATCH")%>
+	  <% else %>
+	    <%= link_to('Rescue', admin_user_path(@user,:is_ban => 0),:class => "btn-sm btn-default", :method => "PATCH")%>
+	  <% end %>
+	</h3>
+
+	<h3>is_live:
+		<%= @user.is_live %>
+		<% if @user.is_live%>
+      <%= link_to('Delete', admin_user_path(@user),:class => "btn-sm btn-danger", :method => "DELETE")%>
+    <% else %>
+      <%= link_to('Rescue', admin_user_path(@user,:rescue => 1),:class => "btn-sm btn-default", :method => "DELETE")%>
+    <% end %>
+	</h3>
+
+</div>
+
+
+

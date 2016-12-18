@@ -278,4 +278,10 @@ Devise.setup do |config|
                   secure_image_url: true,
                   image_size:  'large'
 
+  google_config = YAML.load(File.read("#{Rails.root}/config/google.yml"))[Rails.env]
+  config.omniauth :google_oauth2, google_config["google_oauth2_app_id"], google_config["google_oauth2_secret"], 
+                  scope: "email,profile,offline",
+                  prompt: "select_account consent"
+
+
 end

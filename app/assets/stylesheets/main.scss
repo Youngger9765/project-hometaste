@@ -332,7 +332,6 @@
     height: 40px;
   }
 }
-
 @media (max-width: $xs-width){
   .filters{
     margin-top:0;
@@ -340,6 +339,16 @@
     .content{
       padding-left: 1em !important;
       padding-right: 1em !important;
+    }
+  }
+  .main_index{
+    .banner {
+      .search_wrap{
+        .ui.button{
+          float: initial;
+        }
+        max-width:200px !important;
+      }
     }
   }
   .products.cards{
@@ -373,7 +382,6 @@
       .ui.dropdown {
         display: block;
         margin: auto auto 15px;
-
       }
       .ui.button {
         margin: auto;
