@@ -1,7 +1,5 @@
 class Restaurant < ApplicationRecord
 
-  # has_many :restaurant_food_ships
-  # has_many :foods, :through => :restaurant_food_ships
   has_many :foods
   has_many :orders
   has_many :restaurant_comments
@@ -10,6 +8,9 @@ class Restaurant < ApplicationRecord
   has_many :big_buns
 
   belongs_to :chef
+
+  has_many :restaurant_cuisine_ships
+  has_many :restaurants, :through => :restaurant_cuisine_ships
 
   accepts_nested_attributes_for :delivery,
     :allow_destroy => true,

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RestaurantFoodShipTest < ActiveSupport::TestCase
+class RestaurantCuisineShipTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

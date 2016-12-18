@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218041648) do
+ActiveRecord::Schema.define(version: 20161218045158) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -124,11 +124,13 @@ ActiveRecord::Schema.define(version: 20161218041648) do
     t.index ["user_id"], name: "index_restaurant_comments_on_user_id", using: :btree
   end
 
-  create_table "restaurant_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "restaurant_cuisine_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id"
-    t.integer  "food_id"
+    t.integer  "cuisine_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["cuisine_id"], name: "index_restaurant_cuisine_ships_on_cuisine_id", using: :btree
+    t.index ["restaurant_id"], name: "index_restaurant_cuisine_ships_on_restaurant_id", using: :btree
   end
 
   create_table "restaurants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
