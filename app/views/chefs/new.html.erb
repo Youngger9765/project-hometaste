@@ -1,11 +1,24 @@
 <div class="container chef-container center">
 	<div class="row">
 
+		<div class="row container chef-sub-container center">
+			<div class="form_control col-md-12">
+		    <label class="center">Notice</label>
+		    <p>
+		    	restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......
+		    </p>
+	    </div>
+		</div>
+
 		<%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
 
 			<!-- restaurant -->
 			<div class="row container chef-sub-container center">
 				<%= f.fields_for :restaurant do |r| %>
+					<div id="restaurant-main-photo" class="form_control col-md-12">
+				    <%= r.file_field :main_photo %>
+			    </div>
+
 					<div class="form_control col-md-12">
 				    <%= r.label :name, "Restaurant Name" %> <br>
 				    <%= r.text_field :name %>
