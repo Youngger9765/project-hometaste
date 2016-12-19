@@ -16,7 +16,7 @@ class ChefsController < ApplicationController
 			# create user
 			@user = User.new(user_params)
 			@user.name = chef_params[:first_name]
-			@user.user_name = chef_params[:first_name]
+			@user.foodie_id = chef_params[:first_name]
 			@user.phone_number = chef_params[:phone_number]
 			@user.is_chef = true
 
@@ -81,6 +81,10 @@ class ChefsController < ApplicationController
 
 		  	:restaurant_cuisine_ships_attributes => [
 		  		:id, :restaurant_id, :cuisine_id,
+		  	],
+
+		  	:restaurant_dish_photos_attributes => [
+		  		:id, :restaurant_id, :photo, :comment,
 		  	],
 	  	],
 

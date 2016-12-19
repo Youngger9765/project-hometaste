@@ -20,7 +20,8 @@
 
         <% if current_user %>
             <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
-            <li><%= link_to('修改密碼', edit_registration_path(:user)) %></li>
+            <li><% link_to('修改密碼', edit_registration_path(:user)) %></li>
+            <li><%= link_to('Edit Profile', edit_user_path(current_user)) %></li>
 
         <% else %>
             <li><a id="sign_up">Sign up</a><span class="hidden-xs">|</span></li>
