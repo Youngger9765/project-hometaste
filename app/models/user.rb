@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   validates :name, presence: true
-  validates :user_name, presence: true
+  validates :foodie_id, presence: true
   validates :phone_number, presence: true
 
   has_one :chef
@@ -52,8 +52,8 @@ class User < ApplicationRecord
         return
       end
 
-      if !existing_user.user_name
-        existing_user.user_name = auth[:info][:name]
+      if !existing_user.foodie_id
+        existing_user.foodie_id = auth[:info][:name]
       end
 
       # if existing_user.head_shot_file_name.nil? && auth.info.image.present?
@@ -109,7 +109,7 @@ class User < ApplicationRecord
     user.fb_email = auth[:info][:email]
 
     user.name = user.fb_name
-    user.user_name = user.fb_name
+    user.foodie_id = user.fb_name
     user.phone_number = "0"
 
     if auth[:info][:image].include?"graph.facebook"
@@ -129,8 +129,8 @@ class User < ApplicationRecord
     user = User.find_by_google_uid( auth.uid )
     if user
 
-      if !user.user_name
-        user.user_name = auth[:info][:name]
+      if !user.foodie_id
+        user.foodie_id = auth[:info][:name]
       end
 
       user.google_name = auth[:info][:name]
@@ -154,8 +154,8 @@ class User < ApplicationRecord
         return
       end
 
-      if !existing_user.user_name
-        existing_user.user_name = auth[:info][:name]
+      if !existing_user.foodie_id
+        existing_user.foodie_id = auth[:info][:name]
       end
 
       existing_user.google_name = auth[:info][:name]
@@ -173,7 +173,7 @@ class User < ApplicationRecord
     # Case 3: Create new password
     user = User.new
     user.name = auth.info.name
-    user.user_name = auth.info.name
+    user.foodie_id = auth.info.name
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
     user.phone_number = "0"

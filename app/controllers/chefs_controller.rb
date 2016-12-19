@@ -16,7 +16,7 @@ class ChefsController < ApplicationController
 			# create user
 			@user = User.new(user_params)
 			@user.name = chef_params[:first_name]
-			@user.user_name = chef_params[:first_name]
+			@user.foodie_id = chef_params[:first_name]
 			@user.phone_number = chef_params[:phone_number]
 			@user.is_chef = true
 

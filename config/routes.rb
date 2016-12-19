@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   	resources :restaurants
   end
 
+  resources :users
   resources :chefs
   resources :restaurants
 
