@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :new_user
 
 	protected
 
@@ -16,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized(exception)
     redirect_to root_path  # 導向筆者剛剛新增的網頁
+  end
+
+  def new_user
+  @user = User.new
   end
 
   def user_admin?

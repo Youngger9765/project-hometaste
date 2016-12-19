@@ -144,6 +144,7 @@
   .cart_info{
     text-align: center;
     height: 65px;
+    margin-top: 25px;
     background-color: $main_red;
     img[name='cart_white']{
       padding-top: 5px;
@@ -213,30 +214,6 @@
       .carousel-inner{
         .item div{
           height: 356px;
-        }
-      }
-      .left.carousel-control i{
-        margin-left: -5px;
-        left: 50%;
-        padding-right: 3px;
-      }
-      .right.carousel-control i{
-        margin-right: -5px;
-        right: 50%;
-        padding-left: 3px;
-      }
-      .carousel-control{
-        text-shadow:initial;
-        i{
-          width: 40px;
-          position: absolute;
-          top: 50%;
-          margin-top: -10px;
-          z-index: 5;
-          display: inline-block;
-          font-size: 40px;
-          border-radius: 50%;
-          background-color: rgba(255, 255, 255, 0.5%);
         }
       }
       .product_item_info{

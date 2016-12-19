@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161206160607) do
-=======
 ActiveRecord::Schema.define(version: 20161218054631) do
->>>>>>> a629aa38f05fbf48e5db17575039b296cac32f27
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
