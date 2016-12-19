@@ -8,7 +8,7 @@ namespace :dev do
   	# admin
   	User.create(
   		name: "admin",
-  		user_name: "admin",
+  		foodie_id: "admin",
   		email: "admin@admin.com",
   		phone_number: Faker::PhoneNumber.cell_phone,
   		password: 12345678,
@@ -21,7 +21,7 @@ namespace :dev do
 		# chef
   	User.create(
   		name: "chef",
-  		user_name: "chef",
+  		foodie_id: "chef",
   		email: "chef@chef.com",
   		phone_number: Faker::PhoneNumber.cell_phone,
   		password: 12345678,
@@ -34,7 +34,7 @@ namespace :dev do
 		# purpleice9765@msn.com
   	User.create(
   		name: "young",
-  		user_name: "young",
+  		foodie_id: "young",
   		email: "purpleice9765@msn.com",
   		phone_number: Faker::PhoneNumber.cell_phone,
   		password: 12345678,
@@ -48,7 +48,7 @@ namespace :dev do
   	100.times {
   		User.create(
 	  		name: Faker::Name.name,
-	  		user_name: Faker::Name.name,
+	  		foodie_id: Faker::Name.name,
 	  		email: Faker::Internet.email,
 	  		phone_number: Faker::PhoneNumber.cell_phone,
 	  		password: Faker::Internet.password(10, 20),
