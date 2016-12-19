@@ -1,53 +1,49 @@
 <div class="container user-container center">
 	<div class="row">
 
-		<div class="row container user-sub-container center">
-			<h3>Personal Info</h3>
+		<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
 
-			<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
+			<div class="row container user-sub-container center">
+				<h3>Personal Info</h3>
 
-				<div class="form_control col-md-12">
-					<%= f.label :name, "Your Name" %> <br>
-					<%= f.text_field :name %>
-				</div>
+					<div class="form_control col-md-12">
+						<%= f.label :name, "Your Name" %> <br>
+						<%= f.text_field :name %>
+					</div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :gender, "Gender" %> <br>
-					<%= f.text_field :gender %>
-				</div>
+					<div class="form_control col-md-12">
+						<%= f.label :gender, "Gender" %> <br>
+						<%= f.select :gender, :options_for_select=>([["man","man"],["female","female"]])%>
+					</div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :birthday, "birthday" %> <br>
-					<%= f.text_field :birthday %>
-				</div>
+					<div class="form_control col-md-12">
+						<%= f.label :birthday, "birthday" %> <br>
+						<%= f.date_field :birthday %>
+					</div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :phone_number, "Mobile" %> <br>
-					<%= f.text_field :phone_number %>
-				</div>
+					<div class="form_control col-md-12">
+						<%= f.label :phone_number, "Mobile" %> <br>
+						<%= f.text_field :phone_number %>
+					</div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :email, "email" %> <br>
-					<%= f.text_field :email %>
-				</div>
+					<div class="form_control col-md-12">
+						<%= f.label :email, "email" %> <br>
+						<%= f.text_field :email %>
+					</div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :address, "address" %> <br>
-					<%= f.text_field :address %>
-				</div>
+					<div class="form_control col-md-12">
+						<%= f.label :address, "address" %> <br>
+						<%= f.text_field :address %>
+					</div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :ZIP, "ZIP code" %> <br>
-					<%= f.text_field :ZIP %>
-				</div>
-			<%end%>
+					<div class="form_control col-md-12">
+						<%= f.label :ZIP, "ZIP code" %> <br>
+						<%= f.text_field :ZIP %>
+					</div>
+			</div>
 
-		</div>
-
-		<div class="row container user-sub-container center">
-			<h3>Account Info</h3>
-
-			<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
+			<div class="row container user-sub-container center">
+				<h3>Account Info</h3>
 
 				<div class="form_control col-md-12">
 					<%= f.label :foodie_id, "Foodie ID" %> <br>
@@ -56,32 +52,60 @@
 
 				<div class="form_control col-md-12">
 					<%= f.label :password, "Password" %> <br>
-					<%= f.text_field :password %>
+					<%= f.password_field :password, :id=>"edit_user_password" %>
 				</div>
 
 				<div class="form_control col-md-12">
-					<%= f.label :password_confirmation, "Confirm password" %> <br>
-					<%= f.text_field :password_confirmation %>
+					<%= f.label :edit_password_confirmation, "Confirm password" %> <br>
+					<%= f.password_field :edit_password_confirmation, :id=>"edit_user_password_confirmation"  %>
 				</div>
-			<%end%>
 
-		</div>
+			</div>
 
-		<div class="row container user-sub-container center">
-			<h3>Social Media Account</h3>
+			<div class="row container user-sub-container center">
+				<h3>Social Media Account</h3>
 
-		</div>
+			</div>
 
-		<div class="row container user-sub-container center">
-			<h3>Payment Info</h3>
+			<div class="row container user-sub-container center">
+				<h3>Payment Info</h3>
 
-		</div>
+			</div>
 
-		<div class="row container user-sub-container center">
-			<h3>What type of food/items do you prefer?</h3>
-			<hr>
+			<div class="row container user-sub-container center">
+				<h3>What type of food/items do you prefer?</h3>
+				<hr>
 
-		</div>
+			</div>
 
+			<div class="form_control col-md-12" id="user-submit-div">
+				<bottum id="user-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>
+	    	<%= f.submit "SUBMIT",:class=>"btn btn-success center hidden", :id=>"user-submit-btn"%>
+	    </div>
+		<%end%>
 	</div>
 </div>
+
+
+<script>
+	$("#user-submit-check-btn").click(function(){
+		var check_submit = true;
+		check_submit = check_submit & check_user_password();
+
+		if (check_submit) {
+			$('#user-submit-btn').click();
+		}
+	});
+
+	var check_user_password = function(){
+		var password = $("input#edit_user_password").val();
+		var confirm_password = $("input#edit_user_password_confirmation").val();
+		if (password == confirm_password){
+			return true;
+		} else {
+			alert('Please check password!')
+			return false;
+		};
+	}
+
+</script>
