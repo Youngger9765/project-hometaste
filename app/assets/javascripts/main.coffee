@@ -26,22 +26,22 @@ $(document).ready ->
       cards_qty = 8
     return cards_qty
 
-  render_product_card=(num) ->
+  render_food_card=(num) ->
     card = $('.card:lt('+num+')')
     card.addClass('visible')
     $('.card:lt('+num+') img').each ->
       $(this).attr('src',$(this).attr("data-src"))
 
-  render_product_card(cards_num())
+  render_food_card(cards_num())
 
   $(window).resize ->
     cards_num()
-    render_product_card(cards_num() * load_more_times)
+    render_food_card(cards_num() * load_more_times)
 
   $('#load_more').click ->
     load_more_times += 1
     cards_num()
-    render_product_card(cards_num() * load_more_times)
+    render_food_card(cards_num() * load_more_times)
 
   # -------------- switch map --------------
 
@@ -55,7 +55,7 @@ $(document).ready ->
   $('div[data-tooltip="Map view"],div[data-tooltip="Product list"]').click ->
     $('div[data-tooltip="Map view"]').toggleClass('hidden')
     $('div[data-tooltip="Product list"]').toggleClass('hidden')
-    $('.products.cards').toggleClass('hidden')
+    $('.foods.cards').toggleClass('hidden')
     $('.location_map').toggleClass('hidden')
     render_google_map()
 
@@ -83,9 +83,7 @@ $(document).ready ->
     $.ajax
       type: 'GET',
       url: '/api/v1/search/keyword',
-      data:{text:text,near:near},
-      success:(data)->
-        console.log(1)
+      data:{text:text,near:near}
 
   #----------------- filter ---------------------
 

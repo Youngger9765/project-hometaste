@@ -51,7 +51,7 @@
     }
   }
 }
-.products.cards,.kitchens.cards{
+.foods.cards,.restaurants.cards{
   .col-md-4,.col-xs-6{
     min-height: inherit;
   }
@@ -59,7 +59,7 @@
 .ui.fluid.card.visible{
   display: block !important;
 }
-.products.cards .ui.fluid.card {
+.foods.cards .ui.fluid.card {
   .content {
     position: relative;
     .address_detail{
@@ -269,7 +269,7 @@
     background-color: $main_red;
   }
 }
-.kitchens.cards,.gmap_cards{
+.restaurants.cards,.gmap_cards{
   h4{
     font-weight: bold;
     font-size: 20px;
@@ -354,7 +354,7 @@
       }
     }
   }
-  .products.cards{
+  .foods.cards{
     .content{
       padding: 0.5em;
     }
