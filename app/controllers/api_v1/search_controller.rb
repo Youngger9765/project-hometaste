@@ -31,7 +31,7 @@ class ApiV1::SearchController < ApplicationController
   private
 
   def deal_keyword_and_near_string
-    @keyword = params[:text].gsub(/[^a-zA-Z0-9\-]/,'')
+    @keyword = params[:keyword].gsub(/[^a-zA-Z0-9\-]/,'')
     @near = params[:near].gsub(/[^a-zA-Z0-9\-]/,'')
   end
 
