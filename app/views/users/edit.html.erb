@@ -1,9 +1,18 @@
 <div class="container user-container center">
 	<div class="row">
 
-		<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
+		<%= form_for setup_user(@user), :url => user_path(@user), :method => :patch do |f| %>
 
 			<div class="row container user-sub-container center">
+				<%= f.fields_for :user_photo do |photo| %>
+					<div id="edit-user-photo" class="form_control col-md-12">
+						<% if @user.user_photo.id %>
+						    <%= image_tag(@user.user_photo.photo(:thumb))%>
+						<%end%>
+				    <%= photo.file_field :photo %>
+			    </div>
+		    <%end%>
+
 				<h3>Personal Info</h3>
 
 					<div class="form_control col-md-12">

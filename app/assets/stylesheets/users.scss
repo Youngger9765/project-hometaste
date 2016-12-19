@@ -20,6 +20,17 @@
 	  padding: 1em;
 	}
 
+	#edit-user-photo {
+	    height: 10em;
+	    border: 2px solid;
+	    background-color: azure;
+
+	    input {
+	    	margin: 10% 0%;
+    	    border: 0;
+	    }
+	}
+
 	#user-submit-check-btn {
 		width:100%;
 	}

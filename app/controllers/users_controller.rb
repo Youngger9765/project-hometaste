@@ -29,6 +29,10 @@ class UsersController < ApplicationController
 	  params.require(:user).permit(
 	  	:name, :gender, :birthday, :phone_number, :address,
 	  	:ZIP, :foodie_id,
+
+	  	:user_photo_attributes => [
+	  		:photo,
+	  	]
 	  )
 	end
 
