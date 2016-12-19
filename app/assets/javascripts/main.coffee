@@ -77,13 +77,17 @@ $(document).ready ->
         buildMap(data.gmap_hash)
 
   # ----------------- search -------------------
+
+  $('.menu .item').mouseover ->
+    $('#keyword_input').val($(this).html())
+
   $('#search_submit').click ->
-    text = $('#search_text_input').dropdown('get text');
-    near = $('#near_input').dropdown('get text');
+    keyword = $('#keyword_input').val()
+    near = $('#near_input').val();
     $.ajax
       type: 'GET',
       url: '/api/v1/search/keyword',
-      data:{text:text,near:near}
+      data:{keyword:keyword,near:near}
 
   #----------------- filter ---------------------
 
