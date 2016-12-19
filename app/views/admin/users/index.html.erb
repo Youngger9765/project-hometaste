@@ -36,7 +36,7 @@
                     <%= link_to u.id, admin_user_path(u) %>
                   </td>
                   <td><%= link_to u.email, admin_user_path(u) %></td>
-                  <td><%= link_to u.user_name, admin_user_path(u)  %></td>
+                  <td><%= link_to u.foodie_id, admin_user_path(u)  %></td>
                   <td><%= u.created_at %></td>
                   <td>
                     <div class="btn btn-success">
@@ -48,7 +48,7 @@
 
                   <!-- TODO: click to check admin -->
                   <td><%= u.is_admin %></td>
-                  
+
                   <td style="text-align:center;">
                     <% if u.is_ban %>
                       <%= link_to('Rescue', admin_user_path(u,:is_ban => 0),:class => "btn-sm btn-default", :method => "PATCH")%>
