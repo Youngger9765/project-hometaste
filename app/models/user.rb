@@ -5,14 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
+  validates :email, presence: true , uniqueness: true
   validates :name, presence: true
   validates :foodie_id, presence: true
   validates :phone_number, presence: true
 
   has_one :chef
   has_one :restaurant
+  has_one :user_photo
 
   has_many :orders
+
+  accepts_nested_attributes_for :user_photo,
+    :allow_destroy => true,
+    :reject_if => :all_blank
+
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid

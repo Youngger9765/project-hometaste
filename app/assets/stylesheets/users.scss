@@ -3,7 +3,12 @@
 	width: 50em;
 	font-size: 20px;
 
+	.form_control {
+		margin-bottom: 1em;
+	}
+
 	input {
+		width: 20em;
 		border: 0;
     border-bottom: 2px solid;
 	}
@@ -13,6 +18,21 @@
 		width: 40em;
 		margin: 2em auto;
 	  padding: 1em;
+	}
+
+	#edit-user-photo {
+	    height: 10em;
+	    border: 2px solid;
+	    background-color: azure;
+
+	    input {
+	    	margin: 10% 0%;
+    	    border: 0;
+	    }
+	}
+
+	#user-submit-check-btn {
+		width:100%;
 	}
 
 }
