@@ -84,7 +84,6 @@
 					    <%=cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name, :class=>"form_control", :include_blank => "please select"%>
 						</div>
 					<%end%>
-					
 
 					<!-- ABOUT -->
 			    <div class="form_control col-md-12">
@@ -118,8 +117,9 @@
 			    </div>
 
 				  <div class="form_control col-md-12">
-				    <%= u.label :email, "Email" %> <br>
-				    <%= u.text_field :email %>
+				    <%= u.label :email, "Your Email Address" %> <br>
+				    <p style="color:gray;">we'll send you an email to verify your address</p>
+				    <%= u.text_field :email, :placeholder=>"Email" %>
 			    </div>
 				<% end %>
 
@@ -227,6 +227,24 @@
 				<%end%>
 
 	    </div>
+
+			<!-- restaurant dish photos -->
+			<div class="row container chef-sub-container center">
+
+				<h3>Please upload three dishes that was make by you or your team</h3>
+				<br>
+				<br>
+				<%= f.fields_for :restaurant do |r| %>
+					<%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
+						<div class="form-group col-md-4 restaurant-dish-photo-div">
+							<div class="restaurant-dish-photo">
+								<%= photo.file_field :photo %>
+							</div>
+						    <%= photo.text_area :comment, :placeholder => "dish photo comment" %>
+						</div>
+					<%end%>
+				<%end%>
+			</div>
 
 			<div class="form_control col-md-12" id="chef-submit-div">
 				<bottum id="chef-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>

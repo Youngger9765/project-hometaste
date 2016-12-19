@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
 
 	def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:foodie_id])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:phone_number])
 
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:user_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:foodie_id])
     devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number])
   end
 

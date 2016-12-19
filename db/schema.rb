@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218052326) do
+
+ActiveRecord::Schema.define(version: 20161219012911) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -133,6 +134,18 @@ ActiveRecord::Schema.define(version: 20161218052326) do
     t.index ["restaurant_id"], name: "index_restaurant_cuisine_ships_on_restaurant_id", using: :btree
   end
 
+  create_table "restaurant_dish_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "restaurant_id"
+    t.text     "comment",            limit: 65535
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.index ["restaurant_id"], name: "index_restaurant_dish_photos_on_restaurant_id", using: :btree
+  end
+
   create_table "restaurants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                                        default: "",    null: false
     t.string   "address",                                     default: "",    null: false
@@ -181,7 +194,7 @@ ActiveRecord::Schema.define(version: 20161218052326) do
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.string   "name",                                                 null: false
-    t.string   "user_name",                                            null: false
+    t.string   "foodie_id",                                            null: false
     t.string   "phone_number",                                         null: false
     t.string   "fb_uid"
     t.string   "fb_token"

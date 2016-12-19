@@ -1,0 +1,17 @@
+<div class="container user-container center">
+	<div class="row">
+
+		<div class="row container user-sub-container center">
+			<h3>Personal Info</h3>
+
+			<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
+				<div class="form_control col-md-6">
+					<%= f.label :phone_number, "Mobile" %> <br>
+				  <%= f.text_field :phone_number %>
+				</div>
+			<%end%>
+
+		</div>
+
+	</div>
+</div>
