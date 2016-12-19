@@ -5,11 +5,81 @@
 			<h3>Personal Info</h3>
 
 			<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
-				<div class="form_control col-md-6">
+
+				<div class="form_control col-md-12">
+					<%= f.label :name, "Your Name" %> <br>
+					<%= f.text_field :name %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :gender, "Gender" %> <br>
+					<%= f.text_field :gender %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :birthday, "birthday" %> <br>
+					<%= f.text_field :birthday %>
+				</div>
+
+				<div class="form_control col-md-12">
 					<%= f.label :phone_number, "Mobile" %> <br>
-				  <%= f.text_field :phone_number %>
+					<%= f.text_field :phone_number %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :email, "email" %> <br>
+					<%= f.text_field :email %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :address, "address" %> <br>
+					<%= f.text_field :address %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :ZIP, "ZIP code" %> <br>
+					<%= f.text_field :ZIP %>
 				</div>
 			<%end%>
+
+		</div>
+
+		<div class="row container user-sub-container center">
+			<h3>Account Info</h3>
+
+			<%= form_for @user, :url => user_path(@user), :method => :patch do |f| %>
+
+				<div class="form_control col-md-12">
+					<%= f.label :foodie_id, "Foodie ID" %> <br>
+					<%= f.text_field :foodie_id %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :password, "Password" %> <br>
+					<%= f.text_field :password %>
+				</div>
+
+				<div class="form_control col-md-12">
+					<%= f.label :password_confirmation, "Confirm password" %> <br>
+					<%= f.text_field :password_confirmation %>
+				</div>
+			<%end%>
+
+		</div>
+
+		<div class="row container user-sub-container center">
+			<h3>Social Media Account</h3>
+
+		</div>
+
+		<div class="row container user-sub-container center">
+			<h3>Payment Info</h3>
+
+		</div>
+
+		<div class="row container user-sub-container center">
+			<h3>What type of food/items do you prefer?</h3>
+			<hr>
 
 		</div>
 

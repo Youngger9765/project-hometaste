@@ -3,7 +3,12 @@
 	width: 50em;
 	font-size: 20px;
 
+	.form_control {
+		margin-bottom: 1em;
+	}
+
 	input {
+		width: 20em;
 		border: 0;
     border-bottom: 2px solid;
 	}

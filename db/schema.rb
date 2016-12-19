@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161219012911) do
+ActiveRecord::Schema.define(version: 20161219131130) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -216,6 +215,9 @@ ActiveRecord::Schema.define(version: 20161219012911) do
     t.string   "google_name"
     t.string   "google_head_shot"
     t.boolean  "is_chef",                              default: false
+    t.string   "gender"
+    t.date     "birthday"
+    t.string   "ZIP"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["fb_uid"], name: "index_users_on_fb_uid", using: :btree

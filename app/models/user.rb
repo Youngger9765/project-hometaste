@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
+  validates  :email, presence: true , uniqueness: true
   validates :name, presence: true
   validates :foodie_id, presence: true
   validates :phone_number, presence: true
