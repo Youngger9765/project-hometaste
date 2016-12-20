@@ -1,5 +1,9 @@
 class ChefsController < ApplicationController
 
+	before_action :find_chef, :only =>[:edit, :update]
+	before_action :find_user, :only =>[:edit, :update]
+	before_action :is_current_user?, :only =>[:edit, :update]
+
 	def new
 		@user = User.new
 		@chef = Chef.new
@@ -59,6 +63,14 @@ class ChefsController < ApplicationController
 
 	end
 
+	def show
+		
+	end
+
+	def edit
+
+	end
+
 	private
 
 	def chef_params
@@ -112,5 +124,22 @@ class ChefsController < ApplicationController
 
 	def bulk_buy_checked
 		params[:bulk_buy_only]
+	end
+
+	def find_chef
+		@chef = Chef.find(params[:id])
+	end
+
+	def find_user
+		@user = @chef.user
+	end
+
+	def is_current_user?
+		if current_user && @user == current_user
+
+		else
+			flash[:alert] = "You have no athuroity!"
+			redirect_to root_path
+		end
 	end
 end
