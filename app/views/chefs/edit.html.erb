@@ -1,6 +1,5 @@
 <div class="container chef-container center">
 	<div class="row">
-
 		<div class="row container chef-sub-container center">
 			<div class="form_control col-md-12">
 		    <label class="center">Notice</label>
@@ -10,7 +9,7 @@
 	    </div>
 		</div>
 
-		<%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
+		<%= form_for setup_chef(@chef), :url => chef_path(@chef) do |f| %>
 
 			<%= render :partial => 'form', :locals => { :f => f } %>
 
