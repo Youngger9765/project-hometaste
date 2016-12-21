@@ -15,14 +15,32 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">Help</a><span class="hidden-xs">|</span></li>
-        <li><%= link_to "Become a chef", new_chef_path %><span class="hidden-xs">|</span></li>
-
+        <% unless @chef %>
+            <li><a href="#">Help</a><span class="hidden-xs">|</span></li>
+            <li><%= link_to "Become a chef", new_chef_path %><span class="hidden-xs">|</span></li>
+        <% end %>
+        <li class="dropdown hidden-xs">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi! <%= current_user.name %> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% if current_user %>
+                <li><%= link_to('My account', edit_user_path(current_user), :method => :delete) %></li>
+                <li><%= link_to('Message', edit_user_path(current_user)) %></li>
+                <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+            <% elsif @chef && current_user %>
+                <li><%= link_to('Chef’s Homepage', edit_user_path(current_user), :method => :delete) %></li>
+                <li><%= link_to('Menu', edit_user_path(current_user)) %></li>
+                <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+            <% end %>
+          </ul>
+        </li>
         <% if current_user %>
-            <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
-            <li><% link_to('修改密碼', edit_registration_path(:user)) %></li>
-            <li><%= link_to('Edit Profile', edit_user_path(current_user)) %></li>
-
+            <li class="visible-xs"><%= link_to('My account', edit_user_path(current_user), :method => :delete) %></li>
+            <li class="visible-xs"><%= link_to('Message', edit_user_path(current_user)) %></li>
+            <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+        <% elsif @chef && current_user %>
+            <li class="visible-xs"><%= link_to('Chef’s Homepage', edit_user_path(current_user), :method => :delete) %></li>
+            <li class="visible-xs"><%= link_to('Menu', edit_user_path(current_user)) %></li>
+            <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
         <% else %>
             <li><a id="sign_up">Sign up</a><span class="hidden-xs">|</span></li>
             <li><a id="login">Log In</a></li>
