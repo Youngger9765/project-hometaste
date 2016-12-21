@@ -120,8 +120,20 @@
     height: 50%;
   }
 }
-
+.filter_menu .radio.checkbox {
+  input:checked + label{
+    color: #000000;
+  }
+  label{
+    &:before,&:after{
+      display: none !important;
+    }
+  }
+}
 .filters {
+  .distance_input,p,label{
+    padding-left: 15px !important;
+  }
   margin-top: 15px;
   .ui.button{
     background-color: transparent;
@@ -132,11 +144,6 @@
   }
   img{
     height: 30px;
-  }
-  .distance_input{
-    :before,:after{
-      display: block;
-    }
   }
   .filter_menu{
     padding: 15px;
