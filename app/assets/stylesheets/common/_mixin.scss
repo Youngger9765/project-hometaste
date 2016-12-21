@@ -1,7 +1,7 @@
 $main_red: #E8212D;
 $main_black: #555;
 $main_radius: 10px;
-$card_radius: 5px !important;
+$sub_radius: 5px !important;
 $xs-width: 768px;
 $sm-width: 992px;
 
@@ -32,7 +32,20 @@ $sm-width: 992px;
   margin-bottom: 30px;
   overflow: hidden;
   width: 100%;
-  padding:15px 30px;
+  padding:40px;
+}
+@mixin border_radius($_){
+  -webkit-border-radius:$_;
+  -moz-border-radius:$_;
+  border-radius:$_;
+}
+@mixin background_size_cover {
+  -webkit-background-size:cover;
+  background-size:cover;
+}
+@mixin background_size($_) {
+  -webkit-background-size:$_;
+  background-size:$_;
 }
 @mixin text_overflow($font-size,$line-height){
   font-size: $font-size;
@@ -61,18 +74,6 @@ $sm-width: 992px;
     width: 100%;
     padding:5px 20px;
   }
-  .basic_bg{
-    @include basic_bg(10px,10px);
-    height:calc(100% - 15px);
-  }
-  .basic_bg_top{
-    @include basic_bg(0,10px);
-    height:calc(100% - 15px);
-  }
-  .basic_bg_bottom{
-    @include basic_bg(10px,0);
-    margin-bottom: 0;
-  }
 }
 @media (max-width: $xs-width) {
   @mixin basic_bg($top,$bottom){
@@ -84,19 +85,7 @@ $sm-width: 992px;
     margin-bottom: 15px;
     overflow: hidden;
     width: calc(100% + 30px);
-    margin-left: -15px;
+    //margin-left: -15px;
     padding:5px 20px;
-  }
-  .basic_bg{
-    @include basic_bg(0,0);
-    height:calc(100% - 5px);
-  }
-  .basic_bg_top{
-    @include basic_bg(0,0);
-    height:calc(100% - 5px);
-  }
-  .basic_bg_bottom{
-    @include basic_bg(0,0);
-    margin-bottom: 0;
   }
 }

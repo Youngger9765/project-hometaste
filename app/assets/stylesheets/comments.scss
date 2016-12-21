@@ -1,0 +1,72 @@
+.comments_show{
+  .banner{
+    height: 355px;
+    @include background_size_cover;
+    background-position: center;
+  }
+  [class^="show_rated_"]{
+    font-size: 20px;
+    line-height: 30px;
+  }
+  h3{
+    margin: 7px 0;
+  }
+  [name="top_bg_line"]{
+    margin-top: 60px;
+  }
+  [name="menu_btn"]{
+    height: 40px;
+    width: 110px;
+    padding: 0;
+    border-radius: 5px !important;
+  }
+  p{
+    font-size:16px;
+  }
+  .hometaste_dropdown{
+    margin-left: 25px;
+    vertical-align: top;
+  }
+  @media (min-width: $xs-width )and (max-width: $sm-width ){
+    .menu_btn{
+      position: absolute;
+      bottom:0;
+    }
+    .basic_bg_top > .row{
+      @include flex_(initial,initial)
+    }
+  }
+  @media (max-width: $sm-width ){
+    [name="top_bg_line"]{
+      margin-top: 30px;
+    }
+    .title{
+      font-size: x-large;
+    }
+  }
+  @media (max-width: $xs-width ){
+    [name="menu_btn"]{
+      margin: 20px auto 0;
+      display: block;
+    }
+    .hometaste_dropdown {
+      display: block !important;
+      margin: 5px 0 !important;
+    }
+    textarea{
+      height: 200px;
+    }
+    h3{
+      font-size: 14px;
+    }
+    p{
+      font-size:12px;
+    }
+    h5{
+      margin: 20px 0;
+    }
+    .square_img{
+      margin-bottom: 15px;
+    }
+  }
+}

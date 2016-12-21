@@ -1,12 +1,27 @@
 body{
   margin-top: 50px;
   font-family:"Avenir Next";
+  background-color: #EFF0F1;
 }
 a:hover{
   text-decoration: none;
 }
 hr{
   color: $main_black;
+}
+h3{
+  margin-top: 10px;
+}
+textarea{
+  border-radius: 20px;
+  width: 100%;
+  margin: 25px auto;
+  padding: 25px;
+  border-color: #B8B9BA;
+  resize: none;
+  &:focus{
+    outline: none;
+  }
 }
 .ui.form input[type='text'].my_form,
 .ui.form input[type='number'].my_form,
@@ -26,6 +41,10 @@ hr{
     border-color: #FFFFFF;
   }
 }
+input[type=submit]{
+  width: 130px;
+  height: 50px;
+}
 .ui.form .field.field input:-webkit-autofill {
   box-shadow: 0px 0px 0px 100px $main_red inset !important;
   border-color: #FFFFFF !important;
@@ -33,6 +52,28 @@ hr{
 .ui.form .field.field input:-webkit-autofill:focus {
   box-shadow: 0px 0px 0px 100px $main_red inset !important;
   border-color: #FFFFFF !important;
+}
+.ui.star.rating{
+  .active.icon,.icon.selected,.icon.selected.active{
+    color: $main_red !important;
+    text-shadow: none !important;
+  }
+  .icon{
+    font-size: 20px;
+    text-shadow: none;
+  }
+}
+.hometaste_dropdown{
+  & .menu{
+    border:$main_red !important;
+  }
+  border:1px solid $main_red !important;
+  .dropdown.icon{
+    background-color: red !important;
+    padding: 11px !important;
+    right: 9px !important;
+    color: white !important;
+  }
 }
 img[name='cart']{
   height: auto;
@@ -63,7 +104,7 @@ img[name='cert']{
 .cards .ui.fluid.card{
   overflow: hidden;
   display: none;
-  border-radius: $card_radius;
+  border-radius: $sub_radius;
   p {
     font-weight: 500;
   }
@@ -104,10 +145,6 @@ img[name='cert']{
     margin-top: 5px;
     margin-bottom: 0;
     font-size:14px;
-  }
-  h5{
-    margin-bottom: 0;
-    font-size: 12px;
   }
   p{
     font-size: 12px;
