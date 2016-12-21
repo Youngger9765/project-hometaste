@@ -74,6 +74,7 @@ namespace :dev do
 
   	# create restaurants
     Chef.all.each do |chef|
+      print(chef.id)
     	Restaurant.create(
     		chef_id: chef.id,
     		name: Faker::Name.name,

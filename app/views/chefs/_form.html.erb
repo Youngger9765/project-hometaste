@@ -1,3 +1,9 @@
+<!--
+- 審核過後 認證跟送審時最上傳的三張餐點圖片可以抽掉
+- 送審時最上傳的三張餐點圖片   是只有送省的時候用
+-->
+
+
 <!-- restaurant -->
 <div class="row container chef-sub-container center">
 	<%= f.fields_for :restaurant do |r| %>
@@ -50,16 +56,20 @@
 	    </div>
     </div>
 
-		<!-- certificate -->
-		<div class="check_box col-md-11" style="margin-top: 2em;">
-			<%= check_box_tag 'certificated_check'%><span style="font-size: 14px;">  I or someone cooking with me had the food handling safty class in my state</span>
-		</div>
-		<div class="form_control col-md-6">
-	    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
-    </div>
-    <div class="form-group col-md-6">
-	    <%=r.file_field :certificated_img%>
-		</div>
+		<% if params[:action] == "edit"%>
+
+		<%else%>
+			<!-- certificate -->
+			<div class="check_box col-md-11" style="margin-top: 2em;">
+				<%= check_box_tag 'certificated_check'%><span style="font-size: 14px;">  I or someone cooking with me had the food handling safty class in my state</span>
+			</div>
+			<div class="form_control col-md-6">
+		    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
+	    </div>
+	    <div class="form-group col-md-6">
+		    <%=r.file_field :certificated_img%>
+			</div>
+		<%end%>
 
 		<br>
 		<!-- cuisine -->
@@ -214,22 +224,28 @@
 
 </div>
 
-<!-- restaurant dish photos -->
-<div class="row container chef-sub-container center">
+<% if params[:action] == "edit"%>
 
-	<h3>Please upload three dishes that was make by you or your team</h3>
-	<br>
-	<br>
-	<%= f.fields_for :restaurant do |r| %>
-		<%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
-			<div class="form-group col-md-4 restaurant-dish-photo-div">
-				<div class="restaurant-dish-photo">
-					<%= photo.file_field :photo %>
+<%else%>
+	<!-- restaurant dish photos -->
+	<div class="row container chef-sub-container center">
+
+		<h3>Please upload three dishes that was make by you or your team</h3>
+		<br>
+		<br>
+		<%= f.fields_for :restaurant do |r| %>
+			<%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
+				<div class="form-group col-md-4 restaurant-dish-photo-div">
+					<div class="restaurant-dish-photo">
+						<%= photo.file_field :photo %>
+					</div>
+				    <%= photo.text_area :comment, :placeholder => "dish photo comment" %>
 				</div>
-			    <%= photo.text_area :comment, :placeholder => "dish photo comment" %>
-			</div>
+			<%end%>
 		<%end%>
-	<%end%>
-</div>
+	</div>
+<%end%>
+
+
 
 

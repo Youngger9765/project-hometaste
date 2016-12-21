@@ -6,7 +6,7 @@ class Restaurant < ApplicationRecord
   has_one  :delivery
   has_many :bulk_buys
   has_many :big_buns
-  has_many :restaurant_dish_photos, dependent: :destroy
+  has_many :restaurant_dish_photos
 
   belongs_to :chef
 
