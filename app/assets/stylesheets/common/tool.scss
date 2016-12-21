@@ -53,3 +53,17 @@
   left: 50%;
   transform: translateX(-50%);
 }
+.load_more{
+  display: block;
+  text-align: center;
+  input{
+    background-color: $main_red;
+    color: #FFFFFF;
+    font-weight: inherit;
+    @include border-radius($card_radius);
+    font-size:1em;
+    border: 1px solid $main_red ;
+    width: 175px;
+    height: 40px;
+  }
+}
