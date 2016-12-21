@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="field">
-          <input type="text" name="first-name" placeholder="Near" id="near_input">
+          <input type="text" name="first-name" placeholder="Near" id="location_input">
         </div>
 
         <button id='search_submit' class="ui button" type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
@@ -47,23 +47,20 @@
     </div>
   </div>
 </div>
+
 <div class="container">
-  <% if @foods %>
-      <div class="row foods cards" id="foods">
+  <div class="row foods restaurants cards" id="results" data-sum_qty="<%= @sum_qty %>" data-page="1">
+    <% if @foods %>
         <%= render 'foods',foods:@foods %>
-      </div>
-  <% else %>
-      <div class="row restaurants cards" id="restaurants">
+    <% else %>
+        <!--<div class="row  cards" id="restaurants">-->
         <%= render 'restaurants',restaurants:@restaurants %>
-      </div>
-      <div class="col-xs-12">
-        <div class="row">
-          <div class="load_more" id="load_more">
-            <button class="ui button my_btn absolute_center">Load more</button>
-          </div>
-        </div>
-      </div>
-  <% end %>
+        <!--</div>-->
+    <% end %>
+  </div>
+  <div class="load_more" id="load_more">
+    <input type="button" value="Load more">
+  </div>
 </div>
 
 <%= javascript_include_tag 'main' %>

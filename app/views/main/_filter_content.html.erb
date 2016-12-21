@@ -53,8 +53,14 @@
               <label>Walking-1min</label>
             </div>
           </div>
+          <div class="field">
+            <div class="ui radio checkbox distance_input">
+              <input type="radio" name="distance" tabindex="0" class="hidden">
+              <label class="hidden">10</label>
+              Custom:<input type="number" min="0" max="99" name="custom_min" class="my_form" id="distance_input">min
+            </div>
+          </div>
         </div>
-        Custom:<input type="number" name="custom_min" class="my_form">min
       </div>
       <div class="clearfix hidden-xs-up"></div>
       <div class="col-xs-4 col-sm-2">
@@ -90,9 +96,9 @@
       <div class="col-xs-4 col-sm-2">
         <p>Cuisine</p>
         <hr>
-        <div class="grouped fields">
+        <div class="grouped fields cuisine_grouped">
           <div class="field">
-            <div class="ui checked checkbox">
+            <div class="ui checked checkbox" id="any_cuisine">
               <input type="checkbox" name="cuisine" checked="" tabindex="0" class="hidden">
               <label>Any Cuisine</label>
             </div>
@@ -163,30 +169,12 @@
   <div class="image content">
     <div class="description">
       <p class="hidden">Cuisine</p>
-      <div class="grouped fields">
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
-            <label>Apples</label>
-          </div>
-        </div>
-        <% 10.times do %>
+      <div class="grouped fields cuisine_grouped">
+        <% @cuisines.each do |cuisine| %>
             <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Orangesasdasdas</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Pears</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                <label>Grapefruit</label>
+              <div class="ui checkbox">
+                <input type="checkbox" name="cuisine" tabindex="0" class="hidden">
+                <label><%= cuisine.name %></label>
               </div>
             </div>
         <% end %>
@@ -195,7 +183,7 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui button my_btn">Search</div>
+    <div class="ui button my_btn" id="cuisine_modal_btn">Search</div>
     <div class="ui deny button my_btn_reserve">Cancel</div>
   </div>
 </div>

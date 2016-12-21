@@ -98,12 +98,12 @@
   .ui.button.address{
     position: absolute;
     background-color: transparent;
-    right: 20px;
-    top:0;
+    right: 15px;
+    top:10px;
   }
-  .fa-map-marker{
-    position: absolute;
-  }
+  //.fa-map-marker{
+  //  position: absolute;
+  //}
   .meta span {
     text-decoration: underline;
     color: #3A618D;
@@ -132,6 +132,11 @@
   }
   img{
     height: 30px;
+  }
+  .distance_input{
+    :before,:after{
+      display: block;
+    }
   }
   .filter_menu{
     padding: 15px;
