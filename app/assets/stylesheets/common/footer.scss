@@ -53,14 +53,14 @@
     height: 35px;
   }
 }
-@media (min-width: $sm-width){
+@media (min-width: $screen-md-min){
   .footer{
     .col-md-3:nth-child(1){
       margin-left:12.5%;
     }
   }
 }
-@media (max-width: $sm-width){
+@media (max-width: $screen-sm-max){
   .footer{
     .footer-first a, .footer .footer-first p{
       font-size: 12px;

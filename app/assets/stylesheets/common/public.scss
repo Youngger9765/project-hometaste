@@ -127,16 +127,8 @@ img[name='cert']{
     color: $main_red;
   }
 }
-@media (max-width: $xs-width) {
-  .padding_right_7_xs{
-    padding-right: 7px;
-  }
-  .padding_left_7_xs{
-    padding-left: 7px;
-  }
-}
 
-@media (max-width: $sm-width){
+@media (max-width: $screen-sm-max){
   h2{
     margin:0 5px;
     font-size: 18px;
@@ -148,5 +140,13 @@ img[name='cert']{
   }
   p{
     font-size: 12px;
+  }
+}
+@media (max-width: $screen-xs-max) {
+  .padding_right_7_xs{
+    padding-right: 7px;
+  }
+  .padding_left_7_xs{
+    padding-left: 7px;
   }
 }

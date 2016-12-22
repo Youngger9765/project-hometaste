@@ -18,7 +18,7 @@
     font-size: 20px;
   }
 }
-@media (max-width: $sm-width){
+@media (max-width: $screen-sm-max){
   .ui.form .count_spinner{
     .buttons{
       margin-left: -10px;

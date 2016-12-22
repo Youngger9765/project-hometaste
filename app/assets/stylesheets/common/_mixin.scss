@@ -2,8 +2,6 @@ $main_red: #E8212D;
 $main_black: #555;
 $main_radius: 10px;
 $sub_radius: 5px !important;
-$xs-width: 768px;
-$sm-width: 992px;
 
 @mixin square-icon($pixel: 40px){
   font-size:$pixel / 2;
