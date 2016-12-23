@@ -1,36 +1,54 @@
 <%= render 'carousel' %>
 <div class="container">
   <section class="row">
-    <div class="col-xs-12 basic_bg_top">
+    <div class="col-xs-12 basic_bg_top pl150_md pr150_md pl40_sm Pr40_sm">
 
       <div class="row">
-        <div class="col-xs-12">
-          <button></button>
-          <button></button>
-          <button></button>
+        <div class="col-xs-12 text-right">
+          <button class="ui button my_btn social_link"><i class="fa fa-heart-o white" aria-hidden="true"></i>137</button>
+          <button class="ui button my_btn social_link"><i class="fa fa-plus-circle white" aria-hidden="true"></i>Like</button>
+          <button class="ui button my_btn social_link"><i class="share_icon_white" aria-hidden="true"></i>Share</button>
         </div>
-        <div class="col-xs-4">
+        <div class="col-sm-7 col-xs-12">
           <h1>Roasted Duck</h1>
-          <span>Asian Fusion</span>
-          <span>American</span>
-          <span>Chinese</span>
-        </div>
-        <div class="col-xs-4 col-xs-offset-4">
+          <span class="sub_link ">Asian Fusion</span>
+          <span class="sub_link ml15">American</span>
+          <span class="sub_link ml15">Chinese</span>
+          <div class="col-xs-12 visible-xs visible-sm mt20">
+            <div class="row">
+            <div class="align_two_side">
+              <h4 class="dib">Orders reached:</h4>
+              <h4 class="dib">Max:  6 </h4>
+            </div>
 
+            <div class="ui indicating progress mb15_md mb10_sm" data-percent="74">
+              <div class="bar"></div>
+            </div>
+            <h4 class="pull-right red">120 Ordered</h4>
+            </div>
+          </div>
         </div>
-        <div class="col-xs-12">
-          <h4>Orders reached:</h4>
+        <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm">
+          <h3 class="red mt25">$7.00/ Bowl</h3>
+          <%= render 'spinner', qty: 1  %>
+        </div>
+        <div class="col-xs-12 hidden-xs hidden-sm">
+          <div class="align_two_side">
+            <h4 class="dib">Orders reached:</h4>
+            <h4 class="dib">Max:  6 </h4>
+          </div>
           <div class="ui indicating progress"  data-percent="74">
             <div class="bar"></div>
           </div>
+          <h4 class="pull-right red">120 Ordered</h4>
         </div>
       </div>
 
     </div>
   </section>
   <section class="row">
-    <div class="col-xs-12 basic_bg">
-      <div>About this dish | Ingredients</div>
+    <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm Pr40_sm">
+      <h3><span class="vertical_align">About this dish</span> <i class="l_line"></i> <span class="vertical_align gray">Ingredients</span></h3>
       <div>
         <p>Free range chicken stewed in a spicy tomatillo sauce and served over saffron white rice with cilantro. Served
           with sweet and spicy chilie- roasted carrots with pickled red onions and toasted pepitas. Free range chicken
@@ -40,17 +58,18 @@
     </div>
   </section>
   <section class="row">
-    <div class="col-xs-12 basic_bg">
+    <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm Pr40_sm">
+      <h1 class="dib visible-xs">Mr.Chan’s Kitchen</h1>
       <div class="row">
-        <div class="col-xs-3">
+        <div class="col-sm-3 col-xs-12">
           <div class="square_img border_main_radius" style="background-image: url(<%= image_path('tmp/kitchen.png') %>)"></div>
         </div>
-        <div class="col-xs-9">
-          <div>
-            <h1 class="dib">Mr.Chan’s Kitchen</h1>
-            <button class="ui button my_btn_reserve">Menu</button>
+        <div class="col-sm-9 col-xs-12">
+          <div class="clearfix mt10 mb10">
+            <h1 class="dib hidden-xs">Mr.Chan’s Kitchen</h1>
+            <button class="pull-right mt20 ui button my_btn_reserve">Menu</button>
           </div>
-          <div>
+          <div class="flex_space_between">
             <div class="dib">
               <i class="show_rated_4"></i><span class="">122 Likes</span>
             </div>
@@ -64,41 +83,42 @@
             </div>
           </div>
           <div>
-            <p>“Mr.Chan’s kitchen makes the best Chinese food in town. I love their roasted duck, no one else makes them as good as Mr.Chan! Absolutely favorite!” </p>
+            <p class="mt20 mb20">“Mr.Chan’s kitchen makes the best Chinese food in town. I love their roasted duck, no one else makes them as good as Mr.Chan! Absolutely favorite!” </p>
           </div>
           <div>
-            <span>- John Doe</span> <i class="show_rated_4"></i>
+            <span class="pull-right">- John Doe <i class="show_rated_4"></i></span>
           </div>
         </div>
       </div>
     </div>
   </section>
   <section class="row">
-    <div class="col-xs-12 basic_bg">
-      <h3>You may also want</h3>
+    <div class="col-xs-12 basic_bg pl0_sm">
+      <h3 class="ml150 bold mb25">You may also want</h3>
       <div class="row flex">
-        <div class="col-xs-5">
+        <div class="col-sm-6 col-xs-12">
           <%= render 'product_carousel' %>
         </div>
-        <div class="col-xs-7">
+        <div class="col-sm-6 col-xs-12 pl100_md pl60_sm">
           <div>
             <h3>Seasonal Pumpkin Soup</h3>
           </div>
           <div>
             <h3 class="red">$7.00/ Bowl</h3>
           </div>
-          <div class="product_item">
+          <div>
             <%= render 'spinner', qty: 1  %>
           </div>
           <div>
-            <h3 class="blck normal">2 Left <i class="l_line"></i> 12 Ordered</h3>
+            <h4 class="blck normal">2 Left <i class="l_line"></i> 12 Ordered</h4>
           </div>
           <div>
-            <h3 class="black">Ingredients: <br>Pumpkin, spice, cream, herb
-            </h3>
+            <h4 class="black mt25 mb25">Ingredients: <p class="mt10">Pumpkin, spice, cream, herb</p>
+            </h4>
           </div>
           <div>
-            <i class="fa fa-heart red" aria-hidden="true"></i><i class="share_icon"></i><a href="" class="gray">More...</a>
+            <i class="fa fa-heart red mr25" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+            <a href="" class="gray pull-right"><h4>More...</h4></a>
           </div>
         </div>
       </div>

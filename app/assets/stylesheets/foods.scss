@@ -1,6 +1,72 @@
-.foods_show{
+.foods_show .banner{
+  height: 350px;
   background-color: #F0F0F0;
   .carousel-control.left,.carousel-control.right{
     background-image: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
+.foods_show{
+  h3{
+    font-size: 21px;
+  }
+  i[name=heart]{
+    font-size: 22px;
+  }
+  i[name=shard]{
+    font-size: 23px;
+  }
+  #txtNum{
+    font-size: 40px;
+  }
+  .minus_icon_black,.add_icon_black{
+    font-size: 50px;
+  }
+  .cloche_icon{
+    font-size: 29px;
+  }
+  .fa-heart-o,.fa-plus-circle,.share_icon_white{
+    font-size: 19px;
+    margin-right: 5px;
+  }
+  .ui.progress{
+    border-radius: 10px;
+    .bar{
+      border-radius: 10px;
+      background-color: $main_red !important;
+    }
+  }
+  [class^="show_rated_"]{
+    font-size: 19px;
+  }
+  .social_link{
+    width: 84px;
+    height: 32px;
+  }
+  .carousel-control.left,.carousel-control.right{
+    @extend .flex_center;
+    .fa-angle-left,.fa-angle-right{
+      background-color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      text-shadow:none;
+      @extend .red;
+    }
+    .fa-angle-left{
+      padding-right: 2px;
+    }
+    .fa-angle-right{
+      padding-left: 2px;
+    }
+  }
+}
+@media (max-width: $screen-sm-max) {
+  .foods_show .banner{
+    height: 270px;
+  }
+}
+@media (max-width: $screen-xs-max) {
+  .foods_show .banner{
+    height: 190px;
   }
 }

@@ -25,11 +25,28 @@
 .border_red{
   border: 1px solid $main_red ;
 }
+.sub_link{
+  color: #003470;
+  text-decoration: underline;
+}
+.vertical_align{
+  vertical-align: middle;
+}
 .l_line:before{
   @extend .red;
   content:'|';
   font-size:16px;
   margin: 0 15px;
+}
+.background_img_setting{
+  @include background_size_cover;
+  background-position: center;
+}
+.border_main_radius{
+  @include border_radius($main_radius);
+}
+.border_sub_radius{
+  @include border_radius($sub_radius);
 }
 .ui.button.my_btn{
   @extend .background_red;
@@ -54,6 +71,12 @@
 .flex{
   display: flex;
   display : -webkit-flex;
+}
+.flex_space_around{
+  @include flex_(center,space-around);
+}
+.flex_space_between{
+  @include flex_(center,space-between);
 }
 .flex_center_start{
   @include flex_(center,flex-start);
@@ -175,12 +198,15 @@
   .basic_bg{
     @include basic_bg(0,0);
     margin-bottom: 15px;
+    padding: 30px 20px;
   }
   .basic_bg_top{
     @include basic_bg(0,0);
     margin-bottom: 15px;
+    padding: 30px 20px;
   }
   .basic_bg_bottom{
     @include basic_bg(0,0);
+    padding: 30px 20px;
   }
 }
