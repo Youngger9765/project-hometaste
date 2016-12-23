@@ -6,6 +6,8 @@ namespace :dev do
   task :fake => :environment do
 
   	# admin
+    puts('make admin')
+
   	User.create(
   		name: "admin",
   		foodie_id: "admin",
@@ -19,6 +21,8 @@ namespace :dev do
 		)
 
 		# chef
+    puts('make chef')
+
   	User.create(
   		name: "chef",
   		foodie_id: "chef",
@@ -32,6 +36,8 @@ namespace :dev do
 		)
 
 		# purpleice9765@msn.com
+    puts('make purpleice9765')
+
   	User.create(
   		name: "young",
   		foodie_id: "young",
@@ -45,6 +51,8 @@ namespace :dev do
 		)
 
   	# create users
+    puts('create users')
+
   	100.times {
   		User.create(
 	  		name: Faker::Name.name,
@@ -59,6 +67,8 @@ namespace :dev do
   	}
 
   	# create chef
+    puts('create chef')
+
   	User.where(:is_chef=>true).each do |user|
   		Chef.create(
   			user_id: user.id,
@@ -73,8 +83,9 @@ namespace :dev do
   	end
 
   	# create restaurants
+    puts('create restaurants')
+
     Chef.all.each do |chef|
-      print(chef.id)
     	Restaurant.create(
     		chef_id: chef.id,
     		name: Faker::Name.name,
@@ -93,6 +104,8 @@ namespace :dev do
 		end
 
 		# create foods
+    puts('create foods')
+
 		300.times {
 			Food.create(
 				restaurant_id: Restaurant.all.ids.sample,
@@ -102,7 +115,26 @@ namespace :dev do
 			)
 		}
 
-		# create order
+    # create food_comments
+    puts('create food_comments')
+
+    1000.times {
+      comment = FoodComment.create(
+        user_id: User.where.not(:is_chef => true).ids.sample,
+        food_id: Food.all.ids.sample,
+        comment: Faker::Lorem.paragraph,
+        score: rand(0..5),
+        is_public: [true, false].sample,
+      )
+      restaurant = comment.food.restaurant
+      restaurant.food_comments_count += 1
+      restaurant.food_avg_score = restaurant.get_food_avg_score
+      restaurant.save!
+    }
+
+		# create orders
+    puts('create orders')
+
 		200.times {
 			Order.create(
 				scheduled_time: Faker::Time.between(DateTime.now , DateTime.now+30),
@@ -118,7 +150,9 @@ namespace :dev do
 			)
 		}
 
-		# create order_food_ship
+		# create order_food_ships
+    puts('create order_food_ships')
+
 		1000.times {
 			order = OrderFoodShip.create(
 				order_id: Order.all.ids.sample,
