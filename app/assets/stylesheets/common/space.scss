@@ -1,0 +1,26 @@
+@mixin method_loop($media) {
+  @each $method,$method_short in (margin,'m'),(padding,'p') {
+    @each $direction,$direction_short in (right,'r'),(left,'l'),(top,'t'),(bottom,'b') {
+      @each $i in 0px,10px,15px,20px,30px,40px,50px {
+        .#{$method_short}#{$direction_short}#{$i}-#{$media} { #{$method}-#{$direction}: $i !important; }
+        @if $media == 'xs'{
+          .#{$method_short}#{$direction_short}#{$i} { #{$method}-#{$direction}: $i !important; }
+        }
+      }
+    }
+  }
+}
+
+@include method_loop('xs');
+
+@media (min-width: $screen-sm-min) {
+  @include method_loop('sm');
+}
+
+@media (min-width: $screen-md-min) {
+  @include method_loop('md');
+}
+
+@media (min-width: $screen-lg-min) {
+  @include method_loop('lg');
+}

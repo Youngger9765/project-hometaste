@@ -1,3 +1,6 @@
+body.main_index{
+  background-color: #FFFFFF;
+}
 .main_index{
   .banner {
     min-height: 400px;
@@ -332,7 +335,7 @@
     height: 40px;
   }
 }
-@media (max-width: $xs-width){
+@media (max-width: $screen-xs-max){
   .filters{
     margin-top:0;
     margin-bottom: -10px;
@@ -411,7 +414,7 @@
     }
   }
 }
-@media (min-width: $xs-width){
+@media (min-width: $screen-xs-max){
   .filters{
     height: 50px;
     .clearfix::before,

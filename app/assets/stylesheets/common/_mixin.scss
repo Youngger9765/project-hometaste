@@ -60,7 +60,7 @@ $sub_radius: 5px !important;
   text-overflow: ellipsis;
 }
 
-@media (max-width: $sm-width) {
+@media (max-width: $screen-sm-max) {
   @mixin basic_bg($top,$bottom){
     border-top-left-radius: $top;
     border-top-right-radius: $top;
@@ -73,7 +73,7 @@ $sub_radius: 5px !important;
     padding:5px 20px;
   }
 }
-@media (max-width: $xs-width) {
+@media (max-width: $screen-xs-max) {
   @mixin basic_bg($top,$bottom){
     border-top-left-radius: $top;
     border-top-right-radius: $top;
