@@ -1,0 +1,55 @@
+.ui.button.my_btn{
+  background-color: $main_red;
+  color: #FFFFFF;
+  font-weight: inherit;
+  border-radius: $main_radius;
+  font-size:1em;
+  border: 1px solid $main_red ;
+}
+.ui.button.my_btn_reserve{
+  background-color: #FFFFFF;
+  color: $main_red;
+  font-weight: inherit;
+  border-radius: $main_radius;
+  font-size:1em;
+  border: 1px solid $main_red ;
+}
+.square-icon {
+  @include square-icon;
+}
+.flex{
+  display: flex;
+  display : -webkit-flex;
+}
+.flex_center_start{
+  @include flex_(center,flex-start);
+}
+.flex_center{
+  @include flex_(center,center);
+}
+.basic_bg{
+  @include basic_bg(20px,20px);
+  height:calc(100% - 30px);
+}
+.basic_bg_top{
+  @include basic_bg(0,20px);
+  height:calc(100% - 30px);
+}
+.basic_bg_bottom{
+  @include basic_bg(20px,0);
+  margin-bottom: 0;
+}
+.bold{
+  font-weight: bold;
+}
+.red{
+  color: $main_red;
+}
+.under_line{
+  border-bottom: 1px solid $main_black;
+}
+.absolute_center{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

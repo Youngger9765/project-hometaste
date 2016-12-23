@@ -1,0 +1,115 @@
+body{
+  margin-top: 50px;
+  font-family:"Avenir Next";
+}
+a:hover{
+  text-decoration: none;
+}
+hr{
+  color: $main_black;
+}
+.ui.form input[type='text'].my_form,
+.ui.form input[type='number'].my_form,
+.ui.form input[type='email'].my_form,
+.ui.form.my_form input{
+  border-radius: 0 ;
+  color: #FFFFFF;
+  background-color: transparent;
+  border:none;
+  padding: 0;
+  padding-left: 5px;
+  border-bottom: 1px solid #FFFFFF;
+  &:focus{
+    border-radius: 0 ;
+    background-color: transparent;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+}
+.ui.form .field.field input:-webkit-autofill {
+  box-shadow: 0px 0px 0px 100px $main_red inset !important;
+  border-color: #FFFFFF !important;
+}
+.ui.form .field.field input:-webkit-autofill:focus {
+  box-shadow: 0px 0px 0px 100px $main_red inset !important;
+  border-color: #FFFFFF !important;
+}
+img[name='cart']{
+  height: auto;
+  width: 35px;
+  padding-bottom: 3px;
+  margin: 0 auto;
+}
+img[name='cart_white']{
+  height: auto;
+  width: 35px;
+  padding-bottom: 7px;
+  margin: 0 auto;
+}
+img[name='moto']{
+  height: auto;
+  width: 40px;
+  padding-bottom: 7px;
+  margin: 0 auto;
+}
+img[name='cert']{
+  height: 45px;
+  width: auto;
+}
+.cards .ui.card:last-child, .cards .ui.card:first-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.cards .ui.fluid.card{
+  overflow: hidden;
+  display: none;
+  border-radius: $card_radius;
+  p {
+    font-weight: 500;
+  }
+  img{
+    width: 100%;
+  }
+  .image{
+    position: relative;
+  }
+  a{
+    color: inherit;
+  }
+  .ui.rating {
+    margin-top: 1em;
+    .active.icon {
+      color: $main_red;
+    }
+  }
+  i.fa{
+    color: $main_red;
+  }
+}
+@media (max-width: $xs-width) {
+  .padding_right_7_xs{
+    padding-right: 7px;
+  }
+  .padding_left_7_xs{
+    padding-left: 7px;
+  }
+}
+
+@media (max-width: $sm-width){
+  h2{
+    margin:0 5px;
+    font-size: 18px;
+  }
+  h4{
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size:14px;
+  }
+  h5{
+    margin-bottom: 0;
+    font-size: 12px;
+  }
+  p{
+    font-size: 12px;
+  }
+}
