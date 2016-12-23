@@ -25,10 +25,10 @@
       <%= link_to user_facebook_omniauth_authorize_path do %>
           <i class="fa fa-facebook square-icon" aria-hidden="true"></i>
       <% end %>
-
-      <i class="fa fa-twitter square-icon" aria-hidden="true"></i>
+      <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+          <i class="fa fa-google-plus square-icon" aria-hidden="true"></i>
+      <% end %>
       <i class="fa fa-weixin square-icon" aria-hidden="true"></i>
     </div>
-    <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path,:class => "btn btn-info" %>
   </div>
 </div>

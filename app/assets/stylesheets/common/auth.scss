@@ -1,0 +1,55 @@
+.ui.modal#login_modal,.ui.modal#sign_up_modal{
+  width: 300px;
+  text-align: center;
+  background-color: $main_red;
+  color: #FFFFFF;
+  bottom:inherit;
+  left: 50%;
+  border-radius: $main_radius;
+  margin:0 0 0 -150px ;
+  padding:0 15px 20px;
+  input{
+    height: 40px;
+  }
+  input[type='submit']{
+    border:1px solid #FFFFFF;
+    font-weight:bold;
+    border-radius: $main_radius;
+    padding:5px 25px;
+    margin-top: 15px;
+  }
+  span{
+    text-align: left;
+  }
+  .content{
+    background-color: transparent;
+  }
+  .close.icon{
+    top: 10px;
+    right: 10px;
+    opacity: 1;
+    color: #FFFFFF;
+  }
+  a[name='forgot_password']{
+    text-align: right;
+    display: inherit;
+  }
+  a{
+    color: #FFFFFF;
+  }
+  span[name="term"]{
+    display: inherit;
+    a{
+      text-decoration: underline;
+    }
+  }
+  .outh_logo{
+    p{
+      margin-left: 35px;
+      text-align: left;
+    }
+    i{
+      margin:0 20px;
+    }
+  }
+}
