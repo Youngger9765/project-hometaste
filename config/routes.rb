@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :chefs
+  resources :foods
   resources :restaurants
   resources :comments
 

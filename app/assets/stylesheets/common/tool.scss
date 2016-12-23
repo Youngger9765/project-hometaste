@@ -140,15 +140,14 @@
 @media (max-width: $screen-sm-max) {
   .basic_bg{
     @include basic_bg(10px,10px);
-    height:calc(100% - 15px);
+    margin-bottom: 15px;
   }
   .basic_bg_top{
     @include basic_bg(0,10px);
-    height:calc(100% - 15px);
+    margin-bottom: 15px;
   }
   .basic_bg_bottom{
     @include basic_bg(10px,0);
-    margin-bottom: 0;
   }
 }
 @media (max-width: $screen-xs-max ){
@@ -160,14 +159,19 @@
   }
   .basic_bg{
     @include basic_bg(0,0);
-    height:calc(100% - 5px);
+    width:calc(100% + 30px);
+    margin-left: -15px;
+    margin-bottom: 15px;
   }
   .basic_bg_top{
     @include basic_bg(0,0);
-    height:calc(100% - 5px);
+    width:calc(100% + 30px);
+    margin-left: -15px;
+    margin-bottom: 15px;
   }
   .basic_bg_bottom{
     @include basic_bg(0,0);
-    margin-bottom: 0;
+    width:calc(100% + 30px);
+    margin-left: -15px;
   }
 }
