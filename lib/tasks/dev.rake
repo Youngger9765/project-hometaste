@@ -1,7 +1,7 @@
 namespace :dev do
 
   desc "Rebuild system"
-  task :rebuild => ["db:drop", "db:setup", :fake]
+  task :rebuild => ["db:drop", "db:setup", :fake, :count_order_amount]
 
   task :fake => :environment do
 
@@ -165,7 +165,16 @@ namespace :dev do
 
 			order.amount = quantity * price
 			order.save!
-		}
+    }
+  end
 
+  task :count_order_amount => :environment do
+
+    Order.all.each do |order|
+      puts(order.id)
+      sum = order.order_food_ships.sum(:amount)
+      order.amount = sum
+      order.save!
+    end
   end
 end

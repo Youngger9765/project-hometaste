@@ -43,8 +43,7 @@
                       click to check
                     </div>
                   </td>
-                  <!-- TODO: SUM total user's order acount -->
-                  <th>$100000</th>
+                  <th>$<%= u.orders.sum(:amount)%></th>
 
                   <!-- TODO: click to check admin -->
                   <td><%= u.is_admin %></td>
