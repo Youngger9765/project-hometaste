@@ -1,7 +1,7 @@
 class ChefsController < ApplicationController
 
-	before_action :find_chef, :only =>[:edit, :update]
-	before_action :find_user, :only =>[:edit, :update]
+	before_action :find_chef, :only =>[:show, :edit, :update]
+	before_action :find_user, :only =>[:show, :edit, :update]
 	before_action :is_current_user?, :only =>[:edit, :update]
 
 	def new

@@ -6,7 +6,7 @@ class Restaurant < ApplicationRecord
   has_one  :delivery
   has_many :bulk_buys
   has_many :big_buns
-  has_many :restaurant_dish_photos, dependent: :destroy
+  has_many :restaurant_dish_photos
 
   belongs_to :chef
 
@@ -39,5 +39,15 @@ class Restaurant < ApplicationRecord
   # main_photo
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :main_photo, content_type: /\Aimage\/.*\Z/
+
+  def get_food_avg_score
+    food_ids = self.foods.pluck(:id)
+
+    if FoodComment.find_by(:food_id => food_ids)
+      FoodComment.where(:food_id => food_ids).average(:score)
+    else
+      0
+    end
+  end
 
 end

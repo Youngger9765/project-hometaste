@@ -19,8 +19,12 @@
         <li><%= link_to "Become a chef", new_chef_path %><span class="hidden-xs">|</span></li>
 
         <% if current_user %>
+            <!-- TEMP -->
+            <li><%= link_to "chef's homepage", chef_path(current_user.chef) %><span class="hidden-xs">|</span></li>
+
             <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
             <li><% link_to('修改密碼', edit_registration_path(:user)) %></li>
+            <!-- TEMP -->
             <li><%= link_to('Edit Profile', edit_user_path(current_user)) %></li>
 
         <% else %>
