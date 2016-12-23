@@ -23,6 +23,18 @@ textarea{
     outline: none;
   }
 }
+.carousel{
+  height: 100%;
+  .carousel-inner{
+    height: 100%;
+    .item{
+      height: 100%;
+      img,div{
+        height: 100%;
+      }
+    }
+  }
+}
 .ui.form input[type='text'].my_form,
 .ui.form input[type='number'].my_form,
 .ui.form input[type='email'].my_form,

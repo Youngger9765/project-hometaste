@@ -1,5 +1,5 @@
 $main_red: #E8212D;
-$main_black: #555;
+$main_black: #4A4A4A;
 $main_radius: 10px;
 $sub_radius: 5px !important;
 
@@ -58,4 +58,14 @@ $sub_radius: 5px !important;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.background_img_setting{
+  @include background_size_cover;
+  background-position: center;
+}
+.border_main_radius{
+  @include border_radius($main_radius);
+}
+.border_sub_radius{
+  @include border_radius($sub_radius);
 }

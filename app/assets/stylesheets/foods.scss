@@ -1,3 +1,6 @@
-// Place all the styles related to the foods controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.foods_show{
+  background-color: #F0F0F0;
+  .carousel-control.left,.carousel-control.right{
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}

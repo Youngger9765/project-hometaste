@@ -1,0 +1,35 @@
+.cloche_icon{
+  background-image:image-url('icon/cloche.svg');
+  @extend .background_img_setting;
+  display: inline-block;
+  margin-right: 5px;
+  font-size:10px;
+  width: 2.5em;
+  height: 1.5em;
+}
+.share_icon{
+  background-image:image-url('icon/share_icon.svg');
+  @extend .background_img_setting;
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 10px;
+  width: 2.4em;
+  height: 2em;
+  margin-bottom: -3px;
+}
+.minus_icon{
+  background-image:image-url('icon/minus_icon.svg');
+  @extend .background_img_setting;
+  display: inline-block;
+  font-size: 10px;
+  width: 5em;
+  height: 5em;
+}
+.add_icon{
+  background-image:image-url('icon/add_icon.svg');
+  @extend .background_img_setting;
+  display: inline-block;
+  font-size: 10px;
+  width: 5em;
+  height: 5em;
+}

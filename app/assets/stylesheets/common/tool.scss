@@ -1,28 +1,52 @@
-.ml10{
-  margin-left: 10px !important;
+.white{
+  color: #FFFFFF;
 }
-.mt60{
-  margin-top: 60px !important;
+.red{
+  color: $main_red;
 }
-.mb15{
-  margin-bottom: 15px !important;
+.black{
+  color: $main_black;
+}
+.gray{
+  color: #9B9B9B;
+}
+.lighter{
+  font-weight: lighter;
+}
+.normal{
+  font-weight: normal;
+}
+.background_red{
+  background-color: $main_red;
+}
+.background_white{
+  background-color: #FFFFFF;
+}
+.border_red{
+  border: 1px solid $main_red ;
+}
+.l_line:before{
+  @extend .red;
+  content:'|';
+  font-size:16px;
+  margin: 0 15px;
 }
 .ui.button.my_btn{
-  background-color: $main_red;
-  color: #FFFFFF;
+  @extend .background_red;
+  @extend .white;
+  @extend .border_main_radius;
+  @extend .border_red;
   font-weight: inherit;
-  border-radius: $main_radius;
   font-size:1em;
-  border: 1px solid $main_red ;
   padding: 0;
 }
 .ui.button.my_btn_reserve{
-  background-color: #FFFFFF;
-  color: $main_red;
+  @extend .background_white;
+  @extend .red;
+  @extend .border_main_radius;
+  @extend .border_red;
   font-weight: inherit;
-  border-radius: $main_radius;
   font-size:1em;
-  border: 1px solid $main_red ;
 }
 .square-icon {
   @include square-icon;
@@ -51,9 +75,6 @@
 }
 .bold{
   font-weight: bold;
-}
-.red{
-  color: $main_red;
 }
 .red_line{
   border-bottom: 1px solid $main_red;
@@ -88,12 +109,12 @@
   display: block;
   text-align: center;
   input {
-    background-color: $main_red;
-    color: #FFFFFF;
+    @extend .background_red;
+    @extend .white;
+    @extend .border_sub_radius;
+    @extend .border_red;
     font-weight: inherit;
-    @include border-radius($sub_radius);
     font-size: 1em;
-    border: 1px solid $main_red;
     width: 175px;
     height: 40px;
   }
@@ -103,8 +124,7 @@
   width: 100%;
   padding-top: 100%;
   overflow: hidden;
-  @include background_size_cover;
-  background-position: center;
+  @extend .background_img_setting;
   img{
     position: absolute;
     left: 0;
@@ -115,12 +135,7 @@
     height: 100%;
   }
 }
-.border_main_radius{
-  @include border_radius($main_radius);
-}
-.border_sub_radius{
-  @include border_radius($sub_radius);
-}
+
 
 .align_two_side{
   &:after,&:before{
@@ -159,19 +174,13 @@
   }
   .basic_bg{
     @include basic_bg(0,0);
-    width:calc(100% + 30px);
-    margin-left: -15px;
     margin-bottom: 15px;
   }
   .basic_bg_top{
     @include basic_bg(0,0);
-    width:calc(100% + 30px);
-    margin-left: -15px;
     margin-bottom: 15px;
   }
   .basic_bg_bottom{
     @include basic_bg(0,0);
-    width:calc(100% + 30px);
-    margin-left: -15px;
   }
 }
