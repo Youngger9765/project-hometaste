@@ -8,6 +8,10 @@
 		<%= form_for setup_chef(@chef), :url => chef_path(@chef) do |f| %>
 
 			<%= render :partial => 'form', :locals => { :f => f } %>
+			
+			<div class="row form_control col-md-12" id="chef-approve-btn">
+				<%= link_to "APPROVE", '', :class=>"btn btn-success btn-lg"%>
+			</div>
 
 		<% end %>
 	</div>

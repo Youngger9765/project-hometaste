@@ -89,7 +89,7 @@
 	    <div class="form-group col-md-6">
 
 				<% if @chef.restaurant.certificated_img.exists?%>
-					<%= image_tag(@chef.restaurant.certificated_img(:thumb))%>
+					<%= link_to image_tag(@chef.restaurant.certificated_img(:thumb)), @chef.restaurant.certificated_img.url%>
 				<%end%>
 
 		    <%=r.file_field :certificated_img%>
