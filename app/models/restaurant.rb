@@ -6,7 +6,7 @@ class Restaurant < ApplicationRecord
   has_one  :delivery
   has_many :bulk_buys
   has_many :big_buns
-  has_many :restaurant_dish_photos, dependent: :destroy
+  has_many :restaurant_dish_photos
 
   belongs_to :chef
 
@@ -110,8 +110,8 @@ class Restaurant < ApplicationRecord
   def self.filter_sort( _case )
     case _case[0]
     when 'BestMatch'        ; self
-    when 'Highest Rated'    ; order('food_comments.average_score desc')
-    when 'Most Reviewed'    ; joins(:food_comments).order('food_comments.size desc')
+    when 'Highest Rated'    ; order('food_avg_score desc')
+    when 'Most Reviewed'    ; joins(:food_comments).order('food_comments_count desc')
     when 'New'              ; order('updated_at desc')
     end
   end
@@ -125,6 +125,15 @@ class Restaurant < ApplicationRecord
       cuisine_ids = _cases.map {|x|  Cuisine.where('name like ?',x).ids}.flatten!
       ids = RestaurantCuisineShip.where(cuisine_id:cuisine_ids).pluck(:restaurant_id).uniq
       where(id: ids & self.ids )
+    end
+  end
+
+  def get_food_avg_score
+    food_ids = self.foods.pluck(:id)
+    if FoodComment.find_by(:food_id => food_ids)
+      FoodComment.where(:food_id => food_ids).average(:score)
+    else
+      0
     end
   end
 

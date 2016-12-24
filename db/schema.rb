@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219012911) do
+ActiveRecord::Schema.define(version: 20161223181641) do
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
@@ -79,21 +79,21 @@ ActiveRecord::Schema.define(version: 20161219012911) do
   end
 
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                                  default: "",    null: false
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.string   "name",                                   default: "",    null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.integer  "restaurant_id"
-    t.decimal  "price",         precision: 5, scale: 2
-    t.boolean  "is_public",                             default: false
+    t.decimal  "price",         precision: 10, scale: 2
+    t.boolean  "is_public",                              default: false
   end
 
   create_table "order_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "order_id"
     t.integer  "food_id"
-    t.decimal  "quantity",   precision: 5, scale: 2
-    t.decimal  "amount",     precision: 5, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "quantity",   precision: 10, scale: 2
+    t.decimal  "amount",     precision: 10, scale: 2
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -104,12 +104,12 @@ ActiveRecord::Schema.define(version: 20161219012911) do
     t.string   "shipping_method"
     t.text     "shipping_place",  limit: 65535
     t.string   "shipping_status"
-    t.decimal  "amount",                        precision: 5, scale: 2
+    t.decimal  "amount",                        precision: 10, scale: 2
     t.string   "payment_method"
-    t.string   "payment_status",                                        default: "pendeing", null: false
+    t.string   "payment_status",                                         default: "pendeing", null: false
     t.string   "order_status"
-    t.datetime "created_at",                                                                 null: false
-    t.datetime "updated_at",                                                                 null: false
+    t.datetime "created_at",                                                                  null: false
+    t.datetime "updated_at",                                                                  null: false
   end
 
   create_table "restaurant_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -171,12 +171,24 @@ ActiveRecord::Schema.define(version: 20161219012911) do
     t.string   "main_photo_content_type"
     t.integer  "main_photo_file_size"
     t.datetime "main_photo_updated_at"
+    t.integer  "food_comments_count",                         default: 0
+    t.float    "food_avg_score",                limit: 24,    default: 0.0
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
     t.index ["city"], name: "index_restaurants_on_city", using: :btree
     t.index ["is_approved"], name: "index_restaurants_on_is_approved", using: :btree
     t.index ["is_live"], name: "index_restaurants_on_is_live", using: :btree
     t.index ["state"], name: "index_restaurants_on_state", using: :btree
+  end
+
+  create_table "user_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -215,6 +227,9 @@ ActiveRecord::Schema.define(version: 20161219012911) do
     t.string   "google_name"
     t.string   "google_head_shot"
     t.boolean  "is_chef",                              default: false
+    t.string   "gender"
+    t.date     "birthday"
+    t.string   "ZIP"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["fb_uid"], name: "index_users_on_fb_uid", using: :btree

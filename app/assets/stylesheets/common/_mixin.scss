@@ -1,3 +1,10 @@
+$main_red:#EC1C24;
+$main_black:#4A4A4A;
+
+$main_radius: 10px;
+$sub_radius: 5px;
+
+
 @mixin flex{
   display: -webkit-box;
   display: -moz-box;
@@ -82,7 +89,7 @@
 }
 //---------- tool class ---------//
 
-@media (max-width: $sm-width) {
+@media (max-width: $screen-sm-max) {
   @mixin basic_bg($top,$bottom){
     border-top-left-radius: $top;
     border-top-right-radius: $top;
@@ -107,7 +114,7 @@
     margin-bottom: 0;
   }
 }
-@media (max-width: $xs-width) {
+@media (max-width: $screen-xs-max) {
   @mixin basic_bg($top,$bottom){
     border-top-left-radius: $top;
     border-top-right-radius: $top;

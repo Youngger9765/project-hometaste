@@ -228,7 +228,7 @@ hr{
 .cards .ui.fluid.card{
   //overflow: hidden;
   display: none;
-  border-radius: $card_radius;
+  border-radius: $main_radius;
   p {
     font-weight: 500;
   }
@@ -251,7 +251,7 @@ hr{
     color: $main_red;
   }
 }
-@media (max-width: $xs-width) {
+@media (max-width: $screen-xs-max) {
   .padding_right_7_xs{
     padding-right: 7px;
   }
@@ -259,19 +259,19 @@ hr{
     padding-left: 7px;
   }
 }
-@media (min-width: $xs-width) {
+@media (min-width: $screen-xs-min) {
   .nav.navbar-nav{
     float: right;
   }
 }
-@media (min-width: $sm-width){
+@media (min-width: $screen-sm-min){
   .footer{
     .col-md-3:nth-child(1){
       margin-left:12.5%;
     }
   }
 }
-@media (max-width: $sm-width){
+@media (max-width: $screen-sm-max){
   h2{
     margin:0 5px;
     font-size: 18px;

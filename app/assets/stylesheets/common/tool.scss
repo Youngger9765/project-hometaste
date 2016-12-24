@@ -1,40 +1,72 @@
-.ui.button.my_btn{
-  background-color: $main_red;
+.white{
   color: #FFFFFF;
-  font-weight: inherit;
-  border-radius: $main_radius;
-  font-size:1em;
+}
+.red{
+  color: $main_red;
+}
+.black{
+  color: $main_black;
+}
+.gray{
+  color: #9B9B9B;
+}
+.lighter{
+  font-weight: lighter;
+}
+.normal{
+  font-weight: normal;
+}
+.background_red{
+  background-color: $main_red;
+}
+.background_white{
+  background-color: #FFFFFF;
+}
+.border_red{
   border: 1px solid $main_red ;
+}
+.sub_link{
+  color: #003470;
+  text-decoration: underline;
+}
+.vertical_align{
+  vertical-align: middle;
+}
+.l_line:before{
+  @extend .red;
+  content:'|';
+  font-size:16px;
+  margin: 0 15px;
+}
+.cursor_point{
+  cursor: pointer;
+}
+.background_img_setting{
+  @include background_size_cover;
+  background-position: center;
+}
+.border_main_radius{
+  @include border_radius($main_radius);
+}
+.border_sub_radius{
+  @include border_radius($sub_radius);
+}
+.ui.button.my_btn{
+  @extend .background_red;
+  @extend .white;
+  @extend .border_sub_radius;
+  @extend .border_red;
+  font-weight: inherit;
+  font-size:1em;
+  padding: 0;
 }
 .ui.button.my_btn_reserve{
-  background-color: #FFFFFF;
-  color: $main_red;
+  @extend .background_white;
+  @extend .red;
+  @extend .border_sub_radius;
+  @extend .border_red;
   font-weight: inherit;
-  border-radius: $main_radius;
   font-size:1em;
-  border: 1px solid $main_red ;
-}
-img[name='cart']{
-  height: auto;
-  width: 35px;
-  padding-bottom: 3px;
-  margin: 0 auto;
-}
-img[name='cart_white']{
-  height: auto;
-  width: 35px;
-  padding-bottom: 7px;
-  margin: 0 auto;
-}
-img[name='moto']{
-  height: auto;
-  width: 40px;
-  padding-bottom: 7px;
-  margin: 0 auto;
-}
-img[name='cert']{
-  height: 45px;
-  width: auto;
 }
 .square-icon {
   @include square-icon;
@@ -42,6 +74,12 @@ img[name='cert']{
 .flex{
   display: flex;
   display : -webkit-flex;
+}
+.flex_space_around{
+  @include flex_(center,space-around);
+}
+.flex_space_between{
+  @include flex_(center,space-between);
 }
 .flex_center_start{
   @include flex_(center,flex-start);
@@ -64,28 +102,114 @@ img[name='cert']{
 .bold{
   font-weight: bold;
 }
-.red{
-  color: $main_red;
+.red_line{
+  border-bottom: 1px solid $main_red;
+  width: 100%;
+  margin:15px 0;
+  display: block;
 }
-.under_line{
-  border-bottom: 1px solid $main_black;
+.gray{
+  color: #D4D5D6;
+}
+.gray_line{
+  border-bottom: 1px solid #D4D5D6;
+  width: 100%;
+  margin:15px 0;
+  display: block;
 }
 .absolute_center{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
-.load_more{
+.dib{
+  display: inline-block;
+}
+
+//----------------load more -----------------
+//<div class="load_moer">
+//<input type="button" value="Load more">
+//</div>
+
+.load_more {
   display: block;
   text-align: center;
-  input{
-    background-color: $main_red;
-    color: #FFFFFF;
+  input {
+    @extend .background_red;
+    @extend .white;
+    @extend .border_sub_radius;
+    @extend .border_red;
     font-weight: inherit;
-    @include border-radius($card_radius);
-    font-size:1em;
-    border: 1px solid $main_red ;
+    font-size: 1em;
     width: 175px;
     height: 40px;
+  }
+}
+.square_img{
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  @extend .background_img_setting;
+  img{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+.align_two_side{
+  &:after,&:before{
+    content:' ';
+    display: table;
+  }
+  &:after{
+    clear: both;
+  }
+  &>:first-child{
+    float: left;
+  }
+  &>:last-child{
+    float: right;
+  }
+}
+@media (max-width: $screen-sm-max) {
+  .basic_bg{
+    @include basic_bg(10px,10px);
+    margin-bottom: 15px;
+  }
+  .basic_bg_top{
+    @include basic_bg(0,10px);
+    margin-bottom: 15px;
+  }
+  .basic_bg_bottom{
+    @include basic_bg(10px,0);
+  }
+}
+@media (max-width: $screen-xs-max ){
+  .align_two_side{
+    & > :last-child,& > :first-child{
+      float: inherit;
+      display: block;
+    }
+  }
+  .basic_bg{
+    @include basic_bg(0,0);
+    margin-bottom: 15px;
+    padding: 30px 20px;
+  }
+  .basic_bg_top{
+    @include basic_bg(0,0);
+    margin-bottom: 15px;
+    padding: 30px 20px;
+  }
+  .basic_bg_bottom{
+    @include basic_bg(0,0);
+    padding: 30px 20px;
   }
 }

@@ -6,7 +6,7 @@ class Admin::RestaurantsController < ApplicationController
 	before_action :find_restaurant, :only =>[:show, :update, :destroy]
 
 	def index
-		@restaurants = Restaurant.all
+		@restaurants = Restaurant.page(params[:page]).per(5)
 	end
 
 	def show

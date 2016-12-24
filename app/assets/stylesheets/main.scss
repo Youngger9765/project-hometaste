@@ -1,3 +1,6 @@
+body.main_index{
+  background-color: #FFFFFF;
+}
 .main_index{
   .banner {
     min-height: 400px;
@@ -358,7 +361,15 @@
     color: #3A618D;
   }
 }
-@media (max-width: $xs-width){
+.load_more {
+  min-height: 30px;
+  margin-top: 30px;
+  button.ui.button.my_btn {
+    width: 175px;
+    height: 40px;
+  }
+}
+@media (max-width: $screen-xs-max){
   .filters{
     margin-top:0;
     margin-bottom: -10px;
@@ -437,7 +448,7 @@
     }
   }
 }
-@media (min-width: $xs-width){
+@media (min-width: $screen-xs-max){
   .filters{
     height: 50px;
     .clearfix::before,
@@ -458,7 +469,7 @@
     }
   }
 }
-@media (min-width: 992px){
+@media (min-width: $screen-md-min){
   .filters{
     div[data-tooltip="Filter"]{
       margin-left: -440px;

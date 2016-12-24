@@ -1,0 +1,109 @@
+.navbar{
+  background-color: $main_red;
+  border:0;
+  a{
+    color: #fff !important;
+    font-weight: 500;
+  }
+  span{
+    color: #FFFFFF;
+    font-size: 10px;
+    margin-right: 10px;
+  }
+  .nav.navbar-nav li > a{
+    line-height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: inline-block;
+  }
+  li,a{
+    cursor: pointer;
+  }
+  .navbar-brand{
+    font-family:"Times New Roman";
+    img{
+      float: left;
+      height: 50px;
+      background-color: #FFFFFF;
+      margin-top: -15px;
+      padding: 4px 8px 0 10px;
+      margin-right: 10px;
+    }
+  }
+  .navbar-toggle{
+    padding-right: 0;
+  }
+  &.navbar-default .navbar-toggle .icon-bar{
+    background-color: #FFFFFF;
+  }
+  &.navbar-default .navbar-toggle:hover{
+    background-color: #FFFFFF;
+    .icon-bar{
+      background-color: $main_red;
+    }
+  }
+  .dropdown.hidden-xs.open > a{
+    background-color: $main_red;
+  }
+  .dropdown-menu{
+    right:0;
+    left:inherit;
+    overflow: hidden;
+    background-color: $main_red;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 0;
+    li{
+      border-top: 1px solid white;
+      &:hover{
+        background-color: #FFFFFF;
+        a{
+          color: $main_red !important;
+        }
+      }
+      a{
+        display: block !important;
+      }
+    }
+    li:first-child{
+      border:none;
+    }
+  }
+}
+@media (min-width: $screen-sm-min) {
+  .nav.navbar-nav{
+    float: right;
+  }
+}
+@media (max-width: $screen-xs-max) {
+  nav.navbar{
+    background-color: transparent;
+    .navbar-nav{
+      margin-top: -1px;
+      margin-bottom: 0;
+    }
+  }
+  .navbar-header{
+    background-color: $main_red;
+  }
+  .navbar .nav.navbar-nav li > a{
+    display: block;
+    font-weight: normal;
+  }
+  .navbar-collapse{
+    background-color: $main_red;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 180px;
+    float: right;
+    li{
+      border-top: 1px solid white;
+      &:hover{
+        background-color: #FFFFFF;
+        a{
+          color: $main_red !important;
+        }
+      }
+    }
+  }
+}

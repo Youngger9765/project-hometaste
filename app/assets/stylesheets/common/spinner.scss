@@ -1,0 +1,36 @@
+.ui.form .count_spinner{
+  .product_spineer_button{
+    background-color: transparent;
+    img{
+      width: 20px;
+    }
+  }
+  .buttons{
+    margin-left: -10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  input{
+    border:none;
+    width: 100px;
+    text-align: center;
+    padding: 0 10px;
+    font-size: 20px;
+  }
+}
+@media (max-width: $screen-sm-max){
+  .ui.form .count_spinner{
+    .buttons{
+      margin-left: -10px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      img{
+        width: 15px;
+      }
+    }
+    input{
+      font-size: 14px;
+    }
+  }
+}

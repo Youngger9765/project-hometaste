@@ -3,8 +3,8 @@ $(document).ready ->
     min = 1
     max = 500
     step = 1
-    console.log(5)
     product_item_input = $(this).closest('.product_item').find('#txtNum')
+    console.log(product_item_input.val());
     val = product_item_input.val().trim();
     num = if val isnt '' then parseInt(val) else 0
     switch command

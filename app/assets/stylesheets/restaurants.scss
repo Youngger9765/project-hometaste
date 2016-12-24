@@ -234,12 +234,12 @@
       }
     }
   }
-  @media (min-width: 992px) and (max-width: 1200px) {
+  @media (min-width: $screen-lg-min) {
     .banner{
       h4[name='total_orders']{ padding-right: 35px; }
     }
   }
-  @media (max-width: 992px) {
+  @media (max-width: $screen-sm-max) {
     .banner{
       height: 270px;
       h4[name='total_orders']{ padding-right: 85px;}
@@ -361,7 +361,7 @@
       }
     }
   }
-  @media (max-width: $xs-width){
+  @media (max-width: $screen-xs-max){
     .banner{
       height: 190px;
       h4[name='total_orders']{

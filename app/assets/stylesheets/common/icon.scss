@@ -1,0 +1,125 @@
+.cloche_icon{
+  background-image:image-url('icon/cloche.svg');
+  @extend .background_img_setting;
+  display: inline-block;
+  margin-right: 5px;
+  font-size:10px;
+  width: 1em;
+  height: 0.55em;
+}
+@mixin share_icon($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="22px" height="19px" viewBox="0 0 22 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>share icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-648.000000, -1540.000000)" fill="#{$color}">
+            <g id="you-may-also-want" transform="translate(62.000000, 1158.000000)">
+                <g id="icon" transform="translate(541.000000, 382.000000)">
+                    <g id="share-icon" transform="translate(45.039080, 0.000000)">
+                        <polygon id="Fill-1" points="0 0.600658388 0 18.5017104 17.6575488 18.5017104 17.6575488 11.7137276 16.2354643 11.7137276 16.2354643 17.060015 1.42208446 17.060015 1.42208446 2.04235386 11.3766757 2.04235386 11.3766757 0.600658388"></polygon>
+                        <path d="M21.0349994,4.14487447 L14.7541263,0 L14.7541263,2.20194954 C12.4489274,2.97109408 5.84429312,6.0546404 7.16967584,15.8586501 C7.16967584,15.8586501 8.58322779,7.70634284 14.7541263,7.07175655 L14.7541263,9.13073796 L21.0349994,4.14487447 Z" id="Fill-2"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .background_img_setting;
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 10px;
+  width: 1em;
+  height: 0.9em;
+  margin-bottom: -3px;
+}
+.share_icon_white{
+  @include share_icon(white);
+}
+.share_icon_red{
+  @include share_icon($main_red);
+}
+@mixin minus_icon($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>48px minus</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Desktop" transform="translate(-603.000000, -1339.000000)" stroke="#{$color}">
+            <g id="you-may-also-want" transform="translate(62.000000, 1158.000000)">
+                <g id="48px-minus" transform="translate(541.000000, 181.000000)">
+                    <path d="M48.9382916,24.9385693 C48.9382916,38.1940674 38.1937896,48.9385693 24.9402321,48.9385693 C11.6827935,48.9385693 0.938291575,38.1940674 0.938291575,24.9385693 C0.938291575,11.6830713 11.6827935,0.938569342 24.9402321,0.938569342 C38.1937896,0.938569342 48.9382916,11.6830713 48.9382916,24.9385693 L48.9382916,24.9385693 Z" id="Stroke-1"></path>
+                    <path d="M10.6556015,24 L37.6153084,24" id="Stroke-3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .background_img_setting;
+  display: inline-block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+}
+.minus_icon_black{
+  @include minus_icon(black);
+}
+.minus_icon_white{
+  @include minus_icon(white);
+}
+@mixin add_icon($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>48px add</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Desktop" transform="translate(-806.000000, -1339.000000)" stroke="#{$color}">
+            <g id="you-may-also-want" transform="translate(62.000000, 1158.000000)">
+                <g id="48px-add" transform="translate(744.000000, 181.000000)">
+                    <path d="M48.9382916,24.9385693 C48.9382916,38.1940674 38.1937896,48.9385693 24.9402321,48.9385693 C11.6827935,48.9385693 0.938291575,38.1940674 0.938291575,24.9385693 C0.938291575,11.6830713 11.6827935,0.938569342 24.9402321,0.938569342 C38.1937896,0.938569342 48.9382916,11.6830713 48.9382916,24.9385693 L48.9382916,24.9385693 Z" id="Stroke-1"></path>
+                    <path d="M10.6556015,24 L37.6153084,24" id="Stroke-3"></path>
+                    <path d="M24,10.6611418 L24,37.6396147" id="Stroke-5"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .background_img_setting;
+  display: inline-block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+}
+.add_icon_black{
+  @include add_icon(black);
+}
+.add_icon_white{
+  @include add_icon(white);
+}
+@mixin cart($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="35px" height="28px" viewBox="0 0 35 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>35x28px checkout icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-656.000000, -2284.000000)" fill="#{$color}">
+            <g id="1440x60px-check-out-bar" transform="translate(0.000000, 2267.000000)">
+                <path d="M687.388356,36.3847752 C687.712499,36.3847752 687.999504,36.1679114 688.083062,35.8520359 L690.974104,25.0814014 C691.080267,24.7009879 690.850179,24.30454 690.463872,24.2039248 C690.07797,24.1049131 689.681975,24.329794 689.581059,24.7134144 L689.163267,26.2699433 L662.103247,22.7824849 L661.783546,19.0893867 C661.755289,18.8051789 661.565163,18.5630611 661.289057,18.4704631 L656.952899,17.0361957 C656.568207,16.9123308 656.162928,17.116768 656.038196,17.4907679 C655.909831,17.8651686 656.115699,18.2720387 656.495547,18.3979079 L660.384043,19.6854615 L661.72784,35.056735 C660.508775,35.3926534 659.616274,36.5042307 659.616274,37.8218486 C659.616274,39.0336401 660.388887,40.1215668 661.538118,40.5276353 C661.755289,40.6025956 661.976901,40.6422804 662.199723,40.6675344 C661.941782,41.0964517 661.783546,41.5903079 661.783546,42.1278575 C661.783546,43.7124464 663.081325,45 664.679027,45 C666.269867,45 667.566436,43.7124464 667.566436,42.1278575 C667.566436,41.6031354 667.414658,41.1172963 667.166001,40.693991 L680.558362,40.693991 C680.308494,41.1172963 680.154698,41.6031354 680.154698,42.1278575 C680.154698,43.7124464 681.454496,45 683.050583,45 C684.644652,45 685.937992,43.7124464 685.937992,42.1278575 C685.937992,41.6031354 685.786214,41.1172963 685.537153,40.693991 L687.388356,40.693991 C687.784351,40.693991 688.110108,40.3717018 688.110108,39.9756548 C688.110108,39.5764009 687.784351,39.2573185 687.388356,39.2573185 L662.506911,39.2573185 C662.340602,39.2573185 662.180751,39.2272542 662.022515,39.1755436 C661.449312,38.9711064 661.059776,38.4287465 661.059776,37.8218486 C661.059776,37.0277503 661.710482,36.3847752 662.506911,36.3847752 L687.388356,36.3847752 Z" id="35x28px-checkout-icon"></path>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .background_img_setting;
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 10px;
+  width: 1em;
+  height: 0.9em;
+  margin-bottom: -3px;
+}
+.cart_white{
+  @include cart(white);
+}
+.cart_red{
+  @include cart($main_red);
+}

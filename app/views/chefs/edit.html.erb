@@ -1,0 +1,103 @@
+<div class="container chef-container center">
+	<div class="row col-md-offset-1">
+		<h3>
+			<%=link_to "HOME", root_path%><span> > <%=params[:action]%></span>
+		</h3>
+	</div>
+	<div class="row">
+		<div class="row container chef-sub-container center">
+			<div class="form_control col-md-12">
+		    <label class="center">Notice</label>
+		    <p>
+		    	restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......restaurant notice.......
+		    </p>
+	    </div>
+		</div>
+
+		<%= form_for setup_chef(@chef), :url => chef_path(@chef) do |f| %>
+
+			<%= render :partial => 'form', :locals => { :f => f } %>
+
+			<div class="form_control col-md-12" id="chef-submit-div">
+				<bottum id="chef-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>
+		    <%= f.submit "SUBMIT",:class=>"btn btn-success center hidden", :id=>"chef-submit-btn"%>
+		  </div>
+		<% end %>
+	</div>
+</div>
+
+
+<script>
+	$("#chef-submit-check-btn").click(function(){
+		var check_submit = true;
+		check_submit = check_submit & check_chef_password();
+		check_submit = check_submit & check_certificated();
+
+		if (check_submit) {
+			$('#chef-submit-btn').click();
+		}
+	});
+
+	var check_chef_password = function(){
+		var password = $("input#chef_user_attributes_password").val();
+		var confirm_password = $("input#confirm_password").val();
+		if (password && confirm_password && password == confirm_password){
+			return true;
+		} else {
+			alert('Please check password!')
+			return false;
+		};
+	}
+
+	var check_certificated = function(){
+		var checked = $("#certificated_check").prop('checked');
+		if (checked) {
+			return true;
+		} else {
+			alert('Please check certified!')
+			return false;
+		}
+	}
+
+	$('#bulk-buy-form').hide();
+	$('#delivery-form').hide();
+
+	$('#both_bulk_buy_delivery').click(function(){
+		var checked_both = $('#both_bulk_buy_delivery').prop("checked");
+		if (checked_both) {
+			$('#bulk_buy_only').prop("checked",true);
+			$('#delivery_only').prop("checked",true);
+			$('#bulk-buy-form').show();
+			$('#delivery-form').show();
+		}else{
+			$('#bulk_buy_only').prop("checked",false);
+			$('#delivery_only').prop("checked",false);
+			$('#bulk-buy-form').hide();
+			$('#delivery-form').hide();
+		}
+	});
+
+	$('#bulk_buy_only').change(function(){
+		var checked = $('#bulk_buy_only').prop("checked");
+		if (checked) {
+			$('#bulk-buy-form').show();
+		} else {
+			$('#bulk-buy-form').hide();
+		}
+	});
+
+	$('#delivery_only').change(function(){
+		var checked = $('#delivery_only').prop("checked");
+		if (checked) {
+			$('#delivery-form').show();
+		} else {
+			$('#delivery-form').hide();
+		}
+	});
+
+
+</script>
+
+
+
+
