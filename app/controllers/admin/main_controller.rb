@@ -5,26 +5,29 @@ class Admin::MainController < ApplicationController
   before_action :user_admin?
 
 	def index
+		@last_year = Order.order("created_at").last.created_at.year
+		@first_year = Order.order("created_at").first.created_at.year
+		@order_filter = Order.new
+		@orders = Order.all
 
-		@restaurant_search = Restaurant.new
-		@user_search = User.new
+		if params[:order]
+			# filter by year
+			if params[:order][:year_filter] != "select year"
 
-		if params[:restaurant]
-			@restaurant_search= Restaurant.new(:name => params[:restaurant][:name])
-			restaurant_ids = Restaurant.where('name LIKE ?', "%#{params[:restaurant][:name]}%").pluck(:id)
-			@q = Order.where(:restaurant_id => restaurant_ids).ransack(params[:q])
-		elsif params[:user]
-			@user_search = User.new(:foodie_id => params[:user][:foodie_id])
-			user_ids = User.where('foodie_id LIKE ?', "%#{params[:user][:foodie_id]}%").pluck(:id)
-			@q = Order.where(:user_id => user_ids).ransack(params[:q])
-		else
-			@q = Order.ransack(params[:q])
+				# specific year
+				if params[:order][:year_filter] != "all"
+					select_year = params[:order][:year_filter].to_i
+					@orders = Order.where('extract(year  from created_at) = ?', select_year)
 
+					# filter by specific month
+					if params[:order][:month_filter] != "select month"
+							select_month = params[:order][:month_filter].to_i
+							@orders = @orders.where('extract(month  from created_at) = ?', select_month)
+					end
+
+				end
+			end
 		end
-    @orders = @q.result(distinct: true)
-    @orders = @orders.page(params[:page]).per(5)
-
-
 	end
 
 	def destroy
