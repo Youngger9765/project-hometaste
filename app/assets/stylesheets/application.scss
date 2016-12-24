@@ -14,26 +14,10 @@
  *= require semantic_ui/semantic_ui
  */
 
-
-@import "bootstrap-sprockets";
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
-@import "bootstrap/normalize";
-@import "bootstrap/print";
-@import "bootstrap/forms";
-@import "bootstrap/scaffolding";
-@import "bootstrap/type";
-@import "bootstrap/grid";
-@import "bootstrap/component-animations";
-@import "bootstrap/dropdowns";
-@import "bootstrap/navs";
-@import "bootstrap/navbar";
-@import "bootstrap/carousel";
-@import "bootstrap/utilities";
-@import "bootstrap/responsive-utilities";
-
+@import "bootstrap";
 @import "common/*";
 @import "admin/*";
+@import "library/*";
 
 @import "main";
 @import "chefs";

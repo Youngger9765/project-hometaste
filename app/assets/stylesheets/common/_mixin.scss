@@ -1,7 +1,7 @@
 $main_red: #E8212D;
 $main_black: #4A4A4A;
 $main_radius: 10px;
-$sub_radius: 5px !important;
+$sub_radius: 5px;
 
 @mixin square-icon($pixel: 40px){
   font-size:$pixel / 2;

@@ -1,11 +1,11 @@
 <div class="ui form product_item">
   <div class="count_spinner">
     <div class="ui mini buttons">
-      <%= button_tag type:"button", class:"ui icon button product_spineer_button pr60", command:"Down" do  %>
+      <%= button_tag type:"button", class:"ui icon button product_spineer_button", command:"Down" do  %>
           <i class="minus_icon_black"></i>
       <% end %>
       <%= text_field_tag :qty ,qty, id:"txtNum", min:"1", readonly: true %>
-      <%= button_tag type:"button", class:"ui icon button product_spineer_button pl60", command:"Up" do  %>
+      <%= button_tag type:"button", class:"ui icon button product_spineer_button", command:"Up" do  %>
           <i class="add_icon_black"></i>
       <% end %>
     </div>

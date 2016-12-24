@@ -38,6 +38,9 @@
   font-size:16px;
   margin: 0 15px;
 }
+.cursor_point{
+  cursor: pointer;
+}
 .background_img_setting{
   @include background_size_cover;
   background-position: center;
@@ -51,7 +54,7 @@
 .ui.button.my_btn{
   @extend .background_red;
   @extend .white;
-  @extend .border_main_radius;
+  @extend .border_sub_radius;
   @extend .border_red;
   font-weight: inherit;
   font-size:1em;
@@ -60,7 +63,7 @@
 .ui.button.my_btn_reserve{
   @extend .background_white;
   @extend .red;
-  @extend .border_main_radius;
+  @extend .border_sub_radius;
   @extend .border_red;
   font-weight: inherit;
   font-size:1em;
