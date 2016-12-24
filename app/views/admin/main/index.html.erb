@@ -77,3 +77,14 @@
     </div>
   </div>
 </div>
+
+<script>
+    $("#order_month_filter").hide();
+    $("#order_year_filter").change(function(){
+      $("#order_month_filter").hide();
+      if ( $("#order_year_filter").val() != "select year" && $("#order_year_filter").val() != "all") {
+        $("#order_month_filter").show();
+      }
+    });
+</script>
+
