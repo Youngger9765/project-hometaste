@@ -87,6 +87,11 @@
 		    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
 	    </div>
 	    <div class="form-group col-md-6">
+
+				<% if @chef.restaurant.certificated_img.exists?%>
+					<%= image_tag(@chef.restaurant.certificated_img(:thumb))%>
+				<%end%>
+
 		    <%=r.file_field :certificated_img%>
 			</div>
 		<%end%>
@@ -260,6 +265,9 @@
 			<%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
 				<div class="form-group col-md-4 restaurant-dish-photo-div">
 					<div class="restaurant-dish-photo">
+						<% if @chef.restaurant.restaurant_dish_photos[photo.index].id?%>
+							<%= image_tag(@chef.restaurant.restaurant_dish_photos[photo.index].photo(:thumb))%>
+						<%end%>
 						<%= photo.file_field :photo %>
 					</div>
 				    <%= photo.text_area :comment, :placeholder => "dish photo comment" %>

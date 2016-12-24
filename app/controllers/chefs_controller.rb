@@ -72,7 +72,12 @@ class ChefsController < ApplicationController
 	end
 
 	def update
-		@chef.update(chef_params)
+		if @chef.update(chef_params)
+			redirect_to chef_path(@chef)
+		else
+			flash[:alert] = "update fail"
+			render :action => :edit
+		end
 	end
 
 	def review
