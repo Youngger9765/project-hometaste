@@ -4,12 +4,20 @@
       <div class="col-md-12">
         <div id="custom-search-input">
           <div class="input-group col-md-12">
-            <input type="text" class="form-control input-lg" placeholder="Search" />
-            <span class="input-group-btn">
-              <button class="btn btn-info btn-lg" type="button">
-                <i class="fa fa-search"></i>
-              </button>
-            </span>
+            <%= form_for @restaurant_search, url: admin_main_index_path, :method => :get do |f| %>
+              <%= f.label :name,"Restaurant Name" %>
+              <%= f.search_field :name %>
+
+              <%= f.submit "Search"%>
+            <% end %>
+          </div>
+          <div class="input-group col-md-12">
+            <%= form_for @user_search, url: admin_main_index_path, :method => :get do |f| %>
+              <%= f.label :foodie_id,"foodie_id"  %>
+              <%= f.search_field :foodie_id %>
+
+              <%= f.submit "Search"%>
+            <% end %>
           </div>
         </div>
       </div>
@@ -22,7 +30,7 @@
               <th>Restaurant Name</th>
               <th>User foodie_id</th>
               <th>Total Acount</th>
-              <th>created at</th>
+              <th><%= sort_link(@q, :created_at, 'created at') %></th>
               <th>status</th>
             </tr>
           </thead>

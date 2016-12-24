@@ -33,8 +33,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'ransack'
 gem "nested_form"
 gem "kaminari"
-gem 'bootswatch-rails', '0.5.0'
-gem 'kaminari-bootstrap', '~> 0.1.3'
 
 # register
 gem 'devise'
