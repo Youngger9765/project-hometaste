@@ -1,0 +1,152 @@
+<div class="col-xs-12 banner" style="background-image:url(<%= image_path('tmp/kitchen_1.png') %>);"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 basic_bg_top">
+      <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+          <div class="square_img border_main_radius mb0" style="background-image: url(<%= image_path('tmp/kitchen.png') %>)"></div>
+        </div>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+          <div class="align_two_side">
+            <h3 class="title pull-left bold mt15">Mr.chan kitchen</h3>
+            <button class="ui button my_btn pull-right hidden-xs hidden-sm" name="menu_btn">MENU<i class="fa fa-caret-right ml10" aria-hidden="true"></i></button>
+          </div>
+          <div>
+            <div class="show_rated_3">
+            </div>
+            <span>200 reviews</span>
+          </div>
+          <div class="visible-xs visible-sm menu_btn">
+            <button class="ui button my_btn" name="menu_btn">MENU<i class="fa fa-caret-right ml10" aria-hidden="true"></i></button>
+          </div>
+          <% content_for :top_reviews do %>
+              <i class="red_line" name="top_bg_line"></i>
+              <div class="align_two_side">
+                <h3 class="dib">Summery :</h3>
+                <div class="show_rated_3"></div>
+              </div>
+              <div class="align_two_side">
+                <h3 class="dib">Taste :</h3>
+                <div class="show_rated_3"></div>
+              </div>
+              <div class="align_two_side">
+                <h3 class="dib">Value :</h3>
+                <div class="show_rated_3"></div>
+              </div>
+              <div class="align_two_side">
+                <h3 class="dib">On time pick up/develiery :</h3>
+                <div class="show_rated_3"></div>
+              </div>
+          <% end %>
+          <div class="hidden-xs hidden-sm">
+            <%= content_for :top_reviews %>
+          </div>
+        </div>
+      </div>
+      <div class="row visible-xs visible-sm">
+        <div class="col-xs-12">
+          <%= content_for :top_reviews %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form action="">
+      <div class="col-xs-12 basic_bg">
+        <h3 class="title text-center bold mb15">Leave a comment</h3>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-md-2 col-sm-3 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+                <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
+              </div>
+              <div class="col-md-10 col-sm-9 col-xs-12">
+                <div class="">
+                  <h3 class="dib">Tag a dish :</h3>
+                  <div class="ui selection dropdown hometaste_dropdown">
+                    <input type="hidden" name="gender">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">Gender</div>
+                    <div class="menu">
+                      <div class="item" data-value="1">Male</div>
+                      <div class="item" data-value="0">Female</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="align_two_side">
+                  <h3 class="dib">Taste :</h3>
+                  <div class="ui star rating" data-rating="0"></div>
+                </div>
+                <div class="align_two_side">
+                  <h3 class="dib">Value :</h3>
+                  <div class="ui star rating" data-rating="0"></div>
+                </div>
+                <div class="align_two_side">
+                  <h3 class="dib">On time pick up/develiery :</h3>
+                  <div class="ui star rating" data-rating="0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <textarea name="" id="" cols="30" rows="10" placeholder="Leave your comment here..."></textarea>
+        </div>
+        <div class="text-center">
+          <input type="submit" class="ui button my_btn" value="Submit">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 basic_bg">
+      <h3 class="title text-center bold mb15">Reviews</h3>
+      <div class="row">
+        <div class="col-md-2 col-sm-3">
+          <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
+          <h5 class="text-center">Rostad Ducj</h5>
+        </div>
+        <div class="col-md-2 col-sm-3">
+          <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
+          <h5 class="text-center">Shiba iny</h5>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <div class="align_two_side">
+            <h3 class="dib">Summery :</h3>
+            <div class="show_rated_3"></div>
+          </div>
+          <div class="align_two_side">
+            <h3 class="dib">Taste :</h3>
+            <div class="show_rated_3"></div>
+          </div>
+          <div class="align_two_side">
+            <h3 class="dib">Value :</h3>
+            <div class="show_rated_3"></div>
+          </div>
+          <div class="align_two_side">
+            <h3 class="dib">On time pick up/develiery :</h3>
+            <div class="show_rated_3"></div>
+          </div>
+        </div>
+        <div class="col-md-10 col-md-offset-2 col-xs-12">
+          <i class="gray_line"></i>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
+          <span class="pull-right gray">2016/12/11</span>
+        </div>
+        <div class="col-md-10 col-md-offset-2 col-xs-12">
+          <i class="gray_line"></i>
+          <h5 class="red bold">Reply</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
+          <span class="pull-right gray">2016/12/11</span>
+        </div>
+      </div>
+      <i class="red_line"></i>
+    </div>
+  </div>
+  <div class="load_more">
+    <input type="button" value="Load more">
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $('.ui.rating').rating({initialRating: 0, maxRating: 5});
+</script>

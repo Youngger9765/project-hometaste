@@ -70,12 +70,12 @@
     }
   }
 }
-@media (min-width: $xs-width) {
+@media (min-width: $screen-sm-min) {
   .nav.navbar-nav{
     float: right;
   }
 }
-@media (max-width: $xs-width) {
+@media (max-width: $screen-xs-max) {
   nav.navbar{
     background-color: transparent;
     .navbar-nav{

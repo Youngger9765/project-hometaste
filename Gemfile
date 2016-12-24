@@ -54,7 +54,6 @@ gem "paperclip", "~> 4.3"
 # google map
 gem 'gmaps4rails'
 gem 'geocoder'
-
 gem 'faker'
 
 # Use Capistrano for deployment

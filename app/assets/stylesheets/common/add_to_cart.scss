@@ -1,0 +1,40 @@
+.add_to_cart{
+  height: 60px;
+ @extend .background_red;
+ @extend .white;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  text-align: center;
+  h3{
+    margin: 0;
+    line-height: 60px;
+  }
+  i{
+    margin-right: 10px;
+  }
+  i,button{
+    font-size: 24px;
+  }
+  button{
+    background-color: transparent;
+    position: absolute;
+    font-size: 24px;
+    border: 1px solid white;
+    padding: 13px;
+    right: 70px;
+    border-top: none;
+  }
+}
+@media (max-width: $screen-xs-max){
+  .add_to_cart{
+    text-align: left;
+    h3{
+      margin-left: 15px;
+    }
+    button{
+      right: 0;
+    }
+  }
+}

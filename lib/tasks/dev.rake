@@ -167,7 +167,14 @@ namespace :dev do
 			order.amount = quantity * price
 			order.save!
     }
-  end
+
+		puts('create restaurant_cuisine_ships')
+		1000.times{
+      Cuisine.all.sample.restaurant_cuisine_ships
+          .create(restaurant_id:Restaurant.all.sample.id)
+    }
+
+	end
 
   task :count_order_amount => :environment do
 
