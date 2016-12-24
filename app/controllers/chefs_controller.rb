@@ -1,8 +1,9 @@
 class ChefsController < ApplicationController
 
-	before_action :find_chef, :only =>[:show, :edit, :update, :review]
-	before_action :find_user, :only =>[:show, :edit, :update, :review]
+	before_action :find_chef, :only =>[:show, :edit, :update, :review, :approve]
+	before_action :find_user, :only =>[:show, :edit, :update, :review, :approve]
 	before_action :has_authourity?, :except => [:new]
+	before_action :user_admin?, :only =>[:approve]
 
 	def new
 		@user = User.new
@@ -72,11 +73,26 @@ class ChefsController < ApplicationController
 	end
 
 	def update
-		@chef.update(chef_params)
+		if @chef.update!(chef_params)
+			redirect_to chef_path(@chef)
+		else
+			flash[:alert] = "update fail"
+			render :action => :edit
+		end
 	end
 
 	def review
 		
+	end
+
+	def approve
+		@restaurant = @chef.restaurant
+		if @restaurant.update(:is_approved => true)
+			redirect_to chef_path(@chef)
+		else
+			flash[:alert] = "approve fail"
+			render :action => :review
+		end
 	end
 
 	private

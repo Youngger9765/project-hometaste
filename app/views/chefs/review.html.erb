@@ -9,6 +9,12 @@
 
 			<%= render :partial => 'form', :locals => { :f => f } %>
 
+			<% if !@chef.restaurant.is_approved%>
+				<div class="row form_control col-md-12" id="chef-approve-btn">
+					<%= link_to "APPROVE", approve_chef_path(@chef), :class=>"btn btn-success btn-lg"%>
+				</div>
+			<%end%>
+
 		<% end %>
 	</div>
 </div>
