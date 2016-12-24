@@ -13,9 +13,9 @@ class ApiV1::SearchController < ApplicationController
     end
 
     if @food_ids
-      @food = Food.filter( params[:checked_list] , [@lat,@long] )
+      @foods = Food.filter( params[:checked_list] , [@lat,@long] )
     elsif @restaurant_ids
-      @restaurant = Restaurant.filter( params[:checked_list] , [@lat,@long] )
+      @restaurants = Restaurant.filter( params[:checked_list] , [@lat,@long] )
     end
 
     respond_to do |format|

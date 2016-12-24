@@ -41,19 +41,19 @@ class Restaurant < ApplicationRecord
   validates_attachment_content_type :main_photo, content_type: /\Aimage\/.*\Z/
 
   def average_foods_price
-    foods.pluck(:price).reduce(:+) / foods.size
+    foods.average(:price) || 0
   end
 
   def self.collect_food_ids
-    all.collect {|x| x.foods.ids }.flatten!
+    all.collect {|x| x.foods.ids }.flatten
   end
 
-  def self.get_popular_foods
-    Food.where( id: collect_food_ids ).joins( :food_comments ).order( 'food_comments.score desc' )
+  def self.get_popular_foods( num = 200 )
+    Food.where( id: collect_food_ids ).joins( :food_comments ).order( 'food_comments.score desc' ).limit(num)
   end
 
-  def self.new_in_foods
-    Food.where( id: collect_food_ids ).where('foods.updated_at > ?', Time.current - 7.days )
+  def self.new_in_foods( num = 200 )
+    Food.where( id: collect_food_ids ).where('foods.updated_at > ?', Time.current - 7.days ).limit(num)
   end
 
   def self.get_around_restaurants( km = 2, *coordinate )
@@ -70,20 +70,25 @@ class Restaurant < ApplicationRecord
     cuisine = params['Cuisine']
     features = params['Features']
 
-    where(id:ids).filter_features(features)
-        .filter_price(price)
-        .filter_distance(distance,latlong)
-        .filter_sort(sort)
+    where(id:ids).filter_distance(distance,latlong)
+        .filter_features(features)
         .filter_cuisine(cuisine)
+        .filter_price(price)
+        .filter_sort(sort)
   end
 
   def self.filter_price( _case )
-    case _case
-    when '$'    ; where('average_foods_price < ?' ,10)
-    when '$$'   ; where('average_foods_price >= ? and average_foods_price < ?' ,11,30)
-    when '$$$'  ; where('average_foods_price >= ? and average_foods_price < ?' ,31,60)
-    when '$$$$' ; where('average_foods_price > ?' ,60)
+    case _case[0]
+    when '$'    ; _start, _end = 0  ,10
+    when '$$'   ; _start, _end = 11 ,30
+    when '$$$'  ; _start, _end = 31 ,60
+    when '$$$$' ; _start, _end = 61 ,10000000
     end
+    ids = all.collect do |x|
+      price = x.average_foods_price
+        x.id if price && (price >_start && price <= _end)
+    end
+    where(id:ids.compact)
   end
 
   def self.filter_features( _case )
@@ -91,7 +96,7 @@ class Restaurant < ApplicationRecord
     ids = ids & all.map {|x| x.id if x.foods.where(:is_public => true) } if _case.include?("Today's Meal")
     ids = ids & Delivery.pluck(:restaurant_id) if _case.include?('Delivery')
     ids = ids & BulkBuy.pluck(:restaurant_id) if _case.include?('Bulk Buy')
-    ids = ids & BigBun.where(:is_public => true).pluck(:restaurant_id).uniq! if _case.include?('Offer Big')
+    ids = ids & BigBun.where(:is_public => true).pluck(:restaurant_id).uniq if _case.include?('Offer Big')
     where(id:ids)
   end
 
@@ -101,28 +106,28 @@ class Restaurant < ApplicationRecord
          when 'Driving-5min' ; 2
          when 'Biking-5min'  ; 1
          when 'Walking-1min' ; 0.1
-         else                ; _case.to_i * 0.1
+         else                ; _case[0].to_i * 0.1
          end
     restaurant_ids = Restaurant.get_around_restaurants( km , lat , long ).ids
-    where(restaurant_id:restaurant_ids)
+    where(id:restaurant_ids)
   end
 
   def self.filter_sort( _case )
     case _case[0]
-    when 'BestMatch'        ; self
+    when 'BestMatch'        ; self.all
     when 'Highest Rated'    ; order('food_avg_score desc')
-    when 'Most Reviewed'    ; joins(:food_comments).order('food_comments_count desc')
+    when 'Most Reviewed'    ; order('food_comments_count desc')
     when 'New'              ; order('updated_at desc')
     end
   end
 
   def self.filter_cuisine( _case )
     if _case.include?('Any Cuisine')
-      self
+      self.all
     else
       _cases = _case.uniq
       _cases = _case.map {|x| "%#{ x.to_s.split(' ')[0].to_s.gsub(/[^a-zA-Z0-9\-]/,'') }%" }
-      cuisine_ids = _cases.map {|x|  Cuisine.where('name like ?',x).ids}.flatten!
+      cuisine_ids = _cases.map {|x|  Cuisine.where('name like ?',x).ids}.flatten
       ids = RestaurantCuisineShip.where(cuisine_id:cuisine_ids).pluck(:restaurant_id).uniq
       where(id: ids & self.ids )
     end

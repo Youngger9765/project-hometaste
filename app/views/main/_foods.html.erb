@@ -41,10 +41,13 @@
           <p class="header"><a href=""><%= food.name %></a></p>
 
           <p class="description" href="#">$<%= food.price %>/ Half</p>
-          <div class="meta hidden-xs">
-            <span><a href="">Vegan</a></span><span><a href="">Soup</a></span><span><a href="">Pumkim</a></span><span><a href="">Autum</a></span>
+          <div class="hidden-xs">
+            <span class="sub_link mr5"><a href="">Vegan</a></span>
+            <span class="sub_link mr5"><a href="">Soup</a></span>
+            <span class="sub_link mr5"><a href="">Pumkim</a></span>
+            <span class="sub_link mr5"><a href="">Autum</a></span>
           </div>
-          <div class="ui rating " data-rating="3" data-max-rating="5"></div>
+          <div class="show_rated_4 mt10"></div>
           <div class="card_hover_link visible-xs">
             <%= content_for :card_hover_link %>
           </div>

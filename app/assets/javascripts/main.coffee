@@ -57,7 +57,7 @@ $(document).ready ->
   $('p[name="more_cuisine"]').click ->
     $('.ui.modal[name="more_cuisine"]').modal('show');
 
-  $(document).on('click','#foods div[data-tooltip="Address"]', ->
+  $(document).on('click','.foods div[data-tooltip="Address"]', ->
     $(this).siblings('.address_detail').toggleClass('hidden')
     $(this).find('i').toggleClass('black')
   )
@@ -137,7 +137,7 @@ $(document).ready ->
   $('.distance_input').keypress (event)->
     if ( event.which == 13 )
       filter_ajax()
-      $(this).blur();
+      $(this).find('input').blur();
 
   $('.filter_menu .ui.checkbox:not(.distance_input)').change ->
     filter_ajax()

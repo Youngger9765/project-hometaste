@@ -104,9 +104,6 @@ body.main_index{
     right: 15px;
     top:10px;
   }
-  //.fa-map-marker{
-  //  position: absolute;
-  //}
   .meta span {
     text-decoration: underline;
     color: #3A618D;
@@ -163,6 +160,9 @@ body.main_index{
     .ui.checkbox label:before{
       border-color: #FFFFFF;
       background-color: transparent;
+    }
+    .ui.checkbox label:before,.ui.checkbox label:after{
+      margin-left: -5px;
     }
     p{
       margin-top: 15px;
@@ -241,6 +241,9 @@ body.main_index{
   .ui.radio.checkbox input:checked ~ .box:after, .ui.radio.checkbox input:checked ~ label:after{
     background-color: $main_red;
   }
+  #cuisine_modal_btn{
+    padding:11px 32px 13px;
+  }
 }
 
 .card_hover_link{
@@ -314,9 +317,8 @@ body.main_index{
   }
   .ui.fluid.card .num_counts{
     margin-bottom: 5px;
-    img{
-      width: auto;
-      height: 15px;
+    .cloche_icon{
+      font-size:20px;
       margin-right: 5px;
     }
     span{
@@ -354,11 +356,6 @@ body.main_index{
     p{
       font-size: 10px;
     }
-  }
-  .meta span {
-    font-size: 10px;
-    text-decoration: underline;
-    color: #3A618D;
   }
 }
 .load_more {

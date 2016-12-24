@@ -50,13 +50,7 @@
 
 <div class="container">
   <div class="row foods restaurants cards" id="results" data-sum_qty="<%= @sum_qty %>" data-page="1">
-    <% if @foods %>
         <%= render 'foods',foods:@foods %>
-    <% else %>
-        <!--<div class="row  cards" id="restaurants">-->
-        <%= render 'restaurants',restaurants:@restaurants %>
-        <!--</div>-->
-    <% end %>
   </div>
   <div class="load_more" id="load_more">
     <input type="button" value="Load more">
