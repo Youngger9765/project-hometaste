@@ -117,7 +117,7 @@ $(document).ready ->
     $.ajax
       type: 'GET',
       url: '/api/v1/search/filter',
-      data:{ checked_list_name: checked_list_name }
+      data:{ checked_list: checked_list_name }
 
   check_checkbox_status=() ->
     if ($(this).attr('id') == 'any_cuisine') && ($('#any_cuisine input').prop('checked') == true)

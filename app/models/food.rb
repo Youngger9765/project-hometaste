@@ -11,7 +11,13 @@ class Food < ApplicationRecord
     food_comments.pluck(:score).reduce(:+) / food_comments.all.size
   end
 
-  def self.filter( price , features , distance , lat_long, sort , cuisine , ids = self.ids )
+  def self.filter( params , lat_long, ids = self.ids )
+    sort = params['Sort By']
+    distance = params['Distance']
+    price = params['Price']
+    cuisine = params['Cuisine']
+    features = params['Features']
+
     where(id:ids).joins(:restaurant)
         .filter_price(price)
         .filter_features(features)

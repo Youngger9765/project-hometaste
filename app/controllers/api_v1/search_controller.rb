@@ -1,10 +1,9 @@
 class ApiV1::SearchController < ApplicationController
-  before_action :deal_keyword_and_location_string ,only: :keyword
+  before_action :get_keyword_and_location ,only: :keyword
   before_action :get_user_lat_and_long ,only: :keyword
-  before_action :deal_params ,only: :filter
 
   def filter
-    get_search_results_from_cookies
+    get_cookies_search_results
 
     if cookies.signed[:location].nil?
       @lat = request.location.latitude
@@ -14,9 +13,9 @@ class ApiV1::SearchController < ApplicationController
     end
 
     if @food_ids
-      @food = Food.filter( @price , @features , @distance, [@lat,@long] , @sort , @cuisine , @foods )
+      @food = Food.filter( params[:checked_list] , [@lat,@long] )
     elsif @restaurant_ids
-      @restaurant = Restaurant.filter( @price , @features , @distance, [@lat,@long] , @sort , @cuisine , @restaurants )
+      @restaurant = Restaurant.filter( params[:checked_list] , [@lat,@long] )
     end
 
     respond_to do |format|
@@ -39,7 +38,7 @@ class ApiV1::SearchController < ApplicationController
 
     @sum_qty = @restaurants ? @restaurants.size : @foods.size
 
-    save_search_results_location_in_cookies
+    save_results_in_cookies
 
     respond_to do |format|
       format.js {render 'api_v1/search/results'}
@@ -48,22 +47,14 @@ class ApiV1::SearchController < ApplicationController
 
   private
 
-  def deal_keyword_and_location_string
+  def get_keyword_and_location
     @location = params[:location].to_s.gsub(/[^a-zA-Z0-9\-]/,'')
     @keyword = params[:keyword].to_s.gsub(/[^a-zA-Z0-9\-]/,'')
   end
 
-  def get_search_results_from_cookies
+  def get_cookies_search_results
     _type = cookies.signed[:search_results].keys[0]
     instance_variable_set("@#{_type}_ids", cookies.signed[:search_results][_type])
-  end
-
-  def deal_params
-    @sort = params[:checked_list_name]['Sort By']
-    @distance = params[:checked_list_name]['Distance']
-    @price = params[:checked_list_name]['Price']
-    @cuisine = params[:checked_list_name]['Cuisine']
-    @features = params[:checked_list_name]['Features']
   end
 
   def get_user_lat_and_long
@@ -75,7 +66,7 @@ class ApiV1::SearchController < ApplicationController
     end
   end
 
-  def save_search_results_location_in_cookies
+  def save_results_in_cookies
     cookies.signed[:search_results] = if @foods
                                         {value: {food: @foods.ids} }
                                       else

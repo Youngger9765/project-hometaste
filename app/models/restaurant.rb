@@ -63,8 +63,18 @@ class Restaurant < ApplicationRecord
     where(id: restaurant_ids)
   end
 
-  def self.filter( price , features , distance , latlong , sort , cuisine , ids = self.ids )
-    where(id:ids).filter_features(features).filter_price(price).filter_distance(distance,latlong).filter_sort(sort).filter_cuisine(cuisine)
+  def self.filter( params , latlong , ids = self.ids )
+    sort = params['Sort By']
+    distance = params['Distance']
+    price = params['Price']
+    cuisine = params['Cuisine']
+    features = params['Features']
+
+    where(id:ids).filter_features(features)
+        .filter_price(price)
+        .filter_distance(distance,latlong)
+        .filter_sort(sort)
+        .filter_cuisine(cuisine)
   end
 
   def self.filter_price( _case )
