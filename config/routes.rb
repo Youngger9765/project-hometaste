@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :main
-    resources :orders
+    resources :orders do
+      collection do
+        get :today
+      end
+    end
   	resources :users
   	resources :restaurants
   end

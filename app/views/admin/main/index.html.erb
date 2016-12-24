@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="container">
       <div class="row">
-        <%= link_to 'today', {controller: 'main', action: 'index', :filter_by_today => true}, :class => "btn btn-info"  %>
+        <%= link_to 'All Orders', admin_orders_path, :class => "btn btn-info"  %>
+        <%= link_to 'today', today_admin_orders_path, :class => "btn btn-info"  %>
       </div>
       <br>
       <div class="row">
