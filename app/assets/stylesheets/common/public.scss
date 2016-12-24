@@ -1,7 +1,8 @@
-//---------- public setting ---------//
+
 body{
   margin-top: 50px;
   font-family:"Avenir Next";
+  background-color: #EFF0F1;
 }
 a:hover{
   text-decoration: none;
@@ -9,11 +10,31 @@ a:hover{
 hr{
   color: $main_black;
 }
-.alert_message{
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  font-size: 16px;
+h3{
+  margin-top: 10px;
+}
+textarea{
+  border-radius: 20px;
+  width: 100%;
+  margin: 25px auto;
+  padding: 25px;
+  border-color: #B8B9BA;
+  resize: none;
+  &:focus{
+    outline: none;
+  }
+}
+.carousel{
+  height: 100%;
+  .carousel-inner{
+    height: 100%;
+    .item{
+      height: 100%;
+      img,div{
+        height: 100%;
+      }
+    }
+  }
 }
 .ui.form input[type='text'].my_form,
 .ui.form input[type='number'].my_form,
@@ -33,6 +54,10 @@ hr{
     border-color: #FFFFFF;
   }
 }
+input[type=submit]{
+  width: 130px;
+  height: 50px;
+}
 .ui.form .field.field input:-webkit-autofill {
   box-shadow: 0px 0px 0px 100px $main_red inset !important;
   border-color: #FFFFFF !important;
@@ -41,194 +66,58 @@ hr{
   box-shadow: 0px 0px 0px 100px $main_red inset !important;
   border-color: #FFFFFF !important;
 }
-
-.ui.modal#login_modal,.ui.modal#sign_up_modal{
-  width: 300px;
-  text-align: center;
-  background-color: $main_red;
-  color: #FFFFFF;
-  bottom:inherit;
-  left: 50%;
-  border-radius: $main_radius;
-  margin:0 0 0 -150px ;
-  padding:0 15px 20px;
-  input{
-    height: 40px;
+.ui.star.rating{
+  .active.icon,.icon.selected,.icon.selected.active{
+    color: $main_red !important;
+    text-shadow: none !important;
   }
-  input[type='submit']{
-    border:1px solid #FFFFFF;
-    font-weight:bold;
-    border-radius: $main_radius;
-    padding:5px 25px;
-    margin-top: 15px;
-  }
-  span{
-    text-align: left;
-  }
-  .content{
-    background-color: transparent;
-  }
-  .close.icon{
-    top: 10px;
-    right: 10px;
-    opacity: 1;
-    color: #FFFFFF;
-  }
-  a[name='forgot_password']{
-    text-align: right;
-    display: inherit;
-  }
-  a{
-    color: #FFFFFF;
-  }
-  span[name="term"]{
-    display: inherit;
-    a{
-      text-decoration: underline;
-    }
-  }
-  .outh_logo{
-    p{
-      margin-left: 35px;
-      text-align: left;
-    }
-    i{
-      margin:0 20px;
-    }
-  }
-}
-
-//---------- navbar ---------//
-.navbar{
-  background-color: $main_red;
-  border:0;
-  a{
-    color: #fff !important;
-    font-weight: 500;
-  }
-  span{
-    color: #FFFFFF;
-    font-size: 10px;
-    margin-right: 10px;
-  }
-  .nav.navbar-nav li > a{
-    line-height: 50px;
-    padding-top: 0;
-    padding-bottom: 0;
-    display: inline-block;
-  }
-  li,a{
-    cursor: pointer;
-  }
-  .navbar-brand{
-    font-family:"Times New Roman";
-    img{
-      float: left;
-      height: 50px;
-      background-color: #FFFFFF;
-      margin-top: -15px;
-      padding: 4px 8px 0 10px;
-      margin-right: 10px;
-    }
-  }
-  .navbar-toggle{
-    padding-right: 0;
-  }
-  &.navbar-default .navbar-toggle .icon-bar{
-    background-color: #FFFFFF;
-  }
-  &.navbar-default .navbar-toggle:hover{
-    background-color: #FFFFFF;
-    .icon-bar{
-      background-color: $main_red;
-    }
-  }
-}
-//---------- footer ---------//
-.footer{
-  margin-top: 30px;
-  text-align: center;
-  .col-md-3{
-    height: 100%;
-  }
-  .col-md-3:nth-child(2){
-    border-left: 1px solid #FFFFFF;
-    border-right: 1px solid #FFFFFF;
-  }
-  .col-md-3:nth-child(3){
-    .col-md-12:nth-child(2){
-      border-top: 1px solid #FFFFFF;
-      margin-top: 15px;
-      padding-top: 15px;
-    }
-  }
-  .footer-first{
-    padding:35px 0;
-    background-color: $main_red;
-    color: #FFFFFF;
-    min-height:220px;
-    a,p{
-      color: #FFFFFF;
-      font-size: 16px;
-      display: block;
-    }
-    a{
-      margin-bottom: 15px;
-    }
-    i{
-      font-size: 1.5em;
-      margin-right: 10px;
-    }
-  }
-  .footer-last{
-    height: 30px;
-    color: $main_red;
-    span{
-      margin: 0 15px;
-      line-height: 30px;
-    }
-  }
-}
-.back_to_top{
-  z-index:100;
-  position: fixed;
-  font-size:40px;
-  right: 50px;
-  bottom: 20px;
-  color: red;
-  img{
-    height: 35px;
-  }
-}
-//---------- template ---------//
-.ui.form .count_spinner{
-  .product_spineer_button{
-    background-color: transparent;
-    img{
-      width: 20px;
-    }
-  }
-  .buttons{
-    margin-left: -10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  input{
-    border:none;
-    width: 50px;
-    text-align: center;
-    padding: 0 10px;
+  .icon{
     font-size: 20px;
+    text-shadow: none;
   }
+}
+.hometaste_dropdown{
+  & .menu{
+    border:$main_red !important;
+  }
+  border:1px solid $main_red !important;
+  .dropdown.icon{
+    background-color: red !important;
+    padding: 11px !important;
+    right: 9px !important;
+    color: white !important;
+  }
+}
+img[name='cart']{
+  height: auto;
+  width: 35px;
+  padding-bottom: 3px;
+  margin: 0 auto;
+}
+img[name='cart_white']{
+  height: auto;
+  width: 35px;
+  padding-bottom: 7px;
+  margin: 0 auto;
+}
+img[name='moto']{
+  height: auto;
+  width: 40px;
+  padding-bottom: 7px;
+  margin: 0 auto;
+}
+img[name='cert']{
+  height: 45px;
+  width: auto;
 }
 .cards .ui.card:last-child, .cards .ui.card:first-child {
   margin-top: 1em;
   margin-bottom: 1em;
 }
 .cards .ui.fluid.card{
-  //overflow: hidden;
+  overflow: hidden;
   display: none;
-  border-radius: $main_radius;
+  border-radius: $sub_radius;
   p {
     font-weight: 500;
   }
@@ -251,26 +140,7 @@ hr{
     color: $main_red;
   }
 }
-@media (max-width: $screen-xs-max) {
-  .padding_right_7_xs{
-    padding-right: 7px;
-  }
-  .padding_left_7_xs{
-    padding-left: 7px;
-  }
-}
-@media (min-width: $screen-xs-min) {
-  .nav.navbar-nav{
-    float: right;
-  }
-}
-@media (min-width: $screen-sm-min){
-  .footer{
-    .col-md-3:nth-child(1){
-      margin-left:12.5%;
-    }
-  }
-}
+
 @media (max-width: $screen-sm-max){
   h2{
     margin:0 5px;
@@ -281,49 +151,15 @@ hr{
     margin-bottom: 0;
     font-size:14px;
   }
-  h5{
-    margin-bottom: 0;
-    font-size: 12px;
-  }
   p{
     font-size: 12px;
   }
-  .ui.form .count_spinner{
-    .buttons{
-      margin-left: -10px;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      img{
-        width: 15px;
-      }
-    }
-    input{
-      font-size: 14px;
-    }
+}
+@media (max-width: $screen-xs-max) {
+  .padding_right_7_xs{
+    padding-right: 7px;
   }
-  .footer .footer-first a, .footer .footer-first p{
-    font-size: 12px;
-  }
-  .footer{
-    .col-md-3:nth-child(1){
-      margin-left:0%;
-      border-bottom: 1px ;
-    }
-    .col-md-3:nth-child(2){
-      border-left:none;
-      border-right:none;
-      border-top: 1px solid #FFFFFF;
-      border-bottom: 1px solid #FFFFFF;
-      margin: 15px;
-      padding-top: 15px;
-    }
-    .col-md-3:nth-child(3){
-      margin-top: 15px;
-    }
-    .col-md-12:nth-child(2){
-      border-top: 1px solid #FFFFFF;
-      margin-top: 15px;
-      padding-top: 15px;
-    }
+  .padding_left_7_xs{
+    padding-left: 7px;
   }
 }
