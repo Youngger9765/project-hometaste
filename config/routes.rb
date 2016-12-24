@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get "admin" => "admin/users#index"
 
   namespace :admin do
-  	resources :main
+    resources :main
+    resources :orders
   	resources :users
   	resources :restaurants
   end
