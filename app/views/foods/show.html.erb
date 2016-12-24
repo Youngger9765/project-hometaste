@@ -1,0 +1,165 @@
+<%= render 'carousel' %>
+<div class="container">
+  <section class="row">
+    <div class="col-xs-12 basic_bg_top pl150_md pr150_md pl40_sm pr40_sm pt0_xs pt30_md">
+
+      <div class="row">
+        <div class="col-xs-12 tar social_buttons">
+          <button class="ui button my_btn social_link"><i class="fa fa-heart-o white" aria-hidden="true"></i>137</button>
+          <button class="ui button my_btn social_link"><i class="fa fa-plus-circle white" aria-hidden="true"></i>Like</button>
+          <button class="ui button my_btn social_link"><i class="share_icon_white" aria-hidden="true"></i>Share</button>
+        </div>
+        <div class="col-sm-7 col-xs-12">
+          <h1>Roasted Duck</h1>
+          <span class="sub_link ">Asian Fusion</span>
+          <span class="sub_link ml15">American</span>
+          <span class="sub_link ml15">Chinese</span>
+          <div class="col-xs-12 visible-xs visible-sm mt20">
+            <div class="row">
+              <div class="align_two_side">
+                <h4 class="dib">Orders reached:</h4>
+                <h4 class="dib">Max:  6 </h4>
+              </div>
+
+              <div class="ui indicating progress mb15_md mb10_sm" data-percent="74">
+                <div class="bar"></div>
+              </div>
+              <h4 class="flr red">120 Ordered</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm">
+          <h3 class="red mt25">$7.00/ Bowl</h3>
+          <%= render 'spinner', qty: 1  %>
+        </div>
+        <div class="col-xs-12 hidden-xs hidden-sm">
+          <div class="align_two_side">
+            <h4 class="dib">Orders reached:</h4>
+            <h4 class="dib">Max:  6 </h4>
+          </div>
+          <div class="ui indicating progress"  data-percent="74">
+            <div class="bar"></div>
+          </div>
+          <h4 class="flr red">120 Ordered</h4>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="row">
+    <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm pr40_sm">
+      <h3><span class="vertical_align cursor_point">About this dish</span> <i class="l_line hidden-xs"></i> <span class="vertical_align gray hidden-xs cursor_point">Ingredients</span></h3>
+      <div>
+        <p>Free range chicken stewed in a spicy tomatillo sauce and served over saffron white rice with cilantro. Served
+          with sweet and spicy chilie- roasted carrots with pickled red onions and toasted pepitas. Free range chicken
+          stewed in a spicy tomatillo sauce and served over saffron white rice with cilantro. Served with sweet and
+          spicy chilie- roasted carrots with pickled red onions and toasted pepitas.  </p>
+        <p class="hidden">Duck, tomato, basil, garlic, onion, cilantro,
+          carrots, spice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm pr40_sm visible-xs">
+      <h3><span class="vertical_align">Ingredients</span></h3>
+      <div>
+        <p>Duck, tomato, basil, garlic, onion, cilantro,carrots, spice.   </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm pr40_sm">
+      <h3 class="dib visible-xs">Mr.Chan’s Kitchen</h3>
+      <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+          <div class="square_img border_main_radius" style="background-image: url(<%= image_path('tmp/kitchen.png') %>)"></div>
+        </div>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+          <div class="clearfix mt10_sm mb10_sm mt30_xs mb30_xs tac">
+            <h1 class="dib hidden-xs">Mr.Chan’s Kitchen</h1>
+            <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
+          </div>
+          <div class="flex_space_between">
+            <div class="dib hidden-xs">
+              <i class="show_rated_4"></i><span class="">122 Likes</span>
+            </div>
+            <i class="l_line hidden-xs"></i>
+            <div class="dib">
+              <i class="fa fa-heart red mr5" aria-hidden="true"></i><span>200 reviews</span>
+            </div>
+            <i class="l_line"></i>
+            <div class="dib">
+              <i class="cloche_icon"></i><span class="">60 Ordered</span>
+            </div>
+          </div>
+          <div class="dib visible-xs">
+            <i class="show_rated_4"></i><span class="">122 Likes</span>
+          </div>
+          <div>
+            <p class="mt20 mb20">“Mr.Chan’s kitchen makes the best Chinese food in town. I love their roasted duck, no one else makes them as good as Mr.Chan! Absolutely favorite!” </p>
+          </div>
+          <div>
+            <span class="flr">- John Doe <i class="show_rated_4"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="row">
+    <div class="col-xs-12 basic_bg pl0_sm also_want">
+      <h3 class="ml150_md ml20_xs bold mb25">You may also want</h3>
+      <div class="row df_sm">
+        <div class="col-sm-6 col-xs-12">
+          <%= render 'product_carousel' %>
+        </div>
+        <div class="col-sm-6 col-xs-12 pl100_md pl60_sm">
+          <div>
+            <h3 class="mt15 mt5_sm">Seasonal Pumpkin Soup</h3>
+          </div>
+          <div>
+            <h3 class="red">$7.00/ Bowl</h3>
+          </div>
+          <div>
+            <%= render 'spinner', qty: 1  %>
+          </div>
+          <div>
+            <h4 class="blck normal">2 Left <i class="l_line"></i> 12 Ordered</h4>
+          </div>
+          <div>
+            <h4 class="black mt25 mb25">Ingredients: <p class="mt10">Pumpkin, spice, cream, herb</p>
+            </h4>
+          </div>
+          <div class="hidden-sm">
+            <i class="fa fa-heart red mr25 mt20_sm" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+            <a href="" class="gray flr mt20_xs mt0_sm mt15_md"><h4>More...</h4></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 visible-sm tar">
+          <i class="fa fa-heart red mr25 mt20_sm" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+        </div>
+        <div class="col-xs-6 visible-sm">
+          <a href="" class="gray flr mt40_xs mt0_md"><h4>More...</h4></a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="load_more">
+    <input type="button" value="Load more">
+  </div>
+</div>
+<%= render 'common/add_to_cart' %>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $('.ui.progress').progress();
+    $(document).on('click','h3 .vertical_align.gray',function(){
+      var span = $('h3 .vertical_align')
+      span.toggleClass('gray')
+      span.closest('.basic_bg').find('p').toggleClass('hidden')
+    })
+  })
+</script>
+<%= javascript_include_tag 'spinner' %>

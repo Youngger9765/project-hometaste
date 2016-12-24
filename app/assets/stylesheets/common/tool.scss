@@ -1,28 +1,72 @@
-.ml10{
-  margin-left: 10px !important;
+.white{
+  color: #FFFFFF;
 }
-.mt60{
-  margin-top: 60px !important;
+.red{
+  color: $main_red;
 }
-.mb15{
-  margin-bottom: 15px !important;
+.black{
+  color: $main_black;
+}
+.gray{
+  color: #9B9B9B;
+}
+.lighter{
+  font-weight: lighter;
+}
+.normal{
+  font-weight: normal;
+}
+.background_red{
+  background-color: $main_red;
+}
+.background_white{
+  background-color: #FFFFFF;
+}
+.border_red{
+  border: 1px solid $main_red ;
+}
+.sub_link{
+  color: #003470;
+  text-decoration: underline;
+}
+.vertical_align{
+  vertical-align: middle;
+}
+.l_line:before{
+  @extend .red;
+  content:'|';
+  font-size:16px;
+  margin: 0 15px;
+}
+.cursor_point{
+  cursor: pointer;
+}
+.background_img_setting{
+  @include background_size_cover;
+  background-position: center;
+}
+.border_main_radius{
+  @include border_radius($main_radius);
+}
+.border_sub_radius{
+  @include border_radius($sub_radius);
 }
 .ui.button.my_btn{
-  background-color: $main_red;
-  color: #FFFFFF;
+  @extend .background_red;
+  @extend .white;
+  @extend .border_sub_radius;
+  @extend .border_red;
   font-weight: inherit;
-  border-radius: $main_radius;
   font-size:1em;
-  border: 1px solid $main_red ;
   padding: 0;
 }
 .ui.button.my_btn_reserve{
-  background-color: #FFFFFF;
-  color: $main_red;
+  @extend .background_white;
+  @extend .red;
+  @extend .border_sub_radius;
+  @extend .border_red;
   font-weight: inherit;
-  border-radius: $main_radius;
   font-size:1em;
-  border: 1px solid $main_red ;
 }
 .square-icon {
   @include square-icon;
@@ -30,6 +74,12 @@
 .flex{
   display: flex;
   display : -webkit-flex;
+}
+.flex_space_around{
+  @include flex_(center,space-around);
+}
+.flex_space_between{
+  @include flex_(center,space-between);
 }
 .flex_center_start{
   @include flex_(center,flex-start);
@@ -51,9 +101,6 @@
 }
 .bold{
   font-weight: bold;
-}
-.red{
-  color: $main_red;
 }
 .red_line{
   border-bottom: 1px solid $main_red;
@@ -88,12 +135,12 @@
   display: block;
   text-align: center;
   input {
-    background-color: $main_red;
-    color: #FFFFFF;
+    @extend .background_red;
+    @extend .white;
+    @extend .border_sub_radius;
+    @extend .border_red;
     font-weight: inherit;
-    @include border-radius($sub_radius);
     font-size: 1em;
-    border: 1px solid $main_red;
     width: 175px;
     height: 40px;
   }
@@ -103,8 +150,7 @@
   width: 100%;
   padding-top: 100%;
   overflow: hidden;
-  @include background_size_cover;
-  background-position: center;
+  @extend .background_img_setting;
   img{
     position: absolute;
     left: 0;
@@ -115,12 +161,7 @@
     height: 100%;
   }
 }
-.border_main_radius{
-  @include border_radius($main_radius);
-}
-.border_sub_radius{
-  @include border_radius($sub_radius);
-}
+
 
 .align_two_side{
   &:after,&:before{
@@ -140,15 +181,14 @@
 @media (max-width: $screen-sm-max) {
   .basic_bg{
     @include basic_bg(10px,10px);
-    height:calc(100% - 15px);
+    margin-bottom: 15px;
   }
   .basic_bg_top{
     @include basic_bg(0,10px);
-    height:calc(100% - 15px);
+    margin-bottom: 15px;
   }
   .basic_bg_bottom{
     @include basic_bg(10px,0);
-    margin-bottom: 0;
   }
 }
 @media (max-width: $screen-xs-max ){
@@ -160,14 +200,16 @@
   }
   .basic_bg{
     @include basic_bg(0,0);
-    height:calc(100% - 5px);
+    margin-bottom: 15px;
+    padding: 30px 20px;
   }
   .basic_bg_top{
     @include basic_bg(0,0);
-    height:calc(100% - 5px);
+    margin-bottom: 15px;
+    padding: 30px 20px;
   }
   .basic_bg_bottom{
     @include basic_bg(0,0);
-    margin-bottom: 0;
+    padding: 30px 20px;
   }
 }

@@ -1,10 +1,12 @@
 @mixin method_loop($media) {
   @each $method,$method_short in (margin,'m'),(padding,'p') {
     @each $direction,$direction_short in (right,'r'),(left,'l'),(top,'t'),(bottom,'b') {
-      @each $i_short,$i in (0,0px),(10,10px),(15,15px),(20,20px),(30,30px),(40,40px),(50,50px) {
-        .#{$method_short}#{$direction_short}#{$i_short}-#{$media} { #{$method}-#{$direction}: $i !important; }
-        @if $media == 'xs'{
-          .#{$method_short}#{$direction_short}#{$i_short} { #{$method}-#{$direction}: $i !important; }
+      @for $i from 0 through 200 {
+        @if $i % 5 == 0 {
+          .#{$method_short}#{$direction_short}#{$i}_#{$media} { #{$method}-#{$direction}: #{$i}px !important; }
+          @if $media == 'xs'{
+            .#{$method_short}#{$direction_short}#{$i} { #{$method}-#{$direction}: #{$i}px !important; }
+          }
         }
       }
     }

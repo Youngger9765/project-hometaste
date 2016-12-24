@@ -1,7 +1,7 @@
 $main_red: #E8212D;
-$main_black: #555;
+$main_black: #4A4A4A;
 $main_radius: 10px;
-$sub_radius: 5px !important;
+$sub_radius: 5px;
 
 @mixin square-icon($pixel: 40px){
   font-size:$pixel / 2;
@@ -58,32 +58,4 @@ $sub_radius: 5px !important;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-@media (max-width: $screen-sm-max) {
-  @mixin basic_bg($top,$bottom){
-    border-top-left-radius: $top;
-    border-top-right-radius: $top;
-    border-bottom-right-radius: $bottom;
-    border-bottom-left-radius: $bottom;
-    background-color: #FFFFFF;
-    margin-bottom: 15px;
-    overflow: hidden;
-    width: 100%;
-    padding:5px 20px;
-  }
-}
-@media (max-width: $screen-xs-max) {
-  @mixin basic_bg($top,$bottom){
-    border-top-left-radius: $top;
-    border-top-right-radius: $top;
-    border-bottom-right-radius: $bottom;
-    border-bottom-left-radius: $bottom;
-    background-color: #FFFFFF;
-    margin-bottom: 15px;
-    overflow: hidden;
-    width: calc(100% + 30px);
-    //margin-left: -15px;
-    padding:5px 20px;
-  }
 }
