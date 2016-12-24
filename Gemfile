@@ -28,9 +28,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+# search
 gem 'ransack'
 gem "nested_form"
 gem "kaminari"
+gem 'bootswatch-rails', '0.5.0'
+gem 'kaminari-bootstrap', '~> 0.1.3'
 
 # register
 gem 'devise'
