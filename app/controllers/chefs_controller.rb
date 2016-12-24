@@ -71,6 +71,10 @@ class ChefsController < ApplicationController
 
 	end
 
+	def update
+		@chef.update(chef_params)
+	end
+
 	private
 
 	def chef_params
@@ -102,6 +106,10 @@ class ChefsController < ApplicationController
 
 	  	:user_attributes => [
 	  		:id, :email, :password,
+
+	  		:user_photo_attributes => [
+		  		:id, :user_id, :photo,
+		  	],
 	  	],
 	  )
 	end

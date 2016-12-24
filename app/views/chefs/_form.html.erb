@@ -6,8 +6,28 @@
 
 <!-- restaurant -->
 <div class="row container chef-sub-container center">
+	<%= f.fields_for :user do |u| %>
+		<%= u.fields_for :user_photo do |user_photo| %>
+			<div id="chef-user-main-photo" class="form_control col-md-12">
+				<h3>Chef's photo</h3>
+
+				<% if @chef.user.user_photo.photo.exists? %>
+					<%= image_tag(@chef.user.user_photo.photo(:thumb))%>
+				<%end%>
+
+		    <%= user_photo.file_field :photo %>
+	    </div>
+	  <%end%>
+	 <%end%>
+
 	<%= f.fields_for :restaurant do |r| %>
 		<div id="restaurant-main-photo" class="form_control col-md-12">
+	    <h3>Restaurant's photo</h3>
+
+	    <% if @chef.restaurant.main_photo.exists? %>
+				<%= image_tag(@chef.restaurant.main_photo(:thumb))%>
+			<%end%>
+
 	    <%= r.file_field :main_photo %>
     </div>
 
@@ -56,7 +76,7 @@
 	    </div>
     </div>
 
-		<% if params[:action] == "edit"%>
+		<% if @chef.restaurant.is_approved %>
 
 		<%else%>
 			<!-- certificate -->
@@ -112,11 +132,14 @@
 	    <%= password_field_tag 'confirm_password', ''%>
     </div>
 
-		<div class="form_control col-md-12">
-	    <%= u.label :email, "Your Email Address" %> <br>
-	    <p style="color:gray;">we'll send you an email to verify your address</p>
-	    <%= u.text_field :email, :placeholder=>"Email" %>
-    </div>
+		<% if params[:action] == "new"%>
+			<div class="form_control col-md-12">
+		    <%= u.label :email, "Your Email Address" %> <br>
+		    <p style="color:gray;">we'll send you an email to verify your address</p>
+		    <%= u.text_field :email, :placeholder=>"Email" %>
+	    </div>
+		<%end%>
+
 	<% end %>
 
 	<div class="form_control col-md-12">
@@ -224,7 +247,7 @@
 
 </div>
 
-<% if params[:action] == "edit"%>
+<% if @chef.restaurant.is_approved%>
 
 <%else%>
 	<!-- restaurant dish photos -->
@@ -245,7 +268,5 @@
 		<%end%>
 	</div>
 <%end%>
-
-
 
 
