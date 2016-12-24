@@ -1,0 +1,27 @@
+.carousel-control i{
+  color: $main_red;
+}
+.left.carousel-control i{
+  margin-left: -5px;
+  left: 50%;
+  padding-right: 3px;
+}
+.right.carousel-control i{
+  margin-right: -5px;
+  right: 50%;
+  padding-left: 3px;
+}
+.carousel-control{
+  text-shadow:initial;
+  i{
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    z-index: 5;
+    display: inline-block;
+    font-size: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}

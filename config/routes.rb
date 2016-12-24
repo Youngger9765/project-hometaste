@@ -19,9 +19,21 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :chefs
-  resources :restaurants
 
+  resources :chefs do
+    member do
+      get :review
+    end
+  end
+
+  resources :foods
+  resources :restaurants
+  resources :comments
+
+  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1'  do
+    get "/search/keyword" => "search#keyword"
+    get "/search/filter" => "search#filter"
+  end
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
   	get "/getDishesByFilter" => "mains#getDishesByFilter"
   	get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"

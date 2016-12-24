@@ -14,20 +14,20 @@ class Restaurant < ApplicationRecord
   has_many :restaurants, :through => :restaurant_cuisine_ships
 
   accepts_nested_attributes_for :delivery,
-    :allow_destroy => true,
-    :reject_if => :all_blank
+                                :allow_destroy => true,
+                                :reject_if => :all_blank
 
   accepts_nested_attributes_for :bulk_buys,
-    :allow_destroy => true,
-      :reject_if => :all_blank
+                                :allow_destroy => true,
+                                :reject_if => :all_blank
 
   accepts_nested_attributes_for :restaurant_cuisine_ships,
-    :allow_destroy => true,
-      :reject_if => :all_blank
+                                :allow_destroy => true,
+                                :reject_if => :all_blank
 
   accepts_nested_attributes_for :restaurant_dish_photos,
-    :allow_destroy => true,
-      :reject_if => :all_blank
+                                :allow_destroy => true,
+                                :reject_if => :all_blank
 
   geocoded_by :address
   after_validation :geocode # auto-fetch coordinates
@@ -40,9 +40,101 @@ class Restaurant < ApplicationRecord
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :main_photo, content_type: /\Aimage\/.*\Z/
 
+  def average_foods_price
+    foods.average(:price) || 0
+  end
+
+  def self.collect_food_ids
+    all.collect {|x| x.foods.ids }.flatten
+  end
+
+  def self.get_popular_foods( num = 200 )
+    Food.where( id: collect_food_ids ).joins( :food_comments ).order( 'food_comments.score desc' ).limit(num)
+  end
+
+  def self.new_in_foods( num = 200 )
+    Food.where( id: collect_food_ids ).where('foods.updated_at > ?', Time.current - 7.days ).limit(num)
+  end
+
+  def self.get_around_restaurants( km = 2, *coordinate )
+    restaurant_ids = []
+    lat, long = coordinate
+    self.all.each {|restaurant| restaurant_ids << restaurant.id if restaurant.distance_to([lat,long],:km) < km }
+    where(id: restaurant_ids)
+  end
+
+  def self.filter( params , latlong , ids = self.ids )
+    sort = params['Sort By']
+    distance = params['Distance']
+    price = params['Price']
+    cuisine = params['Cuisine']
+    features = params['Features']
+
+    where(id:ids).filter_distance(distance,latlong)
+        .filter_features(features)
+        .filter_cuisine(cuisine)
+        .filter_price(price)
+        .filter_sort(sort)
+  end
+
+  def self.filter_price( _case )
+    case _case[0]
+    when '$'    ; _start, _end = 0  ,10
+    when '$$'   ; _start, _end = 11 ,30
+    when '$$$'  ; _start, _end = 31 ,60
+    when '$$$$' ; _start, _end = 61 ,10000000
+    end
+    ids = all.collect do |x|
+      price = x.average_foods_price
+        x.id if price && (price >_start && price <= _end)
+    end
+    where(id:ids.compact)
+  end
+
+  def self.filter_features( _case )
+    ids = all.ids
+    ids = ids & all.map {|x| x.id if x.foods.where(:is_public => true) } if _case.include?("Today's Meal")
+    ids = ids & Delivery.pluck(:restaurant_id) if _case.include?('Delivery')
+    ids = ids & BulkBuy.pluck(:restaurant_id) if _case.include?('Bulk Buy')
+    ids = ids & BigBun.where(:is_public => true).pluck(:restaurant_id).uniq if _case.include?('Offer Big')
+    where(id:ids)
+  end
+
+  def self.filter_distance( _case , coordinate )
+    lat, long = coordinate
+    km = case _case[0]
+         when 'Driving-5min' ; 2
+         when 'Biking-5min'  ; 1
+         when 'Walking-1min' ; 0.1
+         else                ; _case[0].to_i * 0.1
+         end
+    restaurant_ids = Restaurant.get_around_restaurants( km , lat , long ).ids
+    where(id:restaurant_ids)
+  end
+
+  def self.filter_sort( _case )
+    case _case[0]
+    when 'BestMatch'        ; self.all
+    when 'Highest Rated'    ; order('food_avg_score desc')
+    when 'Most Reviewed'    ; order('food_comments_count desc')
+    when 'New'              ; order('updated_at desc')
+    end
+  end
+
+  def self.filter_cuisine( _case )
+    if _case.include?('Any Cuisine')
+      self.all
+    else
+      _cases = _case.uniq
+      _cases = _case.map {|x| "%#{ x.to_s.split(' ')[0].to_s.gsub(/[^a-zA-Z0-9\-]/,'') }%" }
+      cuisine_ids = _cases.map {|x|  Cuisine.where('name like ?',x).ids}.flatten
+      ids = RestaurantCuisineShip.where(cuisine_id:cuisine_ids).pluck(:restaurant_id).uniq
+      where(id: ids & self.ids )
+    end
+  end
+
   def get_food_avg_score
     food_ids = self.foods.pluck(:id)
-
     if FoodComment.find_by(:food_id => food_ids)
       FoodComment.where(:food_id => food_ids).average(:score)
     else

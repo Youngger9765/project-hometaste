@@ -1,0 +1,5 @@
+<% if @foods %>
+  $("#results").html("<%=j render 'main/foods',foods:@foods %>");
+<% elsif @restaurants %>
+  $("#results").html("<%=j render 'main/restaurants',restaurants:@restaurants%>");
+<% end %>

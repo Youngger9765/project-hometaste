@@ -1,0 +1,39 @@
+<% restaurants.each do |restaurant| %>
+    <div class="col-md-4 col-xs-6">
+      <div class="ui fluid card">
+        <div class="image">
+          <img data-src="<%= image_path 'tmp/kitchen.png' %>">
+        </div>
+        <div class="content">
+          <h4><a href=""><%= restaurant.name %></a></h4>
+          <div class="rating_wrapping">
+            <div class="show_rated_4"></div>
+            <span name="reivews">200 Reviews</span>
+          </div>
+          <div class="num_counts">
+            <i class="fa fa-heart red mr5" aria-hidden="true"></i>
+            <span>102 Likes</span>
+            <i class="cloche_icon" aria-hidden="true"></i>
+            <span>238 Orders</span>
+          </div>
+          <div class="hidden-xs">
+            <span class="sub_link mr5"><a href="">Vegan</a></span>
+            <span class="sub_link mr5"><a href="">Soup</a></span>
+            <span class="sub_link mr5"><a href="">Pumkim</a></span>
+            <span class="sub_link mr5"><a href="">Autum</a></span>
+          </div>
+
+          <div class="flex_center_start location">
+            <div class="ui icon button address flex_center" data-tooltip="Address" data-inverted="">
+              <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+            </div>
+            <div class="flex_center">
+              <p>全家家就是你家你家就是我家 我家不是你家</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+<% end %>

@@ -212,7 +212,7 @@
 		<br>
 		<!-- delivery only -->
 		<div class="check_box" style="border-bottom: 2px solid;">
-			<%= check_box_tag 'delivery_only'%><span>Delivery only</span>
+			<%= check_box_tag 'delivery_only', "checked"%><span>Delivery only</span>
 		</div>
 		<br>
 		<div id="delivery-form">
@@ -247,7 +247,7 @@
 
 </div>
 
-<% if @chef.restaurant.is_approved%>
+<% if current_user == @user && @chef.restaurant.is_approved%>
 
 <%else%>
 	<!-- restaurant dish photos -->
@@ -269,4 +269,24 @@
 	</div>
 <%end%>
 
+<script type="text/javascript">
+	var check_bulk_buy_size = function(){
+		if (<%=@chef.restaurant.id?%> && <%=BulkBuy.where(:restaurant_id=>@chef.restaurant.id).size > 0%>) {
+			$('#bulk_buy_only').click();
+		} else {
+			$('#bulk-buy-form').hide();
+		}
+	};
+
+	var check_delivery_size = function(){
+		if (<%=@chef.restaurant.id%> && <%= @chef.restaurant.delivery.id?%>) {
+			$('#delivery_only').click();
+		} else {
+			$('#delivery-form').hide();
+		}
+	};
+
+	check_bulk_buy_size();
+	check_delivery_size();
+</script>
 

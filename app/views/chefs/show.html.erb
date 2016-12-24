@@ -1,10 +1,30 @@
 <div class="container chef-container center" >
 	<div class="row">
 		<div class="row container chef-sub-container center">
-			<div class="col-md-12" id="chef-show-bg-img">
+			<div class="col-md-12" id="chef-show-bg-img" style="background-image: url(<%=asset_path(@chef.restaurant.main_photo.url)%>)">
+
 				<div class="col-md-4">
-					
+					<% if @chef.user.user_photo.photo.exists? %>
+						<%= image_tag(@chef.user.user_photo.photo(:thumb))%>
+					<%end%>
 				</div>
+				<div class="col-md-4" id="restaurant_name"><%= @chef.restaurant.name%></div>
+				<% if current_user == @user%>
+					<div class="btn btn-default col-md-2 right" id="chef-edit-btn">
+						<i class="fa fa-pencil" aria-hidden="true"> <%= link_to "Edit Profile", edit_chef_path(@chef) %></i>
+					</div>
+				<%end%>
+				<% if current_user.is_admin %>
+					<div class="btn btn-success col-md-2 right" id="chef-review-btn">
+						<i class="fa fa-eye" aria-hidden="true"> <%= link_to "Review Chef", review_chef_path(@chef) %></i>
+					</div>
+				<%end%>
+			</div>
+			<div class="col-md-12">
+				<h3>About</h3>
+				<p>
+					<%= @chef.restaurant.description%>
+				</p>
 			</div>
 		</div>
 	</div>
@@ -13,6 +33,4 @@
 
 
 
-<div class="container">
-	<li><%= link_to "edit chef profile", edit_chef_path(@chef) %><span class="hidden-xs">|</span></li>
-</div>
+

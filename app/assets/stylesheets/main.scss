@@ -1,3 +1,6 @@
+body.main_index{
+  background-color: #FFFFFF;
+}
 .main_index{
   .banner {
     min-height: 400px;
@@ -15,15 +18,37 @@
         font-weight: lighter;
       }
     }
+    .ui.vertical.menu{
+      position: absolute;
+      display: none;
+      width:inherit;
+      margin-top: 0;
+      .item:before{
+        display: none;
+      }
+      &,& a{
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+    #keyword_input:focus {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      & + .ui.vertical.menu{
+        display: block;
+      }
+    }
     .search_wrap {
       margin: 50px auto ;
       max-width: 460px;
-      .ui.dropdown {
+      .field{
         width: 200px !important;
-        height: 46px;
         display: inline-block;
         .dropdown.icon,.text{
           line-height: 27px;
+        }
+        input{
+          height: 46px;
         }
         .item{
           background-color: $main_red;
@@ -48,7 +73,7 @@
     }
   }
 }
-.products.cards,.kitchens.cards{
+.foods.cards,.restaurants.cards{
   .col-md-4,.col-xs-6{
     min-height: inherit;
   }
@@ -56,7 +81,7 @@
 .ui.fluid.card.visible{
   display: block !important;
 }
-.products.cards .ui.fluid.card {
+.foods.cards .ui.fluid.card {
   .content {
     position: relative;
     .address_detail{
@@ -76,11 +101,8 @@
   .ui.button.address{
     position: absolute;
     background-color: transparent;
-    right: 20px;
-    top:0;
-  }
-  .fa-map-marker{
-    position: absolute;
+    right: 15px;
+    top:10px;
   }
   .meta span {
     text-decoration: underline;
@@ -98,8 +120,20 @@
     height: 50%;
   }
 }
-
+.filter_menu .radio.checkbox {
+  input:checked + label{
+    color: #000000;
+  }
+  label{
+    &:before,&:after{
+      display: none !important;
+    }
+  }
+}
 .filters {
+  .distance_input,p,label{
+    padding-left: 15px !important;
+  }
   margin-top: 15px;
   .ui.button{
     background-color: transparent;
@@ -126,6 +160,9 @@
     .ui.checkbox label:before{
       border-color: #FFFFFF;
       background-color: transparent;
+    }
+    .ui.checkbox label:before,.ui.checkbox label:after{
+      margin-left: -5px;
     }
     p{
       margin-top: 15px;
@@ -204,6 +241,9 @@
   .ui.radio.checkbox input:checked ~ .box:after, .ui.radio.checkbox input:checked ~ label:after{
     background-color: $main_red;
   }
+  #cuisine_modal_btn{
+    padding:11px 32px 13px;
+  }
 }
 
 .card_hover_link{
@@ -266,7 +306,7 @@
     background-color: $main_red;
   }
 }
-.kitchens.cards{
+.restaurants.cards,.gmap_cards{
   h4{
     font-weight: bold;
     font-size: 20px;
@@ -277,9 +317,8 @@
   }
   .ui.fluid.card .num_counts{
     margin-bottom: 5px;
-    img{
-      width: auto;
-      height: 15px;
+    .cloche_icon{
+      font-size:20px;
       margin-right: 5px;
     }
     span{
@@ -318,11 +357,6 @@
       font-size: 10px;
     }
   }
-  .meta span {
-    font-size: 10px;
-    text-decoration: underline;
-    color: #3A618D;
-  }
 }
 .load_more {
   min-height: 30px;
@@ -332,7 +366,7 @@
     height: 40px;
   }
 }
-@media (max-width: $xs-width){
+@media (max-width: $screen-xs-max){
   .filters{
     margin-top:0;
     margin-bottom: -10px;
@@ -351,7 +385,7 @@
       }
     }
   }
-  .products.cards{
+  .foods.cards{
     .content{
       padding: 0.5em;
     }
@@ -411,7 +445,7 @@
     }
   }
 }
-@media (min-width: $xs-width){
+@media (min-width: $screen-xs-max){
   .filters{
     height: 50px;
     .clearfix::before,
@@ -432,7 +466,7 @@
     }
   }
 }
-@media (min-width: 992px){
+@media (min-width: $screen-md-min){
   .filters{
     div[data-tooltip="Filter"]{
       margin-left: -440px;
