@@ -1,8 +1,8 @@
 class ChefsController < ApplicationController
 
-	before_action :find_chef, :only =>[:show, :edit, :update]
-	before_action :find_user, :only =>[:show, :edit, :update]
-	before_action :is_current_user?, :only =>[:edit, :update]
+	before_action :find_chef, :only =>[:show, :edit, :update, :review]
+	before_action :find_user, :only =>[:show, :edit, :update, :review]
+	before_action :has_authourity?, :except => [:new]
 
 	def new
 		@user = User.new
@@ -75,6 +75,10 @@ class ChefsController < ApplicationController
 		@chef.update(chef_params)
 	end
 
+	def review
+		
+	end
+
 	private
 
 	def chef_params
@@ -144,9 +148,17 @@ class ChefsController < ApplicationController
 
 	def is_current_user?
 		if current_user && @user == current_user
-
+			true
 		else
-			flash[:alert] = "You have no athuroity!"
+			false
+		end
+	end
+
+	def has_authourity?
+		if is_current_user? || user_admin?
+			true
+		else
+			flash[:alert] = "You have no authourity!"
 			redirect_to root_path
 		end
 	end

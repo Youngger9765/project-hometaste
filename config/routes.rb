@@ -19,7 +19,13 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :chefs
+
+  resources :chefs do
+    member do
+      get :review
+    end
+  end
+
   resources :foods
   resources :restaurants
   resources :comments

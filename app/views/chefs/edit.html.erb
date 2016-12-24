@@ -62,8 +62,10 @@
 		}
 	}
 
-	$('#bulk-buy-form').hide();
-	$('#delivery-form').hide();
+	if (<%= params[:action]== 'new'%>) {
+		$('#bulk-buy-form').hide();
+		$('#delivery-form').hide();
+	}
 
 	$('#both_bulk_buy_delivery').click(function(){
 		var checked_both = $('#both_bulk_buy_delivery').prop("checked");
