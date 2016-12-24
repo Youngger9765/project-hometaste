@@ -147,6 +147,7 @@ namespace :dev do
 				payment_method: ["cash", "VISA"].sample,
 				payment_status: ["done", "not yet"].sample,
 				order_status: ["in_advance","in_process","finished"].sample,
+        created_at: Faker::Time.between(DateTime.now-720 , DateTime.now),
 			)
 		}
 
@@ -178,7 +179,6 @@ namespace :dev do
   task :count_order_amount => :environment do
 
     Order.all.each do |order|
-      puts(order.id)
       sum = order.order_food_ships.sum(:amount)
       order.amount = sum
       order.save!
