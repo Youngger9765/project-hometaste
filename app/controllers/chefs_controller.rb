@@ -175,8 +175,8 @@ class ChefsController < ApplicationController
 		if current_user && @user == current_user
 			true
 		else
-			flash[:notice] = "Please Login"
-			false
+			flash[:alert] = "Please Login"
+			redirect_to :back
 		end
 	end
 
@@ -184,8 +184,8 @@ class ChefsController < ApplicationController
 		if current_user && (current_user.is_chef || current_user.is_admin)
 			true
 		else
-			flash[:alert] = "Please Login"
-			false
+			flash[:alert] = "No authority!"
+			redirect_to :back
 		end
 	end
 end
