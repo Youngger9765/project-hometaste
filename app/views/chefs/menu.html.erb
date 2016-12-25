@@ -14,17 +14,22 @@
 		<div class="clearfix"></div>
 		<!-- menu content -->
 		<div class="row container menu-sub-container center" id="menu-content-container">
-			<h3>menu</h3>
 			<% @foods.each do |food|%>
 				<div class="row container menu-food-container center">
 					<div class="col-md-9">
 						<!-- photo -->
-						<div class="col-md-12">
+						<div class="col-md-12 center">
+
 							<% if food.food_photos.size > 0%>
-								<% food.food_photos.each_with_index do |food_photo, index|%>
-									<%= image_tag(food_photo.photo(:original),:class=>"food-photo-#{index} food-photo", :data => index)%>
-								<%end%>
-								<i class="photo-select-btn btn btn-default btn-xs fa fa-chevron-circle-right" aria-hidden="true"></i>
+								<div class="col-md-11 food-photo-div">
+									<% food.food_photos.each_with_index do |food_photo, index|%>
+										<%= image_tag(food_photo.photo(:original),:class=>"food-photo-#{index} food-photo", :data => index)%>
+									<%end%>
+								</div>
+								<div class="col-md-1 photo-select-btn-div">
+									<i class="photo-select-btn btn btn-default btn-xs fa fa-chevron-circle-right right" aria-hidden="true"></i>
+								</div>
+
 							<%else%>
 								<%= image_tag("empty_img.png")%>
 							<%end%>

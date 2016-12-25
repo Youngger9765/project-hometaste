@@ -164,7 +164,7 @@
 	}
 
 	.menu-sub-container{
-    border: 2px solid black; /*TODO:; 0*/
+    border: 0;
     width: 100%;
     margin: 1em auto;
     padding: 0;
@@ -177,13 +177,21 @@
     padding: 0;
 
     img {
-			width: 90%;
+			width: auto;
 	    height: 8em;
 	    margin: 1em auto;
 		}
 
 		.fa {
 			font-size: 30px;
+		}
+
+		.food-photo-div{
+			text-align: center;
+		}
+
+		.photo-select-btn-div{
+			line-height: 10em;
 		}
 	}
 
