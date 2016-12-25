@@ -49,16 +49,22 @@
 						<%end%>
 
 						<!-- re-post -->
-						<%= link_to "save to private","",:class=>"btn btn-default"%>
+						<%= link_to "re-post","",:class=>"btn btn-default"%>
 
 						<!-- share -->
-						<%= link_to "save to private","",:class=>"btn btn-default"%>
+						<%= link_to "",:class=>"btn btn-default" do %>
+						  <i class="fa fa-share-alt" aria-hidden="true"></i>
+						<% end %>
 
 						<!-- edit -->
-						<%= link_to "save to private","",:class=>"btn btn-default"%>
+						<%= link_to edit_chef_food_path(@chef.id,food.id),:class=>"btn btn-default" do %>
+						  <i class="fa fa-pencil" aria-hidden="true"></i>
+						<% end %>
 
 						<!-- delete -->
-						<%= link_to "save to private","",:class=>"btn btn-default"%>
+						<%= link_to chef_food_path(@chef.id,food.id), :method => :delete, :class=>"btn btn-default" do %>
+						  <i class="fa fa-trash" aria-hidden="true"></i>
+						<% end %>
 					</div>
 				</div>
 			<%end%>

@@ -1,9 +1,9 @@
 class FoodsController < ApplicationController
 
-	before_action :find_chef, :only =>[:update,:create]
-	before_action :is_current_user?, :only => [:update, :create]
-	before_action :has_authority?, :only => [:update, :create]
-	before_action :find_food, :only =>[:update]
+	before_action :find_chef, :only =>[:update,:create,:edit,:destroy]
+	before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
+	before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
+	before_action :find_food, :only =>[:update,:edit,:destroy]
 
   def show
   end
@@ -35,14 +35,27 @@ class FoodsController < ApplicationController
 
   	if params[:is_public]
   		@food.is_public = params[:is_public]
+
   		if @food.save!
   			redirect_to menu_chef_path(@chef)
-  		else
-  			flash[:alert] = "update fail"
-				render :action => :back
   		end
-  	end
 
+  	elsif params[:food] && @food.update!(food_params)
+  		redirect_to menu_chef_path(@chef)
+
+  	else
+  		flash[:alert] = "update fail"
+			render :action => :back
+  	end
+  end
+
+  def edit
+
+  end
+
+  def destroy
+  	@food.destroy!
+  	redirect_to menu_chef_path(@chef)
   end
 
   private
