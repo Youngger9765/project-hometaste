@@ -4,16 +4,16 @@
 	</div>
 	<div class="row container chef-menu-container center">
 		<div id="chef-menu-title">
-			<div class="col-md-6 center">
+			<div class="col-md-6 center btn btn-default" id="menu-title-btn">
 				Main Menu
 			</div>
-			<div class="col-md-6 center">
+			<div class="col-md-6 center btn btn-default" id="bigbun-title-btn">
 				Big Bun
 			</div>
 		</div>
 		<div class="clearfix"></div>
 		<!-- menu content -->
-		<div class="row container menu-sub-container center">
+		<div class="row container menu-sub-container center" id="menu-content-container">
 			<h3>menu</h3>
 			<% @foods.each do |food|%>
 				<div class="row container menu-food-container center">
@@ -65,7 +65,7 @@
 		</div>
 
 		<!-- big bun content -->
-		<div class="row container menu-sub-container center">
+		<div class="row container menu-sub-container center" id="bigbun-content-container">
 			<h3>bigbun</h3>
 		</div>
 
@@ -114,9 +114,29 @@
 		});
 	}
 
+	var show_content_by_title = function(){
+		$('#bigbun-content-container').hide();
+		$('#menu-title-btn').css('background-color','red');
+
+		$('#menu-title-btn').click(function(){
+			$('#menu-title-btn').css('background-color','red');
+			$('#bigbun-title-btn').css('background-color','white');
+			$('#menu-content-container').show();
+			$('#bigbun-content-container').hide();
+		});
+
+		$('#bigbun-title-btn').click(function(){
+			$('#menu-title-btn').css('background-color','white');
+			$('#bigbun-title-btn').css('background-color','red');
+			$('#menu-content-container').hide();
+			$('#bigbun-content-container').show();
+		});
+	};
+
 	default_photo();
 	change_photo();
 	trigger_photo_btn();
+	show_content_by_title();
 </script>
 
 
