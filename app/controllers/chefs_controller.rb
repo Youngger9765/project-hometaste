@@ -1,10 +1,12 @@
 class ChefsController < ApplicationController
 
 	before_action :find_chef, :only =>[
-		:show, :edit, :update, :review, :approve, :add_dish, :save_dish]
+		:show, :edit, :update, :review, :approve, :add_dish,
+		:save_dish, :menu]
 
 	before_action :find_user, :only =>[
-		:show, :edit, :update, :review, :approve, :add_dish, :save_dish]
+		:show, :edit, :update, :review, :approve, :add_dish,
+		:save_dish, :menu]
 
 	before_action :is_current_user?, :except => [:new]
 	before_action :has_authority?, :except => [:new]
@@ -98,18 +100,8 @@ class ChefsController < ApplicationController
 		end
 	end
 
-	def add_dish
-		@food = Food.new
-	end
-
-	def save_dish
-		@food = @chef.restaurant.foods.new(food_params)
-		if @food.save!
-			redirect_to chef_path(@chef)
-		else
-			flash[:alert] = "add_fish fail"
-			render :action => :add_dish
-		end
+	def menu
+		@foods = @chef.restaurant.foods.all
 	end
 
 	private
@@ -169,17 +161,6 @@ class ChefsController < ApplicationController
 
 	def bulk_buy_checked
 		params[:bulk_buy_only]
-	end
-
-	def food_params
-	  params.require(:food).permit(
-	  	:id, :restaurant_id, :about, :ingredients, :name, :price,
-	  	:is_public, :unit, :unit_name, :max_order, :availability_date,
-
-	  	:food_photos_attributes => [
-		  		:id, :food_id, :photo,
-		  ],
-	  )
 	end
 
 	def find_chef

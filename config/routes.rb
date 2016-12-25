@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :chefs do
+    resources :foods
     member do
       get :review
       get :approve

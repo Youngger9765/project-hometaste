@@ -3,7 +3,7 @@
 		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
 	</div>
 	<div class="row">
-		<%= form_for setup_food(@food), :url => save_dish_chef_path(@chef.id), :method => :post do |f| %>
+		<%= form_for setup_food(@food), :url => chef_foods_path(@chef.id), :method => :post do |f| %>
 			<div class="row container chef-sub-container center" id="chef-add-dish-container">
 
 				<!-- Name -->
