@@ -1,0 +1,90 @@
+<div class="container chef-container center" >
+	<div class="row col-md-offset-1">
+		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
+	</div>
+	<div class="row">
+		<%= form_for setup_food(@food), :url => chef_foods_path(@chef.id), :method => :post do |f| %>
+			<div class="row container chef-sub-container center" id="chef-add-dish-container">
+
+				<!-- Name -->
+				<div class="form_control col-md-12">
+			    <%= f.label :name, "Name of the dish/food" %> <br>
+			    <%= f.text_field :name %>
+		    </div>
+
+				<!-- About -->
+		    <div class="form_control col-md-12">
+			    <%= f.label :about, "About" %> <br>
+			    <%= f.text_area :about %>
+		    </div>
+
+				<!-- ingredients -->
+		    <div class="form_control col-md-12">
+			    <%= f.label :ingredients, "Ingredients" %> <br>
+			    <%= f.text_area :ingredients %>
+		    </div>
+
+				<!-- Unit -->
+				<div class="row form_control col-md-11" id="chef-dish-unit">
+					<div class="form_control col-md-12"><h3>Unit of Measure</h3> </div>
+					<div class="form_control col-md-2">
+						<%= f.number_field :unit, :step => 0.01, :placeholder => "1.2" %>
+			    </div>
+
+			    <div class="form_control col-md-2">
+				    <%= f.text_field :unit_name , :placeholder => "quart"%>
+			    </div>
+				</div>
+
+		    <!-- Price -->
+		    <div class="form_control col-md-2 underline-block">
+			    <%= f.label :price, "price" %> <br>
+			    <%= f.number_field :price, :step => 0.01, :placeholder => "$" %>
+		    </div>
+
+				<div class="clearfix"></div>
+
+				<!-- Max Order -->
+				<div class="form_control col-md-4 underline-block">
+			    <%= f.label :max_order, "Max Order Availible" %> <br>
+			    <%= f.number_field :max_order, :step => 0.01%>
+		    </div>
+
+		    <div class="clearfix"></div>
+
+				<!-- date -->
+				<div class="form_control col-md-4 underline-block">
+			    <%= f.label :availability_date, "Availible date" %> <br>
+			    <%= f.date_field :availability_date, :step => 0.01%>
+		    </div>
+			</div>
+			<!-- photos -->
+			<div class="row container chef-sub-container center" id="chef-add-dish-container">
+				<div class="form_control col-md-12">
+					<h2>Upload Pictures</h2>
+				</div>
+
+				<%= f.fields_for :food_photos, @food.food_photos.each do |photo| %>
+					<div class="form-group col-md-4 restaurant-dish-photo-div">
+						<div class="restaurant-dish-photo">
+							<% if @food.food_photos[photo.index].id?%>
+								<%= image_tag(@food.food_photos[photo.index].photo(:thumb))%>
+							<%end%>
+							<%= photo.file_field :photo %>
+						</div>
+					</div>
+				<%end%>
+
+			</div>
+
+			<div class="form_control col-md-offset-1 col-md-10">
+				<%= f.submit "SUBMIT",:class=>"btn btn-success center", :id=>"chef-submit-btn"%>
+			</div>
+		<%end%>
+	</div>
+</div>
+
+
+
+
+

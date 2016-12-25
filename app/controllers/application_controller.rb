@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
     if current_user && current_user.is_admin?
       true
     else
+      flash[:alert] = "You have no authourity!"
       redirect_to root_path
     end
   end

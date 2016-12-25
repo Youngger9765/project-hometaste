@@ -11,7 +11,7 @@
 			<div id="chef-user-main-photo" class="form_control col-md-12">
 				<h3>Chef's photo</h3>
 
-				<% if @chef.user.user_photo.photo.exists? %>
+				<% if @chef.user.user_photo && @chef.user.user_photo.photo.exists? %>
 					<%= image_tag(@chef.user.user_photo.photo(:thumb))%>
 				<%end%>
 

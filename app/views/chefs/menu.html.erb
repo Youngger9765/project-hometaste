@@ -1,0 +1,104 @@
+<div class="container chef-container center" id="chef-menu-container" >
+	<div class="row col-md-offset-1">
+		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
+	</div>
+	<div class="row container chef-menu-container center">
+		<div id="chef-menu-title">
+			<div class="col-md-6 center">
+				Main Menu
+			</div>
+			<div class="col-md-6 center">
+				Big Bun
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<!-- menu content -->
+		<div class="row container menu-sub-container center">
+			<h3>menu</h3>
+			<% @foods.each do |food|%>
+				<div class="row container menu-food-container center">
+					<div class="col-md-9">
+						<!-- photo -->
+						<div class="col-md-12">
+							<% if food.food_photos.size > 0%>
+								<% food.food_photos.each_with_index do |food_photo, index|%>
+									<%= image_tag(food_photo.photo(:original),:class=>"food-photo-#{index} food-photo", :data => index)%>
+								<%end%>
+							<%else%>
+								<%= image_tag("empty_img.png")%>
+							<%end%>
+						</div>
+						<!-- Name -->
+						<div class="col-md-6">
+							<%= food.name%>
+						</div>
+						<!-- $ unit -->
+						<div class="col-md-6">
+							$ <%= food.price%> | <%= food.unit%> <%=food.unit_name%>
+						</div>
+					</div>
+
+					<div class="col-md-3 food-btn-container">
+
+						<!-- private -->
+						<%= link_to "save to private","",:class=>"btn btn-default"%>
+
+						<!-- re-post -->
+						<%= link_to "save to private","",:class=>"btn btn-default"%>
+
+						<!-- share -->
+						<%= link_to "save to private","",:class=>"btn btn-default"%>
+
+						<!-- edit -->
+						<%= link_to "save to private","",:class=>"btn btn-default"%>
+
+						<!-- delete -->
+						<%= link_to "save to private","",:class=>"btn btn-default"%>
+					</div>
+				</div>
+			<%end%>
+		</div>
+
+		<!-- big bun content -->
+		<div class="row container menu-sub-container center">
+			<h3>bigbun</h3>
+		</div>
+
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	var default_photo = function(){
+		$('.food-photo').hide();
+		$('.food-photo-0').show();
+	}
+
+	var change_photo = function(){
+		$('.food-photo').click(function(){
+			$(this).hide();
+			var photo_count = $(this).parent().find('.food-photo').length
+			var data_number = Number($(this).attr('data'));
+			if (photo_count > 1 && data_number < photo_count-1) {
+				var new_data_number = data_number + 1
+				var photo_class = '.food-photo-' + new_data_number
+				$(this).parent().find(photo_class).show();
+
+			} else if(photo_count == 1) {
+				$(this).show();
+
+			} else {
+				var new_data_number = 0
+				var photo_class = '.food-photo-' + new_data_number
+				$(this).parent().find(photo_class).show();
+			}
+		});
+	}
+
+	default_photo();
+	change_photo();
+</script>
+
+
+
