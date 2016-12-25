@@ -37,7 +37,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<%= link_to 'add dish',new_chef_food_path(@chef.id),:class=>"btn btn-primary"%>
-					<%= link_to 'add bigbun',"",:class=>"btn btn-warning"%>
+					<%= link_to 'add bigbun', new_chef_big_bun_path(@chef.id),:class=>"btn btn-warning"%>
 					<%= link_to 'set Menu',menu_chef_path(@chef.id),:class=>"btn btn-default"%>
 				</div>
 			</div>

@@ -1,46 +1,44 @@
-class FoodsController < ApplicationController
+class BigBunsController < ApplicationController
 
 	before_action :find_chef, :only =>[:update,:create,:edit,:destroy]
 	before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
 	before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
-	before_action :find_food, :only =>[:update,:edit,:destroy]
+	before_action :find_big_bun, :only =>[:update,:edit,:destroy]
 
-  def show
-  end
 
-  def new
-  	@food = Food.new
+	def new
+		@big_bun = BigBun.new
   	if params[:chef_id]
   		@chef = Chef.find(params[:chef_id])
   	end
-  end
+	end
 
-  def create
-  	if params[:chef_id]
+	def create
+		if params[:chef_id]
   		@chef = Chef.find(params[:chef_id])
-	  	@food = @chef.restaurant.foods.new(food_params)
-			if @food.save!
+	  	@big_bun = @chef.restaurant.big_buns.new(big_bun_params)
+			if @big_bun.save!
 				redirect_to chef_path(@chef)
 			else
-				flash[:alert] = "add_fish fail"
+				flash[:alert] = "add_big_bun fail"
 				render :action => :new
 			end
 		else
-			flash[:alert] = "add_fish fail"
+			flash[:alert] = "add_big_bun fail"
 			render :action => :new
 		end
-  end
+	end
 
-  def update
+	def update
 
   	if params[:is_public]
-  		@food.is_public = params[:is_public]
+  		@big_bun.is_public = params[:is_public]
 
-  		if @food.save!
+  		if @big_bun.save!
   			redirect_to menu_chef_path(@chef)
   		end
 
-  	elsif params[:food] && @food.update!(food_params)
+  	elsif params[:big_bun] && @big_bun.update!(big_bun_params)
   		redirect_to menu_chef_path(@chef)
 
   	else
@@ -54,19 +52,18 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-  	@food.destroy!
+  	@big_bun.destroy!
   	redirect_to menu_chef_path(@chef)
   end
 
-  private
+	private
 
-  def food_params
-	  params.require(:food).permit(
-	  	:id, :restaurant_id, :about, :ingredients, :name, :price,
-	  	:is_public, :unit, :unit_name, :max_order, :availability_date,
+	def big_bun_params
+	  params.require(:big_bun).permit(
+	  	:id, :restaurant_id, :style, :unit, :start_datetime, :stop_datetime,
 
-	  	:food_photos_attributes => [
-		  		:id, :food_id, :photo,
+	  	:big_bun_photo_attributes => [
+		  		:id, :big_bun_id, :photo,
 		  ],
 	  )
 	end
@@ -75,8 +72,8 @@ class FoodsController < ApplicationController
 		@chef = Chef.find(params[:chef_id])
 	end
 
-	def find_food
-		@food = Food.find(params[:id])
+	def find_big_bun
+		@big_bun = BigBun.find(params[:id])
 	end
 
 	def is_current_user?
@@ -96,6 +93,4 @@ class FoodsController < ApplicationController
 			redirect_to :back
 		end
 	end
-
-
 end
