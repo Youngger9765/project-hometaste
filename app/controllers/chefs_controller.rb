@@ -70,7 +70,6 @@ class ChefsController < ApplicationController
 	end
 
 	def show
-		
 	end
 
 	def edit
@@ -87,7 +86,6 @@ class ChefsController < ApplicationController
 	end
 
 	def review
-		
 	end
 
 	def approve
@@ -177,6 +175,10 @@ class ChefsController < ApplicationController
 	  params.require(:food).permit(
 	  	:id, :restaurant_id, :about, :ingredients, :name, :price,
 	  	:is_public, :unit, :unit_name, :max_order, :availability_date,
+
+	  	:food_photos_attributes => [
+		  		:id, :food_id, :photo,
+		  ],
 	  )
 	end
 
