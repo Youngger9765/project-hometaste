@@ -1,5 +1,11 @@
 class BigBunsController < ApplicationController
 
+	before_action :find_chef, :only =>[:update,:create,:edit,:destroy]
+	before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
+	before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
+	before_action :find_big_bun, :only =>[:update,:edit,:destroy]
+
+
 	def new
 		@big_bun = BigBun.new
   	if params[:chef_id]
@@ -23,6 +29,33 @@ class BigBunsController < ApplicationController
 		end
 	end
 
+	def update
+
+  	if params[:is_public]
+  		@big_bun.is_public = params[:is_public]
+
+  		if @big_bun.save!
+  			redirect_to menu_chef_path(@chef)
+  		end
+
+  	elsif params[:big_bun] && @big_bun.update!(big_bun_params)
+  		redirect_to menu_chef_path(@chef)
+
+  	else
+  		flash[:alert] = "update fail"
+			render :action => :back
+  	end
+  end
+
+  def edit
+
+  end
+
+  def destroy
+  	@big_bun.destroy!
+  	redirect_to menu_chef_path(@chef)
+  end
+
 	private
 
 	def big_bun_params
@@ -33,5 +66,31 @@ class BigBunsController < ApplicationController
 		  		:id, :big_bun_id, :photo,
 		  ],
 	  )
+	end
+
+	def find_chef
+		@chef = Chef.find(params[:chef_id])
+	end
+
+	def find_big_bun
+		@big_bun = BigBun.find(params[:id])
+	end
+
+	def is_current_user?
+		if current_user && @chef.user == current_user
+			true
+		else
+			flash[:notice] = "Please Login"
+			redirect_to :back
+		end
+	end
+
+	def has_authority?
+		if current_user && (current_user.is_chef || current_user.is_admin)
+			true
+		else
+			flash[:alert] = "No authority!"
+			redirect_to :back
+		end
 	end
 end
