@@ -142,6 +142,10 @@
 	    border-bottom: 2px solid;
 		}
 
+		.number-block {
+			width: 100%;
+		}
+
 		.restaurant-dish-photo-div input {
 			border: 0 ;
 		}
@@ -190,8 +194,43 @@
 			text-align: center;
 		}
 
+		.bigbun-photo-div{
+			text-align: center;
+		}
+
 		.photo-select-btn-div{
 			line-height: 10em;
+		}
+
+		#bigbun-title-div {
+			h2{
+				margin:0;
+				font-size: 24px;
+			}
+
+			p{
+				margin:0;
+				font-size: 14px;
+			}
+			
+
+		}
+	}
+
+	.bigbun-info-container{
+		border-right: 2px solid black;
+	}
+
+	.bigbun-btn-container {
+		text-align: center;
+
+		.btn {
+			margin: 0.5em auto;
+			width: 100%;
+
+			.fa{
+				font-size: 20px;
+			}
 		}
 	}
 
@@ -209,3 +248,5 @@
 		}
 	}
 }
+
+

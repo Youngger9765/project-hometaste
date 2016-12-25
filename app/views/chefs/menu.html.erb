@@ -77,7 +77,66 @@
 
 		<!-- big bun content -->
 		<div class="row container menu-sub-container center" id="bigbun-content-container">
-			<h3>bigbun</h3>
+			<% @big_buns.each do |big_bun|%>
+				<div class="row container menu-food-container center">
+					<div class="col-md-9 bigbun-info-container">
+						<!-- photo -->
+						<div class="col-md-12 center bigbun-photo-div">
+							<% if big_bun.big_bun_photo%>
+								<%= image_tag(big_bun.big_bun_photo.photo(:original))%>
+							<%else%>
+								<%= image_tag("empty_img.png")%>
+							<%end%>
+						</div>
+
+						<!-- Style -->
+						<div class="col-md-8" id="bigbun-title-div">
+							<h2>
+								Big bun#<%= big_bun.id%> : <%=big_bun.style%>
+							</h2>
+							<p>
+								start at: <%=big_bun.start_datetime.strftime('%Y %m %d %H:%M:%S') %>
+							</p>
+							 <p>
+							 	stop at: <%=big_bun.stop_datetime.strftime('%Y %m %d %H:%M:%S') %>
+							 </p>
+						</div>
+
+						<!-- $ unit -->
+						<div class="col-md-4">
+							<%= big_bun.unit%> pieces
+						</div>
+					</div>
+
+					<div class="col-md-3 bigbun-btn-container">
+
+						<!-- private -->
+						<% if big_bun.is_public%>
+							<%= link_to "save to private",chef_big_bun_path(@chef.id, big_bun.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
+						<%else%>
+							<%= link_to "save to public",chef_big_bun_path(@chef.id, big_bun.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
+						<%end%>
+
+						<!-- re-post -->
+						<%= link_to "re-post","",:class=>"btn btn-default"%>
+
+						<!-- share -->
+						<%= link_to "",:class=>"btn btn-default" do %>
+						  <i class="fa fa-share-alt" aria-hidden="true"></i>
+						<% end %>
+
+						<!-- edit -->
+						<%= link_to edit_chef_big_bun_path(@chef.id,big_bun.id),:class=>"btn btn-default" do %>
+						  <i class="fa fa-pencil" aria-hidden="true"></i>
+						<% end %>
+
+						<!-- delete -->
+						<%= link_to chef_big_bun_path(@chef.id,big_bun.id), :method => :delete, :class=>"btn btn-default" do %>
+						  <i class="fa fa-trash" aria-hidden="true"></i>
+						<% end %>
+					</div>
+				</div>
+			<%end%>
 		</div>
 
 	</div>

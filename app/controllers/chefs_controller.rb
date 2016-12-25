@@ -102,6 +102,7 @@ class ChefsController < ApplicationController
 
 	def menu
 		@foods = @chef.restaurant.foods.all
+		@big_buns = @chef.restaurant.big_buns.all
 	end
 
 	private
