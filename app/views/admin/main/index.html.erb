@@ -10,7 +10,7 @@
         <%= form_for @order_filter, url: url_for(controller:admin_main_index_path, action: "index"), method: "get" do |f| %>
           <%= f.select :year_filter,["select year", "all"] + ((@first_year..@last_year).to_a) %>
           <%= f.select :month_filter,["select month"] + ((1..12).to_a) %>
-          <%= f.submit "filter", :class=>"btn btn-default" %>
+          <%= f.submit "filter", :class=>"btn btn-default order-filter-btn"%>
         <% end %>
       </div>
     </div>
