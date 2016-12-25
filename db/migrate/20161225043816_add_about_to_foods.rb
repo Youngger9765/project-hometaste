@@ -5,6 +5,6 @@ class AddAboutToFoods < ActiveRecord::Migration[5.0]
   	add_column :foods, :unit, :float
   	add_column :foods, :unit_name, :string
   	add_column :foods, :max_order, :float
-  	add_column :foods, :availability_date, :float
+  	add_column :foods, :availability_date, :date
   end
 end

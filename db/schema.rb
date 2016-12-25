@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20161225043816) do
     t.float    "unit",              limit: 24
     t.string   "unit_name"
     t.float    "max_order",         limit: 24
-    t.float    "availability_date", limit: 24
+    t.date     "availability_date"
   end
 
   create_table "order_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

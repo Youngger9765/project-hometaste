@@ -126,4 +126,21 @@
 		}
 	}
 
+	#chef-add-dish-container {
+		input {
+	    border: 2px solid;
+		}
+
+		#chef-dish-unit {
+			input {
+				width: 100%;
+			}
+		}
+
+		.underline-block input{
+			border: 0;
+	    border-bottom: 2px solid;
+		}
+	}
+
 }
