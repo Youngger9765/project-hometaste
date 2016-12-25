@@ -1,0 +1,31 @@
+<div class="container chef-container center" >
+	<div class="row col-md-offset-1">
+		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
+	</div>
+	<div class="row">
+		<div class="row container chef-sub-container center">
+			<%= form_for @food, :url => save_dish_chef_path(@chef.id), :method => :post do |f| %>
+				<div class="form_control col-md-12">
+			    <%= f.label :name, "Name of the dish/food" %> <br>
+			    <%= f.text_field :name %>
+		    </div>
+
+		    <div class="form_control col-md-12">
+			    <%= f.label :name, "Name of the dish/food" %> <br>
+			    <%= f.text_field :name %>
+		    </div>
+
+
+
+
+
+		    
+			<%end%>
+		</div>
+	</div>
+</div>
+
+
+
+
+

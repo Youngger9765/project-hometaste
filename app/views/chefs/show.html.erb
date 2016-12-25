@@ -1,4 +1,9 @@
 <div class="container chef-container center" >
+	<div class="row col-md-offset-1">
+		<h3>
+			<%=link_to "HOME", root_path%><span> > <%=params[:action]%></span>
+		</h3>
+	</div>
 	<div class="row">
 		<div class="row container chef-sub-container center">
 			<div class="col-md-12" id="chef-show-bg-img" style="background-image: url(<%=asset_path(@chef.restaurant.main_photo.url)%>)">
@@ -31,7 +36,7 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<%= link_to 'add dish',"",:class=>"btn btn-primary"%>
+					<%= link_to 'add dish',add_dish_chef_path(@chef.id),:class=>"btn btn-primary"%>
 					<%= link_to 'add bigbun',"",:class=>"btn btn-warning"%>
 					<%= link_to 'set Menu',"",:class=>"btn btn-default"%>
 				</div>

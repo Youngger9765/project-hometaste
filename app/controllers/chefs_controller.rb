@@ -1,7 +1,11 @@
 class ChefsController < ApplicationController
 
-	before_action :find_chef, :only =>[:show, :edit, :update, :review, :approve]
-	before_action :find_user, :only =>[:show, :edit, :update, :review, :approve]
+	before_action :find_chef, :only =>[
+		:show, :edit, :update, :review, :approve, :add_dish]
+
+	before_action :find_user, :only =>[
+		:show, :edit, :update, :review, :approve, :add_dish]
+
 	before_action :has_authourity?, :except => [:new]
 	before_action :user_admin?, :only =>[:approve]
 
@@ -92,6 +96,20 @@ class ChefsController < ApplicationController
 		else
 			flash[:alert] = "approve fail"
 			render :action => :review
+		end
+	end
+
+	def add_dish
+		@restaurant = @chef.restaurant
+		@food = @restaurant.foods.new
+	end
+
+	def save_dish
+		if @food.save!
+			redirect_to chef_path(@chef)
+		else
+			flash[:alert] = "add_fish fail"
+			render :action => :add_dish
 		end
 	end
 

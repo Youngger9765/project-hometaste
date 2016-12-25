@@ -24,6 +24,10 @@ Rails.application.routes.draw do
     member do
       get :review
       get :approve
+      get :add_dish
+      post :save_dish
+      get :add_big_bun
+      get :menu
     end
   end
 
