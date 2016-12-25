@@ -24,6 +24,7 @@
 								<% food.food_photos.each_with_index do |food_photo, index|%>
 									<%= image_tag(food_photo.photo(:original),:class=>"food-photo-#{index} food-photo", :data => index)%>
 								<%end%>
+								<i class="photo-select-btn btn btn-default btn-xs fa fa-chevron-circle-right" aria-hidden="true"></i>
 							<%else%>
 								<%= image_tag("empty_img.png")%>
 							<%end%>
@@ -73,31 +74,45 @@
 	var default_photo = function(){
 		$('.food-photo').hide();
 		$('.food-photo-0').show();
+		$('.food-photo-0').addClass("active");
 	}
 
 	var change_photo = function(){
 		$('.food-photo').click(function(){
 			$(this).hide();
+			$(this).removeClass('active');
+
 			var photo_count = $(this).parent().find('.food-photo').length
 			var data_number = Number($(this).attr('data'));
+
 			if (photo_count > 1 && data_number < photo_count-1) {
 				var new_data_number = data_number + 1
 				var photo_class = '.food-photo-' + new_data_number
 				$(this).parent().find(photo_class).show();
+				$(this).parent().find(photo_class).addClass("active");
 
 			} else if(photo_count == 1) {
 				$(this).show();
+				$(this).addClass("active");
 
 			} else {
 				var new_data_number = 0
 				var photo_class = '.food-photo-' + new_data_number
 				$(this).parent().find(photo_class).show();
+				$(this).parent().find(photo_class).addClass("active");
 			}
+		});
+	}
+
+	var trigger_photo_btn = function(){
+		$('.photo-select-btn').click(function(){
+			$(this).parent().find(".food-photo.active").click();
 		});
 	}
 
 	default_photo();
 	change_photo();
+	trigger_photo_btn();
 </script>
 
 
