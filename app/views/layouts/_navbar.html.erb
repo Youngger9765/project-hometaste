@@ -25,7 +25,7 @@
             <ul class="dropdown-menu">
               <% if current_user.is_chef %>
                 <li><%= link_to('Chef’s Homepage', chef_path(current_user.chef)) %></li>
-                <li><%= link_to('Menu', '') %></li>
+                <li><%= link_to('Menu', menu_chef_path(current_user.chef)) %></li>
                 <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
               <% else %>
                 <li><%= link_to('My account', user_path(current_user)) %></li>
