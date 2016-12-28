@@ -6,8 +6,28 @@
 
 <!-- restaurant -->
 <div class="row container chef-sub-container center">
+	<%= f.fields_for :user do |u| %>
+		<%= u.fields_for :user_photo do |user_photo| %>
+			<div id="chef-user-main-photo" class="form_control col-md-12">
+				<h3>Chef's photo</h3>
+
+				<% if @chef.user.user_photo && @chef.user.user_photo.photo.exists? %>
+					<%= image_tag(@chef.user.user_photo.photo(:thumb))%>
+				<%end%>
+
+		    <%= user_photo.file_field :photo %>
+	    </div>
+	  <%end%>
+	 <%end%>
+
 	<%= f.fields_for :restaurant do |r| %>
 		<div id="restaurant-main-photo" class="form_control col-md-12">
+	    <h3>Restaurant's photo</h3>
+
+	    <% if @chef.restaurant.main_photo.exists? %>
+				<%= image_tag(@chef.restaurant.main_photo(:thumb))%>
+			<%end%>
+
 	    <%= r.file_field :main_photo %>
     </div>
 
@@ -56,7 +76,7 @@
 	    </div>
     </div>
 
-		<% if params[:action] == "edit"%>
+		<% if @chef.restaurant.is_approved %>
 
 		<%else%>
 			<!-- certificate -->
@@ -67,6 +87,11 @@
 		    <%= r.text_field :certificated_num, :placeholder=>"class certificate #" %>
 	    </div>
 	    <div class="form-group col-md-6">
+
+				<% if @chef.restaurant.certificated_img.exists?%>
+					<%= link_to image_tag(@chef.restaurant.certificated_img(:thumb)), @chef.restaurant.certificated_img.url%>
+				<%end%>
+
 		    <%=r.file_field :certificated_img%>
 			</div>
 		<%end%>
@@ -112,11 +137,14 @@
 	    <%= password_field_tag 'confirm_password', ''%>
     </div>
 
-		<div class="form_control col-md-12">
-	    <%= u.label :email, "Your Email Address" %> <br>
-	    <p style="color:gray;">we'll send you an email to verify your address</p>
-	    <%= u.text_field :email, :placeholder=>"Email" %>
-    </div>
+		<% if params[:action] == "new"%>
+			<div class="form_control col-md-12">
+		    <%= u.label :email, "Your Email Address" %> <br>
+		    <p style="color:gray;">we'll send you an email to verify your address</p>
+		    <%= u.text_field :email, :placeholder=>"Email" %>
+	    </div>
+		<%end%>
+
 	<% end %>
 
 	<div class="form_control col-md-12">
@@ -189,7 +217,7 @@
 		<br>
 		<!-- delivery only -->
 		<div class="check_box" style="border-bottom: 2px solid;">
-			<%= check_box_tag 'delivery_only'%><span>Delivery only</span>
+			<%= check_box_tag 'delivery_only', "checked"%><span>Delivery only</span>
 		</div>
 		<br>
 		<div id="delivery-form">
@@ -224,7 +252,7 @@
 
 </div>
 
-<% if params[:action] == "edit"%>
+<% if current_user == @user && @chef.restaurant.is_approved%>
 
 <%else%>
 	<!-- restaurant dish photos -->
@@ -237,6 +265,9 @@
 			<%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
 				<div class="form-group col-md-4 restaurant-dish-photo-div">
 					<div class="restaurant-dish-photo">
+						<% if @chef.restaurant.restaurant_dish_photos[photo.index].id?%>
+							<%= image_tag(@chef.restaurant.restaurant_dish_photos[photo.index].photo(:thumb))%>
+						<%end%>
 						<%= photo.file_field :photo %>
 					</div>
 				    <%= photo.text_area :comment, :placeholder => "dish photo comment" %>
@@ -246,6 +277,24 @@
 	</div>
 <%end%>
 
+<script type="text/javascript">
+	var check_bulk_buy_size = function(){
+		if (<%=@chef.restaurant.id?%> && <%=BulkBuy.where(:restaurant_id=>@chef.restaurant.id).size > 0%>) {
+			$('#bulk_buy_only').click();
+		} else {
+			$('#bulk-buy-form').hide();
+		}
+	};
 
+	var check_delivery_size = function(){
+		if (<%=@chef.restaurant.id%> && <%= @chef.restaurant.delivery.id?%>) {
+			$('#delivery_only').click();
+		} else {
+			$('#delivery-form').hide();
+		}
+	};
 
+	check_bulk_buy_size();
+	check_delivery_size();
+</script>
 

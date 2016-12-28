@@ -1,8 +1,16 @@
 class ChefsController < ApplicationController
 
-	before_action :find_chef, :only =>[:show, :edit, :update]
-	before_action :find_user, :only =>[:show, :edit, :update]
-	before_action :is_current_user?, :only =>[:edit, :update]
+	before_action :find_chef, :only =>[
+		:show, :edit, :update, :review, :approve, :add_dish,
+		:save_dish, :menu]
+
+	before_action :find_user, :only =>[
+		:show, :edit, :update, :review, :approve, :add_dish,
+		:save_dish, :menu]
+
+	before_action :is_current_user?, :except => [:new]
+	before_action :has_authority?, :except => [:new]
+	before_action :user_admin?, :only =>[:approve, :review]
 
 	def new
 		@user = User.new
@@ -64,11 +72,37 @@ class ChefsController < ApplicationController
 	end
 
 	def show
-		
 	end
 
 	def edit
 
+	end
+
+	def update
+		if @chef.update!(chef_params)
+			redirect_to chef_path(@chef)
+		else
+			flash[:alert] = "update fail"
+			render :action => :edit
+		end
+	end
+
+	def review
+	end
+
+	def approve
+		@restaurant = @chef.restaurant
+		if @restaurant.update(:is_approved => true)
+			redirect_to chef_path(@chef)
+		else
+			flash[:alert] = "approve fail"
+			render :action => :review
+		end
+	end
+
+	def menu
+		@foods = @chef.restaurant.foods.all
+		@big_buns = @chef.restaurant.big_buns.all
 	end
 
 	private
@@ -102,6 +136,10 @@ class ChefsController < ApplicationController
 
 	  	:user_attributes => [
 	  		:id, :email, :password,
+
+	  		:user_photo_attributes => [
+		  		:id, :user_id, :photo,
+		  	],
 	  	],
 	  )
 	end
@@ -136,10 +174,19 @@ class ChefsController < ApplicationController
 
 	def is_current_user?
 		if current_user && @user == current_user
-
+			true
 		else
-			flash[:alert] = "You have no athuroity!"
-			redirect_to root_path
+			flash[:alert] = "Please Login"
+			redirect_to :back
+		end
+	end
+
+	def has_authority?
+		if current_user && (current_user.is_chef || current_user.is_admin)
+			true
+		else
+			flash[:alert] = "No authority!"
+			redirect_to :back
 		end
 	end
 end

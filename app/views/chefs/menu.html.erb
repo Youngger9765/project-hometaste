@@ -1,0 +1,213 @@
+<div class="container chef-container center" id="chef-menu-container" >
+	<div class="row col-md-offset-1">
+		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
+	</div>
+	<div class="row container chef-menu-container center">
+		<div id="chef-menu-title">
+			<div class="col-md-6 center btn btn-default" id="menu-title-btn">
+				Main Menu
+			</div>
+			<div class="col-md-6 center btn btn-default" id="bigbun-title-btn">
+				Big Bun
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<!-- menu content -->
+		<div class="row container menu-sub-container center" id="menu-content-container">
+			<% @foods.each do |food|%>
+				<div class="row container menu-food-container center">
+					<div class="col-md-9">
+						<!-- photo -->
+						<div class="col-md-12 center">
+
+							<% if food.food_photos.size > 0%>
+								<div class="col-md-11 food-photo-div">
+									<% food.food_photos.each_with_index do |food_photo, index|%>
+										<%= image_tag(food_photo.photo(:original),:class=>"food-photo-#{index} food-photo", :data => index)%>
+									<%end%>
+								</div>
+								<div class="col-md-1 photo-select-btn-div">
+									<i class="photo-select-btn btn btn-default btn-xs fa fa-chevron-circle-right right" aria-hidden="true"></i>
+								</div>
+
+							<%else%>
+								<%= image_tag("empty_img.png")%>
+							<%end%>
+						</div>
+						<!-- Name -->
+						<div class="col-md-6">
+							<%= food.name%>
+						</div>
+						<!-- $ unit -->
+						<div class="col-md-6">
+							$ <%= food.price%> | <%= food.unit%> <%=food.unit_name%>
+						</div>
+					</div>
+
+					<div class="col-md-3 food-btn-container">
+
+						<!-- private -->
+						<% if food.is_public%>
+							<%= link_to "save to private",chef_food_path(@chef.id, food.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
+						<%else%>
+							<%= link_to "save to public",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
+						<%end%>
+
+						<!-- re-post -->
+						<%= link_to "re-post","",:class=>"btn btn-default"%>
+
+						<!-- share -->
+						<%= link_to "",:class=>"btn btn-default" do %>
+						  <i class="fa fa-share-alt" aria-hidden="true"></i>
+						<% end %>
+
+						<!-- edit -->
+						<%= link_to edit_chef_food_path(@chef.id,food.id),:class=>"btn btn-default" do %>
+						  <i class="fa fa-pencil" aria-hidden="true"></i>
+						<% end %>
+
+						<!-- delete -->
+						<%= link_to chef_food_path(@chef.id,food.id), :method => :delete, :class=>"btn btn-default" do %>
+						  <i class="fa fa-trash" aria-hidden="true"></i>
+						<% end %>
+					</div>
+				</div>
+			<%end%>
+		</div>
+
+		<!-- big bun content -->
+		<div class="row container menu-sub-container center" id="bigbun-content-container">
+			<% @big_buns.each do |big_bun|%>
+				<div class="row container menu-food-container center">
+					<div class="col-md-9 bigbun-info-container">
+						<!-- photo -->
+						<div class="col-md-12 center bigbun-photo-div">
+							<% if big_bun.big_bun_photo%>
+								<%= image_tag(big_bun.big_bun_photo.photo(:original))%>
+							<%else%>
+								<%= image_tag("empty_img.png")%>
+							<%end%>
+						</div>
+
+						<!-- Style -->
+						<div class="col-md-8" id="bigbun-title-div">
+							<h2>
+								Big bun#<%= big_bun.id%> : <%=big_bun.style%>
+							</h2>
+							<p>
+								start at: <%=big_bun.start_datetime.strftime('%Y %m %d %H:%M:%S') %>
+							</p>
+							 <p>
+							 	stop at: <%=big_bun.stop_datetime.strftime('%Y %m %d %H:%M:%S') %>
+							 </p>
+						</div>
+
+						<!-- $ unit -->
+						<div class="col-md-4">
+							<%= big_bun.unit%> pieces
+						</div>
+					</div>
+
+					<div class="col-md-3 bigbun-btn-container">
+
+						<!-- private -->
+						<% if big_bun.is_public%>
+							<%= link_to "save to private",chef_big_bun_path(@chef.id, big_bun.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
+						<%else%>
+							<%= link_to "save to public",chef_big_bun_path(@chef.id, big_bun.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
+						<%end%>
+
+						<!-- re-post -->
+						<%= link_to "re-post","",:class=>"btn btn-default"%>
+
+						<!-- share -->
+						<%= link_to "",:class=>"btn btn-default" do %>
+						  <i class="fa fa-share-alt" aria-hidden="true"></i>
+						<% end %>
+
+						<!-- edit -->
+						<%= link_to edit_chef_big_bun_path(@chef.id,big_bun.id),:class=>"btn btn-default" do %>
+						  <i class="fa fa-pencil" aria-hidden="true"></i>
+						<% end %>
+
+						<!-- delete -->
+						<%= link_to chef_big_bun_path(@chef.id,big_bun.id), :method => :delete, :class=>"btn btn-default" do %>
+						  <i class="fa fa-trash" aria-hidden="true"></i>
+						<% end %>
+					</div>
+				</div>
+			<%end%>
+		</div>
+
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	var default_photo = function(){
+		$('.food-photo').hide();
+		$('.food-photo-0').show();
+		$('.food-photo-0').addClass("active");
+	}
+
+	var change_photo = function(){
+		$('.food-photo').click(function(){
+			$(this).hide();
+			$(this).removeClass('active');
+
+			var photo_count = $(this).parent().find('.food-photo').length
+			var data_number = Number($(this).attr('data'));
+
+			if (photo_count > 1 && data_number < photo_count-1) {
+				var new_data_number = data_number + 1
+				var photo_class = '.food-photo-' + new_data_number
+				$(this).parent().find(photo_class).show();
+				$(this).parent().find(photo_class).addClass("active");
+
+			} else if(photo_count == 1) {
+				$(this).show();
+				$(this).addClass("active");
+
+			} else {
+				var new_data_number = 0
+				var photo_class = '.food-photo-' + new_data_number
+				$(this).parent().find(photo_class).show();
+				$(this).parent().find(photo_class).addClass("active");
+			}
+		});
+	}
+
+	var trigger_photo_btn = function(){
+		$('.photo-select-btn').click(function(){
+			$(this).parent().find(".food-photo.active").click();
+		});
+	}
+
+	var show_content_by_title = function(){
+		$('#bigbun-content-container').hide();
+		$('#menu-title-btn').css('background-color','red');
+
+		$('#menu-title-btn').click(function(){
+			$('#menu-title-btn').css('background-color','red');
+			$('#bigbun-title-btn').css('background-color','white');
+			$('#menu-content-container').show();
+			$('#bigbun-content-container').hide();
+		});
+
+		$('#bigbun-title-btn').click(function(){
+			$('#menu-title-btn').css('background-color','white');
+			$('#bigbun-title-btn').css('background-color','red');
+			$('#menu-content-container').hide();
+			$('#bigbun-content-container').show();
+		});
+	};
+
+	default_photo();
+	change_photo();
+	trigger_photo_btn();
+	show_content_by_title();
+</script>
+
+
+

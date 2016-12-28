@@ -112,6 +112,12 @@ namespace :dev do
 				name: Faker::Pokemon.name,
 				price: Faker::Commerce.price,
 				is_public: [true, false].sample,
+        unit: Faker::Number.between(1, 100),
+        unit_name: ["quart", "kg", "piece", "package"].sample,
+        max_order: Faker::Number.between(1, 100),
+        availability_date: Faker::Time.between(DateTime.now - 100, DateTime.now+30),
+        about: Faker::Lorem.paragraph,
+        ingredients: Faker::Lorem.paragraph,
 			)
 		}
 

@@ -31,11 +31,14 @@
 	$("#chef-submit-check-btn").click(function(){
 		var check_submit = true;
 		check_submit = check_submit & check_chef_password();
-		check_submit = check_submit & check_certificated();
+
+		if (!<%= @chef.restaurant.is_approved %>) {
+			check_submit = check_submit & check_certificated();
+		};
 
 		if (check_submit) {
 			$('#chef-submit-btn').click();
-		}
+		};
 	});
 
 	var check_chef_password = function(){
@@ -59,8 +62,10 @@
 		}
 	}
 
-	$('#bulk-buy-form').hide();
-	$('#delivery-form').hide();
+	if (<%= params[:action]== 'new'%>) {
+		$('#bulk-buy-form').hide();
+		$('#delivery-form').hide();
+	}
 
 	$('#both_bulk_buy_delivery').click(function(){
 		var checked_both = $('#both_bulk_buy_delivery').prop("checked");

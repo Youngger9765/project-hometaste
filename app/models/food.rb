@@ -6,6 +6,11 @@ class Food < ApplicationRecord
   has_many :orders, :through => :order_food_ships
 
   has_many :food_comments
+  has_many :food_photos
+
+  accepts_nested_attributes_for :food_photos,
+    :allow_destroy => true,
+    :reject_if => :all_blank
 
   def average_score
     food_comments.average(:score) || 0

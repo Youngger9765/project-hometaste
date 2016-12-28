@@ -10,17 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223181641) do
+ActiveRecord::Schema.define(version: 20161225164623) do
+
+  create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "big_bun_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.index ["big_bun_id"], name: "index_big_bun_photos_on_big_bun_id", using: :btree
+  end
 
   create_table "big_buns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "restaurant_id",                  null: false
-    t.string   "name",                           null: false
-    t.integer  "piece"
     t.datetime "start_datetime"
     t.datetime "stop_datetime"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "is_public",      default: false
+    t.string   "style"
+    t.integer  "unit"
   end
 
   create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -78,13 +89,30 @@ ActiveRecord::Schema.define(version: 20161223181641) do
     t.index ["user_id"], name: "index_food_comments_on_user_id", using: :btree
   end
 
+  create_table "food_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "food_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.index ["food_id"], name: "index_food_photos_on_food_id", using: :btree
+  end
+
   create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                                   default: "",    null: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.string   "name",                                                     default: "",    null: false
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
     t.integer  "restaurant_id"
-    t.decimal  "price",         precision: 10, scale: 2
-    t.boolean  "is_public",                              default: false
+    t.decimal  "price",                           precision: 10, scale: 2
+    t.boolean  "is_public",                                                default: false
+    t.text     "about",             limit: 65535
+    t.text     "ingredients",       limit: 65535
+    t.float    "unit",              limit: 24
+    t.string   "unit_name"
+    t.float    "max_order",         limit: 24
+    t.date     "availability_date"
   end
 
   create_table "order_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
