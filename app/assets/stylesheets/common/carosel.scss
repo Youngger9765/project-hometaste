@@ -25,3 +25,20 @@
     background-color: rgba(255, 255, 255, 0.8);
   }
 }
+.carousel-control.left,.carousel-control.right{
+  @extend .flex_center;
+  .fa-angle-left,.fa-angle-right{
+    background-color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-shadow:none;
+    @extend .red;
+  }
+  .fa-angle-left{
+    padding-right: 2px;
+  }
+  .fa-angle-right{
+    padding-left: 2px;
+  }
+}

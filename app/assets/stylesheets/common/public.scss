@@ -1,4 +1,3 @@
-
 body{
   margin-top: 50px;
   font-family:"Avenir Next";
@@ -12,6 +11,7 @@ hr{
 }
 h3{
   margin-top: 10px;
+  font-size: 21px;
 }
 textarea{
   border-radius: 20px;
@@ -88,27 +88,12 @@ input[type=submit]{
     color: white !important;
   }
 }
-img[name='cart']{
-  height: auto;
-  width: 35px;
-  padding-bottom: 3px;
-  margin: 0 auto;
-}
-img[name='cart_white']{
-  height: auto;
-  width: 35px;
-  padding-bottom: 7px;
-  margin: 0 auto;
-}
-img[name='moto']{
-  height: auto;
-  width: 40px;
-  padding-bottom: 7px;
-  margin: 0 auto;
-}
-img[name='cert']{
-  height: 45px;
-  width: auto;
+.ui.progress{
+  border-radius: 10px;
+  .bar{
+    border-radius: 10px;
+    background-color: $main_red !important;
+  }
 }
 .cards .ui.card:last-child, .cards .ui.card:first-child {
   margin-top: 1em;

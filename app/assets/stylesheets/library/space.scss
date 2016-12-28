@@ -4,9 +4,25 @@
       @for $i from 0 through 200 {
         @if $i % 5 == 0 {
           .#{$method_short}#{$direction_short}#{$i}_#{$media} { #{$method}-#{$direction}: #{$i}px !important; }
+
           @if $media == 'xs'{
             .#{$method_short}#{$direction_short}#{$i} { #{$method}-#{$direction}: #{$i}px !important; }
           }
+          @if $i == 0{
+            .#{$method_short}#{$direction_short}n_#{$media} { #{$method}-#{$direction}: inherit !important; }
+          }
+        }
+      }
+    }
+  }
+}
+@mixin method_loop_full($media) {
+  @each $method,$method_short in (margin,'m'),(padding,'p') {
+    @for $i from 0 through 200 {
+      @if $i % 5 == 0 {
+        .#{$method_short}#{$i}_#{$media} { #{$method}: #{$i}px !important; }
+        @if $media == 'xs'{
+          .#{$method_short}#{$i} { #{$method}: #{$i}px !important; }
         }
       }
     }
@@ -14,15 +30,19 @@
 }
 
 @include method_loop('xs');
+@include method_loop_full('xs');
 
 @media (min-width: $screen-sm-min) {
   @include method_loop('sm');
+  @include method_loop_full('sm');
 }
 
 @media (min-width: $screen-md-min) {
   @include method_loop('md');
+  @include method_loop_full('md');
 }
 
 @media (min-width: $screen-lg-min) {
   @include method_loop('lg');
+  @include method_loop_full('lg');
 }

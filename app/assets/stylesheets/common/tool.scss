@@ -41,7 +41,7 @@
   font-size:16px;
   margin: 0 15px;
 }
-.cursor_point{
+.cursor_pointer{
   cursor: pointer;
 }
 .background_img_setting{
@@ -53,6 +53,10 @@
 }
 .border_sub_radius{
   @include border_radius($sub_radius);
+}
+.small_btn{
+  width: 84px;
+  height: 32px;
 }
 .ui.button.my_btn{
   @extend .background_red;
@@ -93,18 +97,6 @@
 }
 .flex_center{
   @include flex_(center,center);
-}
-.basic_bg{
-  @include basic_bg(20px,20px);
-  height:calc(100% - 30px);
-}
-.basic_bg_top{
-  @include basic_bg(0,20px);
-  height:calc(100% - 30px);
-}
-.basic_bg_bottom{
-  @include basic_bg(20px,0);
-  margin-bottom: 0;
 }
 .bold{
   font-weight: bold;
@@ -165,7 +157,6 @@
     height: 100%;
   }
 }
-
 .align_two_side{
   &:after,&:before{
     content:' ';
@@ -181,38 +172,11 @@
     float: right;
   }
 }
-@media (max-width: $screen-sm-max) {
-  .basic_bg{
-    @include basic_bg(10px,10px);
-    margin-bottom: 15px;
-  }
-  .basic_bg_top{
-    @include basic_bg(0,10px);
-    margin-bottom: 15px;
-  }
-  .basic_bg_bottom{
-    @include basic_bg(10px,0);
-  }
-}
 @media (max-width: $screen-xs-max ){
   .align_two_side{
     & > :last-child,& > :first-child{
       float: inherit;
       display: block;
     }
-  }
-  .basic_bg{
-    @include basic_bg(0,0);
-    margin-bottom: 15px;
-    padding: 30px 20px;
-  }
-  .basic_bg_top{
-    @include basic_bg(0,0);
-    margin-bottom: 15px;
-    padding: 30px 20px;
-  }
-  .basic_bg_bottom{
-    @include basic_bg(0,0);
-    padding: 30px 20px;
   }
 }

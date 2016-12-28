@@ -1,0 +1,40 @@
+.basic_bg{
+  @include basic_bg(20px,20px);
+  height:calc(100% - 30px);
+}
+.basic_bg_top{
+  @include basic_bg(0,20px);
+  height:calc(100% - 30px);
+}
+.basic_bg_bottom{
+  @include basic_bg(20px,0);
+  margin-bottom: 0;
+}
+@media (max-width: $screen-sm-max) {
+  .basic_bg{
+    @include basic_bg(10px,10px);
+    margin-bottom: 15px;
+  }
+  .basic_bg_top{
+    @include basic_bg(0,10px);
+    margin-bottom: 15px;
+  }
+  .basic_bg_bottom{
+    @include basic_bg(10px,0);
+  }
+}
+@media (max-width: $screen-xs-max ){
+  .basic_bg{
+    @include basic_bg(0,0);
+    margin-bottom: 15px;
+    padding: 30px 20px;
+  }
+  .basic_bg_top{
+    @include basic_bg(0,0);
+    margin-bottom: 15px;
+    padding: 30px 20px;
+  }
+  .basic_bg_bottom{
+    padding: 30px 20px;
+  }
+}
