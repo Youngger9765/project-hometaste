@@ -3,6 +3,21 @@
     height: 350px;
     @extend .background_img_setting;
   }
+  .ui.progress{
+    overflow: inherit;
+    margin-bottom: 20px;
+  }
+  .ui.progress .bar:before{
+    content:' ';
+    background-color: #EC1C24 ;
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    right:0;
+    top: -10px;
+    @extend .border_circle;
+  }
   .cart_icon_red,.cert_icon_red{
     font-size: 30px;
   }

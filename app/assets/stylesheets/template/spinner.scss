@@ -21,6 +21,9 @@
     padding: 0 10px;
     font-size: 20px;
   }
+  #txtNum{
+    font-size: 40px;
+  }
 }
 @media (max-width: $screen-sm-max){
   .ui.form .count_spinner{

@@ -36,6 +36,10 @@ textarea{
     }
   }
 }
+.modal{
+  bottom: inherit;
+  right:inherit;
+}
 .ui.form input[type='text'].my_form,
 .ui.form input[type='number'].my_form,
 .ui.form input[type='email'].my_form,

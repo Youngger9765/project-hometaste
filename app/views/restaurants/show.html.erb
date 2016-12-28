@@ -1,4 +1,6 @@
-<div class="col-xs-12 banner" style="background-image:url(<%= image_path('tmp/kitchen_1.png') %>);"></div>
+<div class="col-xs-12 banner" style="background-image:url(<%= image_path('tmp/kitchen_1.png') %>);">
+  <img src="<%= image_path 'tmp/BB_DHD.png' %>" class="mrla db flr_sm mr50_sm bigbun cursor_pointer">
+</div>
 <div class="container">
   <section class="row">
     <div class="col-xs-12 basic_bg_top pt0 pt30_md">
@@ -189,35 +191,20 @@
 </div>
 
 <%= render 'common/add_to_cart' %>
+<%= render 'common/bigbun', id:1 %>
 <%= javascript_include_tag 'common/spinner' %>
 
 
 <script type="text/javascript" charset="utf-8">
-  $('.ui.progress').progress();
-  $(document).on('click','#advance_tab.white,#today_tab.white',function(){
-    $('#advance_tab,#today_tab').toggleClass('background_red').toggleClass('white').toggleClass('red')
-    $('.advance_tab,.today_tab').toggleClass('hidden')
-  })
-  $(document).on('click','.product_lists > i',function(){
-    $('.product_lists > i').toggleClass('hidden')
-    $('.advance_tab,.today_tab').toggleClass('list_status')
+  $(document).ready(function(){
+    $('.ui.progress').progress();
+    $(document).on('click','#advance_tab.white,#today_tab.white',function(){
+      $('#advance_tab,#today_tab').toggleClass('background_red').toggleClass('white').toggleClass('red')
+      $('.advance_tab,.today_tab').toggleClass('hidden')
+    })
+    $(document).on('click','.product_lists > i',function(){
+      $('.product_lists > i').toggleClass('hidden')
+      $('.advance_tab,.today_tab').toggleClass('list_status')
+    })
   })
 </script>
-
-<style>
-  .ui.progress{
-    overflow: inherit;
-    margin-bottom: 20px;
-  }
-  .ui.progress .bar:before{
-    content:' ';
-    background-color: #EC1C24 ;
-    width: 40px;
-    height: 40px;
-    display: block;
-    position: absolute;
-    right:0;
-    top: -10px;
-    -webkit-border-radius:50%; -moz-border-radius:50%; border-radius:50%;
-  }
-</style>
