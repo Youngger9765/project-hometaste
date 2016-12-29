@@ -79,12 +79,20 @@
         </div>
       </section>
       <div class="row">
-        <button class="ui button my_btn" name="reach_order" type="submit">
-          <i class="share_icon_white"></i> Help me reach mssy order!
-        </button>
+        <% if current_user %>
+            <button class="ui button my_btn" name="reach_order" type="submit">
+              <i class="share_icon_white"></i> Help me reach mssy order!
+            </button>
+        <% else %>
+            <button class="ui button my_btn" name="reach_order" onclick="return false">
+              <i class="share_icon_white"></i> Help me reach mssy order!
+            </button>
+        <% end %>
       </div>
   <% end %>
 </div>
 <script type="text/javascript" charset="utf-8">
-  $('.ui.dropdown').dropdown();
+  $('button[name="reach_order"]').click(function(){
+    $('#auth_link_modal').modal('show');
+  })
 </script>

@@ -1,4 +1,4 @@
-.ui.modal#login_modal,.ui.modal#sign_up_modal{
+.ui.modal#login_modal,.ui.modal#sign_up_modal,.ui.modal#auth_link_modal{
   width: 300px;
   text-align: center;
   @extend .background_red;
@@ -51,5 +51,20 @@
     i{
       margin:0 20px;
     }
+  }
+}
+.ui.modal#auth_link_modal{
+  padding: 40px 0;
+  button{
+    @extend .border_main_radius;
+    border:1px solid white;
+    height: 60px;
+    font-size: 20px;
+  }
+  .login{
+    width: 200px;
+  }
+  .sign_up{
+    width: 240px;
   }
 }

@@ -49,13 +49,14 @@
           <% end %>
 
         <% else %>
-            <li><a id="sign_up">Sign up</a><span class="hidden-xs">|</span></li>
-            <li><a id="login">Log In</a></li>
+            <li><a class="sign_up">Sign up</a><span class="hidden-xs">|</span></li>
+            <li><a class="login">Log In</a></li>
         <% end %>
       </ul>
     </div>
   </div>
 </nav>
 
-<%= render 'main/login_form' %>
-<%= render 'main/sign_up_form' %>
+<%= render 'common/login_form' %>
+<%= render 'common/sign_up_form' %>
+<%= render 'common/auth_link' %>
