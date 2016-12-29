@@ -1,0 +1,90 @@
+<div class="container ui form">
+  <%= form_for new_order_path do |f| %>
+      <section class="row">
+        <div class="col-xs-12 basic_bg_top">
+          <h1 class="bold tac mb50">Order Information</h1>
+          <div class="row reverse_xs reverse_back_md tac tan_sm">
+            <div class="col-xs-12">
+              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-1 mb20_sm mt20 mt0_sm">
+                <%= f.label :scheduled_time,'Pick up Time' %>
+              </div>
+              <div class="col-xs-10 col-sm-5 col-md-3 col-lg-2">
+                <%= f.date_field :scheduled_time %>
+              </div>
+              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </div>
+              <div class="col-xs-10 col-sm-5 col-sm-offset-4 col-md-offset-0 col-lg-3 col-md-5 mt20 mt0_sm">
+                <%= f.time_field :scheduled_time %>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-1">
+                <%= f.label :shipping_method,'Order Type' %>
+              </div>
+              <div class="col-xs-12 col-sm-5 col-md-3 col-lg-2 mb20_sm">
+                <%= f.select :shipping_method, options_for_select( ['Bulk Buy','Delivery' ] ),{},class:'ui dropdown fluid' %>
+              </div>
+              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-1 col-lg-1 mt20 mt0_sm">
+                <%= f.label :shipping_place,'at' %>
+              </div>
+              <div class="col-xs-12 col-sm-7 col-md-5 col-lg-5 mb20_sm">
+                <%= f.text_field :shipping_place,placeholder:'555 Montgomery st. Suite 501, San Francisco, CA, 94111' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-xs-12 basic_bg">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1 class="bold tac">Summary</h1>
+              <i class="gray_line mtb15"></i>
+            </div>
+            <div class="col-xs-12">
+              <div class="product_list df_sm ptb15">
+                <%= render 'product_lists' %>
+              </div>
+              <div class="bigbun_list df_sm ptb15">
+                <%= render 'bigbun_list',f:f %>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <i class="gray_line"></i>
+
+              <div class="align_two_side">
+                <h2>Subtotal</h2>
+                <h2>$21.00</h2>
+              </div>
+              <div class="align_two_side">
+                <h2>Delivery Fee</h2>
+                <h2>$1.00</h2>
+              </div>
+              <div class="align_two_side">
+                <h2>Tax</h2>
+                <h2>$2.10</h2>
+              </div>
+              <div class="align_two_side tip">
+                <h2>Tip</h2>
+                <%= f.number_field :user_id ,min:'0',class:'mt20'%>
+              </div>
+              <i class="gray_line mtb15"></i>
+              <div class="align_two_side">
+                <h2>Total</h2>
+                <h2>$24.10</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="row">
+        <button class="ui button my_btn" name="reach_order" type="submit">
+          <i class="share_icon_white"></i> Help me reach mssy order!
+        </button>
+      </div>
+  <% end %>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $('.ui.dropdown').dropdown();
+</script>

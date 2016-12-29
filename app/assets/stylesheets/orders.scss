@@ -1,0 +1,58 @@
+.orders_new{
+  .ui.my_btn[name=reach_order]{
+    width: 100%;
+    height: 80px;
+    font-size: 30px;
+    @include border-radius(20px);
+  }
+  .product_list,.bigbun_list{
+    .background_img_setting{
+      height: 240px;
+    }
+  }
+  label{
+    font-size: 20px;
+  }
+  h2{
+    font-weight: bold;
+  }
+  .ui.form{
+    .tip input{
+      width: auto;
+    }
+  }
+  .fa-calendar{
+    font-size: 30px;
+  }
+  .ui.form .bigbun_list input{
+    width: 200px;
+  }
+}
+@media (max-width: $screen-md-max){
+  h2{
+    font-size: 30px;
+    margin: 10px 0;
+  }
+}
+@media (max-width: $screen-sm-max){
+  .orders_new{
+    h2{
+      font-size: 24px;
+    }
+    .ui.form .bigbun_list input{
+      width: 180px;
+    }
+    .product_list,.bigbun_list{
+      .background_img_setting{
+        height: 200px;
+      }
+    }
+    .ui.my_btn[name=reach_order]{
+      margin: 0 auto;
+      border-radius: 10px;
+      width: 95%;
+      display: block;
+      font-size: 20px;
+    }
+  }
+}

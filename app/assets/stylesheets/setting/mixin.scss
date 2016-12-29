@@ -31,7 +31,7 @@
   -webkit-background-size:$_;
   background-size:$_;
 }
-@mixin square-icon($pixel: 40px){
+@mixin square_icon($pixel: 40px){
   font-size:$pixel / 2;
   color: $main_red;
   background-color: #FFFFFF;

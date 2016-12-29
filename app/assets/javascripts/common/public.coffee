@@ -12,4 +12,3 @@ $(document).ready ->
       $(this).collapse('hide')
   $('.bigbun').click ->
     $('.bigbun_modal').modal('show')
-#    console.log($(this).closest('.bignun_modal'));

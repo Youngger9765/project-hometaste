@@ -3,7 +3,7 @@
   background-position: center;
   display: inline-block;
   margin-right: 5px;
-  font-size:10px;
+  font-size:inherit;
 }
 .cloche_icon_red{
   background-image:image-url('icon/cloche.svg');
@@ -57,7 +57,7 @@
     </g>
 </svg>');
   display: inline-block;
-  font-size: 10px;
+  font-size: inherit;
   width: 1em;
   height: 1em;
 }
@@ -85,7 +85,7 @@
     </g>
 </svg>');
   display: inline-block;
-  font-size: 10px;
+  font-size: inherit;
   width: 1em;
   height: 1em;
 }
