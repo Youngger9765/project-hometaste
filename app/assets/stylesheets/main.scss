@@ -241,9 +241,6 @@ body.main_index{
   .ui.radio.checkbox input:checked ~ .box:after, .ui.radio.checkbox input:checked ~ label:after{
     background-color: $main_red;
   }
-  #cuisine_modal_btn{
-    padding:11px 32px 13px;
-  }
 }
 
 .card_hover_link{
