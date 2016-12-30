@@ -14,7 +14,7 @@
     font-size: 20px;
   }
   h2{
-    font-weight: bold;
+    @extend .bold;
   }
   .ui.form{
     .tip input{
@@ -28,10 +28,86 @@
     width: 200px;
   }
 }
-@media (max-width: $screen-md-max){
+.orders_show{
   h2{
+    @extend .bold;
+  }
+  label{
+    font-size: 30px;
+    @extend .bold;
+  }
+  .save_address{
+    margin-top: 15px;
+    label{
+      @extend .normal;
+      font-size: 16px;
+    }
+  }
+  table{
+    width: 100%;
+    tbody h3{
+      @extend .normal;
+    }
+    th{
+      padding:5px 0;
+    }
+    th:nth-child(2),th:nth-child(3){
+      @extend .tac;
+    }
+    th:nth-child(4){
+      @extend .tar;
+    }
+  }
+  .ui.form{
+    label,input,.ui.dropdown{
+      margin-bottom: 15px;
+    }
+  }
+}
+#thankyou_modal{
+  width: 100%;
+  margin-left: -50%;
+  height: 500px;
+  @extend .border_none_radius;
+  @extend .background_img_setting;
+  background-color: transparent;
+  background-image: image-url('tmp/background_photo.png');
+  h1{
+    margin-bottom: 30px;
+  }
+  h2{
+    margin: 60px auto;
+    max-width: 600px;
+  }
+  i{
+    margin:0 5px;
+    @extend .red;
+    font-size: 40px;
+  }
+  .outh_logo{
+    margin-top: 50px;
+  }
+  a.button{
+    display: block;
+    margin: 40px auto;
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+    line-height: 35px;
+  }
+}
+@media (max-width: $screen-md-max){
+  .orders_new h2{
     font-size: 30px;
     margin: 10px 0;
+  }
+  .orders_show{
+    h2{
+      font-size: 24px;
+    }
+    h3{
+      font-size: 18px;
+    }
   }
 }
 @media (max-width: $screen-sm-max){
@@ -54,5 +130,33 @@
       display: block;
       font-size: 20px;
     }
+  }
+  .orders_show{
+    h2{
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    h3{
+      font-size: 14px;
+    }
+    label{
+      font-size: 20px;
+    }
+    .ui.form{
+      label{
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+      .save_address label{
+        margin-top: 0;
+      }
+      input,.ui.dropdown{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  #thankyou_modal{
+    padding: 20px;
+    height: calc( 100vh - 50px);
   }
 }

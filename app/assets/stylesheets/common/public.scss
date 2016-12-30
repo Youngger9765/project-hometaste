@@ -40,6 +40,9 @@ textarea{
   bottom: inherit;
   right:inherit;
 }
+button:focus{
+  outline: none;
+}
 .ui.form input[type='text'].my_form,
 .ui.form input[type='number'].my_form,
 .ui.form input[type='email'].my_form,

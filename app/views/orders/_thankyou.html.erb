@@ -1,0 +1,29 @@
+<div class="ui small modal" id="thankyou_modal">
+  <div class="tac white">
+    <h2>Thank you for shopping with Hometaste!
+      Here is your confirmation number:</h2>
+    <h1>#12345678</h1>
+    <h3>Your pickup time is 12/31/2016 at 6:00pm
+      Location: 116th St. Main gate.</h3>
+    <h3>Let your friends know what your having!</h3>
+  </div>
+    <div class="outh_logo tac">
+      <%= link_to user_facebook_omniauth_authorize_path do %>
+          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <a href='<%= root_path %>' class="ui button my_btn">Home Page</a>
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $('.purchase').click(function(){
+    $('#thankyou_modal').modal('show')
+  })
+</script>
