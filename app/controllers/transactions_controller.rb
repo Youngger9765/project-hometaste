@@ -50,7 +50,6 @@ class TransactionsController < ApplicationController
   	@cart.delivery_fee = rand(0..3)
   	@cart.tip = rand(0..3)
   	@cart.tax = rand(0..3)
-  	@cart.total_amount = @cart.delivery_fee + @cart.tax + @cart.tip + @cart.sub_total
   	@cart.save!
   end
 
@@ -78,6 +77,7 @@ class TransactionsController < ApplicationController
   	end
 
   	@cart.sub_total = @cart.cart_foods.sum(:sub_total)
+  	@cart.total_amount = @cart.delivery_fee + @cart.tax + @cart.tip + @cart.sub_total
   	@cart.save!
   end
 
