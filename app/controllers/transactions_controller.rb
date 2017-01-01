@@ -12,6 +12,15 @@ class TransactionsController < ApplicationController
   end
 
   def create
-  	raise
+  	nonce_from_the_client = params["payment-method-nonce"]
+  	result = Braintree::Transaction.sale(
+		  :amount => "10.00",
+		  :payment_method_nonce => nonce_from_the_client,
+		  :options => {
+		    :submit_for_settlement => true
+		  }
+		)
+
+		raise
   end
 end
