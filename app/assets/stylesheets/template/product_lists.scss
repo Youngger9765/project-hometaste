@@ -1,0 +1,125 @@
+.product_lists{
+  i[name=heart]{
+    font-size: 22px;
+  }
+  i[name=shard]{
+    font-size: 23px;
+  }
+  .list_status{
+    .list_status_carousel,.list_status_social_link{
+      display: none;
+    }
+    .list_status_info{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      height: 230px;
+      padding: 30px 100px 0;
+      border-top: 1px solid red;
+      border-bottom: 1px solid red;
+      margin: 0px 25px 0px 50px;
+      & > div:nth-child(1){
+        order:1;
+      }
+      & > div:nth-child(2){
+        order: 2;
+      }
+      & > div:nth-child(3){
+        order: 4;
+        .count_spinner{
+          float: right;
+          text-align: right;
+          #txtNum{
+            width: 140px;
+          }
+        }
+      }
+      & > div:nth-child(4){
+        text-align: right;
+        order: 5;
+      }
+      & > div:nth-child(5){
+        order: 3;
+      }
+      & > div:nth-child(6){
+        order: 6;
+        float: right;
+        text-align: right;
+        .share_icon_red{
+          margin-right: 120px;
+        }
+        display: block !important;
+      }
+    }
+  }
+  @media (max-width: $screen-sm-max) {
+    .fa-heart,.share_icon_red{
+      font-size: 40px;
+    }
+    .list_status {
+      .list_status_info{
+        height: 210px;
+        padding: 30px 0 0 !important;
+        & > div:nth-child(6){
+          margin-top: 25px;
+          i.fa-heart{
+            margin-top: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+    .product_carousel {
+      height: 200px;
+      width: calc( 100% + 40px );
+      margin-left: -20px;
+    }
+    .list_status {
+      .list_status_info{
+        margin-left: 0;
+        height: auto;
+        padding: 30px 25px !important;
+        & > div:nth-child(1){
+          order:1;
+        }
+        & > div:nth-child(2){
+          order: 2;
+        }
+        & > div:nth-child(3){
+          order: 3;
+          .count_spinner{
+            float: none;
+            text-align: inherit;
+            #txtNum{
+              width: 100px;
+            }
+          }
+        }
+        & > div:nth-child(4){
+          text-align: left;
+          order: 4;
+        }
+        & > div:nth-child(5){
+          order: 5;
+        }
+        & > div:nth-child(6){
+          order: 6;
+          float: none;
+          text-align: left;
+          margin-top: 0;
+          display: block !important;
+          .share_icon_red{
+            margin-right: 120px;
+          }
+          a{
+            margin-top: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+

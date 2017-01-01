@@ -1,458 +1,146 @@
 .restaurants_show{
-  background-color: #EFF0F1;
-  .banner{
-    background: image-url('tmp/kitchen_1') center;
-    -webkit-background-size:cover;
-    background-size:cover;
+  .banner {
     height: 350px;
-    h4[name='total_orders']{
-      padding-right: 230px;
-      margin: 0;
-    }
+    @extend .background_img_setting;
   }
-  .down_cover{
+  .ui.progress{
+    overflow: inherit;
+    margin-bottom: 20px;
+  }
+  .ui.progress .bar:before{
+    content:' ';
+    background-color: #EC1C24 ;
+    width: 40px;
+    height: 40px;
+    display: block;
     position: absolute;
-    height: 63px;
-    bottom:0;
+    right:0;
+    top: -10px;
+    @extend .border_circle;
+  }
+  .cart_icon_red,.cert_icon_red{
+    font-size: 30px;
+  }
+  .moto_icon_red{
+    font-size: 40px;
+  }
+  .fa-map-marker{
+    font-size: 28px;
+  }
+  .fa-list{
+    font-size: 40px;
+  }
+  [class^=show_rated]{
+    font-size: 24px;
+  }
+  [name=img_background_white]{
+    bottom:-60px;
+    position: absolute;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    .button{
-      img{
-        height: 18px;
-        width: auto;
-        margin-right: 5px;
-      }
-      padding-top: 7px;
-      height: 33px;
-      font-size: 12px;
-      margin: 0 10px;
-    }
-    .container{
-      height: 100%;
-      @include flex_(center,flex-end);
-    }
   }
-  .kitchen_info{
-    padding-left: 300px;
-    padding-bottom: 30px;
-    overflow: initial;
+  [name=location_map]{
+    height: 100%;
+  }
+  #advance_tab,#today_tab{
+    width:calc( 100% + 20px );
     position: relative;
-    h2{
-      font-weight: bold;
-      margin-bottom: 5px;
-      margin-top: 10px;
-    }
-    img[name='major']{
-      height: 230px;
-      width: 230px;
+    &.red:after{
+      @extend .background_red;
+      content: ' ';
+      display: inline-block;
+      width: 220px;
+      height: 10px;
+      left: 50%;
       position: absolute;
-      left: 30px;
-      bottom: 30px;
-      border-radius: $main_radius;
-    }
-    [class^="show_rated_"]{ font-size: 20px; }
-    .sub_info{
-      @include flex_(center,space-between);
-      & > div{
-        width: 100%;
-      }
-      & > div:nth-child(2),& > div:nth-child(3),
-      & > div:nth-child(4),& > div:nth-child(5){
-        border-left: 1px solid $main_red;
-      }
-      & > div:nth-child(5){
-        a{
-          padding-top: 50px;
-          display: block;
-          padding-left: 15px;
-        }
-      }
-      .rated{
-        margin-bottom: 15px;
-        margin-top: 5px;
-      }
-      img{
-        margin:auto;
-        display: block;
-        padding-top: 13px;
-      }
-      h5{
-        text-align: center;
-        margin-bottom: 0;
-      }
-    }
-    .rated { width: 240px; }
-    .sub_tags a{
-      margin-right: 15px;
-      font-size: 12px;
-      text-decoration: underline;
-      margin-bottom: 9px;
+      bottom: 0;
+      transform: translateX(-50%);
     }
   }
-  .order_reached{
-    .ui.progress{
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.05);
-      -webkit-box-shadow: inset 15px 5px 12px -2px rgba(0,0,0,0.11);
-      -moz-box-shadow: inset 15px 5px 12px -2px rgba(0,0,0,0.11);
-      box-shadow: inset 15px 5px 12px -2px rgba(0,0,0,0.11);
-      .bar{
-        background-color: $main_red;
-        border-radius: 10px;
-      }
-    }
-    h4{ font-weight: 600; }
+  #today_tab{
+    margin-left: -15px;
   }
-  .traffic_info{
-    .col-sm-4{
-      img[name='moto']{
-        margin-top: 5px;
-      }
-      img{
-        width: 35px;
-        height: auto;
-      }
-      hr{
-        color: $main_red;
-        margin-top: 15px;
-        width: 200px;
-        float: left;
-        border-top: 1px solid red;
-      }
-    }
-    .col-sm-8{
-      .basic_bg{
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .gmap{
-        display: block;
-        max-width: 100%;
-        height: auto;
-        width:100%;
-      }
-      .location_map{
-        padding: 15px 30px;
-        i{
-          margin: 0 30px;
-          color: $main_red;
-        }
-      }
-    }
+  #advance_tab{
+    margin-left: -5px;
+  }
+  .location_map h4{
+    line-height: 25px;
+  }
+  .restaurant_infos{
 
   }
-  .cart_info{
-    text-align: center;
-    height: 65px;
-    margin-top: 25px;
-    background-color: $main_red;
-    img[name='cart_white']{
-      padding-top: 5px;
-      margin-right: 15px;
+}
+@media (max-width: $screen-sm-max) {
+  .restaurants_show{
+    h2{
+      font-size: 30px;
     }
-    .ui.button{
-      float: right;
-      font-size: 20px;
-      border:1px solid white;
-      padding: 7px 27px;
-      margin-top: 3px;
-      margin-left: -106px;
-    }
-    span{
-      vertical-align: sub;
-      color: #FFFFFF;
-      font-size: 18px;
-    }
-  }
-  .product_items{
-    .select_tabs{
-      width: 100%;
-      div:nth-child(1){
-        margin-right: 7px;
-      }
-      div:nth-child(2){
-        margin-left: 7px;
-      }
-      .basic_bg_bottom{
-        padding-bottom: 0;
-        text-align: center;
-        color: $main_red ;
-        height: 85px;
-        h2{
-          margin-top: 15px;
-          margin-bottom: 5px;
-        }
-        hr{
-          height: 14px;
-          border-bottom: 10px solid $main_red ;
-          border-top: none;
-          margin: -15px auto 0;
-          padding-bottom: 0;
-          width: 190px;
-        }
-      }
-      .basic_bg_bottom.active{
-        background-color: $main_red;
-        color: #FFFFFF;
-      }
-    }
-    .basic_bg_top{
-      padding:15px 0;
-      .fa{
-        color: $main_red;
-      }
-      .fa.fa-list{
-        margin-left: 20px;
-        margin-bottom: 10px;
-      }
-      .product_item{
-        margin-bottom: 50px;
-      }
-      .product_item_img{
-        width: 55%;
-      }
-      .carousel-inner{
-        .item div{
-          height: 356px;
-        }
-      }
-      .product_item_info{
-        width: 45%;
-        h2{ margin: 0; }
-        h4{ margin: 5px 0;}
-        a{ float: right; }
-        .fa-heart{ margin-right: 15px; }
-        &>div{
-          padding: 10px 19%;
-          border-top: 1px solid #B9BABA;
-        }
-        &>div:nth-child(1){ border:none; }
-        &>div:nth-child(3){ height: 135px; }
-        p[name='ingredents']{
-          @include text_overflow(16px,1.4)
-        }
-      }
-    }
-  }
-  @media (min-width: $screen-lg-min) {
-    .banner{
-      h4[name='total_orders']{ padding-right: 35px; }
-    }
-  }
-  @media (max-width: $screen-sm-max) {
-    .banner{
+    .banner {
       height: 270px;
-      h4[name='total_orders']{ padding-right: 85px;}
     }
-    .down_cover{
-      height: 40px;
-      .button{
-        height: 21px;
-        border-radius: 5px;
-        padding: 4px 7px;
-        img{
-          height: 12px;
-          padding-bottom: 2px;
-        }
+    .basic_bg_top .social_buttons{
+      button{
+        margin:0 -2px;
+        width: 80px;
+        height: 50px;
+        @include border_radius(0);
       }
-    }
-    .kitchen_info{
-      padding-bottom: 20px;
-      padding-left: 180px;
-      img[name='major']{
-        width: 146px;
-        height: 146px;
-        left: 20px;
-        bottom: 20px;
+      button:first-child{
+        @include border-radius-(bottom, left ,5px);
       }
-      h2{
-        margin-bottom: 0;
-        //font-size: 18px;
+      button:nth-child(2){
+        border-left:1px solid white;
       }
-      .sub_tags a{
-        margin-right: 5px;
-      }
-      [class^="show_rated_"]{ font-size: 14px; }
-      .sub_info{
-        img[name='cart'],img[name='moto']{
-          width: 25px;
-        }
-        .rated{
-          margin-bottom: 5px;
-          width: 195px;
-        }
-        img[name='cert']{
-          height: 37px;
-        }
-        & > div:nth-child(5) a{
-          padding-top: 39px;
-        }
-        h5{
-          font-size: 12px;
-        }
-      }
-    }
-    .ui.indicating.progress{
-      margin-top:5px;
-    .bar{ height: 12px; }
-    }
-    .traffic_info{
-      h4,p{
-        font-size: 12px;
-        margin-bottom: 5px;
-      }
-      .col-sm-4{
-        padding-right: 8px;
-        hr{
-          margin: 5px 0;
-          width: 120px;
-        }
-        img{
-          width: 25px;
-          margin-top: 5px;
-        }
-      }
-      .col-sm-8{
-        padding-left: 8px;
-        .location_map i{
-          margin:0 15px 0 0;
-        }
-      }
-    }
-    .product_items{
-      .basic_bg_top{
-        .fa.fa-list{
-          font-size: 24px;
-        }
-        .product_item{
-          margin-bottom: 30px;
-        }
-        .carousel-control i{
-          width: 30px;
-          font-size: 30px;
-        }
-        .carousel-inner .item div{
-          height: 230px;
-        }
-        .product_item_info{
-          & > div {
-            padding: 5px 15%;
-          }
-          & > div:nth-child(3){
-            height: 85px;
-          }
-          & > div:nth-child(4){
-            i,span{ font-size: 15px;}
-          }
-          p[name='ingredents']{
-            @include text_overflow(12px,1.2);
-            margin-top: 5px;
-          }
-        }
-      }
-      .select_tabs{
-        .basic_bg_bottom{
-          height: 56px;
-          hr{
-            padding-top: 2px;
-            margin-top: -10px;
-          }
-        }
+      button:last-child{
+        border-left:1px solid white;
+        @include border-radius-(bottom, right ,5px);
       }
     }
   }
-  @media (max-width: $screen-xs-max){
-    .banner{
+}
+@media (max-width: $screen-xs-max) {
+  .restaurants_show {
+    .banner {
       height: 190px;
-      h4[name='total_orders']{
-        position: absolute;
-        left: 195px;
+    }
+    h4{
+      font-size: 16px;
+      line-height: 22px;
+    }
+    [name=img_background_white]{
+      bottom: -110px;
+      position: absolute;
+      width: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    [name=location_map]{
+      height: 715px;
+      width:calc(100% + 40px);
+      margin-left: -20px;
+      margin-top: 30px;
+    }
+    .basic_bg_top .social_buttons{
+      margin-left: -8px;
+      width: calc(100% + 11px);
+      padding: 0;
+      button{
+        width: 50%;
+      }
+      button:first-child{
+        @include border-radius-(bottom, left ,0);
+      }
+      button:last-child{
+        border-left:1px solid white;
+        @include border-radius-(bottom, right ,0);
       }
     }
-
-    .kitchen_info{
-      padding-left:inherit;
-      img[name='major']{
-        bottom: 80px;
-        margin-bottom: 50px;
+    #today_tab,#advance_tab{
+      padding: 15px 10px;
+      h1{
+        font-size: 18px;
       }
-      .sub_info{
-        margin-top: 15px;
-        & > div:nth-child(2){
-          border:none;
-        }
-        & > div:nth-child(5) a{
-          text-align: center;
-          padding-left: 0;
-        }
-      }
-    }
-    .xs_kitchen_info{
-      margin-left: 175px;
-      width: calc(100% - 175px);
-    }
-    .product_items .basic_bg_top{
-      .flex{
-        display: block;
-      }
-    }
-    .traffic_info .row.flex{
-      display: block;
-    }
-    .traffic_info .col-sm-4{
-      img{
-        float: right;
-      }
-      padding-right: 15px;
-    }
-    .product_items {
-      .select_tabs{
-        width: calc(100% + 15px);
-        .basic_bg_bottom{
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-      }
-      .basic_bg_top {
-        padding: 15px 40px;
-        .product_item_img, .product_item_info {
-          width: 100%;
-        }
-        .product_item_info > div{
-          padding: 10px 15%;
-        }
-      }
-    }
-    .cart_info{
-      @include flex_(center,space-between);
-      text-align: inherit;
-      height: 40px;
-      img{ width: 25px;}
-      span{ font-size: 14px;}
-      .container{ width: 100%;}
-      .ui.button{
-        margin-left: 0;
-        padding: 5px 20px;
-        border-radius: 5px;
-        font-size: 12px;
-      }
-    }
-    .four_link_button{
-      margin-top: 15px;
-      display: flex !important;
-      display : -webkit-flex !important;
-      -webkit-justify-content: space-around;
-      justify-content: space-around;
-      .button{
-        height: 21px;
-        border-radius: 5px;
-        padding: 5px 10px;
-        line-height: 0;
-        img{
-          height: 12px;
-          padding-bottom: 2px;
-          padding-right: 5px;
-        }
+      &.red:after{
+        width: 140px;
       }
     }
   }

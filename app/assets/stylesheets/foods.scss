@@ -6,69 +6,27 @@
       background-image: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%);
     }
   }
-  h3{
-    font-size: 21px;
-  }
   i[name=heart]{
     font-size: 22px;
   }
   i[name=shard]{
     font-size: 23px;
   }
-  #txtNum{
-    font-size: 40px;
-  }
-  .minus_icon_black,.add_icon_black{
-    font-size: 50px;
-  }
-  .cloche_icon{
+  .cloche_icon_red{
     font-size: 29px;
   }
   .fa-heart-o,.fa-plus-circle,.share_icon_white{
     font-size: 19px;
     margin-right: 5px;
   }
-  .ui.progress{
-    border-radius: 10px;
-    .bar{
-      border-radius: 10px;
-      background-color: $main_red !important;
-    }
-  }
   [class^="show_rated_"]{
     font-size: 19px;
-  }
-  .social_link{
-    width: 84px;
-    height: 32px;
-  }
-  .carousel-control.left,.carousel-control.right{
-    @extend .flex_center;
-    .fa-angle-left,.fa-angle-right{
-      background-color: white;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      text-shadow:none;
-      @extend .red;
-    }
-    .fa-angle-left{
-      padding-right: 2px;
-    }
-    .fa-angle-right{
-      padding-left: 2px;
-    }
   }
 }
 @media (max-width: $screen-sm-max) {
   .foods_show{
     .banner {
       height: 270px;
-    }
-    .also_want{
-      .fa-heart,.share_icon_red{
-        font-size: 40px;
-      }
     }
     .basic_bg_top .social_buttons{
       button{
@@ -78,15 +36,14 @@
         @include border_radius(0);
       }
       button:first-child{
-        border-bottom-left-radius: 5px;
+        @include border-radius-(bottom, left ,5px);
       }
       button:nth-child(2){
         border-left:1px solid white;
-
       }
       button:last-child{
         border-left:1px solid white;
-        border-bottom-right-radius: 5px;
+        @include border-radius-(bottom, right ,5px);
       }
     }
   }
@@ -96,11 +53,6 @@
     .banner {
       height: 190px;
     }
-    .product_carousel {
-      height: 200px;
-      width: calc( 100% + 40px );
-      margin-left: -20px;
-    }
     .basic_bg_top .social_buttons{
       margin-left: -8px;
       width: calc(100% + 11px);
@@ -109,15 +61,11 @@
         width:calc(100% / 3);
       }
       button:first-child{
-        border-bottom-left-radius: 0;
-        -webkit-border-bottom-left-radius: 0;
-        -moz-border-radius-bottomleft: 0;
+        @include border-radius-(bottom, left ,0);
       }
       button:last-child{
         border-left:1px solid white;
-        border-bottom-right-radius: 0;
-        -webkit-border-bottom-right-radius: 0;
-        -moz-border-radius-bottomright: 0;
+        @include border-radius-(bottom, right ,0);
       }
     }
   }

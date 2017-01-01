@@ -1,0 +1,74 @@
+.ui.modal.bigbun_modal{
+  text-align: center;
+  @extend .border_main_radius;
+  max-width: 600px;
+  .gray_line{
+    width: 70%;
+  }
+  .close{
+    @extend .red;
+    border: 1px solid $main_red;
+    border-radius: 50%;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    padding: 6px 0 0 1px;
+  }
+  img{
+    width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .close{
+    top: 15px;
+    right: 15px;
+  }
+  .red.bold{
+    font-size: 21px;
+  }
+  h4{
+    font-size: 16px;
+    margin:20px;
+  }
+  button{
+    font-size: 16px;
+    width: 128px;
+    height: 50px;
+    margin: 20px 20px 40px;
+  }
+}
+@media (min-width: $screen-sm-min) {
+  .ui.modal.bigbun_modal{
+    margin-left: -300px;
+  }
+}
+@media (max-width: $screen-xs-max) {
+  body .modals.dimmer .ui.scrolling.modal{
+    margin: 0 !important;
+    margin-top: 50px !important;
+  }
+  .ui.modal.bigbun_modal{
+    width: 100%;
+    height: calc( 100vh - 50px );
+    @include border_radius(0);
+    img{
+      width: 65%;
+    }
+    .action_bottons{
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+    .my_btn_reserve{
+      background-color: $main_red;
+      color: #FFFFFF;
+    }
+    .action_bottons button{
+      width: calc( 100% / 3);
+      margin: 0;
+      margin-right: -2px;
+      @include border_radius(0);
+      font-size: 14px;
+    }
+  }
+}

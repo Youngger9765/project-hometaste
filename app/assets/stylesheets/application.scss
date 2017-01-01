@@ -15,9 +15,11 @@
  */
 
 @import "bootstrap";
+@import "setting/*";
 @import "common/*";
-@import "admin/*";
 @import "library/*";
+@import "template/*";
+@import "admin/*";
 
 @import "main";
 @import "chefs";
@@ -26,4 +28,5 @@
 @import "restaurants";
 @import "comments";
 @import "foods";
+@import "orders";
 

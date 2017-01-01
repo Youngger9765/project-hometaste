@@ -241,9 +241,6 @@ body.main_index{
   .ui.radio.checkbox input:checked ~ .box:after, .ui.radio.checkbox input:checked ~ label:after{
     background-color: $main_red;
   }
-  #cuisine_modal_btn{
-    padding:11px 32px 13px;
-  }
 }
 
 .card_hover_link{
@@ -297,7 +294,7 @@ body.main_index{
     padding: 10px 5px;
     border-radius: 5px;
     i{
-      @include square-icon(40px);
+      @include square_icon(40px);
       font-size: 20px;
       margin: 0 5px;
     }
@@ -317,7 +314,7 @@ body.main_index{
   }
   .ui.fluid.card .num_counts{
     margin-bottom: 5px;
-    .cloche_icon{
+    .cloche_icon_red{
       font-size:20px;
       margin-right: 5px;
     }

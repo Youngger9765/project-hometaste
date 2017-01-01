@@ -1,0 +1,112 @@
+<div class="container ui form">
+  <section class="row">
+    <div class="col-xs-12 basic_bg_top">
+      <h1 class="bold tac mb50">Summary</h1>
+      <i class="gray_line"></i>
+      <table>
+        <thead>
+        <tr>
+          <th><h2>Item</h2></th>
+          <th><h2>Qty</h2></th>
+          <th><h2>Price per Item</h2></th>
+          <th><h2>Total</h2></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th><h3>Dish Name 1</h3></th>
+          <th><h3>1</h3></th>
+          <th><h3>$6.00</h3></th>
+          <th><h3>$6.00</h3></th>
+        </tr>
+        <tr>
+          <th><h3>Dish Name 1</h3></th>
+          <th><h3>1</h3></th>
+          <th><h3>$6.00</h3></th>
+          <th><h3>$6.00</h3></th>
+        </tr>
+        <tr>
+          <th><h3>Big Bun Name</h3></th>
+          <th><h3>1</h3></th>
+          <th><h3>--</h3></th>
+          <th><h3>--</h3></th>
+        </tr>
+        </tbody>
+      </table>
+      <i class="gray_line"></i>
+      <div class="align_two_side">
+        <h2>Subtotal</h2>
+        <h2>$21.00</h2>
+      </div>
+      <div class="align_two_side">
+        <h2>Delivery Fee</h2>
+        <h2>$1.00</h2>
+      </div>
+      <div class="align_two_side">
+        <h2>Tax</h2>
+        <h2>$2.10</h2>
+      </div>
+      <div class="align_two_side tip">
+        <h2>Tip</h2>
+        <h2>$220</h2>
+      </div>
+      <i class="gray_line mtb15"></i>
+      <div class="align_two_side">
+        <h2 class="red">Total</h2>
+        <h2 class="red">$24.10</h2>
+      </div>
+    </div>
+  </section>
+  <section class="row">
+    <div class="col-xs-12 basic_bg">
+      <div class="row">
+        <h1 class="bold tac mb50">Your Contact Information</h1>
+
+        <div class="col-md-10 col-md-offset-1">
+          <i class="gray_line mb50_sm mb30"></i>
+          <%= form_for new_order_path do |f| %>
+              <div class="row">
+                <div class="col-sm-5">
+                  <%= f.label :user_id,'Mobile Number:' %>
+                </div>
+                <div class="col-sm-6">
+                  <%= f.text_field :user_id %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <%= f.label :user_id,'E-mail:' %>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.email_field :user_id %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-5">
+                  <%= f.label :user_id,'Billing Address:' %>
+                </div>
+                <div class="col-sm-6">
+                  <%= f.text_field :user_id %>
+                </div>
+                <div class="col-sm-4 col-sm-offset-5">
+                  <%= f.text_field :user_id ,placeholder:'City' %>
+                </div>
+                <div class="col-sm-2">
+                  <%= f.select :user_id,options_for_select(us_states),{},class:'ui dropdown fluid' %>
+                </div>
+                <div class="col-sm-6 col-sm-offset-5">
+                  <%= f.text_field :user_id ,placeholder:'Zip Code' %>
+                </div>
+                <div class="col-sm-11 tar save_address">
+                  <%= f.check_box :user_id %>
+                  <%= f.label :user_id,'Save this billing address' %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<%= render 'purchase' %>
+<%= render 'thankyou' %>

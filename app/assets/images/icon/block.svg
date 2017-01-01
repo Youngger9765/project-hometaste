@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39 (31667) - http://www.bohemiancoding.com/sketch -->
+    <title>pic view icon T</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="18.5714286" height="18.3912363"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="18.5714286" height="18.3912363" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-list" transform="translate(-129.000000, -2037.000000)">
+            <g id="food-section" transform="translate(80.000000, 1919.000000)">
+                <g id="pic-view-icon-T" transform="translate(49.000000, 118.000000)">
+                    <use id="Rectangle-2" stroke="#EC1C24" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+                    <rect id="Rectangle-2-Copy-2" fill="#EC1C24" x="0" y="21.2206573" width="18.5714286" height="18.3912363"></rect>
+                    <rect id="Rectangle-2-Copy" fill="#EC1C24" x="21.4285714" y="0" width="18.5714286" height="18.3912363"></rect>
+                    <rect id="Rectangle-2-Copy-3" fill="#EC1C24" x="21.4285714" y="21.2206573" width="18.5714286" height="18.3912363"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

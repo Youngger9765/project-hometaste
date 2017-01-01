@@ -1,9 +1,3 @@
-$main_red:#EC1C24;
-$main_black:#4A4A4A;
-
-$main_radius: 10px;
-$sub_radius: 5px;
-
 @mixin justice-content ($_){
   justify-content:$_ ;
   -webkit-justify-content: $_;
@@ -13,10 +7,15 @@ $sub_radius: 5px;
   -webkit-align-items: $_;
 }
 
-@mixin border-radius($px){
-  -webkit-border-radius:$px;
-  -moz-border-radius:$px;
-  border-radius:$px;
+@mixin border-radius($_){
+  -webkit-border-radius:$_;
+  -moz-border-radius:$_;
+  border-radius:$_;
+}
+@mixin border-radius-($_, $__ ,$___){
+  border-#{$_}-#{$__}-radius: #{$___};
+  -webkit-border-#{$_}-#{$__}-radius: #{$___};
+  -moz-border-radius-#{$_}#{$__}: #{$___};
 }
 @mixin transition($_) {
   -webkit-transition: $_;
@@ -32,7 +31,7 @@ $sub_radius: 5px;
   -webkit-background-size:$_;
   background-size:$_;
 }
-@mixin square-icon($pixel: 40px){
+@mixin square_icon($pixel: 40px){
   font-size:$pixel / 2;
   color: $main_red;
   background-color: #FFFFFF;
@@ -57,9 +56,8 @@ $sub_radius: 5px;
   border-bottom-left-radius: $bottom;
   background-color: #FFFFFF;
   margin-bottom: 30px;
-  overflow: hidden;
   width: 100%;
-  padding:15px 30px;
+  padding:30px;
 }
 @mixin text_overflow($font-size,$line-height){
   font-size: $font-size;

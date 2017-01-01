@@ -1,9 +1,13 @@
-.cloche_icon{
-  background-image:image-url('icon/cloche.svg');
-  @extend .background_img_setting;
+.icon_setting{
+  @include background_size_cover;
+  background-position: center;
   display: inline-block;
   margin-right: 5px;
-  font-size:10px;
+  font-size:inherit;
+}
+.cloche_icon_red{
+  background-image:image-url('icon/cloche.svg');
+  @extend .icon_setting;
   width: 1em;
   height: 0.55em;
 }
@@ -25,10 +29,7 @@
         </g>
     </g>
 </svg>');
-  @extend .background_img_setting;
-  display: inline-block;
-  margin-right: 5px;
-  font-size: 10px;
+  @extend .icon_setting;
   width: 1em;
   height: 0.9em;
   margin-bottom: -3px;
@@ -55,9 +56,8 @@
         </g>
     </g>
 </svg>');
-  @extend .background_img_setting;
   display: inline-block;
-  font-size: 10px;
+  font-size: inherit;
   width: 1em;
   height: 1em;
 }
@@ -84,9 +84,8 @@
         </g>
     </g>
 </svg>');
-  @extend .background_img_setting;
   display: inline-block;
-  font-size: 10px;
+  font-size: inherit;
   width: 1em;
   height: 1em;
 }
@@ -109,17 +108,103 @@
         </g>
     </g>
 </svg>');
-  @extend .background_img_setting;
-  display: inline-block;
-  margin-right: 5px;
-  font-size: 10px;
+  @extend .icon_setting;
   width: 1em;
   height: 0.9em;
   margin-bottom: -3px;
 }
-.cart_white{
+.cart_icon_white{
   @include cart(white);
 }
-.cart_red{
+.cart_icon_red{
   @include cart($main_red);
+}
+
+@mixin moto($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="43px" height="29px" viewBox="0 0 43 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>delivery icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-105.000000, -757.000000)" fill="#{$color}">
+            <g id="kitchen-intro" transform="translate(62.000000, 278.000000)">
+                <g id="delivery" transform="translate(29.000000, 479.000000)">
+                    <g id="delivery-icon" transform="translate(14.000000, 0.000000)">
+                        <path d="M38.2067376,22.8257943 C37.801279,24.2827197 36.4699571,25.3529381 34.885879,25.3529381 C33.301801,25.3529381 31.970479,24.2827197 31.5650205,22.8257943 L38.2067376,22.8257943 Z M6.4639278,25.3529381 C4.55829366,25.3529381 3.01344,23.8061102 3.01344,21.8977816 C3.01344,19.989453 4.55829366,18.4426251 6.4639278,18.4426251 C8.36956195,18.4426251 9.91441561,19.989453 9.91441561,21.8977816 C9.91441561,23.8061102 8.36956195,25.3529381 6.4639278,25.3529381 L6.4639278,25.3529381 Z M42.8566107,9.99493657 L23.1399571,9.99493657 L23.1399571,11.1502263 C23.1399571,11.1502263 25.5171229,12.3405948 25.5171229,16.4714908 C25.5171229,19.93757 21.5667863,19.7974649 18.1058107,19.7974649 C14.6448351,19.7974649 13.351479,12.0255158 13.246601,11.360489 C13.1637473,10.8355674 12.8205863,10.706385 12.6792107,10.6748771 L16.4512546,2.5336554 C16.7266644,1.93941637 16.4170644,1.45335448 15.7634644,1.45335448 C15.5801376,1.45335448 15.3890498,1.49473486 15.2021571,1.56279192 C14.6572107,0.787907594 12.6766937,0.210052678 11.8479473,0.210052678 L11.8479473,3.71121071 C12.2810937,3.71121071 13.0295034,3.55304104 13.7229571,3.29173551 L10.3047717,10.6681554 C8.15120585,10.7416738 8.28209366,13.8464625 8.28209366,13.8464625 C5.53785463,13.8464625 0.95804,14.5287136 0.11901561,17.154372 C-0.259594146,18.3392792 0.292693659,18.4856859 1.3913961,18.290757 C0.667947317,19.3090924 0.241303415,20.5532344 0.241303415,21.8977816 C0.241303415,25.3392847 3.0272839,28.1292043 6.4639278,28.1292043 C9.90057171,28.1292043 12.6865522,25.3392847 12.6865522,21.8977816 C12.6865522,21.3008119 12.6009717,20.7244273 12.4447034,20.1778703 C13.687718,21.5190566 13.5958449,22.8257943 13.5958449,22.8257943 L28.7322644,22.8257943 C29.1798839,25.827027 31.7642888,28.1292043 34.885879,28.1292043 C38.0074693,28.1292043 40.5918741,25.827027 41.0394937,22.8257943 L42.8566107,22.8257943 C42.8566107,19.4317632 42.0767376,16.9405384 41.1252839,15.1595018 C41.7765766,15.3895094 42.4532498,15.5266738 42.8566107,15.5266738 L42.8566107,12.0255158 C42.124562,12.0255158 40.4926595,12.4764989 39.7467668,13.1161093 C38.6654741,11.8402493 37.7175863,11.3247801 37.7175863,11.3247801 L42.8566107,11.3247801 L42.8566107,9.99493657 Z" id="Fill-1"></path>
+                        <polygon id="Fill-4" points="33.9421024 9.32969974 42.8565268 9.32969974 42.8565268 0.402670983 33.9421024 0.402670983"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .icon_setting;
+  width: 1em;
+  height: 0.6em;
+}
+.moto_icon_white{
+  @include moto(white);
+}
+.moto_icon_red{
+  @include moto($main_red);
+}
+
+@mixin cert($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="24px" height="31px" viewBox="0 0 24 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>certificate icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-122.000000, -858.000000)" fill="#{$color}">
+            <g id="kitchen-intro" transform="translate(62.000000, 278.000000)">
+                <g id="certificate-" transform="translate(29.000000, 580.000000)">
+                    <path d="M42.7715455,5.17646874 C39.1401981,5.17646874 36.1962734,8.10877291 36.1962734,11.7264583 C36.1962734,15.3438428 39.1401981,18.2764478 42.7715455,18.2764478 C46.4028928,18.2764478 49.3468176,15.3438428 49.3468176,11.7264583 C49.3468176,8.10877291 46.4028928,5.17646874 42.7715455,5.17646874 M51.4566119,18.0699207 C51.8823366,19.7635636 50.8397742,20.8022175 49.1394933,20.3781297 C48.6116671,20.2464298 48.0424566,20.2405119 47.4815029,20.3395125 L47.4815029,31 L42.8863341,26.957625 L38.0614874,31 L38.0614874,20.3394122 C37.5005337,20.2405119 36.9314239,20.2464298 36.4035977,20.3781297 C34.7033168,20.8022175 33.6607544,19.7635636 34.0864791,18.0699207 C34.5122038,16.3762778 33.6306475,14.2561399 32.1274204,13.3585141 C30.6241932,12.4608884 30.6241932,10.9920281 32.1274204,10.0943021 C33.6306475,9.19667641 34.5123045,7.07643815 34.0864791,5.38289557 C33.6607544,3.6892527 34.7034175,2.65049844 36.4035977,3.07468652 C38.1037779,3.4987743 40.2319988,2.62070798 41.13319,1.12316056 C42.0342805,-0.374386854 43.5088105,-0.374386854 44.409901,1.12316056 C45.3110922,2.62070798 47.439313,3.4987743 49.1394933,3.07468652 C50.8397742,2.65049844 51.8823366,3.6892527 51.4566119,5.38289557 C51.0308872,7.07643815 51.9124434,9.19667641 53.4156706,10.0943021 C54.9188978,10.9920281 54.9188978,12.4608884 53.4156706,13.3585141 C51.9124434,14.2561399 51.0308872,16.3762778 51.4566119,18.0699207 Z" id="certificate-icon"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .icon_setting;
+  width: 1em;
+  height: 1.3em;
+}
+.cert_icon_white{
+  @include cert(white);
+}
+.cert_icon_red{
+  @include cert($main_red);
+}
+@mixin block_icon($color){
+  background-image:url('data:image/svg+xml;utf8,<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>pic view icon T</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="18.5714286" height="18.3912363"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="18.5714286" height="18.3912363" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-list" transform="translate(-129.000000, -2037.000000)">
+            <g id="food-section" transform="translate(80.000000, 1919.000000)">
+                <g id="pic-view-icon-T" transform="translate(49.000000, 118.000000)">
+                    <use id="Rectangle-2" stroke="#EC1C24" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+                    <rect id="Rectangle-2-Copy-2" fill="#{$color}" x="0" y="21.2206573" width="18.5714286" height="18.3912363"></rect>
+                    <rect id="Rectangle-2-Copy" fill="#{$color}" x="21.4285714" y="0" width="18.5714286" height="18.3912363"></rect>
+                    <rect id="Rectangle-2-Copy-3" fill="#{$color}" x="21.4285714" y="21.2206573" width="18.5714286" height="18.3912363"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>');
+  @extend .icon_setting;
+  width: 1em;
+  height: 2.9em;
+  margin-bottom: -1px;
+}
+.block_icon_white{
+  @include block_icon(white);
+}
+.block_icon_red{
+  @include block_icon($main_red);
 }

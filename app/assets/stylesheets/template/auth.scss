@@ -1,20 +1,20 @@
-.ui.modal#login_modal,.ui.modal#sign_up_modal{
+.ui.modal#login_modal,.ui.modal#sign_up_modal,.ui.modal#auth_link_modal{
   width: 300px;
   text-align: center;
-  background-color: $main_red;
-  color: #FFFFFF;
+  @extend .background_red;
+  @extend .border_main_radius;
+  @extend .white;
   bottom:inherit;
   left: 50%;
-  border-radius: $main_radius;
   margin:0 0 0 -150px ;
   padding:0 15px 20px;
   input{
     height: 40px;
   }
   input[type='submit']{
+    @extend .border_main_radius;
     border:1px solid #FFFFFF;
     font-weight:bold;
-    border-radius: $main_radius;
     padding:5px 25px;
     margin-top: 15px;
   }
@@ -28,14 +28,14 @@
     top: 10px;
     right: 10px;
     opacity: 1;
-    color: #FFFFFF;
+    @extend .white;
   }
   a[name='forgot_password']{
     text-align: right;
     display: inherit;
   }
   a{
-    color: #FFFFFF;
+    @extend .white;
   }
   span[name="term"]{
     display: inherit;
@@ -51,5 +51,20 @@
     i{
       margin:0 20px;
     }
+  }
+}
+.ui.modal#auth_link_modal{
+  padding: 40px 0;
+  button{
+    @extend .border_main_radius;
+    border:1px solid white;
+    height: 60px;
+    font-size: 20px;
+  }
+  .login{
+    width: 200px;
+  }
+  .sign_up{
+    width: 240px;
   }
 }

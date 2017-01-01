@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :foods
   resources :restaurants
   resources :comments
+  resources :orders
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1'  do
     get "/search/keyword" => "search#keyword"
