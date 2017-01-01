@@ -56,6 +56,10 @@ gem 'gmaps4rails'
 gem 'geocoder'
 gem 'faker'
 
+# braintree
+gem "braintree", "~> 2.69.1"
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

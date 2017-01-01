@@ -5,7 +5,8 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @user = User.new
+    @user = current_user || User.new
+    @restaurant = Restaurant.find(params[:id])
   end
 
 end

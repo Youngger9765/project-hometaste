@@ -61,6 +61,7 @@ class BigBunsController < ApplicationController
 	def big_bun_params
 	  params.require(:big_bun).permit(
 	  	:id, :restaurant_id, :style, :unit, :start_datetime, :stop_datetime,
+	  	:prepare_time,
 
 	  	:big_bun_photo_attributes => [
 		  		:id, :big_bun_id, :photo,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161225164623) do
+ActiveRecord::Schema.define(version: 20170101181519) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20161225164623) do
     t.boolean  "is_public",      default: false
     t.string   "style"
     t.integer  "unit"
+    t.time     "prepare_time"
+    t.string   "code",                           null: false
   end
 
   create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -43,6 +45,42 @@ ActiveRecord::Schema.define(version: 20161225164623) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["restaurant_id"], name: "index_bulk_buys_on_restaurant_id", using: :btree
+  end
+
+  create_table "cart_bigbuns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "cart_id"
+    t.integer  "big_bun_id"
+    t.integer  "quatity",    default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["big_bun_id"], name: "index_cart_bigbuns_on_big_bun_id", using: :btree
+    t.index ["cart_id"], name: "index_cart_bigbuns_on_cart_id", using: :btree
+  end
+
+  create_table "cart_foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "cart_id"
+    t.integer  "food_id"
+    t.float    "quantity",   limit: 24
+    t.decimal  "price",                 precision: 10, scale: 2
+    t.decimal  "sub_total",             precision: 10, scale: 2
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.index ["cart_id"], name: "index_cart_foods_on_cart_id", using: :btree
+    t.index ["food_id"], name: "index_cart_foods_on_food_id", using: :btree
+  end
+
+  create_table "carts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "restaurant_id"
+    t.decimal  "sub_total",                precision: 10, scale: 2
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.float    "delivery_fee",  limit: 24
+    t.float    "tax",           limit: 24
+    t.float    "tip",           limit: 24
+    t.decimal  "total_amount",             precision: 10, scale: 2
+    t.index ["restaurant_id"], name: "index_carts_on_restaurant_id", using: :btree
+    t.index ["user_id"], name: "index_carts_on_user_id", using: :btree
   end
 
   create_table "chefs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
