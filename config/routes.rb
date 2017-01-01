@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :transactions
 
   resources :chefs do
     resources :foods
@@ -37,7 +36,11 @@ Rails.application.routes.draw do
   end
 
   resources :foods
-  resources :restaurants
+
+  resources :restaurants do
+    resources :transactions
+  end
+
   resources :comments
   resources :orders
 
