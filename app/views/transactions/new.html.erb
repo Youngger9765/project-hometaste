@@ -22,6 +22,15 @@
                 <td>$ <%= cart_food.sub_total%></td>
               </tr>
             <% end %>
+
+            <% @cart.cart_bigbuns.each do |cart_bigbun|%>
+              <tr>
+                <td><%= cart_bigbun.big_bun.style%></td>
+                <td><%= cart_bigbun.quantity%></td>
+                <td> ---- </td>
+                <td> ---- </td>
+              </tr>
+            <% end %>
           </tbody>
 
           <tbody class="noline">

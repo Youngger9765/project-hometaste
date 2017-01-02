@@ -6,6 +6,7 @@ class BigBun < ApplicationRecord
 	validates :stop_datetime, :presence => true
 
 	belongs_to :restaurant
+  belongs_to :user
 	has_one :big_bun_photo
 
 	accepts_nested_attributes_for :big_bun_photo,
@@ -18,7 +19,10 @@ class BigBun < ApplicationRecord
   private
 
   def set_code
-    self.code = generate_code
+    if self.code
+    else
+      self.code = generate_code
+    end
   end
 
   def generate_code

@@ -150,9 +150,9 @@ namespace :dev do
 				shipping_method: ["bulk_buy", "delivery"].sample,
 				shipping_place: Faker::Address.city + Faker::Address.street_name,
 				amount: Faker::Commerce.price,
-				payment_method: ["cash", "VISA"].sample,
-				payment_status: ["done", "not yet"].sample,
-				order_status: ["in_advance","in_process","finished"].sample,
+				payment_method: ["paypal", "credit_card"].sample,
+				payment_status: ["Unpaid", "paid"].sample,
+				order_status: ["completed","not yet","cancel"].sample,
         created_at: Faker::Time.between(DateTime.now-720 , DateTime.now),
 			)
 		}
@@ -182,6 +182,31 @@ namespace :dev do
         restaurant.restaurant_cuisine_ships.create(:cuisine_id => Cuisine.all.sample.id)
       }
     end
+
+    # create big_buns
+    puts('create big_buns')
+
+    Restaurant.all.each do |restaurant|
+      4.times{
+        user_id = [User.all.sample.id,nil,1,2,3].sample
+        start_datetime = Time.now - rand(0..30).days
+        stop_datetime = start_datetime + rand(5..30).days
+
+        big_bun1 = restaurant.big_buns.create(
+          :user_id => user_id,
+          :start_datetime => start_datetime,
+          :stop_datetime => stop_datetime,
+          :style => Faker::Name.name,
+          :unit => rand(1..5),
+          :prepare_time => "01:00:00",
+          :usage => "self"
+        )
+
+        big_bun2 = big_bun1.dup
+        big_bun2.usage = 'gift'
+        big_bun2.save!
+      }
+    end
 	end
 
   task :count_order_amount => :environment do
@@ -192,4 +217,5 @@ namespace :dev do
       order.save!
     end
   end
+
 end

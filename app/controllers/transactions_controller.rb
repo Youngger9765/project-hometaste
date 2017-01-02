@@ -1,7 +1,8 @@
 class TransactionsController < ApplicationController
 
 	skip_before_filter :verify_authenticity_token, :only => :create
-	before_action :find_restaurant
+
+  before_action :find_restaurant
 	before_action :create_cart, :only => :new
 	before_action :create_cart_foods, :only => :new
 	before_action :create_cart_bigbuns, :only => :new
@@ -87,7 +88,16 @@ class TransactionsController < ApplicationController
   end
 
   def create_cart_bigbuns
-  	
+  	# FAKE
+    if current_user.big_buns.where(:usage => "self").size > 0
+      @cart.cart_bigbuns.destroy_all
+      big_bun = current_user.big_buns.where(:usage => "self").first
+      @cart.cart_bigbuns.create(
+        :cart_id => @cart.id,
+        :big_bun_id => big_bun.id,
+        :quantity => 1,
+      )
+    end
   end
 
 end
