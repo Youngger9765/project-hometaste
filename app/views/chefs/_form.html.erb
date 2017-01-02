@@ -111,6 +111,20 @@
 	    <%= r.label :description, "About" %> <br>
 	    <%= r.text_area :description %>
     </div>
+
+	<div class="clearfix"></div>
+
+    <div class="form_control col-md-6">
+	    <%= r.label :tip, "Tip" %> <br>
+	    <%= r.number_field :tip, :step => 0.01 %>
+    </div>
+
+	<div class="clearfix"></div>
+
+    <div class="form_control col-md-6">
+	    <%= r.label :tax, "Tax" %> <br>
+	    <%= r.number_field :tax, :step => 0.01 %>
+    </div>
 	<% end %>
 </div>
 

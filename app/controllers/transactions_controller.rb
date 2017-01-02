@@ -47,9 +47,14 @@ class TransactionsController < ApplicationController
   	@cart = current_user.carts.where(:restaurant_id => @restaurant.id).first || current_user.carts.create(:restaurant_id => @restaurant.id)
   	
   	# FAKE
-  	@cart.delivery_fee = rand(0..3)
-  	@cart.tip = rand(0..3)
-  	@cart.tax = rand(0..3)
+    if @restaurant.delivery
+      @cart.delivery_fee = @restaurant.delivery.cost
+    else
+      @cart.delivery_fee = 0
+    end
+
+  	@cart.tip = @restaurant.tip
+  	@cart.tax = @restaurant.tax
   	@cart.save!
   end
 

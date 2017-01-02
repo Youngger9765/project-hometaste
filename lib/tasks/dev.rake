@@ -6,7 +6,7 @@ namespace :dev do
   task :fake => :environment do
 
   	# admin
-    puts('make admin')
+    puts('create admin')
 
   	User.create(
   		name: "admin",
@@ -21,7 +21,7 @@ namespace :dev do
 		)
 
 		# chef
-    puts('make chef')
+    puts('create chef')
 
   	User.create(
   		name: "chef",
@@ -36,7 +36,7 @@ namespace :dev do
 		)
 
 		# purpleice9765@msn.com
-    puts('make purpleice9765')
+    puts('create me')
 
   	User.create(
   		name: "young",
@@ -174,12 +174,14 @@ namespace :dev do
 			order.save!
     }
 
+    # create restaurant_cuisine_ships
 		puts('create restaurant_cuisine_ships')
-		1000.times{
-      Cuisine.all.sample.restaurant_cuisine_ships
-          .create(restaurant_id:Restaurant.all.sample.id)
-    }
 
+    Restaurant.all.each do |restaurant|
+      3.times{
+        restaurant.restaurant_cuisine_ships.create(:cuisine_id => Cuisine.all.sample.id)
+      }
+    end
 	end
 
   task :count_order_amount => :environment do

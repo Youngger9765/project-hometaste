@@ -116,6 +116,7 @@ class ChefsController < ApplicationController
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
 	  		:certificated_img, :certificated_num, :main_photo,
+	  		:tip, :tax,
 
 	  		:delivery_attributes => [
 		  		:id, :min_order, :area, :distance, :cost, :order_hours,
@@ -177,7 +178,7 @@ class ChefsController < ApplicationController
 			true
 		else
 			flash[:alert] = "Please Login"
-			redirect_to :back
+			redirect_to root_path
 		end
 	end
 
@@ -186,7 +187,7 @@ class ChefsController < ApplicationController
 			true
 		else
 			flash[:alert] = "No authority!"
-			redirect_to :back
+			redirect_to root_path
 		end
 	end
 end
