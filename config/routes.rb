@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'transactions/new'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   root :to => "main#index"
@@ -34,7 +36,11 @@ Rails.application.routes.draw do
   end
 
   resources :foods
-  resources :restaurants
+
+  resources :restaurants do
+    resources :transactions
+  end
+
   resources :comments
   resources :orders
 

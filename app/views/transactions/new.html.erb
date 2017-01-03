@@ -1,0 +1,171 @@
+<div class="container">
+  <section class="row">
+    <div class="col-md-12 basic_bg_top pt0 pt30_md">
+      <div class="row">
+        <h1>SUMMARY</h1>
+        <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cart.cart_foods.each do |cart_food|%>
+              <tr>
+                <td><%= cart_food.food.name%></td>
+                <td><%= cart_food.quantity%></td>
+                <td>$ <%= cart_food.price%></td>
+                <td>$ <%= cart_food.sub_total%></td>
+              </tr>
+            <% end %>
+          </tbody>
+
+          <tbody class="noline">
+            <tr>
+              <td><h3>sub toal</h3> </td>
+              <td></td>
+              <td></td>
+              <td><h3>$ <%= @cart.sub_total%></h3></td>
+            </tr>
+            <tr>
+              <td><h3>Delivery Fee</h3> </td>
+              <td></td>
+              <td></td>
+              <td><h3>$ <%= @cart.delivery_fee%></h3></td>
+            </tr>
+            <tr>
+              <td><h3>Tax</h3> </td>
+              <td></td>
+              <td></td>
+              <td><h3>$ <%= @cart.tax%></h3></td>
+            </tr>
+            <tr>
+              <td><h3>Tip</h3> </td>
+              <td></td>
+              <td></td>
+              <td><h3>$ <%= @cart.tip%></h3></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td><h1>Total</h1></td>
+              <td></td>
+              <td></td>
+              <td><h1>$<%= @cart.total_amount%></h1></td>
+            </tr>
+          </tbody>
+          
+
+        </table>
+
+      </div>
+    </div>
+  </section>
+  <section class="row">
+    <div class="col-md-12 basic_bg_top pt0 pt30_md">
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <form class='form_control' id="checkout-form" action="/restaurants/<%=@restaurant.id%>/transactions" method="post">
+          <div id="error-message"></div>
+
+          <label for="card-number">Card Number</label>
+          <div class="hosted-field" id="card-number"></div>
+
+          <label for="cvv">CVV</label>
+          <div class="hosted-field" id="cvv"></div>
+
+          <label for="expiration-date">Expiration Date</label>
+          <div class="hosted-field" id="expiration-date"></div>
+
+          <input type="hidden" name="payment-method-nonce">
+          <input type="submit" value="Pay $<%= @cart.total_amount%>">
+        </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+
+<!-- Load the Client component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+
+<script>
+var form = document.querySelector('#checkout-form');
+var submit = document.querySelector('input[type="submit"]');
+
+braintree.client.create({
+  // Replace this with your own authorization.
+  authorization: '<%= @client_token %>'
+}, function (clientErr, clientInstance) {
+  if (clientErr) {
+    // Handle error in client creation
+    return;
+  }
+
+  braintree.hostedFields.create({
+    client: clientInstance,
+    styles: {
+      'input': {
+        'font-size': '14pt'
+      },
+      'input.invalid': {
+        'color': 'red'
+      },
+      'input.valid': {
+        'color': 'green'
+      }
+    },
+    fields: {
+      number: {
+        selector: '#card-number',
+        placeholder: '4111 1111 1111 1111'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: '123'
+      },
+      expirationDate: {
+        selector: '#expiration-date',
+        placeholder: '10/2019'
+      }
+    }
+  }, function (hostedFieldsErr, hostedFieldsInstance) {
+    if (hostedFieldsErr) {
+      // Handle error in Hosted Fields creation
+      return;
+    }
+
+    submit.removeAttribute('disabled');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+        if (tokenizeErr) {
+          // Handle error in Hosted Fields tokenization
+          return;
+        }
+
+        // Put `payload.nonce` into the `payment-method-nonce` input, and then
+        // submit the form. Alternatively, you could send the nonce to your server
+        // with AJAX.
+        document.querySelector('input[name="payment-method-nonce"]').value = payload.nonce;
+        form.submit();
+      });
+    }, false);
+  });
+});
+</script>

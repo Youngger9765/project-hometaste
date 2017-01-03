@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_one :user_photo
 
   has_many :orders
+  has_many :carts
 
   accepts_nested_attributes_for :user_photo,
     :allow_destroy => true,

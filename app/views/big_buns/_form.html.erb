@@ -33,6 +33,14 @@
 
 	<div class="clearfix"></div>
 
+	<!-- stop_datetime -->
+	<div class="form_control col-md-6">
+    <%= f.label :prepare_time, "prepare_time(H:M)" %> <br>
+    <%= f.time_select :prepare_time, ampm: false, minute_step: 30 %>
+  </div>
+
+	<div class="clearfix"></div>
+
 	<hr>
 
   <!-- photo -->
