@@ -71,12 +71,12 @@
   @extend .border_none_radius;
   @extend .background_img_setting;
   background-color: transparent;
-  background-image: image-url('tmp/background_photo.png');
+  background-image: image-url('tmp/background_photo2.png');
   h1{
     margin-bottom: 30px;
   }
   h2{
-    margin: 60px auto;
+    margin: 60px auto 40px;
     max-width: 600px;
   }
   i{
@@ -94,6 +94,16 @@
     max-width: 300px;
     font-size: 16px;
     line-height: 35px;
+  }
+  hr{
+    max-width: 300px;
+  }
+  .to_home_page{
+    img{
+      width: 200px;
+      margin:auto;
+      display: block;
+    }
   }
 }
 @media (max-width: $screen-md-max){
