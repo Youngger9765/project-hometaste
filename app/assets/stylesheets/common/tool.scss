@@ -35,6 +35,11 @@
 .vertical_align{
   vertical-align: middle;
 }
+.black_border_block{
+  margin:15px 25px;
+  border:1px solid #444444;
+  padding: 30px;
+}
 .l_line:before{
   @extend .red;
   content:'|';
@@ -113,6 +118,9 @@
 }
 .flex_center{
   @include flex_(center,center);
+}
+.flex_vertical_center{
+  @include flex_(center,inherit);
 }
 .bold{
   font-weight: bold;
@@ -200,5 +208,10 @@
       float: inherit;
       display: block;
     }
+  }
+  .black_border_block{
+    margin: -1px 0 0;
+    width: calc(100% + 40px);
+    margin-left: -20px;
   }
 }

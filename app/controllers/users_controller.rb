@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		
+		@cuisines = Cuisine.all
 	end
 
 	def update
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 	  	:ZIP, :foodie_id,
 
 	  	:user_photo_attributes => [
-	  		:photo,
+	  		:photo
 	  	]
 	  )
 	end
