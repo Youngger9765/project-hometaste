@@ -1,0 +1,201 @@
+<div class="row">
+	<!-- Order Summary-->
+	<div class="col-md-3 chef-sales-set-btn" id="chef-sales-order-summary-btn">
+		<div class="col-md-12">
+			Order Summary
+		</div>
+	</div>
+
+	<!-- Advance-->
+	<div class="col-md-2 chef-sales-set-btn" id="chef-sales-advance-btn">
+		<div class="col-md-12">
+			Advance
+		</div>
+	</div>
+
+	<!-- Delivering-->
+	<div class="col-md-2 chef-sales-set-btn">
+		<div class="col-md-12">
+			Delivering
+		</div>
+	</div>
+
+	<!-- Completed-->
+	<div class="col-md-2 chef-sales-set-btn" id="chef-sales-completed-btn">
+		<div class="col-md-12">
+			Completed
+		</div>
+	</div>
+
+	<!-- Cancelled-->
+	<div class="col-md-2 chef-sales-set-btn" id="chef-sales-cancelled-btn">
+		<div class="col-md-12">
+			Cancelled
+		</div>
+	</div>
+
+</div>
+
+<!-- summary-show -->
+<div class="row chef-sales-show" id="chef-sales-order-summary-show" style="display: none">
+	<% @today_orders.each do |order|%>
+		<div class="col-md-12 chef-sales-order-summary-show-order">
+			<div class="row">
+				<div class="col-md-5">
+					<%if order.user.user_photo%>
+						<%= image_tag(order.user.user_photo.photo(:thumb))%>
+					<%else%>
+						<%= image_tag('empty_img.png',:style => "width:100%;")%>
+					<%end%>
+					<p style="text-align: center;"><%=order.user.name%></p>
+				</div>
+				<div class="col-md-7">
+					<% order.order_food_ships.each do |ship|%>
+						<div class="row">
+							<div class="col-md-5">
+								<%if ship.food.food_photos.size > 0%>
+									<%= image_tag(ship.food.food_photos.first.photo(:thumb))%>
+								<%else%>
+									<%= image_tag('tmp/product.png',:style => "width:100%;")%>
+								<%end%>
+							</div>
+							<div class="col-md-7">
+								<p><%= ship.food.name%></p>
+								<p>$ <%= ship.food.price%> x <%= ship.quantity%></p>
+							</div>
+						</div>
+						<br>
+					<%end%>
+				</div>
+			</div>
+
+			<div class="row total-payment-line">
+				<div class="col-md-12">
+					<p>Total Payment: $<%= order.amount%></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-9">
+					<p>Location:<%= order.shipping_place%></p>
+				</div>
+				<div class="col-md-3">
+					<p style="font-size: 14px;"><%= order.scheduled_time.strftime('%Y/%m/%d %H:%M:%S')%></p>
+				</div>
+			</div>
+		</div>
+	<%end%>
+</div>
+
+<!-- Advance-->
+<div class="row chef-sales-show" id="advance-show" style="display: none">
+</div>
+
+<!-- Delivering-->
+<div class="row chef-sales-show" id="delivering-show" style="display: none">
+</div>
+
+<!-- Completed-->
+<div class="row chef-sales-show" id="chef-sales-completed-show" style="display: none">
+	<div class="col-md-12 chef-sales-order-summary-show-order">
+		<table class="table">
+			<thead>
+				<th>#</th>
+				<th>Date</th>
+				<th>Type</th>
+				<th>Name</th>
+				<th>Dish</th>
+				<th>Total payment</th>
+			</thead>
+			<tbody>
+				<% @completed_orders.each do |order|%>
+					<tr>
+						<td><%=order.id%></td>
+						<td><%=order.scheduled_time.strftime('%Y/%m/%d')%></td>
+						<td><%=order.shipping_method%></td>
+						<td><%=order.customer_name%></td>
+						<td>
+							<% order.order_food_ships.each do |ship|%>
+								<%= ship.food.name%> x <%= ship.quantity%> <br>
+							<%end%>
+						</td>
+						<td>$ <%=order.amount%></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Cancelled-->
+<div class="row chef-sales-show" id="chef-sales-cancelled-show" style="display: none">
+	<% @cancelled_orders.each do |order|%>
+		<div class="col-md-12 chef-sales-order-summary-show-order">
+			<div class="row">
+				<div class="col-md-5">
+					<%if order.user.user_photo%>
+						<%= image_tag(order.user.user_photo.photo(:thumb))%>
+					<%else%>
+						<%= image_tag('empty_img.png',:style => "width:100%;")%>
+					<%end%>
+					<p style="text-align: center;"><%=order.user.name%></p>
+				</div>
+				<div class="col-md-7">
+					<% order.order_food_ships.each do |ship|%>
+						<div class="row">
+							<div class="col-md-5">
+								<%if ship.food.food_photos.size > 0%>
+									<%= image_tag(ship.food.food_photos.first.photo(:thumb))%>
+								<%else%>
+									<%= image_tag('tmp/product.png',:style => "width:100%;")%>
+								<%end%>
+							</div>
+							<div class="col-md-7">
+								<p><%= ship.food.name%></p>
+								<p>$ <%= ship.food.price%> x <%= ship.quantity%></p>
+							</div>
+						</div>
+						<br>
+					<%end%>
+				</div>
+			</div>
+
+			<div class="row total-payment-line">
+				<div class="col-md-12">
+					<p>Total Payment: $<%= order.amount%></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-9">
+					<p>Location:<%= order.shipping_place%></p>
+				</div>
+				<div class="col-md-3">
+					<p style="font-size: 14px;"><%= order.scheduled_time.strftime('%Y/%m/%d %H:%M:%S')%></p>
+				</div>
+			</div>
+		</div>
+	<%end%>
+</div>
+
+<script type="text/javascript">
+
+	$(".chef-sales-set-btn").click(function(){
+		$('.chef-sales-set-btn').css("background-color","white");
+		$(this).css("background-color","red");
+		$(".chef-sales-show").hide();
+	});
+
+  // order summary
+	$("#chef-sales-order-summary-btn").click(function(){
+		$("#chef-sales-order-summary-show").show();
+	});
+
+	// completed
+	$("#chef-sales-completed-btn").click(function(){
+		$("#chef-sales-completed-show").show();
+	});
+
+	// cancelled
+	$("#chef-sales-cancelled-btn").click(function(){
+		$("#chef-sales-cancelled-show").show();
+	});
+</script>

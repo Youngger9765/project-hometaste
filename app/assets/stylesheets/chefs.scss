@@ -249,4 +249,41 @@
 	}
 }
 
+#event_area {
+	padding: 0;
+
+	.chef-sales-show {
+		margin-left: 2em;
+    padding: 1em;
+    width: 36em;
+	}
+
+	.chef-sales-set {
+	  border: 1px solid;
+	  color: black;
+	  font-size: 18px;
+	}
+
+	.chef-sales-order-summary-show-order{
+		border: 1px solid;
+		margin-top: 1em;
+	}
+
+	.total-payment-line {
+		border-top: 1px solid;
+		border-bottom: 1px solid;
+		margin:10px auto;
+    padding: 1em;
+
+    p{
+	    text-align: right;
+    }
+	}
+
+	table{
+		font-size: 14px;
+	}
+}
+
+
 

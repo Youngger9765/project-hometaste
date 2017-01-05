@@ -22,6 +22,15 @@
                 <td>$ <%= cart_food.sub_total%></td>
               </tr>
             <% end %>
+
+            <% @cart.cart_bigbuns.each do |cart_bigbun|%>
+              <tr>
+                <td><%= cart_bigbun.big_bun.style%></td>
+                <td><%= cart_bigbun.quantity%></td>
+                <td> ---- </td>
+                <td> ---- </td>
+              </tr>
+            <% end %>
           </tbody>
 
           <tbody class="noline">
@@ -71,6 +80,9 @@
         <div class="col-xs-12 col-md-12">
           <form class='form_control' id="checkout-form" action="/restaurants/<%=@restaurant.id%>/transactions" method="post">
           <div id="error-message"></div>
+
+          <label for="card-holder">Card Holder</label>
+          <div class="hosted-field" id="card-holder"></div>
 
           <label for="card-number">Card Number</label>
           <div class="hosted-field" id="card-number"></div>
