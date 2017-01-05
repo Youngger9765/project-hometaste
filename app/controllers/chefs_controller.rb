@@ -2,11 +2,11 @@ class ChefsController < ApplicationController
 
 	before_action :find_chef, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu]
+		:save_dish, :menu, :sales]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu]
+		:save_dish, :menu, :sales]
 
 	before_action :is_current_user?, :except => [:new]
 	before_action :has_authority?, :except => [:new]
@@ -105,6 +105,17 @@ class ChefsController < ApplicationController
 		@big_buns = @chef.restaurant.big_buns.all
 	end
 
+	def sales
+		time_range = (Time.now().beginning_of_day()..Time.now().end_of_day())
+		@today_orders = @chef.restaurant.orders.where(:created_at => time_range).where(:payment_status => "paid")
+		@cancelled_orders = @chef.restaurant.orders.where(:order_status => "cancel")
+		@completed_orders = @chef.restaurant.orders.where(:order_status => "completed")
+		respond_to do |format|
+		  format.html
+		  format.js
+		end
+	end
+
 	private
 
 	def chef_params
@@ -116,6 +127,7 @@ class ChefsController < ApplicationController
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
 	  		:certificated_img, :certificated_num, :main_photo,
+	  		:tip, :tax,
 
 	  		:delivery_attributes => [
 		  		:id, :min_order, :area, :distance, :cost, :order_hours,
@@ -177,7 +189,7 @@ class ChefsController < ApplicationController
 			true
 		else
 			flash[:alert] = "Please Login"
-			redirect_to :back
+			redirect_to root_path
 		end
 	end
 
@@ -186,7 +198,7 @@ class ChefsController < ApplicationController
 			true
 		else
 			flash[:alert] = "No authority!"
-			redirect_to :back
+			redirect_to root_path
 		end
 	end
 end
