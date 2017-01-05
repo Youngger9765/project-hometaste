@@ -28,21 +28,30 @@ Rails.application.routes.draw do
     member do
       get :review
       get :approve
+
+      # Menu
       get :add_dish
       post :save_dish
       get :add_big_bun
       get :menu
+
+      # 5 btn
+      get :sales
+      get :income
+      get :rating
+      get :message
+      get :bussiness
     end
   end
 
   resources :foods
-
-  resources :restaurants do
-    resources :transactions
-  end
-
+  resources :restaurants
   resources :comments
-  resources :orders
+  resources :orders do
+    member do
+      post :transactions
+    end
+  end
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1'  do
     get "/search/keyword" => "search#keyword"
