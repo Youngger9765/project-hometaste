@@ -1,0 +1,18 @@
+<a href="<%= paid_user_path %>" class="my_black_btn_reserve border_none_radius">
+  <p>Paid</p>
+</a>
+<a href="<%= completed_user_path %>" class="my_black_btn_reserve border_none_radius">
+  <p>Completed</p>
+</a>
+<a href="<%= cancelled_user_path %>" class="my_black_btn_reserve border_none_radius">
+  <p>Cancelled</p>
+</a>
+<a href="<%= big_bun_user_path %>" class="my_black_btn_reserve border_none_radius">
+  <p>Big Bun</p>
+</a>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $('a.my_black_btn_reserve[href*="' + location.pathname.split('/')[4] + '"]').toggleClass('my_black_btn_reserve').toggleClass('my_black_btn');
+  })
+</script>

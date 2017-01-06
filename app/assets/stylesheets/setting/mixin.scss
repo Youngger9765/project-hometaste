@@ -18,9 +18,11 @@
   -moz-border-radius-#{$_}#{$__}: #{$___};
 }
 @mixin transition($_) {
-  -webkit-transition: $_;
-  -moz-transition: $_;
-  -o-transition: $_;
+  -webkit-transition: $_ ;
+  -moz-transition: $_ ;
+  -ms-transition: $_ ;
+  -o-transition: $_ ;
+  transition: $_ ;
 }
 
 @mixin background-size-cover {

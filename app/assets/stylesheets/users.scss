@@ -26,6 +26,28 @@
     }
   }
 }
+.user_img_header{
+  position: relative;
+  &:before{
+    content:'Edit Profile';
+    background-color: rgba(0, 0, 0, 0.65);
+    display: block;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: -130px;
+    @include transition(all 0.5s);
+    color: white;
+    text-align: center;
+    padding-top: 45px;
+    font-size: 20px;
+  }
+  &:hover{
+    &:before{
+    bottom: -10px;
+    }
+  }
+}
 .users_edit{
   .field{
     label{
@@ -61,6 +83,42 @@
     i{
       @extend .red;
       font-size: 45px;
+    }
+  }
+}
+[class*=users_]{
+  .user_img{
+    width: 260px;
+    height: 260px;
+    margin: auto;
+  }
+  .basic_bg_top{
+    a[class*=_btn],a[class*=_btn_reserve]{
+      height:100px ;
+      padding-top: 15px;
+      &:hover{
+        color: inherit;
+      }
+    }
+  }
+  .basic_bg{
+    a[class*=_btn],a[class*=_btn_reserve]{
+      height: 50px;
+      &:hover{
+        @extend .red;
+      }
+      p{
+        line-height: 50px;
+      }
+
+    }
+  }
+}
+.users_big_bun{
+  .black_border_block{
+    .my_btn_reserve{
+      width: 160px;
+      height: 60px;
     }
   }
 }

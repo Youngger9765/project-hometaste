@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	before_action :find_user, :only =>[:edit, :update]
-	before_action :is_current_user?, :only =>[:edit, :update]
+	# before_action :is_current_user?, :only =>[:edit, :update]
 
 	def new
 		@user = User.new
@@ -23,17 +23,34 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def my_purchase
+	end
+
+	def paid
+	end
+
+	def completed
+	end
+
+	def cancelled
+	end
+
+	def big_bun
+	end
+
+
+
 	private
 
 	def user_params
-	  params.require(:user).permit(
-	  	:name, :gender, :birthday, :phone_number, :address,
-	  	:ZIP, :foodie_id,
+		params.require(:user).permit(
+				:name, :gender, :birthday, :phone_number, :address,
+				:ZIP, :foodie_id,
 
-	  	:user_photo_attributes => [
-	  		:photo
-	  	]
-	  )
+				:user_photo_attributes => [
+						:photo
+				]
+		)
 	end
 
 	def find_user

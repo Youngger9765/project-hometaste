@@ -25,8 +25,14 @@
 .background_white{
   background-color: #FFFFFF;
 }
+.background_black{
+  background-color: #444444;
+}
 .border_red{
   border: 1px solid $main_red ;
+}
+.border_black{
+  border:1px solid #444444;
 }
 .sub_link{
   color: #003470;
@@ -36,8 +42,8 @@
   vertical-align: middle;
 }
 .black_border_block{
+  @extend .border_black;
   margin:15px 25px;
-  border:1px solid #444444;
   padding: 30px;
 }
 .l_line:before{
@@ -65,33 +71,12 @@
 .border_none_radius{
   @include border_radius(0px);
 }
+.fluid{
+  width: 100%;
+}
 .small_btn{
   width: 84px;
   height: 32px;
-}
-.ui.button.my_btn{
-  @extend .background_red;
-  @extend .white;
-  @extend .border_sub_radius;
-  @extend .border_red;
-  font-weight: inherit;
-  font-size:1em;
-  padding: 0;
-  line-height: 40px;
-  width: 100px;
-  height: 40px;
-}
-.ui.button.my_btn_reserve{
-  @extend .background_white;
-  @extend .red;
-  @extend .border_sub_radius;
-  @extend .border_red;
-  font-weight: inherit;
-  font-size:1em;
-  padding: 0;
-  line-height: 40px;
-  width: 100px;
-  height: 40px;
 }
 .square_icon {
   @include square_icon;
@@ -145,7 +130,56 @@
   left: 50%;
   transform: translateX(-50%);
 }
-
+.btn_setting{
+  @extend .border_sub_radius;
+  @extend .tac;
+  @extend .cursor_pointer;
+  display: inline-block;
+  font-weight: inherit;
+  font-size:1em;
+  padding: 0 15px;
+  line-height: 40px;
+  min-width: 100px;
+  height: 40px;
+}
+.ui.button.my_btn,.my_btn{
+  @extend .background_red;
+  @extend .white;
+  @extend .border_red;
+  @extend .btn_setting;
+}
+.ui.button.my_btn_reserve,.my_btn_reserve{
+  @extend .background_white;
+  @extend .red;
+  @extend .border_red;
+  @extend .btn_setting;
+}
+.my_black_btn{
+  @extend .background_black;
+  @extend .white;
+  @extend .border_black;
+  @extend .btn_setting;
+}
+.my_black_btn_reserve{
+  @extend .border_black;
+  @extend .background_white;
+  @extend .black;
+  @extend .btn_setting;
+}
+.four_btn{
+  @extend .df;
+  [class*=_btn],[class*=_btn_reserve]{
+    width:calc( 100% / 4 );
+    margin: 5px;
+    i{
+      font-size: 40px;
+    }
+    p{
+      line-height: 10px;
+      margin: 0;
+    }
+  }
+}
 //----------------load more -----------------
 //<div class="load_moer">
 //<input type="button" value="Load more">
@@ -203,6 +237,16 @@
   @include align_two_side;
 }
 @media (max-width: $screen-xs-max ){
+  [class*=basic_bg]{
+    .four_btn{
+      width: calc( 100% + 40px );
+      margin-left: -20px;
+      button[class*=_btn],button[class*=_btn_reserve]{
+        margin: 0;
+        border-right: none;
+      }
+    }
+  }
   .align_two_side_sm{
     & > :last-child,& > :first-child{
       float: inherit;
