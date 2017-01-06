@@ -33,11 +33,13 @@ class Restaurant < ApplicationRecord
   after_validation :geocode # auto-fetch coordinates
 
   # certificated imag
-  has_attached_file :certificated_img, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :certificated_img, styles: { medium: "300x300>", thumb: "100x100>" },
+                    default_url: ->(attachment) { ActionController::Base.helpers.asset_path('tmp/kitchen.png') }
   validates_attachment_content_type :certificated_img, content_type: /\Aimage\/.*\Z/
 
   # main_photo
-  has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" },
+                    default_url: ->(attachment) { ActionController::Base.helpers.asset_path('tmp/kitchen.png') }
   validates_attachment_content_type :main_photo, content_type: /\Aimage\/.*\Z/
 
   def average_foods_price
