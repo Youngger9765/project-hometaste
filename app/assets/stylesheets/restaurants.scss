@@ -42,7 +42,7 @@
     height: 100%;
   }
   #advance_tab,#today_tab{
-    width:calc( 100% + 20px );
+    @include calc(width,'100% + 20px');
     position: relative;
     &.red:after{
       @extend .background_red;
@@ -115,7 +115,7 @@
     }
     [name=location_map]{
       height: 715px;
-      width:calc(100% + 40px);
+      @include calc(width,'100% + 40px');
       margin-left: -20px;
       margin-top: 30px;
     }

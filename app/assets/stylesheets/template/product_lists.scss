@@ -73,7 +73,7 @@
   @media (max-width: $screen-xs-max) {
     .product_carousel {
       height: 200px;
-      width: calc( 100% + 40px );
+      @include calc(width,'100% + 40px');
       margin-left: -20px;
     }
     .list_status {

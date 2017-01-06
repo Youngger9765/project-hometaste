@@ -82,8 +82,10 @@
   @include square_icon;
 }
 .flex{
-  display: flex;
-  display : -webkit-flex;
+  @include flex;
+}
+.flex_wrap{
+  @include flex_wrap(wrap);
 }
 .flex_space_around{
   @include flex_(inherit,space-around);
@@ -169,7 +171,7 @@
 .four_btn{
   @extend .df;
   [class*=_btn],[class*=_btn_reserve]{
-    width:calc( 100% / 4 );
+    @include calc(width,'100% / 4');
     margin: 5px;
     i{
       font-size: 40px;
@@ -239,9 +241,10 @@
 @media (max-width: $screen-xs-max ){
   [class*=basic_bg]{
     .four_btn{
-      width: calc( 100% + 40px );
-      margin-left: -20px;
-      button[class*=_btn],button[class*=_btn_reserve]{
+      @include calc(width,'100% + 10px');
+      margin-left: -5px;
+      padding: 0;
+      [class*=_btn],[class*=_btn_reserve]{
         margin: 0;
         border-right: none;
       }
@@ -254,8 +257,7 @@
     }
   }
   .black_border_block{
-    margin: -1px 0 0;
-    width: calc(100% + 40px);
-    margin-left: -20px;
+    margin: -1px 0 0 -20px;
+    @include calc(width,'100% + 40px');
   }
 }

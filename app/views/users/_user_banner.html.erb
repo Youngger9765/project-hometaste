@@ -1,8 +1,10 @@
 <div class="user_img mb40">
-  <div class="square_img border_main_radius user_img_header" style="background-image: url(<%= image_path('tmp/profile_pic.png') %>);"></div>
+  <a href="<%= edit_user_path %>" class="cursor_pointer">
+    <div class="square_img border_main_radius user_img_header" style="background-image: url(<%= image_path('tmp/profile_pic.png') %>);"></div>
+  </a>
 </div>
 <h1 class="mb40 tac bold">John Smith</h1>
-<div class="four_btn">
+<div class="four_btn prl35_md mb25 mb0_sm">
   <a href="<%= paid_user_path %>" class="my_btn_reserve border_none_radius">
     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
     <p>My Purchase</p>

@@ -167,6 +167,6 @@
   }
   #thankyou_modal{
     padding: 20px;
-    height: calc( 100vh - 50px);
+    @include calc(width,'100vh - 50px');
   }
 }

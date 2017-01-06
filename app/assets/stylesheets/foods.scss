@@ -55,10 +55,10 @@
     }
     .basic_bg_top .social_buttons{
       margin-left: -8px;
-      width: calc(100% + 11px);
+      @include calc(width,'100% + 11px');
       padding: 0;
       button{
-        width:calc(100% / 3);
+        @include calc(width,'100% / 3');
       }
       button:first-child{
         @include border-radius-(bottom, left ,0);

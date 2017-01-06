@@ -63,7 +63,7 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     .field{
-      width:calc( 100% / 6);
+      @include calc(width,'100% / 6');
     }
     .ui.checkbox input:checked ~ .box:after, .ui.checkbox input:checked ~ label:after{
       @extend .red;
@@ -104,29 +104,32 @@
   .basic_bg{
     a[class*=_btn],a[class*=_btn_reserve]{
       height: 50px;
+      line-height: 50px;
       &:hover{
         @extend .red;
       }
-      p{
-        line-height: 50px;
+      &:focus{
+        @extend .white;
       }
-
     }
   }
 }
+.users_my_purchase{
+  h4{
+    font-size: 16px;
+  }
+}
 .users_big_bun{
-  .black_border_block{
     .my_btn_reserve{
       width: 160px;
       height: 60px;
     }
-  }
 }
 @media (max-width: $screen-md-max){
   .users_edit{
     .checkbox_warpper{
       .field{
-        width:calc( 100% / 3);
+        @include calc(width,'100% / 3');
       }
     }
   }
@@ -135,7 +138,28 @@
   .users_edit{
     .checkbox_warpper{
       .field{
-        width:calc( 100% / 2);
+        @include calc(width,'100% / 2');
+      }
+    }
+  }
+  .users_big_bun{
+    .my_purchase_lists{
+      .background_img_setting{
+        padding-top: 30%;
+      }
+    }
+  }
+}
+@media (max-width: $screen-xs-max){
+  .my_purchase_lists{
+    .background_img_setting{
+      padding-top: 30%;
+    }
+  }
+  .users_big_bun{
+    .my_purchase_lists{
+      .background_img_setting{
+        padding-top: 50%;
       }
     }
   }

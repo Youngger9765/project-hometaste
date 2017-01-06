@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <section class="col-xs-12 basic_bg_top prl30_sm">
+      <div class="row">
+      <%= render 'user_banner' %>
+      </div>
+    </section>
+    <section class="col-xs-12 basic_bg prl15_sm prl30_md">
+      <div class="row">
+
+        <div class="col-xs-12 four_btn prl35_md mb25 mb0_sm">
+          <%= link_to 'Paid' ,paid_user_path,class:'my_black_btn border_none_radius' ,remote:true %>
+          <%= link_to 'Completed' ,completed_user_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+          <%= link_to 'Cancelled' ,cancelled_user_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+          <%= link_to 'Big Bun' ,big_bun_user_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+        </div>
+
+        <div class="col-xs-12 prl15_sm" id="my_purchase_content">
+          <%= render 'paid' %>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $(document).on('click','.my_black_btn_reserve',function(){
+      $(this).siblings('.my_black_btn').removeClass('my_black_btn').addClass('my_black_btn_reserve');
+      $(this).removeClass('my_black_btn_reserve').addClass('my_black_btn');
+    })
+  })
+</script>

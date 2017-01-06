@@ -27,15 +27,27 @@ class UsersController < ApplicationController
 	end
 
 	def paid
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
 	end
 
 	def completed
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
 	end
 
 	def cancelled
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
 	end
 
 	def big_bun
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
 	end
 
 
