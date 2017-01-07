@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107061622) do
+ActiveRecord::Schema.define(version: 20170107074555) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(version: 20170107061622) do
     t.float    "food_avg_score",                limit: 24,    default: 0.0
     t.float    "tax",                           limit: 24,    default: 0.0
     t.float    "tip",                           limit: 24,    default: 0.0
+    t.float    "order_reach",                   limit: 24
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
     t.index ["city"], name: "index_restaurants_on_city", using: :btree
