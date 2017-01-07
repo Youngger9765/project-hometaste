@@ -16,11 +16,23 @@ Rails.application.routes.draw do
         get :today
       end
     end
-  	resources :users
-  	resources :restaurants
+    resources :users
+    resources :restaurants
   end
 
-  resources :users
+  resources :users do
+    member do
+      get :my_purchase
+      get '/my_purchase/paid'=>'users#paid' ,as:'paid'
+      get '/my_purchase/completed'=>'users#completed' ,as:'completed'
+      get '/my_purchase/cancelled'=>'users#cancelled' ,as:'cancelled'
+      get '/my_purchase/big_bun'=>'users#big_bun' ,as:'big_bun'
+
+      get :my_review
+      get :my_like
+      get :my_message
+    end
+  end
 
   resources :chefs do
     resources :foods
@@ -58,8 +70,8 @@ Rails.application.routes.draw do
     get "/search/filter" => "search#filter"
   end
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
-  	get "/getDishesByFilter" => "mains#getDishesByFilter"
-  	get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"
+    get "/getDishesByFilter" => "mains#getDishesByFilter"
+    get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"
   end
 
 

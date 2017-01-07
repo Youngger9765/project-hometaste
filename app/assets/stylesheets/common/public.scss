@@ -102,6 +102,9 @@ input[type=submit]{
     background-color: $main_red !important;
   }
 }
+.ui.dimmer{
+  background-color: rgba(0, 0, 0, 0.35);
+}
 .cards .ui.card:last-child, .cards .ui.card:first-child {
   margin-top: 1em;
   margin-bottom: 1em;

@@ -1,38 +1,166 @@
-.user-container {
-	border: 2px solid black;
-	width: 50em;
-	font-size: 20px;
-
-	.form_control {
-		margin-bottom: 1em;
-	}
-
-	input {
-		width: 20em;
-		border: 0;
-    border-bottom: 2px solid;
-	}
-
-	.user-sub-container {
-		border: 2px solid black;
-		width: 40em;
-		margin: 2em auto;
-	  padding: 1em;
-	}
-
-	#edit-user-photo {
-	    height: 10em;
-	    border: 2px solid;
-	    background-color: azure;
-
-	    input {
-	    	margin: 10% 0%;
-    	    border: 0;
-	    }
-	}
-
-	#user-submit-check-btn {
-		width:100%;
-	}
-
+.user_img_upload{
+  margin: 0 auto;
+  label{
+    margin: auto;
+    display: block;
+    width: 260px;
+    height: 260px;
+    background-color: #D8D8D8;
+    @extend .background_img_setting;
+    @extend .cursor_pointer;
+    @extend .db;
+    @extend .pt100;
+    @extend .tac;
+    @extend .border_main_radius;
+    transition: all 0.5s ease;
+    &.hover{
+      h4,i{
+        display: none;
+      }
+    }
+    &.hover:hover{
+      opacity: 0.9;
+      h4,i{
+        display: block;
+      }
+    }
+  }
+}
+.user_img_header{
+  position: relative;
+  &:before{
+    content:'Edit Profile';
+    background-color: rgba(0, 0, 0, 0.65);
+    display: block;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: -130px;
+    @include transition(all 0.5s);
+    color: white;
+    text-align: center;
+    padding-top: 45px;
+    font-size: 20px;
+  }
+  &:hover{
+    &:before{
+    bottom: -10px;
+    }
+  }
+}
+.users_edit{
+  .field{
+    label{
+      margin-bottom: 10px !important;
+    }
+    input,select,.ui.dropdown{
+      margin-bottom: 20px !important;
+    }
+  }
+  .checkbox_warpper{
+    @extend .df;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    .field{
+      @include calc(width,'100% / 6');
+    }
+    .ui.checkbox input:checked ~ .box:after, .ui.checkbox input:checked ~ label:after{
+      @extend .red;
+    }
+  }
+  .social_media{
+    .ig_square_icon_red{
+      font-size: 40px;
+    }
+    a{
+      @extend .flex_vertical_center;
+    }
+    p{
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    i{
+      @extend .red;
+      font-size: 45px;
+    }
+  }
+}
+[class*=users_]{
+  .user_img{
+    width: 260px;
+    height: 260px;
+    margin: auto;
+  }
+  .basic_bg_top{
+    a[class*=_btn],a[class*=_btn_reserve]{
+      height:100px ;
+      padding-top: 15px;
+      &:hover{
+        color: inherit;
+      }
+    }
+  }
+  .basic_bg{
+    a[class*=_btn],a[class*=_btn_reserve]{
+      height: 50px;
+      line-height: 50px;
+      &:hover{
+        @extend .red;
+      }
+      &:focus{
+        @extend .white;
+      }
+    }
+  }
+}
+.users_my_purchase{
+  h4{
+    font-size: 16px;
+  }
+}
+.users_big_bun{
+    .my_btn_reserve{
+      width: 160px;
+      height: 60px;
+    }
+}
+@media (max-width: $screen-md-max){
+  .users_edit{
+    .checkbox_warpper{
+      .field{
+        @include calc(width,'100% / 3');
+      }
+    }
+  }
+}
+@media (max-width: $screen-sm-max){
+  .users_edit{
+    .checkbox_warpper{
+      .field{
+        @include calc(width,'100% / 2');
+      }
+    }
+  }
+  .users_big_bun{
+    .my_purchase_lists{
+      .background_img_setting{
+        padding-top: 30%;
+      }
+    }
+  }
+}
+@media (max-width: $screen-xs-max){
+  .my_purchase_lists{
+    .background_img_setting{
+      padding-top: 30%;
+    }
+  }
+  .users_big_bun{
+    .my_purchase_lists{
+      .background_img_setting{
+        padding-top: 50%;
+      }
+    }
+  }
 }

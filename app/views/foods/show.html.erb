@@ -1,4 +1,4 @@
-<%= render 'carousel' %>
+<%= render 'carousel',food:@food %>
 <div class="container">
   <section class="row">
     <div class="col-xs-12 basic_bg_top pl150_md pr150_md pl40_sm pr40_sm pt0_xs pt30_md">
@@ -10,15 +10,15 @@
           <button class="ui button my_btn small_btn"><i class="share_icon_white" aria-hidden="true"></i>Share</button>
         </div>
         <div class="col-sm-7 col-xs-12">
-          <h1>Roasted Duck</h1>
-          <span class="sub_link ">Asian Fusion</span>
-          <span class="sub_link ml15">American</span>
-          <span class="sub_link ml15">Chinese</span>
+          <h1><%= @food.name %></h1>
+          <% @food.restaurant.cuisines.each do |cuisine| %>
+              <span class="sub_link ml15"><%= cuisine.name %></span>
+          <% end %>
           <div class="col-xs-12 visible-xs visible-sm mt20">
             <div class="row">
               <div class="align_two_side">
                 <h4 class="dib">Orders reached:</h4>
-                <h4 class="dib">Max:  6 </h4>
+                <h4 class="dib">Max:  <%= @food.max_order %> </h4>
               </div>
 
               <div class="ui indicating progress mb15_md mb10_sm" data-percent="74">
@@ -29,13 +29,13 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm">
-          <h3 class="red mt25">$7.00/ Bowl</h3>
+          <h3 class="red mt25">$<%= @food.price %>/ Bowl</h3>
           <%= render 'common/spinner', qty: 1  %>
         </div>
         <div class="col-xs-12 hidden-xs hidden-sm">
           <div class="align_two_side">
             <h4 class="dib">Orders reached:</h4>
-            <h4 class="dib">Max:  6 </h4>
+            <h4 class="dib">Max:  <%= @food.max_order %> </h4>
           </div>
           <div class="ui indicating progress"  data-percent="74">
             <div class="bar"></div>
@@ -53,12 +53,8 @@
         <span class="vertical_align gray hidden-xs cursor_pointer">Ingredients</span>
       </h3>
       <div>
-        <p>Free range chicken stewed in a spicy tomatillo sauce and served over saffron white rice with cilantro. Served
-          with sweet and spicy chilie- roasted carrots with pickled red onions and toasted pepitas. Free range chicken
-          stewed in a spicy tomatillo sauce and served over saffron white rice with cilantro. Served with sweet and
-          spicy chilie- roasted carrots with pickled red onions and toasted pepitas.  </p>
-        <p class="hidden">Duck, tomato, basil, garlic, onion, cilantro,
-          carrots, spice.</p>
+        <p><%= @food.about %></p>
+        <p class="hidden"><%= @food.ingredients %></p>
       </div>
     </div>
   </section>
@@ -67,21 +63,21 @@
     <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm pr40_sm visible-xs">
       <h3><span class="vertical_align">Ingredients</span></h3>
       <div>
-        <p>Duck, tomato, basil, garlic, onion, cilantro,carrots, spice.   </p>
+        <p><%= @food.ingredients %></p>
       </div>
     </div>
   </section>
 
   <section class="row">
     <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm pr40_sm">
-      <h3 class="dib visible-xs">Mr.Chan’s Kitchen</h3>
+      <h3 class="dib visible-xs"><%= @restaurant.name.capitalize %></h3>
       <div class="row">
         <div class="col-md-3 col-sm-4 col-xs-12">
-          <div class="square_img border_main_radius" style="background-image: url(<%= image_path('tmp/kitchen.png') %>)"></div>
+          <div class="square_img border_main_radius" style="background-image: url(<%= image_path @restaurant.main_photo.url %>)"></div>
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
           <div class="clearfix mt10_sm mb10_sm mt30_xs mb30_xs tac">
-            <h1 class="dib hidden-xs">Mr.Chan’s Kitchen</h1>
+            <h1 class="dib hidden-xs"><%= @restaurant.name.capitalize %></h1>
             <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
           </div>
           <div class="flex_space_between">
@@ -101,10 +97,10 @@
             <i class="show_rated_4"></i><span class="">122 Likes</span>
           </div>
           <div>
-            <p class="mt20 mb20">“Mr.Chan’s kitchen makes the best Chinese food in town. I love their roasted duck, no one else makes them as good as Mr.Chan! Absolutely favorite!” </p>
+            <p class="mt20 mb20"><%= @restaurant.description %></p>
           </div>
           <div>
-            <span class="flr">- John Doe <i class="show_rated_4"></i></span>
+            <span class="flr">- <%= @restaurant.chef_name %> <i class="show_rated_<%= @restaurant.food_avg_score.to_i %>"></i></span>
           </div>
         </div>
       </div>

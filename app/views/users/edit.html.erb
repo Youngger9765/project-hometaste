@@ -1,120 +1,278 @@
-<div class="container user-container center">
-	<div class="row">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 basic_bg_top ui form">
+      <%= form_for setup_user(@user), :url => user_path(@user), :method => :patch do |f| %>
 
-		<%= form_for setup_user(@user), :url => user_path(@user), :method => :patch do |f| %>
+          <div class="row">
+            <div class="col-xs-12 mb30">
+              <%= f.fields_for :user_photo do |photo| %>
+                  <div id="edit-user-photo" class="user_img_upload">
 
-			<div class="row container user-sub-container center">
-				<%= f.fields_for :user_photo do |photo| %>
-					<div id="edit-user-photo" class="form_control col-md-12">
-						<% if @user.user_photo.photo.exists? %>
-						    <%= image_tag(@user.user_photo.photo(:thumb))%>
-						<%end%>
-				    <%= photo.file_field :photo %>
-			    </div>
-		    <%end%>
+                    <%= photo.label :photo ,style:"background-image:url(#{@user.user_photo.photo(:thumb) if @user.user_photo.photo.exists?})" do %>
+                        <i class="photo_icon"></i>
+                        <h4>Upload a photo</h4>
+                    <% end %>
+                    <%= photo.file_field :photo,class:'hidden' %>
+                  </div>
+              <%end%>
+            </div>
+            <div class="col-xs-12">
+              <div class="black_border_block">
+                <div class="row">
+                  <h3 class="bold ml15">Personal Info</h3>
 
-				<h3>Personal Info</h3>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :name, "Your Name*" %>
+                      <%= f.text_field :name %>
+                    </div>
+                  </div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :name, "Your Name" %> <br>
-						<%= f.text_field :name %>
-					</div>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :name, "Last Name*" %>
+                      <%= f.text_field :name %>
+                    </div>
+                  </div>
+                  <div class="clearfix visible-sm"></div>
+                  <div class="col-xs-5 col-md-3">
+                    <div class="field">
+                      <%= f.label :gender, "Gender" %>
+                      <%= f.select :gender, options_for_select([["man","man"],["female","female"]]),{},class:'ui dropdown fluid' %>
+                    </div>
+                  </div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :gender, "Gender" %> <br>
-						<%= f.select :gender, :options_for_select=>([["man","man"],["female","female"]])%>
-					</div>
+                  <div class="col-md-6 col-sm-7 col-md-offset-3">
+                    <div class="field">
+                      <%= f.label :birthday, "Birthday" %>
+                      <%= f.date_field :birthday %>
+                    </div>
+                  </div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :birthday, "birthday" %> <br>
-						<%= f.date_field :birthday %>
-					</div>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :phone_number, "Mobile number*" %>
+                      <%= f.text_field :phone_number %>
+                    </div>
+                  </div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :phone_number, "Mobile" %> <br>
-						<%= f.text_field :phone_number %>
-					</div>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :email, "E-mail*" %>
+                      <%= f.text_field :email %>
+                    </div>
+                  </div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :email, "email" %> <br>
-						<%= f.text_field :email %>
-					</div>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :address, "Address" %>
+                      <%= f.text_field :address %>
+                    </div>
+                  </div>
+                  <div class="clearfix visible-md-blick"></div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :address, "address" %> <br>
-						<%= f.text_field :address %>
-					</div>
+                  <div class="col-sm-4 col-xs-7">
+                    <div class="field">
+                      <%= f.text_field :ZIP ,placeholder:'City' %>
+                    </div>
+                  </div>
+                  <div class="col-sm-2 col-xs-5">
+                    <div class="field">
+                      <%= f.text_field :ZIP ,placeholder:'State' %>
+                    </div>
+                  </div>
+                  <div class="clearfix visible-sm-blick"></div>
+                  <div class="col-sm-4 col-xs-8">
+                    <div class="field">
+                      <%= f.text_field :ZIP,placeholder:'Zip code' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-					<div class="form_control col-md-12">
-						<%= f.label :ZIP, "ZIP code" %> <br>
-						<%= f.text_field :ZIP %>
-					</div>
-			</div>
+            <div class="col-xs-12">
+              <div class="black_border_block">
+                <div class="row">
+                  <h3 class="bold ml15">Account Info</h3>
+                  <div class="col-md-6">
+                    <div class="field">
+                      <%= f.label :foodie_id, "Foodie ID*" %>
+                      <%= f.text_field :foodie_id %>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="field">
+                      <%= f.label :password, "Password*" %>
+                      <%= f.password_field :password, :id=>"edit_user_password" %>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="field">
+                      <%= f.label :edit_password_confirmation, "Confirm password*" %>
+                      <%= f.password_field :edit_password_confirmation, :id=>"edit_user_password_confirmation"  %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-			<div class="row container user-sub-container center">
-				<h3>Account Info</h3>
+            <div class="col-xs-12">
+              <div class="black_border_block social_media">
+                <div class="row">
 
-				<div class="form_control col-md-12">
-					<%= f.label :foodie_id, "Foodie ID" %> <br>
-					<%= f.text_field :foodie_id %>
-				</div>
+                  <h3 class="bold ml15">Social Media Account</h3>
+                  <div class="col-xs-12 mt15">
+                    <div class="row">
+                      <%= link_to user_facebook_omniauth_authorize_path do %>
+                          <div class="col-sm-1 col-xs-3">
+                            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                          </div>
+                          <div class="tar tal_sm col-sm-6 col-xs-9"><p>Facebook account </p><p class="visible-xs">Link</p></div>
+                          <div class="col-sm-5 col-xs-1 hidden-xs"><p>Link</p></div>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 mt15">
+                    <div class="row">
+                      <%= link_to user_facebook_omniauth_authorize_path do %>
+                          <div class="col-sm-1 col-xs-3">
+                            <i class="ig_square_icon_red"></i>
+                          </div>
+                          <div class="tar tal_sm col-sm-6 col-xs-9"><p>Instagram account </p><p class="visible-xs">Link</p></div>
+                          <div class="col-sm-5 col-xs-1 hidden-xs"><p>Link</p></div>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 mt15">
+                    <div class="row">
+                      <%= link_to user_facebook_omniauth_authorize_path do %>
+                          <div class="col-sm-1 col-xs-3">
+                            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                          </div>
+                          <div class="tar tal_sm col-sm-6 col-xs-9"><p>Twitter account </p><p class="visible-xs">Link</p></div>
+                          <div class="col-sm-5 col-xs-1 hidden-xs"><p>Link</p></div>
+                      <% end %>
+                    </div>
+                  </div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :password, "Password" %> <br>
-					<%= f.password_field :password, :id=>"edit_user_password" %>
-				</div>
+                  <div class="col-xs-12 mt15">
+                    <%= f.check_box :name ,class:'mr5'%>
+                    <%= f.label :name, "Automatically publish to my social media", class:'di' %>
+                  </div>
 
-				<div class="form_control col-md-12">
-					<%= f.label :edit_password_confirmation, "Confirm password" %> <br>
-					<%= f.password_field :edit_password_confirmation, :id=>"edit_user_password_confirmation"  %>
-				</div>
+                </div>
+              </div>
+            </div>
 
-			</div>
+            <div class="col-xs-12">
+              <div class="black_border_block">
+                <div class="row">
+                  <h3 class="bold ml15">Payment Info</h3>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :foodie_id, "Credit card holder name" %>
+                      <%= f.text_field :foodie_id %>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-7">
+                    <div class="field">
+                      <%= f.label :foodie_id, "Credit card number" %>
+                      <%= f.text_field :foodie_id %>
+                    </div>
+                  </div>
+                  <div class="clearfix visible-sm"></div>
+                  <div class="col-sm-3 col-md-2 col-xs-5">
+                    <div class="field">
+                      <%= label :foodie_id, "Expiration date" %>
+                      <%= select_year  Date.today, { start_year: 1992, end_year: 2007 },class:'ui dropdown fluid',placeholder:'Month' %>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-2 col-xs-5">
+                    <div class="field">
+                      <%= label :foodie_id, "Expiration date",class:'invisible' %>
+                      <%= select_month Date.today, { use_month_numbers: true } ,class:'ui dropdown fluid',placeholder:'Year' %>
+                    </div>
+                  </div>
+                  <div class="clearfix visible-md-block"></div>
+                  <div class="col-md-6 col-sm-7 col-lg-offset-2">
+                    <div class="field">
+                      <%= f.label :foodie_id, "CVC code" %>
+                      <%= f.text_field :foodie_id %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-			<div class="row container user-sub-container center">
-				<h3>Social Media Account</h3>
+            <div class="col-xs-12">
+              <div class="black_border_block">
+                <div class="row">
 
-			</div>
 
-			<div class="row container user-sub-container center">
-				<h3>Payment Info</h3>
-
-			</div>
-
-			<div class="row container user-sub-container center">
-				<h3>What type of food/items do you prefer?</h3>
-				<hr>
-
-			</div>
-
-			<div class="form_control col-md-12" id="user-submit-div">
-				<bottum id="user-submit-check-btn" class="btn btn-success center">SUBMIT</bottum>
-	    	<%= f.submit "SUBMIT",:class=>"btn btn-success center hidden", :id=>"user-submit-btn"%>
-	    </div>
-		<%end%>
-	</div>
+                  <h3 class="bold ml15">Preferred food items</h3>
+                  <div class="checkbox_warpper col-xs-12 mt15">
+                    <% @cuisines.each do |cuisine| %>
+                        <div class="field">
+                          <div class="ui checkbox mtb0">
+                            <input type="checkbox" name="cuisine" tabindex="0" class="hidden">
+                            <label><%= cuisine.name %></label>
+                          </div>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 tac mt15">
+              <div id="user-submit-div">
+                <%= f.submit "Save",class:"ui button my_btn", :id=>"user-submit-btn"%>
+              </div>
+            </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
 
 <script>
-	$("#user-submit-check-btn").click(function(){
-		var check_submit = true;
-		check_submit = check_submit & check_user_password();
+  $(document).ready(function(){
+    $("#user-submit-check-btn").click(function(){
+      var check_submit = true;
+      check_submit = check_submit & check_user_password();
 
-		if (check_submit) {
-			$('#user-submit-btn').click();
-		}
-	});
+      if (check_submit) {
+        $('#user-submit-btn').click();
+      }
+    });
 
-	var check_user_password = function(){
-		var password = $("input#edit_user_password").val();
-		var confirm_password = $("input#edit_user_password_confirmation").val();
-		if (password == confirm_password){
-			return true;
-		} else {
-			alert('Please check password!')
-			return false;
-		};
-	}
+    var check_user_password = function(){
+      var password = $("input#edit_user_password").val();
+      var confirm_password = $("input#edit_user_password_confirmation").val();
+      if (password == confirm_password){
+        return true;
+      } else {
+        alert('Please check password!')
+        return false;
+      };
+    }
 
+    $(function() {
+      $('#user_user_photo_attributes_photo').on('change', function(event) {
+        var files = event.target.files;
+        var image = files[0]
+        var reader = new FileReader();
+        reader.onload = function(file) {
+          var img = new Image();
+          img.src = file.target.result;
+          console.log(123);
+          $('label[for="user_user_photo_attributes_photo"]')
+            .css("background-image","url(" + img.src + ")")
+            .addClass('hover');
+        }
+        reader.readAsDataURL(image);
+      });
+    });
+  })
 </script>

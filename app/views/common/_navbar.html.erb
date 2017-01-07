@@ -17,34 +17,36 @@
       <ul class="nav navbar-nav">
         <% unless @chef %>
             <li><a href="#">Help</a><span class="hidden-xs">|</span></li>
-            <li><%= link_to "Become a chef", new_chef_path %><span class="hidden-xs">|</span></li>
+            <li><%= link_to 'Become a chef', new_chef_path %><span class="hidden-xs">|</span></li>
         <% end %>
         <% if current_user %>
-          <li class="dropdown hidden-xs">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi! <%= current_user.name %> <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <% if current_user.is_chef %>
-                <li><%= link_to('Chef’s Homepage', chef_path(current_user.chef)) %></li>
-                <li><%= link_to('Menu', menu_chef_path(current_user.chef)) %></li>
-                <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
-              <% else %>
-                <li><%= link_to('My account', user_path(current_user)) %></li>
-                <li><%= link_to('Message','') %></li>
-                <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
-              <% end %>
-            </ul>
-          </li>
-        <%end%>
+            <div class="ui selection dropdown hidden-xs">
+              <i class="dropdown icon"></i>
+              <div class="default text">Hi! <%= current_user.name %></div>
+              <div class="menu">
+                <% if current_user.is_chef %>
+                    <div class="item"><%= link_to('Chef’s Homepage', chef_path(current_user.chef)) %></div>
+                    <div class="item"><%= link_to('Menu', menu_chef_path(current_user.chef)) %></div>
+                    <div class="item"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></div>
+                <% else %>
+
+                    <div class="item"><%= link_to('My account', user_path(current_user)) %></div>
+                    <div class="item"><%= link_to('Message','') %></div>
+                    <div class="item"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></div>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
         <% if current_user %>
 
           <% if current_user.is_chef %>
             <li class="visible-xs"><%= link_to('Chef’s Homepage', chef_path(current_user.chef)) %></li>
-            <li class="visible-xs"><%= link_to('Menu', "") %></li>
+            <li class="visible-xs"><%= link_to('Menu', '') %></li>
             <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
 
           <% else %>
             <li class="visible-xs"><%= link_to('My account', user_path(current_user)) %></li>
-            <li class="visible-xs"><%= link_to('Message', "") %></li>
+            <li class="visible-xs"><%= link_to('Message', '') %></li>
             <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
           <% end %>
 
@@ -56,7 +58,9 @@
     </div>
   </div>
 </nav>
-
+<script type="text/javascript" charset="utf-8">
+  $('.dropdown-toggle').dropdown()
+</script>
 <%= render 'common/login_form' %>
 <%= render 'common/sign_up_form' %>
 <%= render 'common/auth_link' %>

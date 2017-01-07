@@ -6,21 +6,11 @@
     <li data-target="#bannerCarousel" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" role="listbox">
+    <% food.food_photos.each  %>
     <div class="item active">
       <div style="background-image: url(<%= image_path 'tmp/kitchen_1.png' %>);" class="background_img_setting"></div>
     </div>
 
-    <div class="item">
-      <div style="background-image: url(<%= image_path 'tmp/kitchen_1.png' %>);" class="background_img_setting"></div>
-    </div>
-
-    <div class="item">
-      <div style="background-image: url(<%= image_path 'tmp/kitchen_1.png' %>);" class="background_img_setting"></div>
-    </div>
-
-    <div class="item">
-      <div style="background-image: url(<%= image_path 'tmp/kitchen_1.png' %>);" class="background_img_setting"></div>
-    </div>
   </div>
 
   <a class="left carousel-control" href="#bannerCarousel" role="button" data-slide="prev">

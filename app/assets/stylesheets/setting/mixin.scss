@@ -18,9 +18,11 @@
   -moz-border-radius-#{$_}#{$__}: #{$___};
 }
 @mixin transition($_) {
-  -webkit-transition: $_;
-  -moz-transition: $_;
-  -o-transition: $_;
+  -webkit-transition: $_ ;
+  -moz-transition: $_ ;
+  -ms-transition: $_ ;
+  -o-transition: $_ ;
+  transition: $_ ;
 }
 
 @mixin background-size-cover {
@@ -41,13 +43,30 @@
   width: $pixel;
   text-align: center;
 }
-@mixin flex_($vertical,$horizon){
+@mixin flex{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  display : -webkit-flex;
+}
+@mixin flex_($vertical,$horizon){
+  @include flex;
   -webkit-justify-content: $horizon;
   justify-content: $horizon;
   -webkit-align-items: $vertical;
   align-items: $vertical;
+}
+@mixin calc($_,$__){
+  #{$_}:-moz-calc(#{$__});
+  #{$_}:-webkit-calc(#{$__});
+  #{$_}:calc(#{$__});
+}
+@mixin flex_wrap($_){
+  @include flex;
+  flex-wrap: $_;
+  -webkit-flex-wrap: $_;
+  -ms-flex-wrap: $_;
 }
 @mixin basic_bg($top,$bottom){
   border-top-left-radius: $top;

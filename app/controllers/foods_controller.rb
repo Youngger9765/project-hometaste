@@ -6,6 +6,8 @@ class FoodsController < ApplicationController
 	before_action :find_food, :only =>[:update,:edit,:destroy]
 
   def show
+		@food = Food.includes(:food_photos,:restaurant).find(params[:id])
+		@restaurant = @food.restaurant
   end
 
   def new

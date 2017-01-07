@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
 
 	before_action :find_user, :only =>[:edit, :update]
-	before_action :is_current_user?, :only =>[:edit, :update]
+	# before_action :is_current_user?, :only =>[:edit, :update]
 
 	def new
 		@user = User.new
 	end
 
 	def edit
-		
+		@cuisines = Cuisine.all
 	end
 
 	def update
@@ -23,17 +23,46 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def my_purchase
+	end
+
+	def paid
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
+	end
+
+	def completed
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
+	end
+
+	def cancelled
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
+	end
+
+	def big_bun
+		respond_to do |format|
+			format.js {render 'my_purchase'}
+		end
+	end
+
+
+
 	private
 
 	def user_params
-	  params.require(:user).permit(
-	  	:name, :gender, :birthday, :phone_number, :address,
-	  	:ZIP, :foodie_id,
+		params.require(:user).permit(
+				:name, :gender, :birthday, :phone_number, :address,
+				:ZIP, :foodie_id,
 
-	  	:user_photo_attributes => [
-	  		:photo,
-	  	]
-	  )
+				:user_photo_attributes => [
+						:photo
+				]
+		)
 	end
 
 	def find_user
