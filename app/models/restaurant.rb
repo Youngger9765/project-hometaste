@@ -11,7 +11,7 @@ class Restaurant < ApplicationRecord
   belongs_to :chef
 
   has_many :restaurant_cuisine_ships
-  has_many :restaurants, :through => :restaurant_cuisine_ships
+  has_many :cuisines, :through => :restaurant_cuisine_ships
 
   accepts_nested_attributes_for :delivery,
                                 :allow_destroy => true,
@@ -44,6 +44,10 @@ class Restaurant < ApplicationRecord
 
   def average_foods_price
     foods.average(:price) || 0
+  end
+
+  def chef_name
+    chef.first_name.capitalize + chef.last_name.capitalize
   end
 
   def self.collect_food_ids

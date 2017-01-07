@@ -6,7 +6,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @user = current_user || User.new
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.includes(:big_buns,:bulk_buys).find(params[:id])
   end
 
 end
