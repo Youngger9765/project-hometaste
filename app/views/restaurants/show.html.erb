@@ -38,7 +38,7 @@
           </div>
 
           <div class="col-sm-3 col-xs-12 tar_sm mt10 mt0_sm">
-            <div class="show_rated_3"></div>
+            <div class="show_rated_<%= @score_rate%>"></div>
             <span class="db_sm"><%= @restaurant.food_comments_count%>  reviews</span>
           </div>
         </div>
@@ -161,20 +161,10 @@
                 <i class="fa fa-map-marker red" aria-hidden="true"></i>
               </div>
               <div class="col-xs-10">
-                <h4 class="normal"><%= @restaurant.address%></h4>
-                <h4 class="normal"><%= @restaurant.city%></h4>
-                <h4 class="normal"><%= @restaurant.state%></h4>
+                <h4 class="normal"><%= bulk_buy.location%></h4>
               </div>
               <div class="col-xs-12">
                 <i class="red_line"></i>
-              </div>
-              <div class="col-xs-2 tac pt10">
-                <i class="fa fa-map-marker red" aria-hidden="true"></i>
-              </div>
-              <div class="col-xs-10">
-                <h4 class="normal">Pacific Heights 1324 Broadw</h4>
-                <h4 class="normal">ay st.San Fran </h4>
-                <h4 class="normal">cisco CA 94115</h4>
               </div>
             </div>
           <%end%>
