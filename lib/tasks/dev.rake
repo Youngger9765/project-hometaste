@@ -99,6 +99,8 @@ namespace :dev do
     		state: Faker::Address.state,
     		ZIP: Faker::Address.zip,
     		tax_ID: Faker::Number.number(10),
+        tax: rand(1..5),
+        order_reach: rand(50..1000),
     		communication_method: ["email", "text-message"].sample,
     	)
 		end
@@ -110,7 +112,7 @@ namespace :dev do
 			Food.create(
 				restaurant_id: Restaurant.all.ids.sample,
 				name: Faker::Pokemon.name,
-				price: Faker::Commerce.price,
+				price: Faker::Commerce.price/10,
 				is_public: [true, false].sample,
         unit: Faker::Number.between(1, 100),
         unit_name: ["quart", "kg", "piece", "package"].sample,
@@ -150,6 +152,7 @@ namespace :dev do
 				shipping_method: ["bulk_buy", "delivery"].sample,
 				shipping_place: Faker::Address.city + Faker::Address.street_name,
 				amount: Faker::Commerce.price,
+        tip: rand(1..5),
 				payment_method: ["paypal", "credit_card"].sample,
 				payment_status: ["Unpaid", "paid"].sample,
 				order_status: ["completed","not yet","cancel"].sample,
@@ -164,7 +167,7 @@ namespace :dev do
 			order = OrderFoodShip.create(
 				order_id: Order.all.ids.sample,
 				food_id: Food.all.ids.sample,
-				quantity: Faker::Number.between(1, 10),
+				quantity: Faker::Number.between(1, 5),
 			)
 
 			quantity = order.quantity
@@ -213,7 +216,8 @@ namespace :dev do
 
     Order.all.each do |order|
       sum = order.order_food_ships.sum(:amount)
-      order.amount = sum
+      order.subtotal = sum
+      order.amount = order.restaurant.tax + order.tip + sum
       order.save!
     end
   end

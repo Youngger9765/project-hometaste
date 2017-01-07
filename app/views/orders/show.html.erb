@@ -5,38 +5,34 @@
       <i class="gray_line"></i>
       <table>
         <thead>
-        <tr>
-          <th><h2>Item</h2></th>
-          <th><h2>Qty</h2></th>
-          <th><h2>Price per Item</h2></th>
-          <th><h2>Total</h2></th>
-        </tr>
+          <tr>
+            <th><h2>Item</h2></th>
+            <th><h2>Qty</h2></th>
+            <th><h2>Price</h2></th>
+            <th><h2>Total</h2></th>
+          </tr>
         </thead>
         <tbody>
-        <tr>
-          <th><h3>Dish Name 1</h3></th>
-          <th><h3>1</h3></th>
-          <th><h3>$6.00</h3></th>
-          <th><h3>$6.00</h3></th>
-        </tr>
-        <tr>
-          <th><h3>Dish Name 1</h3></th>
-          <th><h3>1</h3></th>
-          <th><h3>$6.00</h3></th>
-          <th><h3>$6.00</h3></th>
-        </tr>
-        <tr>
-          <th><h3>Big Bun Name</h3></th>
-          <th><h3>1</h3></th>
-          <th><h3>--</h3></th>
-          <th><h3>--</h3></th>
-        </tr>
+          <% @order.order_food_ships.each do |ship|%>
+            <tr>
+              <th><h3><%= ship.food.name%></h3></th>
+              <th><h3><%= ship.quantity%></h3></th>
+              <th><h3><%= ship.food.price%></h3></th>
+              <th><h3><%= ship.amount%></h3></th>
+            </tr>
+          <%end%>
+          <tr>
+            <th><h3>Big Bun Name</h3></th>
+            <th><h3>1</h3></th>
+            <th><h3>--</h3></th>
+            <th><h3>--</h3></th>
+          </tr>
         </tbody>
       </table>
       <i class="gray_line"></i>
       <div class="align_two_side">
         <h2>Subtotal</h2>
-        <h2>$21.00</h2>
+        <h2>$<%= @order.amount %></h2>
       </div>
       <div class="align_two_side">
         <h2>Delivery Fee</h2>
