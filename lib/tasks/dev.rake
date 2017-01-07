@@ -86,7 +86,7 @@ namespace :dev do
     puts('create restaurants')
 
     Chef.all.each do |chef|
-    	Restaurant.create(
+    	restaurant = Restaurant.create(
     		chef_id: chef.id,
     		name: Faker::Name.name,
     		address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
@@ -103,6 +103,29 @@ namespace :dev do
         order_reach: rand(50..1000),
     		communication_method: ["email", "text-message"].sample,
     	)
+
+      if [true,false].sample
+        Delivery.create(
+          restaurant_id: restaurant.id,
+          min_order: rand(5..15),
+          area: Faker::Address.city,
+          distance: Faker::Number.number(3),
+          cost: rand(5..10),
+          order_hours: rand(1..5),
+
+        )
+      end
+
+      rand(1..2).times {
+        BulkBuy.create(
+          restaurant_id: restaurant.id,
+          min_order: rand(5..15),
+          cut_off_time: Faker::Time.forward(0),
+          location: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+          pick_up_time: Faker::Time.forward(0),
+        )
+      }
+
 		end
 
 		# create foods
@@ -144,7 +167,7 @@ namespace :dev do
     puts('create orders')
 
 		200.times {
-			Order.create(
+			order = Order.create(
 				scheduled_time: Faker::Time.between(DateTime.now , DateTime.now+30),
 				user_id: User.all.ids.sample,
 				restaurant_id: Restaurant.all.ids.sample,
@@ -156,8 +179,18 @@ namespace :dev do
 				payment_method: ["paypal", "credit_card"].sample,
 				payment_status: ["Unpaid", "paid"].sample,
 				order_status: ["completed","not yet","cancel"].sample,
+        delivery_fee: 0,
         created_at: Faker::Time.between(DateTime.now-720 , DateTime.now),
 			)
+
+      if order.shipping_method == "delivery"
+        if order.restaurant.delivery
+          order.delivery_fee = order.restaurant.delivery.cost
+          order.save!
+        else
+          order.delivery_fee = 0
+        end
+      end
 		}
 
 		# create order_food_ships
@@ -217,7 +250,7 @@ namespace :dev do
     Order.all.each do |order|
       sum = order.order_food_ships.sum(:amount)
       order.subtotal = sum
-      order.amount = order.restaurant.tax + order.tip + sum
+      order.amount = order.restaurant.tax + order.tip + sum + order.delivery_fee
       order.save!
     end
   end

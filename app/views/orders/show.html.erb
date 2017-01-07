@@ -32,24 +32,30 @@
       <i class="gray_line"></i>
       <div class="align_two_side">
         <h2>Subtotal</h2>
-        <h2>$<%= @order.amount %></h2>
+        <h2>$<%= @order.subtotal %></h2>
       </div>
-      <div class="align_two_side">
-        <h2>Delivery Fee</h2>
-        <h2>$1.00</h2>
-      </div>
+
+      <% if @order.shipping_method = "delivery"%>
+        <% if @order.restaurant.delivery%>
+          <div class="align_two_side">
+            <h2>Delivery Fee</h2>
+            <h2>$<%= @order.restaurant.delivery.cost %></h2>
+          </div>
+        <%end%>
+      <%end%>
+
       <div class="align_two_side">
         <h2>Tax</h2>
-        <h2>$2.10</h2>
+        <h2>$<%= @order.restaurant.tax %></h2>
       </div>
       <div class="align_two_side tip">
         <h2>Tip</h2>
-        <h2>$220</h2>
+        <h2>$<%= @order.tip %></h2>
       </div>
       <i class="gray_line mtb15"></i>
       <div class="align_two_side">
         <h2 class="red">Total</h2>
-        <h2 class="red">$24.10</h2>
+        <h2 class="red">$<%= @order.amount %></h2>
       </div>
     </div>
   </section>

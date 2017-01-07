@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107090327) do
+ActiveRecord::Schema.define(version: 20170107095712) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20170107090327) do
     t.datetime "updated_at",                                                                  null: false
     t.decimal  "subtotal",                      precision: 10, scale: 2
     t.float    "tip",             limit: 24
+    t.float    "delivery_fee",    limit: 24
   end
 
   create_table "restaurant_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
