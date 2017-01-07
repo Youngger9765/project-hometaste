@@ -57,10 +57,10 @@ $(document).ready ->
   $('p[name="more_cuisine"]').click ->
     $('.ui.modal[name="more_cuisine"]').modal('show');
 
-  $(document).on('click','.foods div[data-tooltip="Address"]', ->
-    $(this).siblings('.address_detail').toggleClass('hidden')
+  $(document).on 'click','.foods div[data-tooltip="Address"]', (e) ->
+    $(this).parents('.content').find('.address_detail').toggleClass('hidden')
     $(this).find('i').toggleClass('black')
-  )
+    e.preventDefault();
 
   $('div[data-tooltip="Map view"],div[data-tooltip="Product list"]').click ->
     $('div[data-tooltip="Product list"],div[data-tooltip="Map view"]').toggleClass('hidden')

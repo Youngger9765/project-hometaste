@@ -32,7 +32,7 @@
             <h4 class="dib">1000 Total orders</h4>
           </div>
           <div class="col-sm-6 col-xs-12 pt10 pl60_sm">
-            <%= @restaurant.cuisines.each do |cuisine| %>
+            <% @restaurant.cuisines.each do |cuisine| %>
             <span class="sub_link ml15"><%= cuisine.name %></span>
                 <% end %>
           </div>
@@ -66,20 +66,20 @@
           </div>
           <div>
             <div class="dib_sm ml40 ml100_lg">
-              <h4>5Min. delivery  order:</h4>
+              <h4>Min. delivery  order:</h4>
               <h4 class="mb15">10</h4>
             </div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Delivery distance: </h4>
-              <h4 class="mb15"><%= @restaurant.distance %> mi</h4>
+              <h4 class="mb15"><%#= @restaurant.distance %> mi</h4>
             </div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Delivery cost:</h4>
-              <h4 class="mb15">$<%= @restaurant.cost %></h4>
+              <h4 class="mb15">$<%#= @restaurant.cost %></h4>
             </div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Order hours:</h4>
-              <h4 class="mb15"><%= @restaurant.order_hours %> hr</h4>
+              <h4 class="mb15"><%#= @restaurant.order_hours %> hr</h4>
             </div>
           </div>
         </div>
