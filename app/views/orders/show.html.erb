@@ -59,58 +59,66 @@
       </div>
     </div>
   </section>
-  <section class="row">
-    <div class="col-xs-12 basic_bg">
-      <div class="row">
-        <h1 class="bold tac mb50">Your Contact Information</h1>
 
-        <div class="col-md-10 col-md-offset-1">
-          <i class="gray_line mb50_sm mb30"></i>
-          <%= form_for new_order_path do |f| %>
-              <div class="row">
-                <div class="col-sm-5">
-                  <%= f.label :user_id,'Mobile Number:' %>
+  <% if @order.payment_status == "unpaid"%>
+    <section class="row">
+      <div class="col-xs-12 basic_bg">
+        <div class="row">
+          <h1 class="bold tac mb50">Your Contact Information</h1>
+
+          <div class="col-md-10 col-md-offset-1">
+            <i class="gray_line mb50_sm mb30"></i>
+            <%= form_for new_order_path do |f| %>
+                <div class="row">
+                  <div class="col-sm-5">
+                    <%= f.label :user_id,'Mobile Number:' %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= f.text_field :user_id %>
+                  </div>
                 </div>
-                <div class="col-sm-6">
-                  <%= f.text_field :user_id %>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <%= f.label :user_id,'E-mail:' %>
+                  </div>
+                  <div class="col-sm-8">
+                    <%= f.email_field :user_id %>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3">
-                  <%= f.label :user_id,'E-mail:' %>
+                <div class="row">
+                  <div class="col-sm-5">
+                    <%= f.label :user_id,'Billing Address:' %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= f.text_field :user_id %>
+                  </div>
+                  <div class="col-sm-4 col-sm-offset-5">
+                    <%= f.text_field :user_id ,placeholder:'City' %>
+                  </div>
+                  <div class="col-sm-2">
+                    <%= f.select :user_id,options_for_select(us_states),{},class:'ui dropdown fluid' %>
+                  </div>
+                  <div class="col-sm-6 col-sm-offset-5">
+                    <%= f.text_field :user_id ,placeholder:'Zip Code' %>
+                  </div>
+                  <div class="col-sm-11 tar save_address">
+                    <%= f.check_box :user_id %>
+                    <%= f.label :user_id,'Save this billing address' %>
+                  </div>
                 </div>
-                <div class="col-sm-8">
-                  <%= f.email_field :user_id %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-5">
-                  <%= f.label :user_id,'Billing Address:' %>
-                </div>
-                <div class="col-sm-6">
-                  <%= f.text_field :user_id %>
-                </div>
-                <div class="col-sm-4 col-sm-offset-5">
-                  <%= f.text_field :user_id ,placeholder:'City' %>
-                </div>
-                <div class="col-sm-2">
-                  <%= f.select :user_id,options_for_select(us_states),{},class:'ui dropdown fluid' %>
-                </div>
-                <div class="col-sm-6 col-sm-offset-5">
-                  <%= f.text_field :user_id ,placeholder:'Zip Code' %>
-                </div>
-                <div class="col-sm-11 tar save_address">
-                  <%= f.check_box :user_id %>
-                  <%= f.label :user_id,'Save this billing address' %>
-                </div>
-              </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  <%= render 'transaction'%>
+    </section>
+    <%= render 'transaction'%>
+  <%end%>
+
 </div>
-<%= render 'purchase' %>
+
+<% if @order.payment_status == "unpaid"%>
+  <%= render 'purchase' %>
+<%end%>
+
 <%= render 'thankyou' %>
 
