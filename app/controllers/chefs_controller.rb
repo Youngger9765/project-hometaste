@@ -126,8 +126,8 @@ class ChefsController < ApplicationController
 	  	:restaurant_attributes => [
 	  		:id, :name, :address, :phone_number,:description,
 	  		:city, :state, :ZIP, :tax_ID, :communication_method,
-	  		:certificated_img, :certificated_num, :main_photo,
-	  		:tip, :tax,
+	  		:certificated_img, :certificated_num, :main_photo, :tax,
+	  		:order_reach,
 
 	  		:delivery_attributes => [
 		  		:id, :min_order, :area, :distance, :cost, :order_hours,
