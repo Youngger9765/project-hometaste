@@ -114,13 +114,7 @@
 
 	<div class="clearfix"></div>
 
-    <div class="form_control col-md-6">
-	    <%= r.label :tip, "Tip" %> <br>
-	    <%= r.number_field :tip, :step => 0.01 %>
-    </div>
-
-	<div class="clearfix"></div>
-
+	<!-- Tax -->
     <div class="form_control col-md-6">
 	    <%= r.label :tax, "Tax" %> <br>
 	    <%= r.number_field :tax, :step => 0.01 %>
@@ -189,15 +183,15 @@
 
 <!-- delivery -->
 <div class="row container chef-sub-container center">
-
-	<h1>Delivery Type</h1>
-	<!-- bulk buy only -->
-		<div class="check_box">
-			<%= check_box_tag 'both_bulk_buy_delivery'%><span>both bulk buy and delivery</span>
-		</div>
-	<br>
 	<%= f.fields_for :restaurant do |r| %>
+		<h3>Order reach to $ <%= r.number_field :order_reach, :step => 0.1 %> start cooking</h3>
 
+		<h3>Delivery Type</h3>
+		<!-- bulk buy only -->
+			<div class="check_box">
+				<%= check_box_tag 'both_bulk_buy_delivery'%><span>both bulk buy and delivery</span>
+			</div>
+		<br>
 		<!-- bulk buy only -->
 		<div class="check_box" style="border-bottom: 2px solid;">
 			<%= check_box_tag 'bulk_buy_only'%><span>bulk buy only</span>

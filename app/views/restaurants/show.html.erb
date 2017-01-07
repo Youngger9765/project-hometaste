@@ -29,16 +29,17 @@
         </div>
         <div class="col-xs-12 mb20">
           <div class="col-sm-3 col-xs-12">
-            <h4 class="dib">1000 Total orders</h4>
+            <h4 class="dib"><%= @restaurant.orders.count%> Total orders</h4>
           </div>
           <div class="col-sm-6 col-xs-12 pt10 pl60_sm">
-            <%= @restaurant.cuisines.each do |cuisine| %>
-            <span class="sub_link ml15"><%= cuisine.name %></span>
-                <% end %>
+            <% @restaurant.cuisines.each do |cuisine| %>
+              <span class="sub_link ml15"><%= cuisine.name %></span>
+            <% end %>
           </div>
+
           <div class="col-sm-3 col-xs-12 tar_sm mt10 mt0_sm">
             <div class="show_rated_3"></div>
-            <span class="db_sm">200 reviews</span>
+            <span class="db_sm"><%= @restaurant.food_comments_count%>  reviews</span>
           </div>
         </div>
 
@@ -50,15 +51,23 @@
           <div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Cut off time:</h4>
-              <h4>Lunch 10:30</h4></div>
-            <div class="dib_sm ml40 ml100_lg">
-              <h4 class="mb15">Dinner 17:00</h4>
             </div>
+            <div class="cleafix"></div>
+            <% @restaurant.bulk_buys.each do |bulk_buy|%>
+              <div class="dib_sm ml40 ml100_lg">
+                <%if bulk_buy.cut_off_time.strftime('%H').to_i <= 13 %>
+                  <h4>Launch <%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
+                <%else%>
+                  <h4>Dinner <%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
+                <%end%>
+              </div>
+            <%end%>
           </div>
         </div>
         <div class="col-xs-12">
           <i class="red_line mb30_md"></i>
         </div>
+
         <div class="col-xs-12 df">
           <div class="dib_sm tac ml10_sm">
             <i class="moto_icon_red"></i>
@@ -66,23 +75,40 @@
           </div>
           <div>
             <div class="dib_sm ml40 ml100_lg">
-              <h4>5Min. delivery  order:</h4>
-              <h4 class="mb15">10</h4>
+              <h4>Min. delivery  order:</h4>
+              <h4 class="mb15">
+                <% if @restaurant.delivery%>
+                  <%= @restaurant.delivery.min_order %>
+                <%end%>
+              </h4>
             </div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Delivery distance: </h4>
-              <h4 class="mb15"><%= @restaurant.distance %> mi</h4>
+              <h4 class="mb15">
+                <% if @restaurant.delivery%>
+                  <%= @restaurant.delivery.distance %> mi
+                <%end%>
+              </h4>
             </div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Delivery cost:</h4>
-              <h4 class="mb15">$<%= @restaurant.cost %></h4>
+              <h4 class="mb15">
+                <% if @restaurant.delivery%>
+                  $ <%= @restaurant.delivery.cost %>
+                <%end%>
+              </h4>
             </div>
             <div class="dib_sm ml40 ml100_lg">
               <h4>Order hours:</h4>
-              <h4 class="mb15"><%= @restaurant.order_hours %> hr</h4>
+              <h4 class="mb15">
+                <% if @restaurant.delivery%>
+                  <%= @restaurant.delivery.order_hours %> hr
+                <%end%>
+              </h4>
             </div>
           </div>
         </div>
+
         <div class="col-xs-12">
           <i class="red_line mb30_md"></i>
         </div>
@@ -109,7 +135,6 @@
     <div class="col-xs-12 basic_bg">
       <div class="align_two_side">
         <h3 class="dib">Orders reached:</h3>
-        <h3 class="dib bold">2 HOURS LEFT</h3>
       </div>
       <div>
         <h3 class="tar_sm bold">Goal: $50</h3>
@@ -130,27 +155,29 @@
       <div class="row df_sm">
         <div class="col-xs-12 col-sm-5 location_map">
           <h3>Pick up locations:</h3>
-          <div class="row">
-            <div class="col-xs-2 tac pt10">
-              <i class="fa fa-map-marker red" aria-hidden="true"></i>
+          <% @restaurant.bulk_buys.each do |bulk_buy|%>
+            <div class="row">
+              <div class="col-xs-2 tac pt10">
+                <i class="fa fa-map-marker red" aria-hidden="true"></i>
+              </div>
+              <div class="col-xs-10">
+                <h4 class="normal"><%= @restaurant.address%></h4>
+                <h4 class="normal"><%= @restaurant.city%></h4>
+                <h4 class="normal"><%= @restaurant.state%></h4>
+              </div>
+              <div class="col-xs-12">
+                <i class="red_line"></i>
+              </div>
+              <div class="col-xs-2 tac pt10">
+                <i class="fa fa-map-marker red" aria-hidden="true"></i>
+              </div>
+              <div class="col-xs-10">
+                <h4 class="normal">Pacific Heights 1324 Broadw</h4>
+                <h4 class="normal">ay st.San Fran </h4>
+                <h4 class="normal">cisco CA 94115</h4>
+              </div>
             </div>
-            <div class="col-xs-10">
-              <h4 class="normal">Lower Pacific Heights 2821</h4>
-              <h4 class="normal">California st. </h4>
-              <h4 class="normal">San Francisco CA 94115</h4>
-            </div>
-            <div class="col-xs-12">
-              <i class="red_line"></i>
-            </div>
-            <div class="col-xs-2 tac pt10">
-              <i class="fa fa-map-marker red" aria-hidden="true"></i>
-            </div>
-            <div class="col-xs-10">
-              <h4 class="normal">Pacific Heights 1324 Broadw</h4>
-              <h4 class="normal">ay st.San Fran </h4>
-              <h4 class="normal">cisco CA 94115</h4>
-            </div>
-          </div>
+          <%end%>
         </div>
         <div class="col-xs-12 col-sm-7 ">
           <div class="background_img_setting" style="background-image:url(<%= image_path('tmp/kitchen_map.png') %>);" name="location_map"></div>
