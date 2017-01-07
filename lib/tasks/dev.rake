@@ -224,23 +224,16 @@ namespace :dev do
 
     Restaurant.all.each do |restaurant|
       4.times{
-        user_id = [User.all.sample.id,nil,1,2,3].sample
         start_datetime = Time.now - rand(0..30).days
         stop_datetime = start_datetime + rand(5..30).days
 
         big_bun1 = restaurant.big_buns.create(
-          :user_id => user_id,
           :start_datetime => start_datetime,
           :stop_datetime => stop_datetime,
           :style => Faker::Name.name,
           :unit => rand(1..5),
           :prepare_time => "01:00:00",
-          :usage => "self"
         )
-
-        big_bun2 = big_bun1.dup
-        big_bun2.usage = 'gift'
-        big_bun2.save!
       }
     end
 	end
