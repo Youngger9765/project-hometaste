@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107104326) do
+ActiveRecord::Schema.define(version: 20170107105359) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -250,6 +250,19 @@ ActiveRecord::Schema.define(version: 20170107104326) do
     t.index ["is_approved"], name: "index_restaurants_on_is_approved", using: :btree
     t.index ["is_live"], name: "index_restaurants_on_is_live", using: :btree
     t.index ["state"], name: "index_restaurants_on_state", using: :btree
+  end
+
+  create_table "user_big_bun_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "big_bun_id"
+    t.integer  "user_id"
+    t.string   "order_id"
+    t.string   "usage"
+    t.boolean  "is_used",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["big_bun_id"], name: "index_user_big_bun_ships_on_big_bun_id", using: :btree
+    t.index ["order_id"], name: "index_user_big_bun_ships_on_order_id", using: :btree
+    t.index ["user_id"], name: "index_user_big_bun_ships_on_user_id", using: :btree
   end
 
   create_table "user_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

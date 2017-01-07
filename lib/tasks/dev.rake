@@ -227,15 +227,24 @@ namespace :dev do
         start_datetime = Time.now - rand(0..30).days
         stop_datetime = start_datetime + rand(5..30).days
 
-        big_bun1 = restaurant.big_buns.create(
+        restaurant.big_buns.create(
           :start_datetime => start_datetime,
           :stop_datetime => stop_datetime,
           :style => Faker::Name.name,
           :unit => rand(1..5),
           :prepare_time => "01:00:00",
+          :is_public => [true,false].sample,
         )
       }
     end
+
+    # create user_big_bun_ships
+    puts('create user_big_bun_ships')
+
+    BigBun.all.each do |big_bun|
+
+    end
+
 	end
 
   task :count_order_amount => :environment do

@@ -1,0 +1,2 @@
+class UserBigBunShip < ApplicationRecord
+end
