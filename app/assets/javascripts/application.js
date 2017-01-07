@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery_cookie
 //= require semantic_ui/semantic_ui
 //= require bootstrap/collapse
 // require bootstrap/dropdown
