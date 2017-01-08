@@ -241,14 +241,23 @@ namespace :dev do
     # create user_big_bun_ships
     puts('create user_big_bun_ships')
 
-    BigBun.all.each do |big_bun|
+    BigBun.where(:is_public => true).each do |big_bun|
+      ship1 = big_bun.user_big_bun_ships.create(
+        user_id: User.all.where(:is_chef => false).ids.sample,
+        usage: "self",
+        is_used: false,
+      )
 
+      big_bun.user_big_bun_ships.create(
+        user_id: ship1.user_id,
+        usage: "gift",
+        is_used: false,
+      )
     end
 
 	end
 
   task :count_order_amount => :environment do
-
     Order.all.each do |order|
       sum = order.order_food_ships.sum(:amount)
       order.subtotal = sum

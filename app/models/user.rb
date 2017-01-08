@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :big_buns
   has_many :carts
+  has_many :user_big_bun_ships
 
   accepts_nested_attributes_for :user_photo,
     :allow_destroy => true,
