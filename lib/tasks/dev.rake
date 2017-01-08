@@ -177,8 +177,8 @@ namespace :dev do
 				amount: Faker::Commerce.price,
         tip: rand(1..5),
 				payment_method: ["paypal", "credit_card"].sample,
-				payment_status: ["Unpaid", "paid"].sample,
-				order_status: ["completed","not yet","cancel"].sample,
+				payment_status: ["unpaid", "paid"].sample,
+				order_status: ["completed","not yet","cancelled"].sample,
         delivery_fee: 0,
         created_at: Faker::Time.between(DateTime.now-720 , DateTime.now),
 			)
