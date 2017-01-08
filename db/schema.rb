@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107074555) do
+ActiveRecord::Schema.define(version: 20170108143938) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -34,9 +34,6 @@ ActiveRecord::Schema.define(version: 20170107074555) do
     t.integer  "unit"
     t.time     "prepare_time"
     t.string   "code",                           null: false
-    t.integer  "user_id"
-    t.string   "usage"
-    t.boolean  "is_used",        default: false
   end
 
   create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -166,19 +163,23 @@ ActiveRecord::Schema.define(version: 20170107074555) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "scheduled_time"
+    t.datetime "pick_up_datetime"
     t.integer  "user_id"
     t.integer  "restaurant_id"
     t.string   "customer_name"
     t.string   "shipping_method"
-    t.text     "shipping_place",  limit: 65535
+    t.text     "shipping_place",      limit: 65535
     t.string   "shipping_status"
-    t.decimal  "amount",                        precision: 10, scale: 2
+    t.decimal  "amount",                            precision: 10, scale: 2
     t.string   "payment_method"
-    t.string   "payment_status",                                         default: "pendeing", null: false
+    t.string   "payment_status",                                             default: "pendeing", null: false
     t.string   "order_status"
-    t.datetime "created_at",                                                                  null: false
-    t.datetime "updated_at",                                                                  null: false
+    t.datetime "created_at",                                                                      null: false
+    t.datetime "updated_at",                                                                      null: false
+    t.decimal  "subtotal",                          precision: 10, scale: 2
+    t.float    "tip",                 limit: 24
+    t.float    "delivery_fee",        limit: 24
+    t.string   "confirmation_number"
   end
 
   create_table "restaurant_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -243,7 +244,6 @@ ActiveRecord::Schema.define(version: 20170107074555) do
     t.integer  "food_comments_count",                         default: 0
     t.float    "food_avg_score",                limit: 24,    default: 0.0
     t.float    "tax",                           limit: 24,    default: 0.0
-    t.float    "tip",                           limit: 24,    default: 0.0
     t.float    "order_reach",                   limit: 24
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
@@ -251,6 +251,19 @@ ActiveRecord::Schema.define(version: 20170107074555) do
     t.index ["is_approved"], name: "index_restaurants_on_is_approved", using: :btree
     t.index ["is_live"], name: "index_restaurants_on_is_live", using: :btree
     t.index ["state"], name: "index_restaurants_on_state", using: :btree
+  end
+
+  create_table "user_big_bun_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "big_bun_id"
+    t.integer  "user_id"
+    t.string   "order_id"
+    t.string   "usage"
+    t.boolean  "is_used",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["big_bun_id"], name: "index_user_big_bun_ships_on_big_bun_id", using: :btree
+    t.index ["order_id"], name: "index_user_big_bun_ships_on_order_id", using: :btree
+    t.index ["user_id"], name: "index_user_big_bun_ships_on_user_id", using: :btree
   end
 
   create_table "user_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

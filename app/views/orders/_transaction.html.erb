@@ -49,13 +49,6 @@
 var form = document.querySelector('#checkout-form');
 var submit = document.querySelector('input[type="submit"]');
 
-$('.purchase').click(function(){
-  submit.click();
-})
-
-
-
-
 braintree.client.create({
   // Replace this with your own authorization.
   authorization: '<%= @client_token %>'
