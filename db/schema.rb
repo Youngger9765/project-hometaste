@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107105359) do
+ActiveRecord::Schema.define(version: 20170108143938) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -163,22 +163,23 @@ ActiveRecord::Schema.define(version: 20170107105359) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "scheduled_time"
+    t.datetime "pick_up_datetime"
     t.integer  "user_id"
     t.integer  "restaurant_id"
     t.string   "customer_name"
     t.string   "shipping_method"
-    t.text     "shipping_place",  limit: 65535
+    t.text     "shipping_place",      limit: 65535
     t.string   "shipping_status"
-    t.decimal  "amount",                        precision: 10, scale: 2
+    t.decimal  "amount",                            precision: 10, scale: 2
     t.string   "payment_method"
-    t.string   "payment_status",                                         default: "pendeing", null: false
+    t.string   "payment_status",                                             default: "pendeing", null: false
     t.string   "order_status"
-    t.datetime "created_at",                                                                  null: false
-    t.datetime "updated_at",                                                                  null: false
-    t.decimal  "subtotal",                      precision: 10, scale: 2
-    t.float    "tip",             limit: 24
-    t.float    "delivery_fee",    limit: 24
+    t.datetime "created_at",                                                                      null: false
+    t.datetime "updated_at",                                                                      null: false
+    t.decimal  "subtotal",                          precision: 10, scale: 2
+    t.float    "tip",                 limit: 24
+    t.float    "delivery_fee",        limit: 24
+    t.string   "confirmation_number"
   end
 
   create_table "restaurant_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
