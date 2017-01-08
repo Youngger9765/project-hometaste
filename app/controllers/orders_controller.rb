@@ -13,13 +13,20 @@ class OrdersController < ApplicationController
 
   def show
   	@client_token = Braintree::ClientToken.generate
+
+    if @order.payment_status == "unpaid"
+      @thankyou = false
+    else
+      @thankyou = true
+    end
+
   end
 
   def transactions
 
   	nonce_from_the_client = params["payment-method-nonce"]
   	result = Braintree::Transaction.sale(
-		  :amount => 10,
+		  :amount => @order.amount,
 		  :payment_method_nonce => nonce_from_the_client,
 		  :options => {
 		    :submit_for_settlement => true
@@ -29,7 +36,12 @@ class OrdersController < ApplicationController
   	if result.success?
   		# TODO: update order
   		@order.payment_status = "paid"
-  		# TODO: destroy cart
+      @order.confirmation_number = result.transaction.id
+      @order.save!
+
+      flash[:notice] = "Successfully paid!"
+      @thankyou = true
+      redirect_to order_path(@order.id)
   	else
   		render :show
   	end

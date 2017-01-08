@@ -108,7 +108,7 @@ class ChefsController < ApplicationController
 	def sales
 		time_range = (Time.now().beginning_of_day()..Time.now().end_of_day())
 		@today_orders = @chef.restaurant.orders.where(:created_at => time_range).where(:payment_status => "paid")
-		@cancelled_orders = @chef.restaurant.orders.where(:order_status => "cancel")
+		@cancelled_orders = @chef.restaurant.orders.where(:order_status => "cancelled")
 		@completed_orders = @chef.restaurant.orders.where(:order_status => "completed")
 		respond_to do |format|
 		  format.html

@@ -177,8 +177,8 @@ namespace :dev do
 				amount: Faker::Commerce.price,
         tip: rand(1..5),
 				payment_method: ["paypal", "credit_card"].sample,
-				payment_status: ["Unpaid", "paid"].sample,
-				order_status: ["completed","not yet","cancel"].sample,
+				payment_status: ["unpaid", "paid"].sample,
+				order_status: ["completed","not yet","cancelled"].sample,
         delivery_fee: 0,
         created_at: Faker::Time.between(DateTime.now-720 , DateTime.now),
 			)
@@ -224,29 +224,40 @@ namespace :dev do
 
     Restaurant.all.each do |restaurant|
       4.times{
-        user_id = [User.all.sample.id,nil,1,2,3].sample
         start_datetime = Time.now - rand(0..30).days
         stop_datetime = start_datetime + rand(5..30).days
 
-        big_bun1 = restaurant.big_buns.create(
-          :user_id => user_id,
+        restaurant.big_buns.create(
           :start_datetime => start_datetime,
           :stop_datetime => stop_datetime,
           :style => Faker::Name.name,
           :unit => rand(1..5),
           :prepare_time => "01:00:00",
-          :usage => "self"
+          :is_public => [true,false].sample,
         )
-
-        big_bun2 = big_bun1.dup
-        big_bun2.usage = 'gift'
-        big_bun2.save!
       }
     end
+
+    # create user_big_bun_ships
+    puts('create user_big_bun_ships')
+
+    BigBun.where(:is_public => true).each do |big_bun|
+      ship1 = big_bun.user_big_bun_ships.create(
+        user_id: User.all.where(:is_chef => false).ids.sample,
+        usage: "self",
+        is_used: false,
+      )
+
+      big_bun.user_big_bun_ships.create(
+        user_id: ship1.user_id,
+        usage: "gift",
+        is_used: false,
+      )
+    end
+
 	end
 
   task :count_order_amount => :environment do
-
     Order.all.each do |order|
       sum = order.order_food_ships.sum(:amount)
       order.subtotal = sum

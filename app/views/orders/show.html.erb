@@ -122,3 +122,15 @@
 
 <%= render 'thankyou' %>
 
+
+<script type="text/javascript">
+  $('.purchase').click(function(){
+    $('#checkout-form-submit').click();
+  })
+
+  var thankyou_show = <%= @thankyou %>;
+
+  if (thankyou_show) {
+    $('#thankyou_modal').modal('show');
+  }
+</script>
