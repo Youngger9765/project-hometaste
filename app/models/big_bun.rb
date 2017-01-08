@@ -19,10 +19,7 @@ class BigBun < ApplicationRecord
   private
 
   def set_code
-    if self.code
-    else
-      self.code = generate_code
-    end
+    self.code = generate_code unless self.code
   end
 
   def generate_code

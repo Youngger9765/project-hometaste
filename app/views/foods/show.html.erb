@@ -28,9 +28,9 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm">
+        <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm food_data_info" data-food-price="$<%= @food.price %>" data-food-id="<%= @food.id %>" data-restaurant-id="<%= @food.restaurant.id %>">
           <h3 class="red mt25">$<%= @food.price %>/ Bowl</h3>
-          <%= render 'common/spinner', qty: 1  %>
+          <%= render 'common/spinner' %>
         </div>
         <div class="col-xs-12 hidden-xs hidden-sm">
           <div class="align_two_side">

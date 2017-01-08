@@ -25,3 +25,4 @@
 //= require gmaps
 //= require common/spinner
 //= require common/public
+//= require cart

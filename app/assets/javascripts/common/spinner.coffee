@@ -1,6 +1,6 @@
 $(document).ready ->
   update_spinner_input=(command) ->
-    min = 1
+    min = 0
     max = 500
     step = 1
     product_item_input = $(this).closest('.product_item').find('#txtNum')
