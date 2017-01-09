@@ -58,7 +58,7 @@
 </div>
 
 <% @foods.each do |food| %>
-    <%= render 'common/bigbun', food: food , bigbun: food.restaurant.big_buns.last%>
+    <%= render 'common/bigbun', food: food , bigbun: food.restaurant.big_buns.last ,restaurant: food.restaurant%>
 <% end %>
 
 <%= javascript_include_tag 'main' %>

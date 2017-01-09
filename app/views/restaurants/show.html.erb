@@ -212,7 +212,7 @@
 </div>
 
 <%= render 'common/add_to_cart' %>
-<%= render 'common/bigbun', id:@restaurant.id , bigbun:@restaurant.big_buns.last%>
+<%= render 'common/bigbun', restaurant: @restaurant , bigbun:@restaurant.big_buns.last,food:nil %>
 
 
 <script type="text/javascript" charset="utf-8">
