@@ -1,23 +1,17 @@
-<div class="ui modal bigbun_modal">
+<div class="ui modal bigbun_modal" id="bigbun_modal_<%= food.id %>" data-bigbun-id="<%= bigbun.id %>" data-restaurant-id="<%= food.restaurant.id %>" >
   <i class="close icon"></i>
   <h4 class="bold">Congratulation!</h4>
   <i class="gray_line"></i>
   <div class="description">
     <h4>You got a free bowl of egg drop soup!</h4>
-    <h4 class="bold red">Code: 12345</h4>
+    <h4 class="bold red">Code: <span id="bigbun_code"><%= bigbun.code %></span></h4>
     <div class="image">
       <%= image_tag 'tmp/soup.png' %>
     </div>
   </div>
   <div class="action_bottons">
-    <button class="ui button my_btn">
-      Redeem now
-    </button>
-    <button class="ui button my_btn_reserve">
-      Use later
-    </button>
-    <button class="ui button my_btn">
-      Send as gift
-    </button>
+    <button class="ui button my_btn" id="redeem_now">Redeem now</button>
+    <button class="ui button my_btn_reserve">Use later</button>
+    <button class="ui button my_btn">Send as gift</button>
   </div>
 </div>

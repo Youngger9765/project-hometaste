@@ -6,6 +6,9 @@ body{
 a:hover{
   text-decoration: none;
 }
+a:focus{
+  outline: none;
+}
 hr{
   color: $main_black;
 }

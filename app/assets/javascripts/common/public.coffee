@@ -10,5 +10,4 @@ $(document).ready ->
   $(document).on 'click','.navbar-collapse.in',(e) ->
     if $(e.target).is('a')
       $(this).collapse('hide')
-  $('.bigbun').click ->
-    $('.bigbun_modal').modal('show')
+

@@ -18,10 +18,9 @@
                 <span>238 Orders</span>
               </div>
               <div class="hidden-xs">
-                <span class="sub_link mr5">Vegan</span>
-                <span class="sub_link mr5">Soup</span>
-                <span class="sub_link mr5">Pumkim</span>
-                <span class="sub_link mr5">Autum</span>
+                <%= restaurant.cuisines.first(3).each do |cuisine| %>
+                    <span class="sub_link mr5"><%= cuisine.name %></span>
+                <% end %>
               </div>
 
               <div class="flex_center_start location">
@@ -29,7 +28,7 @@
                   <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
                 </div>
                 <div class="flex_center">
-                  <p>全家家就是你家你家就是我家 我家不是你家</p>
+                  <p><%= restaurant.address %></p>
                 </div>
               </div>
 

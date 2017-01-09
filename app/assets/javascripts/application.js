@@ -23,6 +23,5 @@
 //= require underscore
 //= require gmaps/google
 //= require gmaps
-//= require common/spinner
-//= require common/public
+//= require_tree ./common
 //= require cart

@@ -50,12 +50,16 @@
 
 <div class="container">
   <div class="row foods restaurants cards" id="results" data-sum_qty="<%= @sum_qty %>" data-page="1">
-        <%= render 'foods',foods:@foods %>
+    <%= render 'foods',foods:@foods %>
   </div>
   <div class="load_more" id="load_more">
     <input type="button" value="Load more">
   </div>
 </div>
+
+<% @foods.each do |food| %>
+    <%= render 'common/bigbun', food: food , bigbun: food.restaurant.big_buns.last%>
+<% end %>
 
 <%= javascript_include_tag 'main' %>
 

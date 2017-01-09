@@ -15,8 +15,8 @@ $(document).ready ->
         if (num > min)
           num -= step
           break
-    product_item_input.attr("value", num)
+    product_item_input.val(num)
 
-  $('.product_spineer_button').on 'click', ->
+  $(document).on 'click','.product_spineer_button', ->
     command = $(this).attr('command')
     update_spinner_input.bind(this)(command)

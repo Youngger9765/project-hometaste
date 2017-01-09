@@ -26,6 +26,9 @@
     right: 70px;
     border-top: none;
   }
+  a,a:hover{
+    @extend .white;
+  }
 }
 @media (max-width: $screen-xs-max){
   .add_to_cart{

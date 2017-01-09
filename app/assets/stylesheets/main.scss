@@ -108,16 +108,12 @@ body.main_index{
     text-decoration: underline;
     color: #3A618D;
   }
-  .food_status{
+  .bigbun{
     position: absolute;
     right: 5px;
     top: 5px;
-    min-width: 40px;
-    max-width: 80px;
-    min-height: 40px;
-    max-height: 80px;
-    width:auto;
-    height: 50%;
+    width: 80px;
+    height: 80px;
   }
 }
 .filter_menu .radio.checkbox {
@@ -406,6 +402,10 @@ body.main_index{
           margin: 3px;
         }
       }
+    }
+    .ui.fluid.card .bigbun{
+      width: 50px;
+      height: 50px;
     }
   }
   .banner{

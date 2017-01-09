@@ -8,7 +8,7 @@
   <div class="carousel-inner" role="listbox">
     <% food.food_photos.each  %>
     <div class="item active">
-      <div style="background-image: url(<%= image_path 'tmp/kitchen_1.png' %>);" class="background_img_setting"></div>
+      <div style="background-image: url(<%= image_path 'tmp/kitchen_1.png' %>);" class="background_img_setting" data-food-pic="<%= food.id %>"></div>
     </div>
 
   </div>

@@ -20,7 +20,9 @@
         <div class="col-md-4 col-xs-6">
           <div class="ui fluid card" data-id="<%= food.id %>">
             <div class="image">
-              <img data-src="<%= image_path 'tmp/BB_DHD.png' %>" class="food_status">
+              <% if food.restaurant.big_buns %>
+                  <div class="db bigbun after_prepartion cursor_pointer"></div>
+              <% end %>
               <img data-src="<%= image_path 'tmp/product.png' %>">
               <div class="card_hover_link hidden hidden-xs">
                 <%= content_for :card_hover_link %>
@@ -35,7 +37,7 @@
 
               <hr>
               <div class="address_detail hidden">
-                <p>全家家就是你家你家就是我家 我家不是你家</p>
+                <p><%= food.restaurant.address %></p>
                 <hr>
               </div>
 
@@ -47,7 +49,7 @@
                     <span class="sub_link mr5"><%= cuisine.name %></span>
                 <% end %>
               </div>
-              <div class="show_rated_4 mt10"></div>
+              <div class="show_rated_<%= food.restaurant.food_score %> mt10"></div>
               <div class="card_hover_link visible-xs">
                 <%= content_for :card_hover_link %>
               </div>
