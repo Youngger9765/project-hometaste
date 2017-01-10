@@ -70,17 +70,21 @@
 
   <section class="row">
     <div class="col-xs-12 basic_bg pl150_md pr150_md pl40_sm pr40_sm">
-      <h3 class="dib visible-xs"><%= @restaurant.name.capitalize %></h3>
+      <%= link_to @restaurant do %>
+          <h3 class="dib visible-xs"><%= @restaurant.name.capitalize %></h3>
+      <% end %>
       <div class="row">
         <div class="col-md-3 col-sm-4 col-xs-12">
-          <div class="square_img border_main_radius" style="background-image: url(<%= image_path @restaurant.main_photo.url %>)"></div>
+          <%= link_to @restaurant do %>
+              <div class="square_img border_main_radius" style="background-image: url(<%= image_path @restaurant.main_photo.url %>)"></div>
+          <% end %>
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
           <div class="clearfix mt10_sm mb10_sm mt30_xs mb30_xs tac">
+            <%= link_to @restaurant ,class:'black' do %>
             <h1 class="dib hidden-xs"><%= @restaurant.name.capitalize %></h1>
-            <%= link_to @restaurant do %>
-                <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
-            <% end %>
+                <% end %>
+            <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
           </div>
           <div class="flex_space_between">
             <div class="dib hidden-xs">
