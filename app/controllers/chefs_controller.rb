@@ -8,8 +8,8 @@ class ChefsController < ApplicationController
 		:show, :edit, :update, :review, :approve, :add_dish,
 		:save_dish, :menu, :sales]
 
-	before_action :is_current_user?, :except => [:new]
-	before_action :has_authority?, :except => [:new]
+	# before_action :is_current_user?, :except => [:new]
+	# before_action :has_authority?, :except => [:new]
 	before_action :user_admin?, :only =>[:approve, :review]
 
 	def new
