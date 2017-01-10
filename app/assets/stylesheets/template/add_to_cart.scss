@@ -30,6 +30,11 @@
     @extend .white;
   }
 }
+.orders_new{
+  .add_to_cart a{
+    display: none;
+  }
+}
 @media (max-width: $screen-xs-max){
   .add_to_cart{
     text-align: left;

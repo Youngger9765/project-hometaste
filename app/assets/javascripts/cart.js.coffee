@@ -54,7 +54,6 @@ $(document).ready ->
       img_url = ''
 
     info_object = get_cart_list()
-
     if qty > 0
       if info_object["restaurant_#{restaurant_id}"]
         info_object["restaurant_#{restaurant_id}"]["food_#{food_id}"] =
@@ -160,7 +159,11 @@ $(document).ready ->
       data = $('.orders_new .ui.form form').serialize()
       cart_list = get_cart_list()
       Object.keys(cart_list).forEach (restaurant,i,a) ->
+
         restaurant_id = +restaurant.replace('restaurant_','')
+        input = $("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id);
+        $('.orders_new .ui.form form').append($(input));
+
         Object.keys(cart_list["#{restaurant}"]).forEach (_key,i,a) ->
 
           if _key.indexOf('food') != -1
@@ -175,7 +178,7 @@ $(document).ready ->
             input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
             $('.orders_new .ui.form form').append($(input));
 
-      $.removeCookie('cart_list',{path:'/'})
+#      $.removeCookie('cart_list',{path:'/'})
       $(this).off('submit').submit();
 
 

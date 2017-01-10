@@ -3,7 +3,12 @@ table .noline td{
 }
 
 .credit-input{
-	height: 4em;
+	height: 36px;
     border: 1px solid gainsboro;
-    border-radius: 5px;
+    @include border-radius(0.28571429rem);
+    padding:0.67861429em 1em;
+}
+#checkout-form-submit{
+  width: 100% !important;
+  font-size: 24px !important;
 }

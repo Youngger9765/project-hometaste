@@ -17,10 +17,13 @@ class OrdersController < ApplicationController
 		@order = current_user.orders.new(orders_params)
 		@order.pick_up_datetime = pick_datetime
 		@order.customer_name = current_user.name
+		@order.payment_status = 'unpaid'
+		@order.order_status = 'not yet'
 
 		if @order.save
 			create_user_bigbun(params[:bigbun])
 			create_user_order_food(params[:food])
+			@order.update_order_price
 
 			flash[:notice] = "Successfully create order!"
 			redirect_to @order
@@ -33,11 +36,13 @@ class OrdersController < ApplicationController
 
 	def show
 		@client_token = Braintree::ClientToken.generate
+		if request.env["HTTP_REFERER"]
+			@clean_cart_cookie = request.env["HTTP_REFERER"].match(/orders\/new/) ? true : false
+		end
 
-		if @order.payment_status == "unpaid"
-			@thankyou = false
-		else
-			@thankyou = true
+		case @order.payment_status
+		when 'unpaid' ;@thankyou = false
+		when 'paid' ;@thankyou = true
 		end
 
 	end
@@ -75,7 +80,7 @@ class OrdersController < ApplicationController
 	end
 
 	def orders_params
-		params.require(:order).permit(:shipping_method, :shipping_place,:tip)
+		params.require(:order).permit(:shipping_method, :shipping_place, :tip ,:restaurant_id )
 	end
 
 	def pick_datetime

@@ -1,10 +1,10 @@
 .basic_bg{
   @include basic_bg(20px,20px);
-  @include calc(width,'100% - 30px');
+  //@include calc(height,'100% - 30px');
 }
 .basic_bg_top{
   @include basic_bg(0,20px);
-  @include calc(width,'100% - 30px');
+  //@include calc(height,'100% - 30px');
 }
 .basic_bg_bottom{
   @include basic_bg(20px,0);
