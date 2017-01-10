@@ -53,6 +53,9 @@ Rails.application.routes.draw do
       get :rating
       get :message
       get :bussiness
+
+      #yep
+      post :yep
     end
   end
 
