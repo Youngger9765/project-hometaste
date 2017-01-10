@@ -1,4 +1,4 @@
-<%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
+<%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
 
     <div name="kitchen_photo">
       <%= f.fields_for :restaurant do |r| %>
@@ -34,7 +34,10 @@
 
   $("#chef-submit-check-btn").click(function(){
     var check_submit = true;
-    check_submit = check_submit & check_chef_password();
+
+    if ($("input#chef_user_attributes_password").val()) {
+      check_submit = check_submit & check_chef_password();
+    }
 
     if (!<%= @chef.restaurant.is_approved %>) {
       check_submit = check_submit & check_certificated();
@@ -51,7 +54,7 @@
     if (password && confirm_password && password == confirm_password){
       return true;
     } else {
-      alert('Please check password!')
+      alert("Please check password! \n If you don't wanna change password, please let it be blank. ")
       return false;
     };
   }
