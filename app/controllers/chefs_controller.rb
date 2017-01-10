@@ -79,6 +79,11 @@ class ChefsController < ApplicationController
 	end
 
 	def update
+		if !params[:chef][:user_attributes][:password].blank?
+			@chef.user.password = params[:chef][:user_attributes][:password]
+			@chef.user.save!
+		end
+
 		if @chef.update!(chef_params)
 			redirect_to chef_path(@chef)
 		else
@@ -106,8 +111,12 @@ class ChefsController < ApplicationController
 	end
 
 	def sales
-		time_range = (Time.now().beginning_of_day()..Time.now().end_of_day())
-		@today_orders = @chef.restaurant.orders.where(:created_at => time_range).where(:payment_status => "paid")
+		standby_time_range = (Time.now().utc..Time.now().end_of_day().utc)
+		@today_orders = @chef.restaurant.orders.where(:pick_up_time => standby_time_range).where(:payment_status => "paid")
+
+		finished_time_range = (Time.now().beginning_of_day().utc..Time.now().utc)
+		@delivery_orders = @chef.restaurant.orders.where(:pick_up_time => finished_time_range).where(:payment_status => "paid")
+
 		@cancelled_orders = @chef.restaurant.orders.where(:order_status => "cancelled")
 		@completed_orders = @chef.restaurant.orders.where(:order_status => "completed")
 		respond_to do |format|
@@ -147,7 +156,7 @@ class ChefsController < ApplicationController
 	  	],
 
 	  	:user_attributes => [
-	  		:id, :email, :password,
+	  		:id, :email,
 
 	  		:user_photo_attributes => [
 		  		:id, :user_id, :photo,

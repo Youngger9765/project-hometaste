@@ -168,7 +168,7 @@ namespace :dev do
 
 		200.times {
 			order = Order.create(
-				scheduled_time: Faker::Time.between(DateTime.now , DateTime.now+30),
+				pick_up_time: Faker::Time.between(DateTime.now , DateTime.now+30),
 				user_id: User.all.ids.sample,
 				restaurant_id: Restaurant.all.ids.sample,
 				customer_name: Faker::Name.name,

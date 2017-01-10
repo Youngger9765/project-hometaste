@@ -10,7 +10,7 @@
 	</div>
 
 	<!-- Delivering-->
-	<div class="col-md-2 chef-sales-set-btn">
+	<div class="col-md-2 chef-sales-set-btn" id="chef-sales-order-delivery-btn">
 			Delivering
 	</div>
 
@@ -69,7 +69,7 @@
 					<p>Location:<%= order.shipping_place%></p>
 				</div>
 				<div class="col-md-3">
-					<p style="font-size: 14px;"><%= order.scheduled_time.strftime('%Y/%m/%d %H:%M:%S')%></p>
+					<p style="font-size: 14px;"><%= order.pick_up_time.strftime('%Y/%m/%d %H:%M:%S')%></p>
 				</div>
 			</div>
 		</div>
@@ -81,7 +81,53 @@
 </div>
 
 <!-- Delivering-->
-<div class="row chef-sales-show" id="delivering-show" style="display: none">
+<div class="row chef-sales-show" id="chef-sales-order-delivery-show" style="display: none">
+	<% @delivery_orders.each do |order|%>
+		<div class="col-md-12 chef-sales-order-summary-show-order">
+			<div class="row">
+				<div class="col-md-5">
+					<%if order.user.user_photo%>
+						<%= image_tag(order.user.user_photo.photo(:thumb))%>
+					<%else%>
+						<%= image_tag('empty_img.png',:style => "width:100%;")%>
+					<%end%>
+					<p style="text-align: center;"><%=order.user.name%></p>
+				</div>
+				<div class="col-md-7">
+					<% order.order_food_ships.each do |ship|%>
+						<div class="row">
+							<div class="col-md-5">
+								<%if ship.food.food_photos.size > 0%>
+									<%= image_tag(ship.food.food_photos.first.photo(:thumb))%>
+								<%else%>
+									<%= image_tag('tmp/product.png',:style => "width:100%;")%>
+								<%end%>
+							</div>
+							<div class="col-md-7">
+								<p><%= ship.food.name%></p>
+								<p>$ <%= ship.food.price%> x <%= ship.quantity%></p>
+							</div>
+						</div>
+						<br>
+					<%end%>
+				</div>
+			</div>
+
+			<div class="row total-payment-line">
+				<div class="col-md-12">
+					<p>Total Payment: $<%= order.amount%></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-9">
+					<p>Location:<%= order.shipping_place%></p>
+				</div>
+				<div class="col-md-3">
+					<p style="font-size: 14px;"><%= order.pick_up_time.strftime('%Y/%m/%d %H:%M:%S')%></p>
+				</div>
+			</div>
+		</div>
+	<%end%>
 </div>
 
 <!-- Completed-->
@@ -100,7 +146,7 @@
 				<% @completed_orders.each do |order|%>
 					<tr>
 						<td><%=order.id%></td>
-						<td><%=order.scheduled_time.strftime('%Y/%m/%d')%></td>
+						<td><%=order.pick_up_time.strftime('%Y/%m/%d')%></td>
 						<td><%=order.shipping_method%></td>
 						<td><%=order.customer_name%></td>
 						<td>
@@ -132,7 +178,7 @@
 				<% @cancelled_orders.each do |order|%>
 					<tr>
 						<td><%=order.id%></td>
-						<td><%=order.scheduled_time.strftime('%Y/%m/%d')%></td>
+						<td><%=order.pick_up_time.strftime('%Y/%m/%d')%></td>
 						<td><%=order.shipping_method%></td>
 						<td><%=order.customer_name%></td>
 						<td>
@@ -159,6 +205,11 @@
   // order summary
 	$("#chef-sales-order-summary-btn").click(function(){
 		$("#chef-sales-order-summary-show").show();
+	});
+
+	//delivery
+	$("#chef-sales-order-delivery-btn").click(function(){
+		$("#chef-sales-order-delivery-show").show();
 	});
 
 	// completed
