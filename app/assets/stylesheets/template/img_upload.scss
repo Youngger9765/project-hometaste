@@ -1,0 +1,39 @@
+.img_upload{
+  margin: 0 auto;
+  overflow: hidden;
+  label{
+    margin: auto;
+    width: 260px;
+    height: 260px;
+    background-color: #D8D8D8;
+    @extend .background_img_setting;
+    @extend .flex_center;
+    @extend .flex-direction_column;
+    @extend .cursor_pointer;
+    @extend .tac;
+    @extend .border_main_radius;
+    transition: all 0.5s ease;
+    i{
+      margin: 0;
+    }
+    &.hover{
+      h4,i{
+        display: none;
+      }
+    }
+    &.hover:hover{
+      opacity: 0.9;
+      h4,i{
+        display: block;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+}
+@media (max-width: $screen-sm-max) {
+}
+@media (max-width: $screen-xs-max) {
+
+}

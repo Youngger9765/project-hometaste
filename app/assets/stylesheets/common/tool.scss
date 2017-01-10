@@ -90,12 +90,15 @@
 .flex_space_around{
   @include flex_(inherit,space-around);
 }
-.vertical_space_around{
-  @extend .flex;
-  @extend .flex_space_between;
+.flex-direction_column{
   -ms-flex-direction: column;
   -webkit-flex-direction: column;
   flex-direction: column;
+}
+.vertical_space_around{
+  @extend .flex;
+  @extend .flex_space_between;
+  @extend .flex-direction_column;
 }
 .flex_space_between{
   @include flex_(inherit,space-between);
@@ -117,6 +120,11 @@
   width: 100%;
   margin:15px auto;
   display: block;
+}
+.field.date_select_modify .selection.dropdown{
+  width: 32.6% !important;
+  display: inline-block !important;
+  min-width: inherit !important;
 }
 .gray{
   color: #D4D5D6;
