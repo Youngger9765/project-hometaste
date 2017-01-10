@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="12px" viewBox="0 0 22 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39 (31667) - http://www.bohemiancoding.com/sketch -->
+    <title>Ordered icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-757.000000, -994.000000)">
+            <g id="kitchen" transform="translate(62.000000, 888.000000)">
+                <g id="ordered" transform="translate(695.000000, 103.220399)">
+                    <g id="Ordered-icon" transform="translate(0.000000, 2.846424)">
+                        <path d="M18.4242424,11.7632844 C18.4242424,7.43216271 14.9510575,3.92109482 10.6666667,3.92109482 C6.38227588,3.92109482 2.90909091,7.43216271 2.90909091,11.7632844 C6.44981061,11.7632844 13.53125,11.7632844 18.4242424,11.7632844 Z" id="Oval-4" fill="#EC1C24"></path>
+                        <ellipse id="Oval-5" fill="#EC1C24" cx="10.6666667" cy="1.96054741" rx="1.93939394" ry="1.96054741"></ellipse>
+                        <path d="M0.484848485,11.3384992 L20.9406285,11.3384992" id="Line" stroke="#EC1C24" stroke-width="0.852" stroke-linecap="round"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
