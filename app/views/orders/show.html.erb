@@ -39,14 +39,14 @@
         <% if @order.restaurant.delivery%>
           <div class="align_two_side">
             <h2>Delivery Fee</h2>
-            <h2>$<%= @order.restaurant.delivery.cost %></h2>
+            <h2>$<%= @order.delivery_fee %></h2>
           </div>
         <%end%>
       <%end%>
 
       <div class="align_two_side">
         <h2>Tax</h2>
-        <h2>$<%= @order.restaurant.tax %></h2>
+        <h2>$<%= @order.calc_tax %></h2>
       </div>
       <div class="align_two_side tip">
         <h2>Tip</h2>
@@ -113,14 +113,15 @@
     </section>
     <%= render 'transaction'%>
   <%end%>
-
 </div>
 
 <% if @order.payment_status == "unpaid"%>
-  <%= render 'purchase' %>
-<%end%>
+    <%= render 'purchase' %>
+<% else %>
+    <%= render 'thankyou' %>
+<% end %>
 
-<%= render 'thankyou' %>
+
 
 
 <script type="text/javascript">
@@ -132,5 +133,8 @@
 
   if (thankyou_show) {
     $('#thankyou_modal').modal('show');
+  }
+  if (<%= @clean_cart_cookie %>) {
+    $.removeCookie('cart_list')
   }
 </script>

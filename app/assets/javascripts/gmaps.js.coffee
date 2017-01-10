@@ -53,7 +53,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 
       coordinate = deal_coordinate(ne,sw)
 
-      if prevent_prerender && check_in_bound(coordinate) && show_card_num ==0
+      if prevent_prerender && check_in_bound(coordinate) && show_card_num == 0
         rerender_map(coordinate)
       prevent_prerender = true
 

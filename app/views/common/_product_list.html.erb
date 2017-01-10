@@ -1,22 +1,24 @@
 <div class="row df_sm mb20_md">
   <div class="col-sm-6 col-xs-12 list_status_carousel">
-    <%= render 'common/product_carousel',index:index %>
+    <% if food.food_photos.present? %>
+        <%= render 'common/product_carousel' ,food:food %>
+    <% end %>
   </div>
   <div class="col-sm-6 col-xs-12 pl100_md pl60_sm list_status_info">
     <div>
-      <h3 class="mt15 mt5_sm">Seasonal Pumpkin Soup</h3>
+      <h3 class="mt15 mt5_sm"><%= food.name %></h3>
     </div>
     <div>
-      <h3 class="red">$7.00/ Bowl</h3>
+      <h3 class="red">$<%= food.price %>/ Bowl</h3>
     </div>
-    <div>
-      <%= render 'common/spinner', qty: 1 ,index:index %>
+    <div class="food_data_info" <%= food_restaurant_info(food) %>>
+      <%= render 'common/spinner', qty: 0  %>
     </div>
     <div>
       <h4 class="blck normal">2 Left <i class="l_line"></i> 12 Ordered</h4>
     </div>
     <div>
-      <h4 class="black mt25 mb25">Ingredients: <p class="mt10">Pumpkin, spice, cream, herb</p>
+      <h4 class="black mt25 mb25">Ingredients: <p class="mt10"><%= food.ingredients %></p>
       </h4>
     </div>
     <div class="hidden-sm mb20 mb0_sm">

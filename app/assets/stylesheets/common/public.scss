@@ -6,6 +6,9 @@ body{
 a:hover{
   text-decoration: none;
 }
+a:focus{
+  outline: none;
+}
 hr{
   color: $main_black;
 }
@@ -42,6 +45,9 @@ textarea{
 }
 button:focus{
   outline: none;
+}
+.ui.form input:not([type='submit']),.ui.form select,.ui.form .ui.dropdown{
+  height: 36px;
 }
 .ui.form input[type='text'].my_form,
 .ui.form input[type='number'].my_form,
@@ -110,7 +116,7 @@ input[type=submit]{
   margin-bottom: 1em;
 }
 .cards .ui.fluid.card{
-  overflow: hidden;
+  //overflow: hidden;
   display: none;
   border-radius: $sub_radius;
   p {

@@ -50,6 +50,22 @@ class Restaurant < ApplicationRecord
     chef.first_name.capitalize + chef.last_name.capitalize
   end
 
+  def get_available_bigbun
+    big_buns.available_bigbun
+  end
+
+  def food_score
+    score = food_avg_score.round(1)
+    score = if score.to_s[-1].to_i >= 5
+              (score.to_s[0].to_i + 1).to_i
+            elsif score.to_s[-1].to_i > 0
+              score.to_i + 0.5
+            else
+              score.to_i
+            end
+    score.to_s.gsub('.','_')
+  end
+
   def self.collect_food_ids
     all.collect {|x| x.foods.ids }.flatten
   end
@@ -92,7 +108,7 @@ class Restaurant < ApplicationRecord
     end
     ids = all.collect do |x|
       price = x.average_foods_price
-        x.id if price && (price >_start && price <= _end)
+      x.id if price && (price >_start && price <= _end)
     end
     where(id:ids.compact)
   end

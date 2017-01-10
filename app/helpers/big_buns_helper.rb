@@ -15,4 +15,13 @@ module BigBunsHelper
 
 	  big_bun
 	end
+
+	def bigbun_status_class( bigbun )
+		if bigbun == 'preparing'
+			'before_prepartion'
+		elsif bigbun
+			'after_prepartion'
+		end
+	end
+
 end

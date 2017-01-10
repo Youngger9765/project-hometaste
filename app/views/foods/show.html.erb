@@ -28,9 +28,9 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm">
+        <div class="col-xs-12 col-sm-5 text-right mt0_md mt65_sm food_data_info" <%= food_restaurant_info(@food) %>>
           <h3 class="red mt25">$<%= @food.price %>/ Bowl</h3>
-          <%= render 'common/spinner', qty: 1  %>
+          <%= render 'common/spinner' %>
         </div>
         <div class="col-xs-12 hidden-xs hidden-sm">
           <div class="align_two_side">
@@ -78,7 +78,9 @@
         <div class="col-md-9 col-sm-8 col-xs-12">
           <div class="clearfix mt10_sm mb10_sm mt30_xs mb30_xs tac">
             <h1 class="dib hidden-xs"><%= @restaurant.name.capitalize %></h1>
-            <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
+            <%= link_to @restaurant do %>
+                <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
+            <% end %>
           </div>
           <div class="flex_space_between">
             <div class="dib hidden-xs">
@@ -100,7 +102,7 @@
             <p class="mt20 mb20"><%= @restaurant.description %></p>
           </div>
           <div>
-            <span class="flr">- <%= @restaurant.chef_name %> <i class="show_rated_<%= @restaurant.food_avg_score.to_i %>"></i></span>
+            <span class="flr">- <%= @restaurant.chef_name %> <i class="show_rated_<%= @food.restaurant.food_score %>"></i></span>
           </div>
         </div>
       </div>
@@ -109,8 +111,8 @@
   <section class="row">
     <div class="col-xs-12 basic_bg pl0_sm product_lists">
       <h3 class="ml150_md ml20_xs bold mb25">You may also want</h3>
-      <% 3.times.each_with_index do |index| %>
-          <%= render 'common/product_list' ,index:index  %>
+      <% @restaurant.foods.sample(1).each do |food| %>
+          <%= render 'common/product_list' ,food:food   %>
       <% end %>
     </div>
   </section>

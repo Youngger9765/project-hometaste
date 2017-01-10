@@ -1,4 +1,4 @@
-<%= content_for :card_hover_link do %>
+<% content_for :card_hover_link do %>
     <div class="sold_num">
       <i class="fa fa-heart" aria-hidden="true">
         <span><p>123</p></span>
@@ -16,43 +16,44 @@
     </div>
 <% end %>
 <% foods.each do |food| %>
-    <div class="col-md-4 col-xs-6">
-      <div class="ui fluid card" data-id="<%= food.id %>">
-        <div class="image">
-          <img data-src="<%= image_path 'tmp/BB_DHD.png' %>" class="food_status">
-          <img data-src="<%= image_path 'tmp/product.png' %>">
-          <div class="card_hover_link hidden hidden-xs">
-            <%= content_for :card_hover_link %>
+    <%= link_to food do %>
+        <div class="col-md-4 col-xs-6">
+          <div class="ui fluid card" data-id="<%= food.id %>">
+            <div class="image">
+              <div class="db bigbun <%= bigbun_status_class(food.restaurant.get_available_bigbun) %>"></div>
+              <img data-src="<%= image_path 'tmp/product.png' %>">
+              <div class="card_hover_link hidden hidden-xs">
+                <%= content_for :card_hover_link %>
+              </div>
+            </div>
+            <div class="content">
+              <div class="ui icon button address" data-tooltip="Address" data-inverted="">
+                <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+              </div>
+
+              <p class="description"><%= food.restaurant.name %></p>
+
+              <hr>
+              <div class="address_detail hidden">
+                <p><%= food.restaurant.address %></p>
+                <hr>
+              </div>
+
+              <p class="header"><%= food.name %></p>
+
+              <p class="description">$<%= food.price %>/ Half</p>
+              <div class="hidden-xs">
+                <% food.restaurant.cuisines.first(3).each do |cuisine| %>
+                    <span class="sub_link mr5"><%= cuisine.name %></span>
+                <% end %>
+              </div>
+              <div class="show_rated_<%= food.restaurant.food_score %> mt10"></div>
+              <div class="card_hover_link visible-xs">
+                <%= content_for :card_hover_link %>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="content">
-          <div class="ui icon button address" data-tooltip="Address" data-inverted="">
-            <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
-          </div>
-
-          <p class="description"><a href=""><%= food.restaurant.name %></a></p>
-
-          <hr>
-          <div class="address_detail hidden">
-            <p>全家家就是你家你家就是我家 我家不是你家</p>
-            <hr>
-          </div>
-
-          <p class="header"><a href=""><%= food.name %></a></p>
-
-          <p class="description" href="#">$<%= food.price %>/ Half</p>
-          <div class="hidden-xs">
-            <span class="sub_link mr5"><a href="">Vegan</a></span>
-            <span class="sub_link mr5"><a href="">Soup</a></span>
-            <span class="sub_link mr5"><a href="">Pumkim</a></span>
-            <span class="sub_link mr5"><a href="">Autum</a></span>
-          </div>
-          <div class="show_rated_4 mt10"></div>
-          <div class="card_hover_link visible-xs">
-            <%= content_for :card_hover_link %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% end %>
 <% end %>
 
