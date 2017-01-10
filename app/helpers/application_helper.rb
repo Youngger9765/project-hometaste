@@ -1,13 +1,7 @@
 module ApplicationHelper
   def food_restaurant_info(food = 'default')
     if food == 'default'
-      name = ''
-      price = ''
-      food_id = ''
-      restaurant_id = ''
-      tax = ''
-      cost = ''
-      distance = ''
+      name = price = food_id = restaurant_id = tax = cost = distance = -1
     else
       name = food.name
       price = food.price
@@ -18,8 +12,7 @@ module ApplicationHelper
         cost = food.restaurant.delivery.cost
         distance = food.restaurant.delivery.distance
       else
-        cost = ''
-        distance = ''
+        cost = distance = -1
       end
     end
     "data-food-name=#{name} data-food-price=#{price} data-food-id=#{food_id}
