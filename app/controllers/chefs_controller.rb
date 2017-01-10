@@ -2,11 +2,11 @@ class ChefsController < ApplicationController
 
 	before_action :find_chef, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales]
+		:save_dish, :menu, :sales, :yep]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales]
+		:save_dish, :menu, :sales, :yep]
 
 	# before_action :is_current_user?, :except => [:new]
 	# before_action :has_authority?, :except => [:new]
@@ -112,10 +112,10 @@ class ChefsController < ApplicationController
 
 	def sales
 		standby_time_range = (Time.now().utc..Time.now().end_of_day().utc)
-		@today_orders = @chef.restaurant.orders.where(:pick_up_time => standby_time_range).where(:payment_status => "paid")
+		@today_orders = @chef.restaurant.orders.where(:pick_up_time => standby_time_range).where(:payment_status => "paid").where(:order_status => "not yet")
 
 		finished_time_range = (Time.now().beginning_of_day().utc..Time.now().utc)
-		@delivery_orders = @chef.restaurant.orders.where(:pick_up_time => finished_time_range).where(:payment_status => "paid")
+		@delivery_orders = @chef.restaurant.orders.where(:pick_up_time => finished_time_range).where(:payment_status => "paid").where(:order_status => "not yet")
 
 		@cancelled_orders = @chef.restaurant.orders.where(:order_status => "cancelled")
 		@completed_orders = @chef.restaurant.orders.where(:order_status => "completed")
@@ -123,6 +123,24 @@ class ChefsController < ApplicationController
 		  format.html
 		  format.js
 		end
+	end
+
+	def yep
+		confirmation_number = params[:confirmation_number]
+		order = Order.find(params[:order_id])
+
+		if confirmation_number.present?
+			if confirmation_number == order.confirmation_number
+				order.order_status = "completed"
+				order.save!
+				flash[:notice] = "Successfully completed order"
+			else
+				flash[:alert] = "Confirmation number is wrong!"
+			end
+		else
+			flash[:alert] = "Please input confirmation number"
+		end
+		redirect_to chef_path(@chef)
 	end
 
 	private
