@@ -28,7 +28,44 @@
       <section class="row">
         <!--- 審核過後 認證跟送審時最上傳的三張餐點圖片可以抽掉- 送審時最上傳的三張餐點圖片   是只有送省的時候用-->
         <div class="col-xs-12 basic_bg_top ui form">
-          <%= render 'form' , f:f %>
+          <div class="row">
+            <%= render 'form' , f:f %>
+
+            <% unless current_user == @user && @chef.restaurant.is_approved %>
+                <div class="col-xs-12">
+                  <div class="black_border_block">
+                    <div class="row">
+
+                      <div class="col-xs-12"><h3 class="bold">Please upload three dishes that was make by you or your team</h3></div>
+
+                      <%= f.fields_for :restaurant do |r| %>
+                          <%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
+                              <div class="col-sm-4 mt30 col-sm-offset-1 col-lg-4 col-lg-offset-0" name="dish_photo">
+                                <h4>Dish<%= photo.index+1 %></h4>
+                                <div class="img_upload">
+                                  <%= photo.label :photo ,style:"background-image:url(#{@chef.restaurant.restaurant_dish_photos[photo.index].url if @chef.restaurant.restaurant_dish_photos[photo.index].id?})" do %>
+                                      <i class="photo_icon"></i>
+                                      <h4>Upload a dish photo</h4>
+                                  <% end %>
+                                  <%= photo.file_field :photo ,class:'hidden'%>
+                                  <%= photo.text_area :comment,class:'mt10', :placeholder => "Dish photo comment" %>
+                                </div>
+                              </div>
+
+                          <% end %>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+
+            <div class="col-xs-12 tac" id="chef-submit-div">
+              <bottum id="chef-submit-check-btn" class="my_btn">SUBMIT</bottum>
+              <%= f.submit "SUBMIT",:class=>"my_btn hidden", :id=>"chef-submit-btn"%>
+            </div>
+
+          </div>
         </div>
 
       </section>

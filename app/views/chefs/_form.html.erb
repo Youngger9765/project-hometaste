@@ -1,424 +1,390 @@
-<div class="row">
-
-  <div class="col-xs-12">
-    <%= f.fields_for :user do |u| %>
-        <%= u.fields_for :user_photo do |user_photo| %>
-            <div class="img_upload ml30 p10 dib background_white border_main_radius" name="profile">
-              <%= user_photo.label :photo ,style:"background-image:url(#{@chef.user.user_photo.photo.url if @chef.user.user_photo && @chef.user.user_photo.photo.file?})" do %>
-                  <i class="photo_icon"></i>
-                  <h4>Upload a profile photo</h4>
-              <% end %>
-              <%= user_photo.file_field :photo ,class:'hidden'%>
-            </div>
-        <% end %>
-    <% end %>
-  </div>
-
-  <div class="col-xs-12">
-    <div class="black_border_block">
-      <div class="row">
-
-        <div class="col-xs-12"><h3 class="bold">Business Info</h3></div>
-
-        <%= f.fields_for :restaurant do |r| %>
-            <div class="col-sm-7 col-md-6 col-lg-4">
-              <div class="field">
-                <%= r.label :name, "Business name" %>
-                <%= r.text_field :name ,placeholder:'Mr. Chen’s Kitchen' %>
-              </div>
-            </div>
-
-            <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-              <div class="field">
-                <%= r.label :phone_number, "Phone number" %>
-                <%= r.text_field :phone_number,placeholder:'6021234567' %>
-              </div>
-            </div>
-
-            <div class="col-sm-7 col-md-6 col-lg-4">
-              <div class="field">
-                <%= r.label :address, "Address" %>
-                <%= r.text_field :address,placeholder:'2821 California st.' %>
-              </div>
-            </div>
-
-            <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-              <div class="field">
-                <%= r.label :tax_ID, "Tax ID" %>
-                <%= r.text_field :tax_ID,placeholder:'1234567890' %>
-              </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="col-sm-4 col-md-4 col-lg-2">
-              <div class="field">
-                <%= r.text_field :city,placeholder:'City' %>
-              </div>
-            </div>
-
-            <div class="col-sm-3 col-md-2 col-lg-2">
-              <div class="field">
-                <%= r.select :state,options_for_select(us_states),{},class:'ui dropdown fluid' %>
-              </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="col-sm-4 col-md-4 col-lg-2">
-              <div class="field">
-                <%= r.text_field :ZIP,placeholder:'94115' %>
-              </div>
-            </div>
-
-            <div class="col-md-12">
-              <h5>Communication method</h5>
-              <p>Orders will be communicated using the following method(s),</p>
-              <p>please make sure you can check often. (must check one)</p>
-
-              <div class="check_box col-md-3 col-lg-2">
-                <div class="field ui checkbox">
-                  <%= label_tag :communication_method_email , 'Email' %>
-                  <%= check_box_tag 'chef[restaurant_attributes][communication_method]','email',true,id:'communication_method_email' %>
-                </div>
-              </div>
-
-              <div class="check_box col-md-3 col-lg-2">
-                <div class="field ui checkbox">
-                  <%= label_tag :communication_method_message , 'Text-message' %>
-                  <%= check_box_tag 'chef[restaurant_attributes][communication_method]','message', false,id:'communication_method_message' %>
-                </div>
-              </div>
-            </div>
-
-            <% unless @chef.restaurant.is_approved %>
-                <!-- certificate -->
-                <div class="gray_line col-md-12"></div>
-
-                <div class="col-xs-12">
-                  <div class="ui checkbox field">
-                    <%= check_box_tag 'certificated_check'%>
-                    <%= label_tag 'certificated_check','I or someone cooking with me had the food handling safty class in my state' %>
-                  </div>
-                </div>
-
-                <div class="col-sm-7 col-md-6 col-lg-4">
-                  <div class="field">
-                    <%= r.label :certificated_num, 'Certification number' %>
-                    <%= r.text_field :certificated_num %>
-                  </div>
-                </div>
-
-                <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-                  <div class="field">
-                    <%= r.label :certificated_num, 'Issued by' %>
-                    <%= r.text_field :certificated_num %>
-                  </div>
-                </div>
-
-                <div class="col-sm-7 col-md-6 col-lg-4">
-                  <div class="field date_select_modify">
-                    <%= r.label :certificated_num, 'Issued date' %>
-                    <%= r.date_select :certificated_num,{} ,class:'ui dropdown'%>
-                  </div>
-                </div>
-
-                <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-                  <div class="field">
-                    <%= r.label 'invisible',class:'invisible' %>
-                    <button class="fluid my_btn">Upload certification file</button>
-                  </div>
-                </div>
-
-                <div class="clearfix"></div>
-
-                <div class="col-sm-7 col-md-6 col-lg-4">
-                  <div class="field">
-                    <button class="fluid my_btn_reserve"><i class="fa fa-plus" aria-hidden="true"></i> Add another certification </button>
-                    <%= r.label 'invisible',class:'invisible' %>
-                  </div>
-                </div>
-
-                <div class="clearfix"></div>
+<div class="col-xs-12">
+  <%= f.fields_for :user do |u| %>
+      <%= u.fields_for :user_photo do |user_photo| %>
+          <div class="img_upload ml30 p10 dib background_white border_main_radius" name="profile">
+            <%= user_photo.label :photo ,style:"background-image:url(#{@chef.user.user_photo.photo.url if @chef.user.user_photo && @chef.user.user_photo.photo.file?})" do %>
+                <i class="photo_icon"></i>
+                <h4>Upload a profile photo</h4>
             <% end %>
+            <%= user_photo.file_field :photo ,class:'hidden'%>
+          </div>
+      <% end %>
+  <% end %>
+</div>
 
-            <%= r.fields_for :restaurant_cuisine_ships, @chef.restaurant.restaurant_cuisine_ships.each do |cuisine_ship| %>
-                <div class="col-sm-3 col-md-2">
-                  <div class="field">
-                    <%= cuisine_ship.label :cuisine_id ,'Cuisine Type' %>
-                    <%= cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name,{}, class:"ui dropdown fluid", include_blank: "please select" %>
-                  </div>
+<div class="col-xs-12">
+  <div class="black_border_block">
+    <div class="row">
+
+      <div class="col-xs-12"><h3 class="bold">Business Info</h3></div>
+
+      <%= f.fields_for :restaurant do |r| %>
+          <div class="col-sm-7 col-md-6 col-lg-4">
+            <div class="field">
+              <%= r.label :name, "Business name" %>
+              <%= r.text_field :name ,placeholder:'Mr. Chen’s Kitchen' %>
+            </div>
+          </div>
+
+          <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+            <div class="field">
+              <%= r.label :phone_number, "Phone number" %>
+              <%= r.text_field :phone_number,placeholder:'6021234567' %>
+            </div>
+          </div>
+
+          <div class="col-sm-7 col-md-6 col-lg-4">
+            <div class="field">
+              <%= r.label :address, "Address" %>
+              <%= r.text_field :address,placeholder:'2821 California st.' %>
+            </div>
+          </div>
+
+          <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+            <div class="field">
+              <%= r.label :tax_ID, "Tax ID" %>
+              <%= r.text_field :tax_ID,placeholder:'1234567890' %>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="col-sm-4 col-md-4 col-lg-2">
+            <div class="field">
+              <%= r.text_field :city,placeholder:'City' %>
+            </div>
+          </div>
+
+          <div class="col-sm-3 col-md-2 col-lg-2">
+            <div class="field">
+              <%= r.select :state,options_for_select(us_states),{},class:'ui dropdown fluid' %>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="col-sm-4 col-md-4 col-lg-2">
+            <div class="field">
+              <%= r.text_field :ZIP,placeholder:'94115' %>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <h5>Communication method</h5>
+            <p>Orders will be communicated using the following method(s),</p>
+            <p>please make sure you can check often. (must check one)</p>
+
+            <div class="check_box col-md-3 col-lg-2">
+              <div class="field ui checkbox">
+                <%= label_tag :communication_method_email , 'Email' %>
+                <%= check_box_tag 'chef[restaurant_attributes][communication_method]','email',true,id:'communication_method_email' %>
+              </div>
+            </div>
+
+            <div class="check_box col-md-3 col-lg-2">
+              <div class="field ui checkbox">
+                <%= label_tag :communication_method_message , 'Text-message' %>
+                <%= check_box_tag 'chef[restaurant_attributes][communication_method]','message', false,id:'communication_method_message' %>
+              </div>
+            </div>
+          </div>
+
+          <% unless @chef.restaurant.is_approved %>
+              <!-- certificate -->
+              <div class="gray_line col-md-12"></div>
+
+              <div class="col-xs-12">
+                <div class="ui checkbox field">
+                  <%= check_box_tag 'certificated_check'%>
+                  <%= label_tag 'certificated_check','I or someone cooking with me had the food handling safty class in my state' %>
                 </div>
-            <%end%>
-
-            <!-- ABOUT -->
-            <div class="col-md-12">
-              <div class="field">
-                <%= r.label :description, "About the kitchen" %>
-                <%= r.text_area :description,placeholder:'Tell us about your kitchen...' %>
               </div>
-            </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xs-12">
-    <div class="black_border_block">
-      <div class="row">
-
-        <div class="col-xs-12"><h3 class="bold">Personal Info</h3></div>
-
-        <div class="col-sm-7 col-md-6 col-lg-4">
-          <div class="field">
-            <%= f.label :first_name %>
-            <%= f.text_field :first_name %>
-          </div>
-        </div>
-
-        <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-          <div class="field">
-            <%= f.label :last_name %>
-            <%= f.text_field :last_name %>
-          </div>
-        </div>
-
-        <!-- user -->
-        <%= f.fields_for :user do |u| %>
-            <div class="col-sm-7 col-md-6 col-lg-4">
-              <div class="field">
-                <%= u.label :password %>
-                <%= u.password_field :password %>
-              </div>
-            </div>
-
-            <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-              <div class="field">
-                <%= label_tag :confirm_password %>
-                <%= password_field_tag :confirm_password %>
-              </div>
-            </div>
-
-            <div class="col-sm-7 col-md-6 col-lg-4">
-              <div class="field">
-                <%= f.label :phone_number %>
-                <%= f.text_field :phone_number %>
-              </div>
-            </div>
-
-            <% if params[:action] == "new" %>
-                <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-                  <div class="field">
-                    <%= u.label :email %>
-                    <%= u.text_field :email %>
-                  </div>
-                </div>
-            <%end%>
-
-        <% end %>
-
-        <div class="col-sm-7 col-md-6 col-lg-5">
-          <div class="field date_select_modify">
-            <%= f.label :birthday %>
-            <%= f.date_select :birthday, {order: [:year, :month, :day], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 10, end_year: Date.today.year - 100}, {required: true , class:'ui dropdown fluid'} %>
-          </div>
-        </div>
-
-        <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-1">
-          <div class="field">
-            <%= f.label :SSN ,'SSN' %>
-            <%= f.text_field :SSN%>
-          </div>
-        </div>
-
-        <div class="col-sm-7 col-md-6 col-lg-4">
-          <div class="field">
-            <%= f.label :routing_number %>
-            <%= f.text_field :routing_number%>
-          </div>
-        </div>
-
-        <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
-          <div class="field">
-            <%= f.label :account_number %>
-            <%= f.text_field :account_number%>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xs-12">
-    <div class="black_border_block">
-      <div class="row">
-        <div class="col-xs-12"><h4 class="bold ml15">Set a minimum order amount</h4></div>
-
-        <div class="col-xs-12">
-          <%= f.fields_for :restaurant do |r| %>
 
               <div class="col-sm-7 col-md-6 col-lg-4">
                 <div class="field">
-                  <h5>Orders must reach this amount before you start cooking</h5>
-                  <%= f.text_field :account_number%>
+                  <%= r.label :certificated_num, 'Certification number' %>
+                  <%= r.text_field :certificated_num %>
                 </div>
               </div>
 
-              <div class="col-xs-12"><h4 class="bold">Choose deliver options</h4></div>
-
-              <div class="col-xs-4 col-lg-3">
-                <div class="field ui checkbox">
-                  <%= label_tag :both_bulk_buy_delivery %>
-                  <%= check_box_tag 'both_bulk_buy_delivery'%>
+              <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+                <div class="field">
+                  <%= r.label :certificated_num, 'Issued by' %>
+                  <%= r.text_field :certificated_num %>
                 </div>
               </div>
 
-              <div class="col-xs-4 col-lg-3">
-                <div class="field ui checkbox">
-                  <%= label_tag :bulk_buy_only %>
-                  <%= check_box_tag 'bulk_buy_only'%>
+              <div class="col-sm-7 col-md-6 col-lg-4">
+                <div class="field date_select_modify">
+                  <%= r.label :certificated_num, 'Issued date' %>
+                  <%= r.date_select :certificated_num,{} ,class:'ui dropdown'%>
                 </div>
               </div>
 
-              <div class="col-xs-4 col-lg-3">
-                <div class="field ui checkbox">
-                  <%= label_tag :delivery_only %>
-                  <%= check_box_tag 'delivery_only', "checked"%>
+              <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+                <div class="field">
+                  <%= r.label 'invisible',class:'invisible' %>
+                  <button class="fluid my_btn">Upload certification file</button>
                 </div>
               </div>
 
-              <div class="col-xs-12"><h3 class="bold">Bulk buy setting</h3></div>
-              <div class="col-xs-12"><i class="gray_line"></i></div>
+              <div class="clearfix"></div>
 
-              <%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each ,id:'bulk-buy-form' do |b| %>
-                  <div class="col-sm-7 col-md-6">
-                    <div class="row">
-                      <div class="col-xs-12 col-lg-10 col-lg-offset-1">
-                        <h4 class="bold mb15">Setting<%= b.index + 1 %></h4>
-                      </div>
-                      <div class="col-sm-4 col-lg-3 col-lg-offset-1">
-                        <div class="field">
-                          <%= b.label :cut_off_time %>
-                          <%= b.time_field :cut_off_time,:minute_step => 30, :ampm => true %>
-                        </div>
-                      </div>
+              <div class="col-sm-7 col-md-6 col-lg-4">
+                <div class="field">
+                  <button class="fluid my_btn_reserve"><i class="fa fa-plus" aria-hidden="true"></i> Add another certification </button>
+                  <%= r.label 'invisible',class:'invisible' %>
+                </div>
+              </div>
 
-                      <div class="col-sm-4 col-sm-offset-4 col-lg-3 col-lg-offset-4">
-                        <div class="field">
-                          <%= b.label :pick_up_time %>
-                          <%= b.time_field :pick_up_time,:minute_step => 30, :ampm => true %>
-                        </div>
-                      </div>
+              <div class="clearfix"></div>
+          <% end %>
 
-                      <div class="col-sm-12 col-lg-10 col-lg-offset-1">
-                        <div class="field">
-                          <%= b.label :location %>
-                          <%= b.text_field :location%>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              <%end%>
-
-              <div class="col-xs-12"><h3 class="bold">Delivery setting</h3></div>
-              <div class="col-xs-12"><i class="gray_line"></i></div>
-
-              <div id="delivery-form">
-                <%= r.fields_for :delivery do |d| %>
-                    <div class="col-sm-2">
-                      <div class="field">
-                        <%= d.label :min_order, "Minimum order" %>
-                        <%= d.number_field :min_order, :step => 0.000001 %>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-2 col-sm-offset-2 col-lg-offset-1">
-                      <div class="field">
-                        <%= d.label :cost, "Delivery cost" %>
-                        <%= d.text_field :cost %>
-                      </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="col-sm-2">
-                      <div class="field">
-                        <%= d.label :distance, "Maximum distance" %>
-                        <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-2 col-sm-offset-2 col-lg-offset-1">
-                      <div class="field">
-                        <%= d.label :order_hours, "Completion time" %>
-                        <%= d.select :order_hours ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
-                      </div>
-                    </div>
-                <%end%>
+          <%= r.fields_for :restaurant_cuisine_ships, @chef.restaurant.restaurant_cuisine_ships.each do |cuisine_ship| %>
+              <div class="col-sm-3 col-md-2">
+                <div class="field">
+                  <%= cuisine_ship.label :cuisine_id ,'Cuisine Type' %>
+                  <%= cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name,{}, class:"ui dropdown fluid", include_blank: "please select" %>
+                </div>
               </div>
           <%end%>
+
+          <!-- ABOUT -->
+          <div class="col-md-12">
+            <div class="field">
+              <%= r.label :description, "About the kitchen" %>
+              <%= r.text_area :description,placeholder:'Tell us about your kitchen...' %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12">
+  <div class="black_border_block">
+    <div class="row">
+
+      <div class="col-xs-12"><h3 class="bold">Personal Info</h3></div>
+
+      <div class="col-sm-7 col-md-6 col-lg-4">
+        <div class="field">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name %>
+        </div>
+      </div>
+
+      <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+        <div class="field">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
+
+      <!-- user -->
+      <%= f.fields_for :user do |u| %>
+          <div class="col-sm-7 col-md-6 col-lg-4">
+            <div class="field">
+              <%= u.label :password %>
+              <%= u.password_field :password %>
+            </div>
+          </div>
+
+          <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+            <div class="field">
+              <%= label_tag :confirm_password %>
+              <%= password_field_tag :confirm_password %>
+            </div>
+          </div>
+
+          <div class="col-sm-7 col-md-6 col-lg-4">
+            <div class="field">
+              <%= f.label :phone_number %>
+              <%= f.text_field :phone_number %>
+            </div>
+          </div>
+
+          <% if params[:action] == "new" %>
+              <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+                <div class="field">
+                  <%= u.label :email %>
+                  <%= u.text_field :email %>
+                </div>
+              </div>
+          <%end%>
+
+      <% end %>
+
+      <div class="col-sm-7 col-md-6 col-lg-5">
+        <div class="field date_select_modify">
+          <%= f.label :birthday %>
+          <%= f.date_select :birthday, {order: [:year, :month, :day], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 10, end_year: Date.today.year - 100}, {required: true , class:'ui dropdown fluid'} %>
+        </div>
+      </div>
+
+      <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-1">
+        <div class="field">
+          <%= f.label :SSN ,'SSN' %>
+          <%= f.text_field :SSN%>
+        </div>
+      </div>
+
+      <div class="col-sm-7 col-md-6 col-lg-4">
+        <div class="field">
+          <%= f.label :routing_number %>
+          <%= f.text_field :routing_number%>
+        </div>
+      </div>
+
+      <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
+        <div class="field">
+          <%= f.label :account_number %>
+          <%= f.text_field :account_number%>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <% unless current_user == @user && @chef.restaurant.is_approved %>
+<div class="col-xs-12">
+  <div class="black_border_block">
+    <div class="row">
+      <div class="col-xs-12"><h4 class="bold ml15">Set a minimum order amount</h4></div>
+
       <div class="col-xs-12">
-        <div class="black_border_block">
-          <div class="row">
+        <%= f.fields_for :restaurant do |r| %>
 
-            <div class="col-xs-12"><h3 class="bold">Please upload three dishes that was make by you or your team</h3></div>
+            <div class="col-sm-7 col-md-6 col-lg-4">
+              <div class="field">
+                <h5>Orders must reach this amount before you start cooking</h5>
+                <%= f.text_field :account_number%>
+              </div>
+            </div>
 
-            <%= f.fields_for :restaurant do |r| %>
-                <% index = 0 %>
-                <%= r.fields_for :restaurant_dish_photos, @chef.restaurant.restaurant_dish_photos.each do |photo| %>
-                    <div class="col-sm-4 mt30 col-sm-offset-1 col-lg-4 col-lg-offset-0" name="dish_photo">
-                      <h4>Dish<%= photo.index+1 %></h4>
-                      <div class="img_upload">
-                        <%= photo.label :photo ,style:"background-image:url(#{@chef.restaurant.restaurant_dish_photos[photo.index].url if @chef.restaurant.restaurant_dish_photos[photo.index].id?})" do %>
-                            <i class="photo_icon"></i>
-                            <h4>Upload a dish photo</h4>
-                        <% end %>
-                        <%= photo.file_field :photo ,class:'hidden'%>
-                        <%= photo.text_area :comment,class:'mt10', :placeholder => "Dish photo comment" %>
+            <div class="col-xs-12"><h4 class="bold">Choose deliver options</h4></div>
+
+            <div class="col-xs-4 col-lg-3">
+              <div class="field ui checkbox">
+                <%= label_tag :both_bulk_buy_delivery %>
+                <%= check_box_tag 'both_bulk_buy_delivery'%>
+              </div>
+            </div>
+
+            <div class="col-xs-4 col-lg-3">
+              <div class="field ui checkbox">
+                <%= label_tag :bulk_buy_only %>
+                <%= check_box_tag 'bulk_buy_only'%>
+              </div>
+            </div>
+
+            <div class="col-xs-4 col-lg-3">
+              <div class="field ui checkbox">
+                <%= label_tag :delivery_only %>
+                <%= check_box_tag 'delivery_only', "checked"%>
+              </div>
+            </div>
+
+            <div class="col-xs-12"><h3 class="bold">Bulk buy setting</h3></div>
+            <div class="col-xs-12"><i class="gray_line"></i></div>
+
+            <%= r.fields_for :bulk_buys, @chef.restaurant.bulk_buys.each ,id:'bulk-buy-form' do |b| %>
+                <div class="col-sm-7 col-md-6">
+                  <div class="row">
+                    <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                      <h4 class="bold mb15">Setting<%= b.index + 1 %></h4>
+                    </div>
+                    <div class="col-sm-4 col-lg-3 col-lg-offset-1">
+                      <div class="field">
+                        <%= b.label :cut_off_time %>
+                        <%= b.time_field :cut_off_time,:minute_step => 30, :ampm => true %>
                       </div>
                     </div>
 
+                    <div class="col-sm-4 col-sm-offset-4 col-lg-3 col-lg-offset-4">
+                      <div class="field">
+                        <%= b.label :pick_up_time %>
+                        <%= b.time_field :pick_up_time,:minute_step => 30, :ampm => true %>
+                      </div>
+                    </div>
 
-                <% end %>
-            <% end %>
+                    <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+                      <div class="field">
+                        <%= b.label :location %>
+                        <%= b.text_field :location%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <%end%>
 
-          </div>
-        </div>
+            <div class="col-xs-12"><h3 class="bold">Delivery setting</h3></div>
+            <div class="col-xs-12"><i class="gray_line"></i></div>
+
+            <div id="delivery-form">
+              <%= r.fields_for :delivery do |d| %>
+                  <div class="col-sm-2">
+                    <div class="field">
+                      <%= d.label :min_order, "Minimum order" %>
+                      <%= d.number_field :min_order, :step => 0.000001 %>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2 col-sm-offset-2 col-lg-offset-1">
+                    <div class="field">
+                      <%= d.label :cost, "Delivery cost" %>
+                      <%= d.text_field :cost %>
+                    </div>
+                  </div>
+
+                  <div class="clearfix"></div>
+
+                  <div class="col-sm-2">
+                    <div class="field">
+                      <%= d.label :distance, "Maximum distance" %>
+                      <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2 col-sm-offset-2 col-lg-offset-1">
+                    <div class="field">
+                      <%= d.label :order_hours, "Completion time" %>
+                      <%= d.select :order_hours ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    </div>
+                  </div>
+              <%end%>
+            </div>
+        <%end%>
       </div>
-  <% end %>
-
-  <div class="col-xs-12 tac" id="chef-submit-div">
-    <bottum id="chef-submit-check-btn" class="my_btn">SUBMIT</bottum>
-    <%= f.submit "SUBMIT",:class=>"my_btn hidden", :id=>"chef-submit-btn"%>
+    </div>
   </div>
-
 </div>
 
 
 
+
+
+
+
+
+
 <script type="text/javascript">
-	var check_bulk_buy_size = function(){
-		if (<%=@chef.restaurant.id?%> && <%=BulkBuy.where(:restaurant_id=>@chef.restaurant.id).size > 0%>) {
-			$('#bulk_buy_only').click();
-		} else {
-			$('#bulk-buy-form').hide();
-		}
-	};
+  var check_bulk_buy_size = function(){
+    if (<%=@chef.restaurant.id?%> && <%=BulkBuy.where(:restaurant_id=>@chef.restaurant.id).size > 0%>) {
+      $('#bulk_buy_only').click();
+    } else {
+      $('#bulk-buy-form').hide();
+    }
+  };
 
-	var check_delivery_size = function(){
-		if (<%=@chef.restaurant.id%> && <%= @chef.restaurant.delivery.id?%>) {
-			$('#delivery_only').click();
-		} else {
-			$('#delivery-form').hide();
-		}
-	};
+  var check_delivery_size = function(){
+    if (<%=@chef.restaurant.id%> && <%= @chef.restaurant.delivery.id?%>) {
+      $('#delivery_only').click();
+    } else {
+      $('#delivery-form').hide();
+    }
+  };
 
-	check_bulk_buy_size();
-	check_delivery_size();
+  check_bulk_buy_size();
+  check_delivery_size();
 </script>
 
