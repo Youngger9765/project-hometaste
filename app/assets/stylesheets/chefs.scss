@@ -33,7 +33,22 @@
   }
 }
 
-
+@media (max-width: $screen-xs-max) {
+  [name="kitchen_photo"]{
+    label{
+      padding-top: 20px;
+      @include justice-content(inherit);
+      height: 190px;
+    }
+  }
+  [name="profile"]{
+    margin-top: -130px;
+    label{
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
 
 
 
