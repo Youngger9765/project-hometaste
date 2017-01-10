@@ -20,9 +20,7 @@
         <div class="col-md-4 col-xs-6">
           <div class="ui fluid card" data-id="<%= food.id %>">
             <div class="image">
-              <% if food.restaurant.big_buns %>
-                  <div class="db bigbun after_prepartion cursor_pointer"></div>
-              <% end %>
+              <div class="db bigbun <%= bigbun_status_class(food.restaurant.get_available_bigbun) %>"></div>
               <img data-src="<%= image_path 'tmp/product.png' %>">
               <div class="card_hover_link hidden hidden-xs">
                 <%= content_for :card_hover_link %>

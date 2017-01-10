@@ -1,15 +1,22 @@
 .bigbun{
   width: 130px;
   height: 130px;
+  display: none;
   @extend .background_img_setting;
   &.after_prepartion{
     background-image: image-url('big_bun/bb_half_way.png');
+    cursor: pointer;
   }
   &.empty{
     background-image: image-url('big_bun/bb_empty.png');
+    cursor: default;
   }
   &.before_prepartion{
     background-image: image-url('big_bun/bb_just_started.png');
+    cursor: default;
+  }
+  &.after_prepartion,&.empty,&.before_prepartion{
+    @extend .db;
   }
 }
 .ui.modal.bigbun_modal{

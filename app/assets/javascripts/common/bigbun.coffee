@@ -6,3 +6,6 @@ $(document).ready ->
       $('#bigbun_modal_'+id ).modal('show')
     else if location.pathname.match(/(restaurants\/\d+)/gi)
       $('.bigbun_modal').modal('show')
+
+  $(document).on 'click','.bigbun.before_prepartion', (e) ->
+    e.preventDefault()

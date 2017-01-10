@@ -50,6 +50,10 @@ class Restaurant < ApplicationRecord
     chef.first_name.capitalize + chef.last_name.capitalize
   end
 
+  def get_available_bigbun
+    big_buns.available_bigbun
+  end
+
   def food_score
     score = food_avg_score.round(1)
     score = if score.to_s[-1].to_i >= 5

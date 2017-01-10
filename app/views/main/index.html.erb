@@ -58,8 +58,8 @@
 </div>
 
 <% @foods.each do |food| %>
-    <% if food.restaurant.big_buns.present? %>
-        <%= render 'common/bigbun', food: food , bigbun: food.restaurant.big_buns.last ,restaurant: food.restaurant %>
+    <% if food.restaurant.get_available_bigbun.is_a?(ActiveRecord::Base) %>
+        <%= render 'common/bigbun', food: food , bigbun: food.restaurant.get_available_bigbun ,restaurant: food.restaurant %>
     <% end %>
 <% end %>
 
