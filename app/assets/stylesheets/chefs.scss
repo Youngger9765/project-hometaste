@@ -31,9 +31,29 @@
       }
     }
   }
+  .img_upload{
+    margin-right: 0 !important;
+  }
+  .basic_bg_top{
+    a[class*=_btn],a[class*=_btn_reserve]{
+      height:100px ;
+      padding-top: 15px;
+      &:hover{
+        color: inherit;
+      }
+    }
+  }
+  .fa-calendar{
+    font-size: 30px;
+  }
 }
 
 @media (max-width: $screen-xs-max) {
+  [class^=chefs]{
+    h4{
+      font-size: 16px;
+    }
+  }
   [name="kitchen_photo"]{
     label{
       padding-top: 20px;

@@ -22,15 +22,15 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :my_purchase
-      get '/my_purchase/paid'=>'users#paid' ,as:'paid'
-      get '/my_purchase/completed'=>'users#completed' ,as:'completed'
-      get '/my_purchase/cancelled'=>'users#cancelled' ,as:'cancelled'
-      get '/my_purchase/big_bun'=>'users#big_bun' ,as:'big_bun'
+      get :purchase
+      get :paid
+      get :completed
+      get :cancelled
+      get :big_bun
 
-      get :my_review
-      get :my_like
-      get :my_message
+      get :review
+      get :like
+      get :message
     end
   end
 
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
       get :income
       get :rating
       get :message
-      get :bussiness
+      get :busines
 
       #yep
       post :yep
