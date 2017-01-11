@@ -384,7 +384,7 @@
   };
 
   var check_delivery_size = function(){
-    if (<%=@chef.restaurant.id%> && <%= @chef.restaurant.delivery.id?%>) {
+    if (<%=@chef.restaurant.id?%> && <%= @chef.restaurant.delivery.id?%>) {
       $('#delivery_only').click();
     } else {
       $('#delivery-form').hide();
