@@ -156,33 +156,33 @@ $(document).ready ->
 
     $('.orders_new form').submit (e)->
       e.preventDefault()
+      if !!+$('.add_to_cart [name=cart_total_price]').html()
+        form = $('.orders_new form')
+        data = form.serialize()
+        cart_list = get_cart_list()
+        Object.keys(cart_list).forEach (restaurant,i,a) ->
 
-      form = $('.orders_new form')
-      data = form.serialize()
-      cart_list = get_cart_list()
-      Object.keys(cart_list).forEach (restaurant,i,a) ->
+          restaurant_id = +restaurant.replace('restaurant_','')
+          input = $("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id);
+          form.append($(input));
 
-        restaurant_id = +restaurant.replace('restaurant_','')
-        input = $("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id);
-        form.append($(input));
+          Object.keys(cart_list["#{restaurant}"]).forEach (_key,i,a) ->
 
-        Object.keys(cart_list["#{restaurant}"]).forEach (_key,i,a) ->
+            if _key.indexOf('food') != -1
+              qty = +cart_list["#{restaurant}"]["#{_key}"]['qty']
+              food_id = +_key.replace('food_','')
+              input = $("<input>").attr("type", "hidden").attr("name", "food[#{food_id}]").val(qty);
+              form.append($(input));
 
-          if _key.indexOf('food') != -1
-            qty = +cart_list["#{restaurant}"]["#{_key}"]['qty']
-            food_id = +_key.replace('food_','')
-            input = $("<input>").attr("type", "hidden").attr("name", "food[#{food_id}]").val(qty);
-            form.append($(input));
+            else if _key.indexOf('bigbun') != -1
+              code = cart_list["#{restaurant}"]["#{_key}"]
+              bigbun_id = +_key.replace('bigbun_','')
+              input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
+              form.append($(input));
 
-          else if _key.indexOf('bigbun') != -1
-            code = cart_list["#{restaurant}"]["#{_key}"]
-            bigbun_id = +_key.replace('bigbun_','')
-            input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
-            form.append($(input));
-
-#      $.removeCookie('cart_list',{path:'/'})
-      $(this).off('submit').submit();
-#
+  #      $.removeCookie('cart_list',{path:'/'})
+        $(this).off('submit').submit();
+  #
 
 
 
