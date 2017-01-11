@@ -1,0 +1,26 @@
+<h1 class="pt20 pb10 bold ml30">About</h1>
+<h4 class="prl30 mb30 normal">Mr.Chan’s Kitchen is an Asian cuisine restaurant that makes authentic Chinese food with fresh and local ingredients. With more than 30 years chef experience, we are certain we can provide you with the best food in town.  </h4>
+<div class="four_btn mb25 mb0_sm">
+  <a href="<%= sales_chef_path %>" class="my_btn_reserve border_none_radius">
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    <p>My Sales</p>
+  </a>
+  <a href="<%= rating_chef_path %>" class="my_btn_reserve border_none_radius">
+    <i class="fa fa-star" aria-hidden="true"></i>
+    <p>My Rating</p>
+  </a>
+  <a href="<%= menu_chef_path %>" class="my_btn_reserve border_none_radius">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+    <p>My Message</p>
+  </a>
+  <a href="<%= busines_chef_path %>" class="my_btn_reserve border_none_radius">
+    <i class="fa fa-comment" aria-hidden="true"></i>
+    <p>Buiness Summary</p>
+  </a>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $('a.my_btn_reserve[href*="' + location.pathname.split('/')[3] + '"]').toggleClass('my_btn_reserve').toggleClass('my_btn');
+  })
+</script>

@@ -1,16 +1,16 @@
 <%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
 
-    <%= render 'kitchen_photo',f:f %>
+    <%= render 'kitchen_photo',f:f ,pen_click:'pen_click' %>
 
     <div class="container">
       <section class="row">
         <div class="col-xs-12 basic_bg_top">
           <div class="row" name="kitchen_banner">
             <div class="col-xs-12 df_sm mb15 tac tal_sm">
-              <%= render 'chef_photo' ,f:f %>
+              <%= render 'chef_photo' ,f:f ,pen_click:'pen_click' %>
               <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm">Mr. Chan’s Kitchen</h1>
             </div>
-              <%= render 'chef_banner' %>
+            <%= render 'chef_banner' %>
           </div>
         </div>
       </section>

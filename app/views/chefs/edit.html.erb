@@ -1,29 +1,19 @@
 <%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
 
-    <div name="kitchen_photo">
-      <%= f.fields_for :restaurant do |r| %>
-          <div class="img_upload">
-            <%= r.label :main_photo ,style:"background-image:url(#{@chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists?})" do %>
-                <i class="photo_icon"></i>
-                <h4>Upload a kitchen photo</h4>
-            <% end %>
-            <%= r.file_field :main_photo ,class:'hidden'%>
-          </div>
-      <% end %>
-    </div>
+    <%= render 'kitchen_photo',f:f ,pen_click:''%>
 
     <div class="container">
       <section class="row">
         <!--- 審核過後 認證跟送審時最上傳的三張餐點圖片可以抽掉- 送審時最上傳的三張餐點圖片   是只有送省的時候用-->
         <div class="col-xs-12 basic_bg_top ui form">
-<div class="row">
-          <%= render 'form' , f:f %>
+          <div class="row">
+            <%= render 'form' , f:f %>
 
-          <div class="col-xs-12 tac mt15 mt0_sm" id="chef-submit-div">
-            <bottum id="chef-submit-check-btn" class="my_btn">SUBMIT</bottum>
-            <%= f.submit "SUBMIT",:class=>"my_btn hidden", :id=>"chef-submit-btn"%>
+            <div class="col-xs-12 tac mt15 mt0_sm" id="chef-submit-div">
+              <bottum id="chef-submit-check-btn" class="my_btn">SUBMIT</bottum>
+              <%= f.submit "SUBMIT",:class=>"my_btn hidden", :id=>"chef-submit-btn"%>
+            </div>
           </div>
-</div>
         </div>
 
       </section>

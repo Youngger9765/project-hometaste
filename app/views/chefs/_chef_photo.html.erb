@@ -1,0 +1,12 @@
+<%= f.fields_for :user do |u| %>
+    <%= u.fields_for :user_photo do |user_photo| %>
+        <div class="img_upload <%= pen_click %> ml30_sm p10 dib background_white border_main_radius" name="profile">
+          <%= user_photo.label :photo ,style:"background-image:url(#{@chef.user.user_photo.photo.url if @chef.user.user_photo && @chef.user.user_photo.photo.file?})" do %>
+              <i class="photo_icon"></i>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <h4>Upload a profile photo</h4>
+          <% end %>
+          <%= user_photo.file_field :photo ,class:'hidden'%>
+        </div>
+    <% end %>
+<% end %>

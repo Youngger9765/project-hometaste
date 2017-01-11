@@ -2,7 +2,7 @@ class ChefsController < ApplicationController
 
 	before_action :find_chef, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep]
+		:save_dish, :menu, :sales, :yep, :busines]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
@@ -72,6 +72,9 @@ class ChefsController < ApplicationController
 	end
 
 	def show
+	end
+
+	def busines
 	end
 
 	def edit

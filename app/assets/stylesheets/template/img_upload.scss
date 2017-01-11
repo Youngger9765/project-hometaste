@@ -16,6 +16,9 @@
     i{
       margin: 0;
     }
+    .fa-pencil{
+      display: none;
+    }
     &.hover{
       h4,i{
         display: none;
@@ -29,11 +32,32 @@
     }
   }
 }
-
-@media (min-width: $screen-sm-min) {
-}
-@media (max-width: $screen-sm-max) {
-}
-@media (max-width: $screen-xs-max) {
-
+.img_upload.pen_click{
+  label{
+    cursor: default;
+    @include justice-content(flex-end);
+    @include align-items(flex-end);
+    .fa-pencil{
+      @extend .cursor_pointer;
+      @include border-radius(50%);
+      font-size: 26px;
+      margin: 15px;
+      display: block;
+      background-color: rgba(255,255,255,0.6);
+      padding: 8px 10px;
+    }
+    &.hover{
+      .fa-pencil{
+        display: block;
+      }
+    }
+    &.hover:hover{
+      .photo_icon,h4{
+        display: none;
+      }
+    }
+    .photo_icon ,h4 {
+      display: none;
+    }
+  }
 }

@@ -12,17 +12,7 @@
 
 <%= form_for setup_chef(@chef), :url => chefs_path do |f| %>
 
-    <div name="kitchen_photo">
-      <%= f.fields_for :restaurant do |r| %>
-          <div class="img_upload">
-            <%= r.label :main_photo ,style:"background-image:url(#{@chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists?})" do %>
-                <i class="photo_icon"></i>
-                <h4>Upload a kitchen photo</h4>
-            <% end %>
-            <%= r.file_field :main_photo ,class:'hidden'%>
-          </div>
-      <% end %>
-    </div>
+    <%= render 'kitchen_photo', f:f ,pen_click:'' %>
 
     <div class="container">
       <section class="row">
