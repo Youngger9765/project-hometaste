@@ -27,7 +27,7 @@
         </div>
         <div class="col-xs-12 mb20">
           <div class="col-sm-3 col-xs-12">
-            <h4 class="dib"><%= @restaurant.orders.count%> Total orders</h4>
+            <h4 class="dib"><%= @restaurant.orders.count %> Total orders</h4>
           </div>
           <div class="col-sm-6 col-xs-12 pt10 pl60_sm">
             <% @restaurant.cuisines.each do |cuisine| %>
@@ -37,7 +37,7 @@
 
           <div class="col-sm-3 col-xs-12 tar_sm mt10 mt0_sm">
             <div class="show_rated_<%= @restaurant.food_score %>"></div>
-            <span class="db_sm"><%= @restaurant.food_comments_count%>  reviews</span>
+            <span class="db_sm"><%= @restaurant.food_comments_count %>  reviews</span>
           </div>
         </div>
 
@@ -99,7 +99,7 @@
             <div class="dib_sm ml40 ml100_lg">
               <h4>Order hours:</h4>
               <h4 class="mb15">
-                <% if @restaurant.delivery%>
+                <% if @restaurant.delivery %>
                     <%= @restaurant.delivery.order_hours %> hr
                 <%end%>
               </h4>
@@ -138,11 +138,11 @@
         <h3 class="tar_sm bold">Goal: $<%= @restaurant.order_reach%></h3>
       </div>
       <div>
-        <h3 class="red" style="margin-left: 74%; transform: translateX(-30%); margin-bottom: 15px;">Reached</h3>
+        <h3 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(-30%); margin-bottom: 15px;">Reached</h3>
         <div class="ui indicating progress"  data-percent="<%= @reach_percent %>">
           <div class="bar"></div>
         </div>
-        <h2 class="red" style="margin-left: 74%; transform: translateX(-27%);">$ <%= @today_orders.sum(:amount)%></h2>
+        <h2 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(-27%);">$ <%= @today_orders.sum(:amount)%></h2>
       </div>
     </div>
   </section>
