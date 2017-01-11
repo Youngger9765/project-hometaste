@@ -1,84 +1,110 @@
-<%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
+<div class="container chef-container center" >
+  <div class="row col-md-offset-1">
+    <h3>
+      <%=link_to "HOME", root_path%><span> > <%=params[:action]%></span>
+    </h3>
+  </div>
+  <div class="row">
+    <div class="row container chef-sub-container center">
+      <div class="col-md-12" id="chef-show-bg-img" style="background-image: url(<%=asset_path(@chef.restaurant.main_photo.url)%>)">
 
-    <%= render 'kitchen_photo',f:f %>
-
-    <div class="container">
-      <section class="row">
-        <div class="col-xs-12 basic_bg_top">
-          <div class="row" name="kitchen_banner">
-            <div class="col-xs-12 df_sm mb15 tac tal_sm">
-              <%= render 'chef_photo' ,f:f %>
-              <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm">Mr. Chan’s Kitchen</h1>
-            </div>
-              <%= render 'chef_banner' %>
-          </div>
+        <div class="col-md-4">
+          <% if @chef.user.user_photo && @chef.user.user_photo.photo.exists? %>
+              <%= image_tag(@chef.user.user_photo.photo(:thumb))%>
+          <%end%>
         </div>
-      </section>
+        <div class="col-md-4" id="restaurant_name"><%= @chef.restaurant.name%></div>
+        <% if current_user == @user%>
+            <div class="btn btn-default col-md-2 right" id="chef-edit-btn">
+              <i class="fa fa-pencil" aria-hidden="true"> <%= link_to "Edit Profile", edit_chef_path(@chef) %></i>
+            </div>
+        <%end%>
+        <% if current_user.is_admin %>
+            <div class="btn btn-success col-md-2 right" id="chef-review-btn">
+              <i class="fa fa-eye" aria-hidden="true"> <%= link_to "Review Chef", review_chef_path(@chef) %></i>
+            </div>
+        <%end%>
+      </div>
+      <div class="col-md-12">
+        <h3>About</h3>
+        <p>
+          <%= @chef.restaurant.description%>
+        </p>
+      </div>
 
-      <section class="row">
-        <div class="col-xs-12 basic_bg ui form">
-          <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-              <div class="row">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 p50">
-                  <div class="red_circular">
-                    <h2 class="bold red">USD $150,000</h2>
-                  </div>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Total orders:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">200</h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Total revenue:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">$150,000</h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Total sale this month: </h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">$20,000</h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Rating:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">4.5</h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Most popular item:</h4>
-                  <h4 class="mtb20_sm mtb15 dib_sm ml30_sm">Roasted duck / 50 orders </h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Sale detail report:</h4>
-                </div>
-                <div class="col-xs-2">
-                  <h4 class="bold dib">From</h4>
-                </div>
-                <div class="col-xs-8">
-                  <div class="field">
-                    <%= date_field_tag :pick_up_date %>
-                  </div>
-                </div>
-                <div class="col-xs-1">
-                  <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
-                </div>
-                <div class="clearfix mtb20_sm"></div>
-                <div class="col-xs-2">
-                  <h4 class="bold dib">To</h4>
-                </div>
-                <div class="col-xs-8">
-                  <div class="field">
-                    <%= date_field_tag :pick_up_date %>
-                  </div>
-                </div>
-                <div class="col-xs-1">
-                  <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
-                </div>
-                <div class="col-xs-12 mtb20 tac">
-                  <button class="my_btn">Export</button>
-                </div>
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <%= link_to 'add dish',new_chef_food_path(@chef.id),:class=>"btn btn-primary"%>
+          <%= link_to 'add bigbun', new_chef_big_bun_path(@chef.id),:class=>"btn btn-warning"%>
+          <%= link_to 'set Menu',menu_chef_path(@chef.id),:class=>"btn btn-default"%>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row" id="chef-menu-set-row">
+
+        <!-- Sales -->
+        <%= link_to sales_chef_path(@chef.id), :remote => true do%>
+            <div class="col-md-offset-1 col-md-2 chef-menu-set" id='chef-sales'>
+              <div class="col-md-12">
+                <i class="fa fa-file-text" aria-hidden="true"></i>
+              </div>
+              <div class="col-md-12">
+                Sales
               </div>
             </div>
+        <%end%>
+
+        <div class="col-md-2 chef-menu-set" id='chef-income'>
+          <div class="col-md-12">
+            <i class="fa fa-money" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-12">
+            Income
           </div>
         </div>
-      </section>
 
+        <div class="col-md-2 chef-menu-set" id='chef-rating'>
+          <div class="col-md-12">
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-12">
+            Rating
+          </div>
+        </div>
+
+        <div class="col-md-2 chef-menu-set" id='chef-message'>
+          <div class="col-md-12">
+            <i class="fa fa-weixin" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-12">
+            Message
+          </div>
+        </div>
+
+        <div class="col-md-2 chef-menu-set" id='chef-business'>
+          <div class="col-md-12">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-12">
+            Business
+          </div>
+        </div>
+
+      </div>
     </div>
-<% end %>
+  </div>
+
+  <div class="row">
+    <div class="row container chef-sub-container center" id="event_area">
+    </div>
+  </div>
+</div>
+
+
+
+
+
