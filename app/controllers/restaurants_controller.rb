@@ -14,9 +14,9 @@ class RestaurantsController < ApplicationController
     @today_orders = @chef.restaurant.orders.where(:created_at => time_range).where(:payment_status => "paid")
     @reach_percent = @today_orders ? (@today_orders.sum(:amount)*100/@restaurant.order_reach).to_f : 0
 
-    score_rate_i = @restaurant.food_avg_score.to_i
-    score_rate_f = ((@restaurant.food_avg_score - score_rate_i)/0.5).to_i
-    @score_rate = score_rate_i.to_s + ("_5" * score_rate_f)
+    # score_rate_i = @restaurant.food_avg_score.to_i
+    # score_rate_f = ((@restaurant.food_avg_score - score_rate_i)/0.5).to_i
+    # @score_rate = score_rate_i.to_s + ("_5" * score_rate_f)
   end
 
   private
