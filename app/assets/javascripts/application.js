@@ -15,10 +15,8 @@
 //= require jquery_cookie
 //= require semantic_ui/semantic_ui
 //= require bootstrap/collapse
-// require bootstrap/dropdown
 //= require bootstrap/transition
 //= require bootstrap/carousel
-// require bootstrap-sprockets
 
 //= require underscore
 //= require gmaps/google

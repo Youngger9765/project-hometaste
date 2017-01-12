@@ -14,10 +14,10 @@
   i{
     margin-right: 10px;
   }
-  i,button{
+  i,button,input{
     font-size: 24px;
   }
-  button{
+  button,input{
     background-color: transparent;
     position: absolute;
     font-size: 24px;
@@ -28,11 +28,6 @@
   }
   a,a:hover{
     @extend .white;
-  }
-}
-.orders_new{
-  .add_to_cart a{
-    display: none;
   }
 }
 @media (max-width: $screen-xs-max){
