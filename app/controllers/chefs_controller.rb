@@ -19,6 +19,8 @@ class ChefsController < ApplicationController
 
 	def create
 		create_pass = true
+		flash[:alert] = []
+
 		@chef = Chef.new(chef_params)
 
 		# check email
@@ -40,7 +42,7 @@ class ChefsController < ApplicationController
 			end
 
 			# save user pass
-			if @user.save!
+			if @user.save
 				@chef.user = @user
 
 				# save chef & restaurant & delivery & bulk_buys
@@ -74,8 +76,8 @@ class ChefsController < ApplicationController
 
 			@user = User.new
 			@chef = Chef.new(chef_params)
-			flash[:alert] << "create fail"
-			render :action => :new
+			flash[:alert] << "Register chef fail"
+			redirect_to new_chef_path
 		end
 
 	end
