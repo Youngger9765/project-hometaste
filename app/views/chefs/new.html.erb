@@ -64,6 +64,43 @@
 
 <script>
 
+  $("#chef-submit-check-btn").click(function(){
+    var check_submit = true;
+
+    if ($("input#chef_user_attributes_password").val()) {
+      check_submit = check_submit & check_chef_password();
+    }
+
+    if (!<%= @chef.restaurant.is_approved %>) {
+      check_submit = check_submit & check_certificated();
+    };
+
+    if (check_submit) {
+      $('#chef-submit-btn').click();
+    };
+  });
+
+  var check_chef_password = function(){
+    var password = $("input#chef_user_attributes_password").val();
+    var confirm_password = $("input#confirm_password").val();
+    if (password && confirm_password && password == confirm_password){
+      return true;
+    } else {
+      alert("Please check password! \n If you don't wanna change password, please let it be blank. ")
+      return false;
+    };
+  }
+
+  var check_certificated = function(){
+    var checked = $("#certificated_check").prop('checked');
+    if (checked) {
+      return true;
+    } else {
+      alert('Please check certified!')
+      return false;
+    }
+  }
+
   $('#both_bulk_buy_delivery').click(function(){
     var checked_both = $('#both_bulk_buy_delivery').prop("checked");
     if (checked_both) {
