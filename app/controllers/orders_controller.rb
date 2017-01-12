@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-
 		@order = current_user.orders.new(orders_params)
 		@order.pick_up_time = pick_datetime
 		@order.customer_name = current_user.name
@@ -24,6 +23,12 @@ class OrdersController < ApplicationController
 		if @order.save
 			create_user_bigbun(params[:bigbun])
 			create_user_order_food(params[:food])
+
+			if @order.shipping_method == "delivery"
+				@order.update(:delivery_fee => @order.calc_delivery)
+			else
+				@order.update(:delivery_fee => 0)
+			end
 			@order.update_order_price
 			cookies.delete(:cart_list, path: '/')
 

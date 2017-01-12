@@ -21,7 +21,7 @@ class Order < ApplicationRecord
 	def update_order_price
 		update( amount: calc_amount )
 		update( subtotal: calc_subtotal )
-		update( delivery_fee: calc_delivery )
+		# update( delivery_fee: calc_delivery )
 	end
 
 	def calc_amount
@@ -37,8 +37,7 @@ class Order < ApplicationRecord
 	end
 
 	def calc_delivery
-		# 不知道規則 需改正
-		0
+		restaurant.delivery.cost || 0
 	end
 
 end
