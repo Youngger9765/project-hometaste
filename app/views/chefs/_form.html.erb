@@ -101,15 +101,15 @@
 
               <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
                 <div class="field">
-                  <%= r.label :certificated_num, 'Issued by' %>
-                  <%= r.text_field :certificated_num %>
+                  <%= r.label :certificated_by, 'Issued by' %>
+                  <%= text_field_tag :certificated_by %>
                 </div>
               </div>
 
               <div class="col-sm-7 col-md-6 col-lg-4">
                 <div class="field date_select_modify">
-                  <%= r.label :certificated_num, 'Issued date' %>
-                  <%= r.date_select :certificated_num,{} ,class:'ui dropdown'%>
+                  <%= r.label :certificated_date, 'Issued date' %>
+                  <%= select_tag :certificated_date,{} ,class:'ui dropdown'%>
                 </div>
               </div>
 
@@ -211,7 +211,7 @@
       <div class="col-sm-8 col-md-6 col-lg-5">
         <div class="field date_select_modify">
           <%= f.label :birthday %>
-          <%= f.date_select :birthday, {order: [:year, :month, :day], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 10, end_year: Date.today.year - 100}, {required: true , class:'ui dropdown fluid'} %>
+          <%= f.date_select :birthday,{} ,class:'ui dropdown' %>
         </div>
       </div>
 

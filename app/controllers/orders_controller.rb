@@ -38,6 +38,8 @@ class OrdersController < ApplicationController
 		@client_token = Braintree::ClientToken.generate
 		if request.env["HTTP_REFERER"]
 			@clean_cart_cookie = request.env["HTTP_REFERER"].match(/orders\/new/) ? true : false
+		else
+			@clean_cart_cookie = true
 		end
 
 		case @order.payment_status

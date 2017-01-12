@@ -66,19 +66,25 @@
 
   $("#chef-submit-check-btn").click(function(){
     var check_submit = true;
-
-    if ($("input#chef_user_attributes_password").val()) {
-      check_submit = check_submit & check_chef_password();
-    }
-
-    if (!<%= @chef.restaurant.is_approved %>) {
-      check_submit = check_submit & check_certificated();
-    };
+    check_submit = check_submit & check_email();
+    check_submit = check_submit & check_chef_password();
+    check_submit = check_submit & check_restaurant_name();
+    check_submit = check_submit & check_certificated();
 
     if (check_submit) {
       $('#chef-submit-btn').click();
     };
   });
+
+  var check_email = function(){
+    var email = $("input#chef_user_attributes_email").val();
+    if (email){
+      return true;
+    } else {
+      alert("Please check email! ")
+      return false;
+    };
+  }
 
   var check_chef_password = function(){
     var password = $("input#chef_user_attributes_password").val();
@@ -86,7 +92,17 @@
     if (password && confirm_password && password == confirm_password){
       return true;
     } else {
-      alert("Please check password! \n If you don't wanna change password, please let it be blank. ")
+      alert("Please check password! ")
+      return false;
+    };
+  }
+
+  var check_restaurant_name = function(){
+    var restaurant_name = $("input#chef_restaurant_attributes_name").val();
+    if (restaurant_name){
+      return true;
+    } else {
+      alert("Please check restaurant_name! ")
       return false;
     };
   }
