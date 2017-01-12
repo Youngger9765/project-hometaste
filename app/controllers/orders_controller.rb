@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
 
 	def new
 		@order = Order.new
+		@restaurant = get_restaurant_from_cookies
 	end
 
 	def create
@@ -72,6 +73,17 @@ class OrdersController < ApplicationController
 	end
 
 	private
+
+	def get_restaurant_from_cookies
+		if cookies[:cart_list]
+			cart = JSON.parse(cookies[:cart_list])
+			keys = cart.keys.select do |key|
+				cart[key].keys.select { |x| x.match(/food_\d/) }
+			end
+			id = keys.last.gsub('restaurant_','')
+			Restaurant.find(id)
+		end
+	end
 
 	def find_order
 		@order = Order.find(params[:id])
