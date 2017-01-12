@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
 
 	skip_before_filter :verify_authenticity_token
 	before_action :find_order, :except => [:new,:create]
+	before_action :is_chef?
 
 	Braintree::Configuration.environment = :sandbox
 	Braintree::Configuration.merchant_id = "72yk9y5dxms9gxf9"
@@ -39,8 +40,8 @@ class OrdersController < ApplicationController
 		@client_token = Braintree::ClientToken.generate
 
 		case @order.payment_status
-		when 'unpaid' ;@thankyou = false
-		when 'paid' ;@thankyou = true
+			when 'unpaid' ;@thankyou = false
+			when 'paid' ;@thankyou = true
 		end
 
 	end
@@ -98,6 +99,15 @@ class OrdersController < ApplicationController
 			params.each do |key,value|
 				@order.order_food_ships.find_or_create_by( food_id: key.to_i,quantity: value.to_i)
 			end
+		end
+	end
+
+	def is_chef?
+		if current_user && current_user.is_chef
+			flash[:alert] = "Chef can't build order!"
+			redirect_to root_path
+		else
+			return true
 		end
 	end
 

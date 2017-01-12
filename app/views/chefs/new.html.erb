@@ -68,6 +68,7 @@
     var check_submit = true;
     check_submit = check_submit & check_email();
     check_submit = check_submit & check_chef_password();
+    check_submit = check_submit & check_phone_num();
     check_submit = check_submit & check_restaurant_name();
     check_submit = check_submit & check_certificated();
 
@@ -93,6 +94,16 @@
       return true;
     } else {
       alert("Please check password! ")
+      return false;
+    };
+  }
+
+  var check_phone_num = function(){
+    var phone_num = $("input#chef_phone_number").val();
+    if (phone_num){
+      return true;
+    } else {
+      alert("Please check phone number! ")
       return false;
     };
   }
