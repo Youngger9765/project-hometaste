@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-	before_action :find_user, :only =>[:edit, :update]
-	# before_action :is_current_user?, :only =>[:edit, :update]
+	before_action :find_user, :except =>[:new]
+	before_action :is_current_user?, :only =>[:edit, :update]
 
 	def new
 		@user = User.new
@@ -24,9 +24,11 @@ class UsersController < ApplicationController
 	end
 
 	def purchase
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
 	end
 
 	def paid
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end
