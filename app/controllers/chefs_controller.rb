@@ -24,7 +24,7 @@ class ChefsController < ApplicationController
 		# check email
 		if User.find_by(:email => user_params[:email])
 			create_pass = false
-			flash[:alert] = "user exist!"
+			flash[:alert] << "user exist!"
 		else
 			# create user
 			@user = User.new(user_params)
@@ -36,7 +36,7 @@ class ChefsController < ApplicationController
 			if !params[:chef][:user_attributes][:password].blank?
 				@user.password = params[:chef][:user_attributes][:password]
 			else
-				flash[:alert] = "password fail"
+				flash[:alert] << "password fail"
 			end
 
 			# save user pass
@@ -57,13 +57,13 @@ class ChefsController < ApplicationController
 				else
 					@user.destroy
 					create_pass = false
-					flash[:alert] = "save chef fail"
+					flash[:alert] << "save chef fail"
 				end
 
 			# save user fail
 			else
 				create_pass = false
-				flash[:alert] = "save user fail"
+				flash[:alert] << "save user fail"
 			end
 		end
 
@@ -74,7 +74,7 @@ class ChefsController < ApplicationController
 
 			@user = User.new
 			@chef = Chef.new(chef_params)
-			flash[:alert] = "create fail"
+			flash[:alert] << "create fail"
 			render :action => :new
 		end
 
