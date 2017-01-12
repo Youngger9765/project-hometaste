@@ -32,6 +32,9 @@
   .ui.form .bigbun_list input{
     width: 200px;
   }
+  [type=submit]:focus{
+    outline: none;
+  }
 }
 .orders_show{
   h2{

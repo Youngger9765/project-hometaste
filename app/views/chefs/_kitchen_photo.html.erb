@@ -1,0 +1,12 @@
+<div name="kitchen_photo">
+  <%= f.fields_for :restaurant do |r| %>
+      <div class="img_upload <%= pen_click %>">
+        <%= r.label :main_photo ,style:"background-image:url(#{@chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists?})" do %>
+            <i class="photo_icon"></i>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <h4>Upload a kitchen photo</h4>
+        <% end %>
+        <%= r.file_field :main_photo ,class:'hidden'%>
+      </div>
+  <% end %>
+</div>

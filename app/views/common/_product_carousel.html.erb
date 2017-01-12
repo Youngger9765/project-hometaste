@@ -8,7 +8,7 @@
   <div class="carousel-inner" role="listbox">
     <% food.food_photos.each_with_index do |photo,index| %>
         <div class="item <%= 'active' if index == 0 %>">
-          <div style="background-image: url(<%= image_path photo.photo.url %>);" class="background_img_setting" data-food-id-pic="<%= @food.id %>"></div>
+          <div style="background-image: url(<%= image_path photo.photo.url %>);" class="background_img_setting" data-food-id-pic="<%= food.id %>"></div>
         </div>
     <% end %>
   </div>

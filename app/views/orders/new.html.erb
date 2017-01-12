@@ -1,5 +1,6 @@
-<div class="container ui form">
-  <%= form_for @order do |f| %>
+
+<%= form_for @order do |f| %>
+    <div class="container ui form">
       <section class="row">
         <div class="col-xs-12 basic_bg_top">
           <h1 class="bold tac mb50">Order Information</h1>
@@ -71,7 +72,7 @@
               <div class="align_two_side tip">
                 <h2>Tip</h2>
                 <h2>
-                $ <%= f.number_field :tip ,value:0,min:0,step:0.1,class:' tar tip_input' %>
+                  $ <%= f.number_field :tip ,value:0,min:0,step:0.1,class:' tar tip_input' %>
                 </h2>
               </div>
               <i class="gray_line mtb15"></i>
@@ -85,23 +86,43 @@
       </section>
       <div class="row">
         <% if current_user %>
-            <button class="ui button my_btn" name="reach_order" type="submit">
+            <button class="ui button my_btn" name="reach_order">
               <i class="share_icon_white"></i> Help me reach mssy order!
             </button>
         <% else %>
-            <button class="ui button my_btn" name="reach_order" id="need_to_login">
+            <button class="ui button my_btn" name="reach_order">
               <i class="share_icon_white"></i> Help me reach mssy order!
             </button>
         <% end %>
       </div>
-  <% end %>
-</div>
+    </div>
 
-<%= render 'common/add_to_cart' %>
+    <div class="add_to_cart">
+      <h3 class="dib"><i class="cart_icon_white"></i>$<span name="cart_total_price">0</span></h3>
+      <% if current_user %>
+          <%= f.submit :NEXT ,style:'height:61px' %>
+      <% else %>
+          <button name="reach_order" id="need_to_login">NEXT</button>
+      <% end %>
+    </div>
+
+<% end %>
+
+
+
+<style>
+  .footer,.back_to_top{
+    display: none !important;
+  }
+  body{
+    padding-bottom: 80px;
+  }
+</style>
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
-    $('#need_to_login').click(function(){
+    $('#need_to_login').click(function(e){
+      e.preventDefault()
       $('#auth_link_modal').modal('show');
     })
   })
