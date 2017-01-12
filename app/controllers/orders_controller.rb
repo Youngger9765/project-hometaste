@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
 			create_user_bigbun(params[:bigbun])
 			create_user_order_food(params[:food])
 			@order.update_order_price
+			cookies.delete(:cart_list, path: '/')
 
 			flash[:notice] = "Successfully create order!"
 			redirect_to @order
@@ -36,9 +37,6 @@ class OrdersController < ApplicationController
 
 	def show
 		@client_token = Braintree::ClientToken.generate
-		if request.env["HTTP_REFERER"]
-			@clean_cart_cookie = request.env["HTTP_REFERER"].match(/orders\/new/) ? true : false
-		end
 
 		case @order.payment_status
 		when 'unpaid' ;@thankyou = false
