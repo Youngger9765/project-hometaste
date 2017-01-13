@@ -19,7 +19,7 @@
         <h4 class="red">Confirmation Number: #<%= order.confirmation_number %></h4>
       </div>
       <div class="col-sm-6 col-xs-12 tac tar_sm">
-        <a class="my_btn_reserve mt25 mt0_sm">Cancel this order</a>
+        <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
       </div>
       <div class="col-xs-12">
         <i class="gray_line mtb25"></i>

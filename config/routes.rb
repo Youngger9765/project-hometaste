@@ -23,10 +23,17 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :purchase
+
+      # ajax btn
       get :paid
       get :completed
       get :cancelled
       get :big_bun
+
+      # update order btn
+      post :cancel_order
+      post :not_yet_order
+      post :yep_order
 
       get :review
       get :like
