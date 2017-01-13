@@ -67,11 +67,18 @@ class UsersController < ApplicationController
 	end
 
 	def not_yet_order
-		
+		raise
 	end
 
 	def yep_order
-		
+		if @order.order_status != "cancelled"
+			@order.update(:order_status => "completed")
+			flash[:notice] = "Successfully completed."
+			redirect_to purchase_user_path(@user)
+		else
+			flash[:alert] = "You can't modify this order. It is already cancelled."
+			redirect_to purchase_user_path(@user)
+		end
 	end
 
 
