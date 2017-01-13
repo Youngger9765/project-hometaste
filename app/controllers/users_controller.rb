@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
 	before_action :find_user, :except =>[:new]
-	before_action :is_current_user?, :only =>[:edit, :update]
+	before_action :is_current_user?, :except =>[:new]
+	before_action :find_order, :only =>[:cancel_order,:not_yet_order,:yep_order]
 
 	def new
 		@user = User.new
@@ -35,12 +36,14 @@ class UsersController < ApplicationController
 	end
 
 	def completed
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "completed")
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end
 	end
 
 	def cancelled
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "cancelled")
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end
@@ -50,6 +53,25 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end
+	end
+
+	def cancel_order
+		if @order.order_status != "completed"
+			@order.update(:order_status => "cancelled")
+			flash[:notice] = "Successfully cancelled."
+			redirect_to purchase_user_path(@user)
+		else
+			flash[:alert] = "You can't cancel this order! It is already completed."
+			redirect_to purchase_user_path(@user)
+		end
+	end
+
+	def not_yet_order
+		
+	end
+
+	def yep_order
+		
 	end
 
 
@@ -78,5 +100,9 @@ class UsersController < ApplicationController
 			flash[:alert] = "You have no athuroity!"
 			redirect_to root_path
 		end
+	end
+
+	def find_order
+		@order = Order.find(params[:order_id])
 	end
 end
