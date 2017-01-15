@@ -168,7 +168,6 @@ namespace :dev do
 
 		200.times {
 			order = Order.create(
-				pick_up_time: Faker::Time.between(DateTime.now , DateTime.now+30),
 				user_id: User.all.ids.sample,
 				restaurant_id: Restaurant.all.ids.sample,
 				customer_name: Faker::Name.name,
@@ -186,11 +185,15 @@ namespace :dev do
       if order.shipping_method == "delivery"
         if order.restaurant.delivery
           order.delivery_fee = order.restaurant.delivery.cost
-          order.save!
         else
           order.delivery_fee = 0
         end
+      else #bulk_buy
+        bulk_buy_id = order.restaurant.bulk_buys.ids.sample
+        order.bulk_buy_id = bulk_buy_id
+        order.pick_up_time = BulkBuy.find(bulk_buy_id).pick_up_time
       end
+      order.save!
 		}
 
 		# create order_food_ships

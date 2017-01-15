@@ -67,7 +67,21 @@ class UsersController < ApplicationController
 	end
 
 	def not_yet_order
-		raise
+		if params[:user_not_yet_reason].present?
+			if @order.order_status != "completed" && @order.order_status != "cancelled"
+				@order.update(:cancelled_reason => params[:user_not_yet_reason],
+											:order_status => "cancelled"
+										)
+				flash[:notice] = "We already tell chef to check this problem and will refound!"
+				redirect_to purchase_user_path(@user)
+			else
+				flash[:alert] = "You can't modify this order."
+				redirect_to purchase_user_path(@user)
+			end
+		else
+			flash[:alert] = "Please choose a reason!"
+			redirect_to purchase_user_path(@user)
+		end
 	end
 
 	def yep_order
@@ -80,8 +94,6 @@ class UsersController < ApplicationController
 			redirect_to purchase_user_path(@user)
 		end
 	end
-
-
 
 	private
 

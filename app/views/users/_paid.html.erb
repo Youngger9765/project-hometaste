@@ -18,9 +18,17 @@
       <div class="col-sm-6 col-xs-12 tac tan_sm">
         <h4 class="red">Confirmation Number: #<%= order.confirmation_number %></h4>
       </div>
-      <div class="col-sm-6 col-xs-12 tac tar_sm">
-        <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
-      </div>
+
+      <% if order.shipping_method == "bulk_buy"%>
+        <% if order.bulk_buy.cut_off_time.hour > Time.now.utc().hour%>
+          <div class="col-sm-6 col-xs-12 tac tar_sm">
+            <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
+          </div>
+        <%end%>
+      <%else%>
+      <!-- delivery -->
+      <%end%>
+
       <div class="col-xs-12">
         <i class="gray_line mtb25"></i>
       </div>
@@ -34,8 +42,17 @@
       <div class="col-xs-12">
         <i class="gray_line mtb25"></i>
       </div>
-      <div class="col-sm-6 col-xs-12 tac tar_sm" style="display: none;" id="user_order_not_yet_confirm_<%=order.id%>">
-        <%= link_to "Confirm!", not_yet_order_user_path(@user,:order_id => order) ,:method => "POST", :class => "my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla"%>
+      <div class="col-sm-6 col-xs-12 tac" style="display: none;text-align: left" id="user_order_not_yet_confirm_<%=order.id%>">
+        <h5 class="black">What went wrong?</h5>
+        <%= form_tag(not_yet_order_user_path(@user.id, :order_id => order.id), method: "post") do %>
+          <%= radio_button_tag(:user_not_yet_reason, "My order didn't arrive(15 mins past scheduled time)") %>
+          <%= label_tag(:reason_1, "My order didn't arrive(15 mins past scheduled time)") %>
+          <br>
+          <%= radio_button_tag(:user_not_yet_reason, "Wrong order was delivered") %>
+          <%= label_tag(:reason_2, "Wrong order was delivered") %>
+          <br>
+          <%= submit_tag("Submit",:class => "my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla" )%>
+        <% end %>
       </div>
     </div>
   <%end%>
