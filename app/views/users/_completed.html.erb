@@ -3,6 +3,25 @@
     <div class="row">
       <h3 class="bold ml15"><%= order.restaurant.name %></h3>
 
+      <div class="col-md-3 col-sm-3 col-sm-5 hidden-xs">
+        <div class="df">
+          <div class="pr15">
+            <i class="fa fa-map-marker fa-2x red"></i>
+          </div>
+          <div class="pt5">
+            <p><%= order.shipping_place%></p>
+          </div>
+        </div>
+        <div class="df mt15">
+          <div class="pr15">
+            <i class="fa fa-clock-o red fa-2x"></i>
+          </div>
+          <div class="pt5">
+            <p><%= order.pick_up_time.localtime%></p>
+          </div>
+        </div>
+      </div>
+
       <% order.order_food_ships.each do |ship| %>
           <div class="col-xs-12 mt30">
             <%= render 'product_list', :ship => ship %>
