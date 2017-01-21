@@ -57,6 +57,13 @@ class UsersController < ApplicationController
 
 	def cancel_order
 		if @order.order_status != "completed"
+
+			# 確認delivery
+
+			# 確認cut off time
+
+			# 要做退款功能
+
 			@order.update(:order_status => "cancelled")
 			flash[:notice] = "Successfully cancelled."
 			redirect_to purchase_user_path(@user)
@@ -68,6 +75,12 @@ class UsersController < ApplicationController
 
 	def not_yet_order
 		if params[:user_not_yet_reason].present?
+
+			# 先確認送餐時間
+
+			# 寄信功能
+
+			# 要做退款功能
 			if @order.order_status != "completed" && @order.order_status != "cancelled"
 				@order.update(:cancelled_reason => params[:user_not_yet_reason],
 											:order_status => "cancelled"
