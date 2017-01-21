@@ -3,6 +3,25 @@
     <div class="row">
       <h3 class="bold ml15"><%= order.restaurant.name %></h3>
 
+      <div class="col-md-3 col-sm-3 col-sm-5 hidden-xs">
+        <div class="df">
+          <div class="pr15">
+            <i class="fa fa-map-marker fa-2x red"></i>
+          </div>
+          <div class="pt5">
+            <p><%= order.shipping_place%></p>
+          </div>
+        </div>
+        <div class="df mt15">
+          <div class="pr15">
+            <i class="fa fa-clock-o red fa-2x"></i>
+          </div>
+          <div class="pt5">
+            <p><%= order.pick_up_time%></p>
+          </div>
+        </div>
+      </div>
+
       <% order.order_food_ships.each do |ship| %>
           <div class="col-xs-12 mt30">
             <%= render 'product_list', :ship => ship %>
@@ -18,9 +37,17 @@
       <div class="col-sm-6 col-xs-12 tac tan_sm">
         <h4 class="red">Confirmation Number: #<%= order.confirmation_number %></h4>
       </div>
-      <div class="col-sm-6 col-xs-12 tac tar_sm">
-        <a class="my_btn_reserve mt25 mt0_sm">Cancel this order</a>
-      </div>
+
+      <% if order.shipping_method == "bulk_buy"%>
+        <% if order.bulk_buy.cut_off_time.localtime.strftime("%H%M%S") > @time_now_to_Num%>
+          <div class="col-sm-6 col-xs-12 tac tar_sm">
+            <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
+          </div>
+        <%end%>
+      <%else%>
+      <!-- delivery -->
+      <%end%>
+
       <div class="col-xs-12">
         <i class="gray_line mtb25"></i>
       </div>
@@ -28,9 +55,39 @@
         <h5 class="black">Got the meal?</h5>
       </div>
       <div class="col-sm-6 col-xs-12 tac tar_sm">
-        <a class="my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla">Yep!</a>
-        <a class="my_btn_reserve db dib_sm mt25 mt0_sm mrla">Not yet!</a>
+        <%= link_to "Yep!", yep_order_user_path(@user,:order_id => order) ,:method => "POST", :class => "my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla"%>
+        <a class="user_not_yet_order_btn my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla" data=<%=order.id%>>Not yet!</a>
+      </div>
+      <div class="col-xs-12">
+        <i class="gray_line mtb25"></i>
+      </div>
+      <div class="col-sm-6 col-xs-12 tac" style="display: none;text-align: left" id="user_order_not_yet_confirm_<%=order.id%>">
+        <h5 class="black">What went wrong?</h5>
+        <%= form_tag(not_yet_order_user_path(@user.id, :order_id => order.id), method: "post") do %>
+          <%= radio_button_tag(:user_not_yet_reason, "My order didn't arrive(15 mins past scheduled time)") %>
+          <%= label_tag(:reason_1, "My order didn't arrive(15 mins past scheduled time)") %>
+          <br>
+          <%= radio_button_tag(:user_not_yet_reason, "Wrong order was delivered") %>
+          <%= label_tag(:reason_2, "Wrong order was delivered") %>
+          <br>
+          <%= submit_tag("Submit",:class => "my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla" )%>
+        <% end %>
       </div>
     </div>
   <%end%>
 </div>
+
+<script type="text/javascript">
+  $('.user_not_yet_order_btn').click(function() {
+    // confirm data show!
+    var order_id = this.attributes["data"].value;
+    var confirm_div_id = "#user_order_not_yet_confirm_" + order_id;
+    if ($(confirm_div_id)[0].style.display == "none") {
+      $(confirm_div_id).show();
+    } else {
+      $(confirm_div_id).hide();
+      $(confirm_div_id).css("display","none");
+    };
+
+  });
+</script>
