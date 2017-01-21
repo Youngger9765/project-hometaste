@@ -26,10 +26,17 @@ class UsersController < ApplicationController
 
 	def purchase
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
+
+		datetime_now = Time.now.utc.localtime
+		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 	end
 
 	def paid
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
+
+		datetime_now = Time.now.utc.localtime
+		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
+
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end
@@ -58,19 +65,34 @@ class UsersController < ApplicationController
 	def cancel_order
 		if @order.order_status != "completed"
 
-			# 確認delivery
+			datetime_now = Time.now.utc.localtime
+			time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 
-			# 確認cut off time
+			# check cut off time
+			if @order.bulk_buy.present?
+				cut_off_time = @order.bulk_buy.cut_off_time.localtime
+				cut_off_time_to_Num = cut_off_time.strftime( "%H%M%S" )
 
-			# 要做退款功能
+				# User can cancel before cut off time
+				if time_now_to_Num <= cut_off_time_to_Num
+					@order.update(:order_status => "cancelled")
+					flash[:notice] = "Successfully cancelled."
 
-			@order.update(:order_status => "cancelled")
-			flash[:notice] = "Successfully cancelled."
-			redirect_to purchase_user_path(@user)
+					# 要做退款功能
+
+				else
+					flash[:notice] = "You can't cancel this order! It is already over cut off time."
+				end
+			else
+				# check delivery
+
+			end
+
 		else
 			flash[:alert] = "You can't cancel this order! It is already completed."
-			redirect_to purchase_user_path(@user)
 		end
+
+		redirect_to purchase_user_path(@user)
 	end
 
 	def not_yet_order
