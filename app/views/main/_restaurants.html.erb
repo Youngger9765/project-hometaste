@@ -6,7 +6,7 @@
               <img data-src="<%= image_path 'tmp/kitchen.png' %>">
             </div>
             <div class="content">
-              <h4><a href="<%= link_to restaurant %>"><%= restaurant.name %></a></h4>
+              <h4><%= link_to restaurant do %><%= restaurant.name %><% end %></h4>
               <div class="rating_wrapping">
                 <div class="show_rated_<%= restaurant.food_score %>"></div>
                 <span name="reivews">200 Reviews</span>

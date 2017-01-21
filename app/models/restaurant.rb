@@ -54,6 +54,10 @@ class Restaurant < ApplicationRecord
     big_buns.available_bigbun
   end
 
+  def get_near_pickup_time
+    bulk_buys.select {|x| x.pick_up_time if x.pick_up_time > Time.current }.first
+  end
+
   def food_score
     score = food_avg_score.round(1)
     score = if score.to_s[-1].to_i >= 5
