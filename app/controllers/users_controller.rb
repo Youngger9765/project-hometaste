@@ -29,32 +29,28 @@ class UsersController < ApplicationController
 
 	def paid
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
+		render_js
 	end
 
 	def completed
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
+		render_js
 	end
 
 	def cancelled
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
+		render_js
 	end
 
 	def big_bun
+		render_js
+	end
+
+	private
+
+	def render_js
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end
 	end
-
-
-
-	private
 
 	def user_params
 		params.require(:user).permit(

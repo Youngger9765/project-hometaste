@@ -49,10 +49,16 @@ Rails.application.routes.draw do
 
       # 5 btn
       get :sales
+      get :summary
+      get :advance
+      get :delivering
+      get :completed
+      get :cancelled
+
       get :income
       get :rating
       get :message
-      get :busines
+      get :business
 
       #yep
       post :yep

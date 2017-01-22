@@ -41,6 +41,7 @@
           }
           @if $i == 0{
             .#{$method_short}#{$direction_short}n_#{$media} { #{$method}-#{$direction}: inherit !important; }
+            .#{$method_short}#{$direction_short}a_#{$media} { #{$method}-#{$direction}: auto !important; }
           }
         }
       }

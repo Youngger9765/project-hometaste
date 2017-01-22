@@ -2,7 +2,7 @@ class ChefsController < ApplicationController
 
 	before_action :find_chef, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep, :busines]
+		:save_dish, :menu, :sales, :yep, :business]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
@@ -82,10 +82,31 @@ class ChefsController < ApplicationController
 
 	end
 
-	def show
+	# show
+	def sales
 	end
 
-	def busines
+	def summary
+		render_js
+	end
+
+	def advance
+		render_js
+	end
+
+	def delivering
+		render_js
+	end
+
+	def completed
+		render_js
+	end
+
+	def cancelled
+		render_js
+	end
+
+	def business
 	end
 
 	def edit
@@ -158,6 +179,13 @@ class ChefsController < ApplicationController
 	end
 
 	private
+
+	def render_js
+		respond_to do |format|
+			format.js {render 'sales'}
+		end
+	end
+
 
 	def chef_params
 	  params.require(:chef).permit(
