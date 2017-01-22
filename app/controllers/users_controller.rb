@@ -53,14 +53,6 @@ class UsersController < ApplicationController
 		render_js
 	end
 
-	private
-
-	def render_js
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
-	end
-
 	def cancel_order
 		if @order.order_status != "completed"
 
@@ -130,6 +122,12 @@ class UsersController < ApplicationController
 	end
 
 	private
+
+	def render_js
+		respond_to do |format|
+			format.js {render 'purchase'}
+		end
+	end
 
 	def user_params
 		params.require(:user).permit(
