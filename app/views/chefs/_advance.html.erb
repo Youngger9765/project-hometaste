@@ -1,0 +1,33 @@
+<!--以下整塊是一個訂單 接資料時需用以下整個each do-->
+<div class="black_border_block mt25_sm mrl5_sm mrl25_md">
+  <div class="row df_sm">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3 class="bold dib_sm tac tal_sm">2017/1/16</h3>
+          <h3 class="bold dib_sm ml40_sm tac tal_sm">12:00</h3>
+        </div>
+
+        <% 3.times do %>
+            <% order.order_food_ships.each do |ship| %>
+                <div class="col-xs-12 mt30">
+                  <div class="df chef_product_lists">
+                    <div class="col-xs-5 background_img_setting" style="background-image: url(<%= image_path 'tmp/kitchen.png' %>);">
+                    </div>
+                    <div class="col-xs-7 vertical_space_around">
+                      <h6 class="mtb0 ml20_sm ml10 bold"><%= ship.food.name %></h6>
+                      <div>
+                      <h3 class="red dib ml20">2</h3>
+                        <h6 class="mtb0 ml20_sm ml10 dib">foodies want it</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            <% end %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@
               <i class="fa fa-pencil" aria-hidden="true"> <%= link_to "Edit Profile", edit_chef_path(@chef) %></i>
             </div>
         <%end%>
-        <% if current_user.is_admin %>
+        <% if current_user.try(:is_admin) %>
             <div class="btn btn-success col-md-2 right" id="chef-review-btn">
               <i class="fa fa-eye" aria-hidden="true"> <%= link_to "Review Chef", review_chef_path(@chef) %></i>
             </div>

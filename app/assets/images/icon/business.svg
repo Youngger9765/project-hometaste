@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="45px" viewBox="0 0 40 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39 (31667) - http://www.bohemiancoding.com/sketch -->
+    <title>business summary icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="completed" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-1165.000000, -831.000000)" fill="#EC1C24">
+            <g id="business-summary-btn" transform="translate(1035.000000, 819.000000)">
+                <path d="M170,21.3355999 L170,17.0093855 C170,14.231557 167.759041,12 164.994678,12 L135.005322,12 C132.236284,12 130,14.2427783 130,17.0093855 L130,51.9906145 C130,54.768443 132.240959,57 135.005322,57 L164.994678,57 C167.763716,57 170,54.7572217 170,51.9906145 L170,35.00145 L161.57871,43.4227396 L154.745785,36.5898145 L170,21.3355999 Z M140,22 L160,22 L160,24 L140,24 L140,22 Z M140,29 L160,29 L160,31 L140,31 L140,29 Z M140,36 L149,36 L149,38 L140,38 L140,36 Z M153.416463,38 L160.249388,44.8329251 L150,48.2493876 L153.416463,38 Z" id="business-summary-icon"></path>
+            </g>
+        </g>
+    </g>
+</svg>

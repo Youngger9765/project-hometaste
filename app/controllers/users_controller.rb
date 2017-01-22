@@ -33,30 +33,29 @@ class UsersController < ApplicationController
 
 	def paid
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
-
 		datetime_now = Time.now.utc.localtime
 		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
+		render_js
 	end
 
 	def completed
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "completed")
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
+		render_js
 	end
 
 	def cancelled
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "cancelled")
-		respond_to do |format|
-			format.js {render 'purchase'}
-		end
+		render_js
 	end
 
 	def big_bun
+		render_js
+	end
+
+	private
+
+	def render_js
 		respond_to do |format|
 			format.js {render 'purchase'}
 		end

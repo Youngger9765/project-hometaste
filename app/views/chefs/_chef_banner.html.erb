@@ -10,17 +10,21 @@
     <p>My Rating</p>
   </a>
   <a href="<%= menu_chef_path %>" class="my_btn_reserve border_none_radius">
-    <i class="fa fa-heart" aria-hidden="true"></i>
+    <i class="fa fa-comment" aria-hidden="true"></i>
     <p>My Message</p>
   </a>
-  <a href="<%= busines_chef_path %>" class="my_btn_reserve border_none_radius">
-    <i class="fa fa-comment" aria-hidden="true"></i>
-    <p>Buiness Summary</p>
+  <a href="<%= business_chef_path %>" class="my_btn_reserve border_none_radius">
+    <i class="business_icon_red" aria-hidden="true"></i>
+    <i class="business_icon_white hidden" aria-hidden="true"></i>
+    <p>Business Summary</p>
   </a>
 </div>
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
-    $('a.my_btn_reserve[href*="' + location.pathname.split('/')[3] + '"]').toggleClass('my_btn_reserve').toggleClass('my_btn');
+    var btn = $('a.my_btn_reserve[href*="' + location.pathname.split('/')[3] + '"]')
+    btn.toggleClass('my_btn_reserve').toggleClass('my_btn');
+    btn.find('[class^=business]').toggleClass('hidden')
+
   })
 </script>
