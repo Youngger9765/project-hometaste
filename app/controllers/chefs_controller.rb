@@ -87,22 +87,27 @@ class ChefsController < ApplicationController
 	end
 
 	def summary
+		# @order 這邊需要幫我寫一下怎麼生出@order
 		render_js
 	end
 
 	def advance
+		# @order 這邊需要幫我寫一下怎麼生出@order
 		render_js
 	end
 
 	def delivering
+		# @order 這邊需要幫我寫一下怎麼生出@order
 		render_js
 	end
 
 	def completed
+		# @order 這邊需要幫我寫一下怎麼生出@order
 		render_js
 	end
 
 	def cancelled
+		# @order 這邊需要幫我寫一下怎麼生出@order
 		render_js
 	end
 
@@ -110,7 +115,6 @@ class ChefsController < ApplicationController
 	end
 
 	def edit
-
 	end
 
 	def update
