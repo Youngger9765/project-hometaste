@@ -4,6 +4,11 @@ class UsersController < ApplicationController
 	before_action :is_current_user?, :except =>[:new]
 	before_action :find_order, :only =>[:cancel_order,:not_yet_order,:yep_order]
 
+	Braintree::Configuration.environment = :sandbox
+	Braintree::Configuration.merchant_id = "72yk9y5dxms9gxf9"
+	Braintree::Configuration.public_key = "n3tn23y52b346z3x"
+	Braintree::Configuration.private_key = "dd8841579f3ee81053baddadbb4da98a"
+
 	def new
 		@user = User.new
 	end
@@ -25,6 +30,7 @@ class UsersController < ApplicationController
 	end
 
 	def purchase
+		@client_token = Braintree::ClientToken.generate
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
 
 		datetime_now = Time.now.utc.localtime
@@ -101,9 +107,28 @@ class UsersController < ApplicationController
 					@order.update(:cancelled_reason => params[:user_not_yet_reason],
 												:order_status => "cancelled"
 											)
+					# Mail
 					UserMailer.user_not_yet_order(current_user, @order.cancelled_reason).deliver_now!
-					# TODO: 要做退款功能
-					flash[:notice] = "We already tell chef to check this problem and will refound!"
+
+					# Refund
+					nonce_from_the_client = params["payment-method-nonce"]
+
+					if @order.confirmation_number.present?
+						transaction = Braintree::Transaction.find(@order.confirmation_number)
+						transaction_status = transaction.status
+
+						if transaction_status == "submitted_for_settlement"
+							result = Braintree::Transaction.void(@order.confirmation_number)
+						elsif transaction_status == "settled"
+							result = Braintree::Transaction.refund(@order.confirmation_number)
+						end
+					end
+
+					if result.success?
+						flash[:notice] = "We already tell chef to check this problem and will refound!"
+					else
+						flash[:notice] = "We already tell chef and deal with your payment!"
+					end
 				else
 					flash[:alert] = "You can't modify this order."
 				end
