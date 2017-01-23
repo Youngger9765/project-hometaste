@@ -17,6 +17,9 @@ class BigBunsController < ApplicationController
 		if params[:chef_id]
   		@chef = Chef.find(params[:chef_id])
 	  	@big_bun = @chef.restaurant.big_buns.new(big_bun_params)
+
+	  	# TODO: check start_datetime & stop_datetime
+	  	
 			if @big_bun.save!
 				redirect_to chef_path(@chef)
 			else

@@ -25,14 +25,14 @@ class UsersController < ApplicationController
 	end
 
 	def purchase
-		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
 
 		datetime_now = Time.now.utc.localtime
 		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 	end
 
 	def paid
-		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "not yet")
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
 		datetime_now = Time.now.utc.localtime
 		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 
