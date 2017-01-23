@@ -61,8 +61,8 @@ class ApiV1::SearchController < ApplicationController
     if Geocoder.coordinates(@location)
       @lat ,@long = Geocoder.coordinates(@location)
     else
-      @lat = request.location.latitude
-      @long = request.location.longitude
+      @lat = request.location.data['latitude'].to_f
+      @long = request.location.data['longitude'].to_f
     end
   end
 

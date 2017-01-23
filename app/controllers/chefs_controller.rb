@@ -1,12 +1,12 @@
 class ChefsController < ApplicationController
 
-	before_action :find_chef, :only =>[
+	before_action :find_chef_restaurant, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep, :busines]
+		:save_dish, :menu, :sales, :yep, :business, :summary]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep]
+		:save_dish, :menu, :sales, :yep, :summary]
 
 	# before_action :is_current_user?, :except => [:new]
 	# before_action :has_authority?, :except => [:new]
@@ -82,14 +82,56 @@ class ChefsController < ApplicationController
 
 	end
 
-	def show
+	# show
+	def sales
 	end
 
-	def busines
+	def summary
+
+		# UTC time
+		datetime_now = Time.now
+		datetime_now_to_utc = datetime_now.utc
+
+		# 要確認時區的開始時間
+		# TODO:加入request 的time_zone
+		local_datetime_beginning = Time.now.utc.localtime.beginning_of_day
+		local_datetime_end = Time.now.utc.localtime.end_of_day
+
+		local_datetime_beginning_to_utc = local_datetime_beginning.utc
+		local_datetime_end_to_utc = local_datetime_end.utc
+		today_time_range = (local_datetime_beginning_to_utc..local_datetime_end_to_utc)
+
+		# today's paid orders
+		today_orders = @restaurant.orders.where(:payment_status => "paid").where(:pick_up_time => today_time_range)
+		# before pick up time
+		@orders = today_orders.where(["pick_up_time > ?",datetime_now_to_utc])
+		render_js
+	end
+
+	def advance
+		# @order 這邊需要幫我寫一下怎麼生出@order
+		render_js
+	end
+
+	def delivering
+		# @order 這邊需要幫我寫一下怎麼生出@order
+		render_js
+	end
+
+	def completed
+		# @order 這邊需要幫我寫一下怎麼生出@order
+		render_js
+	end
+
+	def cancelled
+		# @order 這邊需要幫我寫一下怎麼生出@order
+		render_js
+	end
+
+	def business
 	end
 
 	def edit
-
 	end
 
 	def update
@@ -159,6 +201,13 @@ class ChefsController < ApplicationController
 
 	private
 
+	def render_js
+		respond_to do |format|
+			format.js {render 'sales'}
+		end
+	end
+
+
 	def chef_params
 	  params.require(:chef).permit(
 	  	:first_name, :last_name, :phone_number, :birthday,
@@ -217,8 +266,9 @@ class ChefsController < ApplicationController
 		params[:bulk_buy_only]
 	end
 
-	def find_chef
+	def find_chef_restaurant
 		@chef = Chef.find(params[:id])
+		@restaurant = @chef.restaurant
 	end
 
 	def find_user

@@ -47,7 +47,30 @@
     font-size: 30px;
   }
 }
+.chef_product_lists .background_img_setting{
+  padding-top: 25%;
+}
+[class^=chef]{
+.basic_bg{
+  a[class*=_btn],a[class*=_btn_reserve]{
+    height: 50px;
+    line-height: 50px;
+    &:hover{
+      @extend .red;
+    }
+    &:focus{
+      @extend .white;
+    }
+  }
+}
+}
 
+@media (max-width: 507px) {
+  [name=order_summary]{
+    line-height: 18px !important;
+    padding-top: 7px !important;
+  }
+}
 @media (max-width: $screen-xs-max) {
   [class^=chefs]{
     h4{

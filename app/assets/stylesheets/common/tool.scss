@@ -74,6 +74,9 @@
 .fluid{
   width: 100%;
 }
+.height_fluid{
+  height: 100%;
+}
 .small_btn{
   width: 84px;
   height: 32px;
@@ -136,6 +139,9 @@
 }
 .flex_space_between{
   @include flex_(inherit,space-between);
+}
+.flex_justify_end{
+  @include flex_(inherit,flex-end);
 }
 .flex_center_start{
   @include flex_(inherit,flex-start);
@@ -215,6 +221,26 @@
   [class*=_btn],[class*=_btn_reserve]{
     @include calc(width,'100% / 4');
     margin: 5px;
+    &:focus{
+      color: #FFFFFF;
+    }
+    i{
+      font-size: 40px;
+    }
+    p{
+      line-height: 10px;
+      margin: 0;
+    }
+  }
+}
+.five_btn{
+  @extend .df;
+  [class*=_btn],[class*=_btn_reserve]{
+    @include calc(width,'100% / 5');
+    margin: 5px;
+    &:focus{
+      color: #FFFFFF;
+    }
     i{
       font-size: 40px;
     }
@@ -289,6 +315,17 @@
       [class*=_btn],[class*=_btn_reserve]{
         margin: 0;
         border-right: none;
+      }
+    }
+    .five_btn{
+      @include calc(width,'100% + 10px');
+      margin-left: -5px;
+      padding: 0;
+      [class*=_btn],[class*=_btn_reserve]{
+        margin: 0;
+        min-width: 80px;
+        border-right: none;
+        padding: 0;
       }
     }
   }

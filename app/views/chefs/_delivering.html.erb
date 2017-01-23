@@ -1,0 +1,72 @@
+<!--以下整塊是一個訂單 接資料時需用以下整個each do-->
+<div class="black_border_block mt25_sm mrl5_sm mrl25_md">
+  <div class="row df_sm">
+    <div class="col-md-8 col-sm-7 col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 mt10 flex_vertical_center">
+          <div class="dib border_sub_radius border_black background_img_setting mla_xs mln_sm" style="background-image: url(<%= image_path order.restaurant.main_photo %>); width: 40px; height: 40px;"></div>
+          <h3 class="bold dib ml10 mra_xs mra_sm">Mr. Chan’s Kitchen</h3>
+        </div>
+
+        <% 3.times do %>
+            <% order.order_food_ships.each do |ship| %>
+                <div class="col-xs-12 mt30">
+                  <%= render 'product_list', :ship => ship %>
+                </div>
+            <% end %>
+        <% end %>
+
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-5 col-xs-12">
+      <div class="row height_fluid df">
+        <div class="col-xs-12 pt20 pt60_sm df flex-direction_column height_fluid">
+          <i class="gray_line visible-xs"></i>
+          <div class="df">
+            <div class="pr15 mla_xs mln_sm">
+              <i class="fa fa-map-marker fa-2x red mt15"></i>
+            </div>
+            <div class="pt5 mra_xs mra_sm">
+              <h6 style="line-height: 24px;">555 Montgomery st. <br>
+                Suite 501, <br>
+                San Francisco, CA, 94111
+              </h6>
+            </div>
+          </div>
+          <div class="df mt15">
+            <div class="pr15 mla_xs mln_sm">
+              <i class="fa fa-clock-o red fa-2x mt10"></i>
+            </div>
+            <div class="pt5 mra_xs mra_sm">
+              <h6>2016/12/21 12:00</h6>
+            </div>
+          </div>
+          <i class="gray_line visible-xs"></i>
+          <div class="mta_xs">
+            <h3 class="bold tac tal_sm mb0_sm">Total Payment : $28.00</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <i class="gray_line  mtb25"></i>
+    </div>
+    <div class="col-xs-12 tac tan_sm ui form db_xs df_sm flex_vertical_center">
+      <h3 class="red">Confirmation Number: </h3>
+      <h3 class="red dib mt10 mr10">#1234</h3><%= text_field_tag :'valid_number',nil,style:'width:70px; display:inline-block; border:1px solid #EC1C24;' %>
+    </div>
+    <div class="col-xs-12">
+      <i class="gray_line mtb25"></i>
+    </div>
+    <div class="col-sm-5 col-xs-12 tac tan_sm">
+      <h3 class="black">Order completed?</h3>
+    </div>
+    <div class="col-sm-7 col-xs-12 tac tar_sm">
+      <a class="my_btn_reserve mr15_sm mt25 mt0_sm db dib_sm mrla" style="width: 160px;">Yep!</a>
+      <a class="my_btn_reserve db dib_sm mt25 mt0_sm mrla" style="width: 160px;">Not yet!</a>
+    </div>
+  </div>
+</div>
