@@ -39,6 +39,7 @@
       </div>
 
       <% if order.shipping_method == "bulk_buy"%>
+        <!-- TODO: 確認 cut off time 的local time -->
         <% if order.bulk_buy.cut_off_time.localtime.strftime("%H%M%S") > @time_now_to_Num%>
           <div class="col-sm-6 col-xs-12 tac tar_sm">
             <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
