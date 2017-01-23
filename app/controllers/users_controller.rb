@@ -101,9 +101,8 @@ class UsersController < ApplicationController
 					@order.update(:cancelled_reason => params[:user_not_yet_reason],
 												:order_status => "cancelled"
 											)
-					# 寄信功能
 					UserMailer.user_not_yet_order(current_user, @order.cancelled_reason).deliver_now!
-					# 要做退款功能
+					# TODO: 要做退款功能
 					flash[:notice] = "We already tell chef to check this problem and will refound!"
 				else
 					flash[:alert] = "You can't modify this order."
