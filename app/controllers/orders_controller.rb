@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
 		@order.pick_up_time = pick_datetime
 		@order.customer_name = current_user.name
 		@order.payment_status = 'unpaid'
-		@order.order_status = 'not yet'
+		@order.order_status = 'process'
 
 		if @order.save
 			create_user_bigbun(params[:bigbun])

@@ -2,15 +2,18 @@ class ChefsController < ApplicationController
 
 	before_action :find_chef_restaurant, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep, :business, :summary]
+		:save_dish, :menu, :sales, :yep, :business, :summary,:delivering,
+		:completed,:cancelled]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep, :summary]
+		:save_dish, :menu, :sales, :yep, :summary,:delivering,
+		:completed,:cancelled]
 
 	# before_action :is_current_user?, :except => [:new]
 	# before_action :has_authority?, :except => [:new]
 	before_action :user_admin?, :only =>[:approve, :review]
+	before_action :find_orders, :only => [:summary, :delivering, :advance]
 
 	def new
 		@user = User.new
@@ -87,24 +90,9 @@ class ChefsController < ApplicationController
 	end
 
 	def summary
-
-		# UTC time
-		datetime_now = Time.now
-		datetime_now_to_utc = datetime_now.utc
-
-		# 要確認時區的開始時間
-		# TODO:加入request 的time_zone
-		local_datetime_beginning = Time.now.utc.localtime.beginning_of_day
-		local_datetime_end = Time.now.utc.localtime.end_of_day
-
-		local_datetime_beginning_to_utc = local_datetime_beginning.utc
-		local_datetime_end_to_utc = local_datetime_end.utc
-		today_time_range = (local_datetime_beginning_to_utc..local_datetime_end_to_utc)
-
-		# today's paid orders
-		today_orders = @restaurant.orders.where(:payment_status => "paid").where(:pick_up_time => today_time_range)
-		# before pick up time
-		@orders = today_orders.where(["pick_up_time > ?",datetime_now_to_utc])
+		# Today's ORDERS
+		today_orders = @paid_process_orders.where(:pick_up_time => @today_time_range)
+		@orders = today_orders.where(["pick_up_time > ?",@datetime_now_to_utc])
 		render_js
 	end
 
@@ -114,17 +102,17 @@ class ChefsController < ApplicationController
 	end
 
 	def delivering
-		# @order 這邊需要幫我寫一下怎麼生出@order
+		@orders = @paid_process_orders.where(["pick_up_time < ?",@datetime_now_to_utc])
 		render_js
 	end
 
 	def completed
-		# @order 這邊需要幫我寫一下怎麼生出@order
+		@orders = @restaurant.orders.where(:payment_status => 'paid').where(:order_status => 'completed')
 		render_js
 	end
 
 	def cancelled
-		# @order 這邊需要幫我寫一下怎麼生出@order
+		@orders = @restaurant.orders.where(:payment_status => 'paid').where(:order_status => 'cancelled')
 		render_js
 	end
 
@@ -167,14 +155,6 @@ class ChefsController < ApplicationController
 	end
 
 	def sales
-		standby_time_range = (Time.now().utc..Time.now().end_of_day().utc)
-		@today_orders = @chef.restaurant.orders.where(:pick_up_time => standby_time_range).where(:payment_status => "paid").where(:order_status => "not yet")
-
-		finished_time_range = (Time.now().beginning_of_day().utc..Time.now().utc)
-		@delivery_orders = @chef.restaurant.orders.where(:pick_up_time => finished_time_range).where(:payment_status => "paid").where(:order_status => "not yet")
-
-		@cancelled_orders = @chef.restaurant.orders.where(:order_status => "cancelled")
-		@completed_orders = @chef.restaurant.orders.where(:order_status => "completed")
 		respond_to do |format|
 		  format.html
 		  format.js
@@ -291,5 +271,21 @@ class ChefsController < ApplicationController
 			flash[:alert] = "No authority!"
 			redirect_to root_path
 		end
+	end
+
+	def find_orders
+		@paid_process_orders = @restaurant.orders.where(:payment_status => "paid").where(order_status: "process")
+		# UTC time
+		datetime_now = Time.now
+		@datetime_now_to_utc = datetime_now.utc
+
+		# 要確認時區的開始時間
+		# TODO:加入request 的time_zone
+		local_datetime_beginning = Time.now.utc.localtime.beginning_of_day
+		local_datetime_end = Time.now.utc.localtime.end_of_day
+
+		@local_datetime_beginning_to_utc = local_datetime_beginning.utc
+		@local_datetime_end_to_utc = local_datetime_end.utc
+		@today_time_range = (@local_datetime_beginning_to_utc..@local_datetime_end_to_utc)
 	end
 end
