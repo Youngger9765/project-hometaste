@@ -87,27 +87,34 @@ class UsersController < ApplicationController
 	end
 
 	def not_yet_order
-		if params[:user_not_yet_reason].present?
 
-			# 先確認送餐時間
+		# 先確認送餐時間  TODO: 確認local time
+		datetime_now = Time.now
+		datetime_now_to_utc = datetime_now.utc
 
-			# 寄信功能
+		if datetime_now_to_utc < @order.pick_up_time.utc
+			flash[:alert] = "Please wait till pick up time!"
 
-			# 要做退款功能
-			if @order.order_status != "completed" && @order.order_status != "cancelled"
-				@order.update(:cancelled_reason => params[:user_not_yet_reason],
-											:order_status => "cancelled"
-										)
-				flash[:notice] = "We already tell chef to check this problem and will refound!"
-				redirect_to purchase_user_path(@user)
-			else
-				flash[:alert] = "You can't modify this order."
-				redirect_to purchase_user_path(@user)
-			end
 		else
-			flash[:alert] = "Please choose a reason!"
-			redirect_to purchase_user_path(@user)
+			if params[:user_not_yet_reason].present?
+				# 寄信功能
+
+				# 要做退款功能
+				if @order.order_status != "completed" && @order.order_status != "cancelled"
+					@order.update(:cancelled_reason => params[:user_not_yet_reason],
+												:order_status => "cancelled"
+											)
+					flash[:notice] = "We already tell chef to check this problem and will refound!"
+				else
+					flash[:alert] = "You can't modify this order."
+				end
+			else
+				flash[:alert] = "Please choose a reason!"
+			end
+
 		end
+
+		redirect_to purchase_user_path(@user)
 	end
 
 	def yep_order
