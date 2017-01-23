@@ -75,7 +75,8 @@ class UsersController < ApplicationController
 					@order.update(:order_status => "cancelled")
 					flash[:notice] = "Successfully cancelled."
 
-					# 要做退款功能
+					# Refund
+					order_refund
 
 				else
 					flash[:notice] = "You can't cancel this order! It is already over cut off time."
@@ -111,24 +112,8 @@ class UsersController < ApplicationController
 					UserMailer.user_not_yet_order(current_user, @order.cancelled_reason).deliver_now!
 
 					# Refund
-					nonce_from_the_client = params["payment-method-nonce"]
+					order_refund
 
-					if @order.confirmation_number.present?
-						transaction = Braintree::Transaction.find(@order.confirmation_number)
-						transaction_status = transaction.status
-
-						if transaction_status == "submitted_for_settlement"
-							result = Braintree::Transaction.void(@order.confirmation_number)
-						elsif transaction_status == "settled"
-							result = Braintree::Transaction.refund(@order.confirmation_number)
-						end
-					end
-
-					if result.success?
-						flash[:notice] = "We already tell chef to check this problem and will refound!"
-					else
-						flash[:notice] = "We already tell chef and deal with your payment!"
-					end
 				else
 					flash[:alert] = "You can't modify this order."
 				end
@@ -186,5 +171,27 @@ class UsersController < ApplicationController
 
 	def find_order
 		@order = Order.find(params[:order_id])
+	end
+
+	def order_refund
+		# Refund
+		nonce_from_the_client = params["payment-method-nonce"]
+
+		if @order.confirmation_number.present?
+			transaction = Braintree::Transaction.find(@order.confirmation_number)
+			transaction_status = transaction.status
+
+			if transaction_status == "submitted_for_settlement"
+				result = Braintree::Transaction.void(@order.confirmation_number)
+			elsif transaction_status == "settled"
+				result = Braintree::Transaction.refund(@order.confirmation_number)
+			end
+		end
+
+		if result.success?
+			flash[:notice] = "We already tell chef to check this problem and will refound!"
+		else
+			flash[:notice] = "We already tell chef and deal with your payment!"
+		end
 	end
 end
