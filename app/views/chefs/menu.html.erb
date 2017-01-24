@@ -53,9 +53,6 @@
 							<%= link_to "save to public",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
 						<%end%>
 
-						<!-- re-post -->
-						<%= link_to "re-post","",:class=>"btn btn-default"%>
-
 						<!-- share -->
 						<%= link_to "",:class=>"btn btn-default" do %>
 						  <i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -116,9 +113,6 @@
 						<%else%>
 							<%= link_to "save to public",chef_big_bun_path(@chef.id, big_bun.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
 						<%end%>
-
-						<!-- re-post -->
-						<%= link_to "re-post","",:class=>"btn btn-default"%>
 
 						<!-- share -->
 						<%= link_to "",:class=>"btn btn-default" do %>
