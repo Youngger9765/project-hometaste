@@ -23,6 +23,8 @@ class User < ApplicationRecord
     :allow_destroy => true,
     :reject_if => :all_blank
 
+  serialize :prefered_cuisine_ids
+
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
@@ -203,5 +205,9 @@ class User < ApplicationRecord
 
   def is_admin?
       self.is_admin
+  end
+
+  def virtual_name
+    
   end
 end

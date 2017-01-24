@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170115121821) do
+ActiveRecord::Schema.define(version: 20170124135002) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -320,6 +320,7 @@ ActiveRecord::Schema.define(version: 20170115121821) do
     t.string   "last_name"
     t.string   "state"
     t.string   "city"
+    t.text     "prefered_cuisine_ids",   limit: 65535
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["fb_uid"], name: "index_users_on_fb_uid", using: :btree

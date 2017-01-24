@@ -20,6 +20,12 @@ class UsersController < ApplicationController
 	def update
 		@user.update(user_params)
 
+		# save prefered_food_ids
+		@user.prefered_cuisine_ids = []
+		params[:user][:prefered_cuisine_ids].each do |id|
+			@user.prefered_cuisine_ids << id.to_i
+		end
+
 		if @user.save
 			flash[:notice] = "Successfully edited"
 			redirect_to edit_user_path(@user)
@@ -147,8 +153,8 @@ class UsersController < ApplicationController
 
 	def user_params
 		params.require(:user).permit(
-				:name, :gender, :birthday, :phone_number, :address,
-				:ZIP, :foodie_id,
+				:name, :last_name, :gender, :birthday, :phone_number, :address,
+				:ZIP, :foodie_id, :prefered_cuisine_ids,
 
 				:user_photo_attributes => [
 						:photo
