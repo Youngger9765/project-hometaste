@@ -8,9 +8,9 @@ class BigBunsController < ApplicationController
 
 	def new
 		@big_bun = BigBun.new
-  	if params[:chef_id]
-  		@chef = Chef.find(params[:chef_id])
-  	end
+		if params[:chef_id]
+			@chef = Chef.find(params[:chef_id])
+		end
 	end
 
 	def create
@@ -18,7 +18,12 @@ class BigBunsController < ApplicationController
   		@chef = Chef.find(params[:chef_id])
 	  	@big_bun = @chef.restaurant.big_buns.new(big_bun_params)
 
-	  	# TODO: check start_datetime & stop_datetime
+	  	time_error = false
+	  	# 先確認start_time < stop_time
+
+	  	# TODO: check all start_datetime & stop_datetime
+	  	# 先確認 A.start_time > B.end_time or A.end_time < B.start_time
+	  	big_buns = @chef.big_buns
 	  	
 			if @big_bun.save!
 				redirect_to chef_path(@chef)

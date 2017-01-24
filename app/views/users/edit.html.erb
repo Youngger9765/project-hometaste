@@ -29,8 +29,8 @@
 
                   <div class="col-md-6 col-sm-7">
                     <div class="field">
-                      <%= f.label :name, "Last Name*" %>
-                      <%= f.text_field :name %>
+                      <%= f.label :last_name, "Last Name*" %>
+                      <%= f.text_field :last_name %>
                     </div>
                   </div>
                   <div class="clearfix visible-sm"></div>
@@ -156,8 +156,8 @@
                   </div>
 
                   <div class="col-xs-12 mt15">
-                    <%= f.check_box :name ,class:'mr5'%>
-                    <%= f.label :name, "Automatically publish to my social media", class:'di' %>
+                    <%= f.check_box :virtual_name ,class:'mr5'%>
+                    <%= f.label :virtual_name, "Automatically publish to my social media", class:'di' %>
                   </div>
 
                 </div>
@@ -170,33 +170,33 @@
                   <h3 class="bold ml15">Payment Info</h3>
                   <div class="col-md-6 col-sm-7">
                     <div class="field">
-                      <%= f.label :foodie_id, "Credit card holder name" %>
-                      <%= f.text_field :foodie_id %>
+                      <%= f.label :virtual_name, "Credit card holder name" %>
+                      <%= f.text_field :virtual_name %>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-7">
                     <div class="field">
-                      <%= f.label :foodie_id, "Credit card number" %>
-                      <%= f.text_field :foodie_id %>
+                      <%= f.label :virtual_name, "Credit card number" %>
+                      <%= f.text_field :virtual_name %>
                     </div>
                   </div>
                   <div class="clearfix visible-sm"></div>
                   <div class="col-sm-3 col-md-2 col-xs-5">
                     <div class="field">
-                      <%= label :foodie_id, "Expiration date" %>
+                      <%= label :virtual_name, "Expiration date" %>
                       <%= select_year  Date.today, { start_year: 1992, end_year: 2007 },class:'ui dropdown fluid',placeholder:'Month' %>
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-2 col-xs-5">
                     <div class="field">
-                      <%= label :foodie_id, "Expiration date",class:'invisible' %>
+                      <%= label :virtual_name, "Expiration date",class:'invisible' %>
                       <%= select_month Date.today, { use_month_numbers: true } ,class:'ui dropdown fluid',placeholder:'Year' %>
                     </div>
                   </div>
                   <div class="clearfix visible-md-block"></div>
                   <div class="col-md-6 col-sm-7 col-lg-offset-2">
                     <div class="field">
-                      <%= f.label :foodie_id, "CVC code" %>
+                      <%= f.label :virtual_name, "CVC code" %>
                       <%= f.text_field :foodie_id %>
                     </div>
                   </div>
@@ -214,7 +214,7 @@
                     <% @cuisines.each do |cuisine| %>
                         <div class="field">
                           <div class="ui checkbox mtb0">
-                            <input type="checkbox" name="cuisine" tabindex="0" class="hidden">
+                            <input type="checkbox" value=<%=cuisine.id%> name="user[prefered_cuisine_ids][]" id="user-prefered_cuisine_ids-<%=cuisine.id%>" tabindex="0" class="hidden">
                             <label><%= cuisine.name %></label>
                           </div>
                         </div>
@@ -255,6 +255,15 @@
         alert('Please check password!')
         return false;
       };
+    }
+
+    var prefered_cuisine_ids = <%= @user.prefered_cuisine_ids%> || [];
+    if (prefered_cuisine_ids) {
+      for (var i = 0; i < prefered_cuisine_ids.length; i++) {
+        id = prefered_cuisine_ids[i];
+        id_name = '#user-prefered_cuisine_ids-' + id;
+        $(id_name).click();
+      }
     }
   })
 </script>
