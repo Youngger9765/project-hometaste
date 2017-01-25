@@ -58,7 +58,7 @@
                   <div class="col-md-6 col-sm-7">
                     <div class="field">
                       <%= f.label :email, "E-mail*" %>
-                      <%= f.text_field :email %>
+                      <%= f.text_field :email, :disabled => true %>
                     </div>
                   </div>
 
@@ -225,7 +225,8 @@
             </div>
             <div class="col-xs-12 tac mt15">
               <div id="user-submit-div">
-                <%= f.submit "Save",class:"ui button my_btn", :id=>"user-submit-btn"%>
+                <%= f.submit "Save",class:"ui button my_btn hidden", :id=>"user-submit-btn"%>
+                <div id="user-submit-check-btn" class="ui button my_btn">Save</div>
               </div>
             </div>
       <% end %>
