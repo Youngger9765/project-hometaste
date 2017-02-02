@@ -1,10 +1,10 @@
 <div class="df my_purchase_lists">
-  <div class="col-md-3 col-sm-3  col-xs-5 background_img_setting" style="background-image: url(<%= image_path 'tmp/kitchen.png' %>);">
+  <div class="col-xs-5 background_img_setting" style="background-image: url(<%= image_path 'tmp/kitchen.png' %>);">
   </div>
-  <div class="col-md-6 col-sm-6 col-xs-7 vertical_space_around">
+  <div class="col-xs-7 vertical_space_around">
     <h4 class="mtb0 ml20 bold"><%= ship.food.name %></h4>
     <h4 class="ml20 mt40 mt0_sm"><span>$<%= ship.food.price%></span> <span class="visible-xs-inline flr">Qty: <%= ship.quantity%></span></h4>
-    <h4 class="mtb0 ml20 hidden-xs">Qty: <%= ship.quantity%></h4>
+    <h4 class="mtb0 ml20 hidden-xs">Qty: <%= ship.quantity.to_i %></h4>
 
   </div>
 </div>

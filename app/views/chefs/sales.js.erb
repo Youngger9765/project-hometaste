@@ -1,1 +1,1 @@
-$('#chef_show_content').html("<%=j render action_name ,order: Order.all.last %>")
+$('#chef_show_content').html("<%=j render 'chefs/sales_five_page/'+ action_name ,orders: @orders %>")

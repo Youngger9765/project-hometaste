@@ -37,14 +37,15 @@ class UsersController < ApplicationController
 
 	def purchase
 		@client_token = Braintree::ClientToken.generate
-		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
-
+		# @orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
+		@orders = @user.orders
 		datetime_now = Time.now.utc.localtime
 		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 	end
 
 	def paid
-		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
+		# @orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
+		@orders = @user.orders
 		datetime_now = Time.now.utc.localtime
 		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
 
