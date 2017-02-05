@@ -1,0 +1,14 @@
+<% orders.each do |order| %>
+    <div class="black_border_block mt25_sm mrl5_sm mrl25_md">
+      <%= render 'chefs/sales_five_page/order_list',order:order %>
+      <div class="row">
+        <div class="col-xs-12">
+          <i class="gray_line  mtb25"></i>
+        </div>
+        <div class="col-xs-12 tac tar_sm">
+          <h3 class="red dib_sm">Cancelled at</h3>
+          <h3 class="red dib mr10 mb10 mb0_sm">2016/12/21 14:00</h3>
+        </div>
+      </div>
+    </div>
+<% end %>

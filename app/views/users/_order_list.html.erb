@@ -1,0 +1,45 @@
+<div class="row df_sm">
+  <div class="col-md-8 col-sm-7 col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3 class="bold"><%= order.restaurant.name %></h3>
+      </div>
+      <% order.order_food_ships.each do |ship| %>
+          <div class="col-xs-12 mt30">
+            <%= render 'product_list', :ship => ship %>
+          </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-5 col-xs-12">
+    <div class="row height_fluid df">
+      <div class="col-xs-12 pt20 pt60_sm df flex-direction_column height_fluid">
+        <i class="gray_line visible-xs"></i>
+        <div class="df">
+          <div class="pr15 mla_xs mln_sm">
+            <i class="fa fa-map-marker fa-2x red mt15"></i>
+          </div>
+          <div class="pt5 mra_xs mra_sm">
+            <h6 style="line-height: 24px;"><%= order.shipping_place %>
+            </h6>
+          </div>
+        </div>
+        <div class="df mt15">
+          <div class="pr15 mla_xs mln_sm">
+            <i class="fa fa-clock-o red fa-2x mt10"></i>
+          </div>
+          <div class="pt5 mra_xs mra_sm">
+            <h6><%= order.pick_up_time.localtime.strftime('%G/%I/%H %R') %></h6>
+          </div>
+        </div>
+        <i class="gray_line visible-xs"></i>
+        <div class="mta_xs">
+          <h3 class="bold tac tal_sm mb0_sm">Total Payment : $<%= order.amount %></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

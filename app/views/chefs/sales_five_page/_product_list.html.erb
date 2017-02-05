@@ -4,6 +4,6 @@
   <div class="col-xs-7 vertical_space_around">
     <h6 class="mtb0 ml20 bold"><%= ship.food.name %></h6>
     <h6 class="ml20 mt40 mt0_sm"><span>$<%= ship.food.price%></span> <span class="visible-xs-inline flr">Qty: <%= ship.quantity%></span></h6>
-    <h6 class="mtb0 ml20 hidden-xs">Qty: <%= ship.quantity%></h6>
+    <h6 class="mtb0 ml20 hidden-xs">Qty: <%= ship.quantity.to_i %></h6>
   </div>
 </div>
