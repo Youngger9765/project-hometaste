@@ -80,7 +80,7 @@ $(document).ready ->
             delete info_object["restaurant_#{restaurant_id}"]
 
     save_in_cookie(info_object)
-#    return restaurant_id:restaurant_id,food_id:food_id,food_price:food_price,qty:qty,info_object:info_object
+  #    return restaurant_id:restaurant_id,food_id:food_id,food_price:food_price,qty:qty,info_object:info_object
 
 
   render_order_new_list=() ->
@@ -180,9 +180,9 @@ $(document).ready ->
               input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
               form.append($(input));
 
-  #      $.removeCookie('cart_list',{path:'/'})
+        #      $.removeCookie('cart_list',{path:'/'})
         $(this).off('submit').submit();
-  #
+#
 
 
 
