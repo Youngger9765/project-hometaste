@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('.ui.dropdown').dropdown();
+  $(document).on 'dropdown','.ui.dropdown'
   $('.ui.checkbox').checkbox();
   $('.ui.accordion').accordion();
   $('.ui.radio.checkbox').checkbox();

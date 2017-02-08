@@ -41,6 +41,7 @@ gem 'settingslogic' #管理我們的秘密key
 gem 'omniauth-google-oauth2'
 
 # front tools
+gem 'nested_form'
 gem 'font-awesome-rails'
 gem 'less-rails-semantic_ui'
 gem 'autoprefixer-rails'
