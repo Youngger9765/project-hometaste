@@ -12,28 +12,28 @@
           <div class="col-sm-7 col-md-6 col-lg-4">
             <div class="field">
               <%= r.label :name, "Business name" %>
-              <%= r.text_field :name ,placeholder:'Mr. Chen’s Kitchen' %>
+              <%= r.text_field :name, placeholder:'Mr. Chen’s Kitchen' %>
             </div>
           </div>
 
           <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
             <div class="field">
               <%= r.label :phone_number, "Phone number" %>
-              <%= r.text_field :phone_number,placeholder:'6021234567' %>
+              <%= r.text_field :phone_number, placeholder:'6021234567' %>
             </div>
           </div>
 
           <div class="col-sm-7 col-md-6 col-lg-4">
             <div class="field">
               <%= r.label :address, "Address" %>
-              <%= r.text_field :address,placeholder:'2821 California st.' %>
+              <%= r.text_field :address, placeholder:'2821 California st.' %>
             </div>
           </div>
 
           <div class="col-sm-7 col-md-6 col-lg-4 col-lg-offset-2">
             <div class="field">
               <%= r.label :tax_ID, "Tax ID" %>
-              <%= r.text_field :tax_ID,placeholder:'1234567890' %>
+              <%= r.text_field :tax_ID, placeholder:'1234567890' %>
             </div>
           </div>
 
@@ -41,7 +41,7 @@
 
           <div class="col-xs-7 col-sm-4 col-md-4 col-lg-2">
             <div class="field">
-              <%= r.text_field :city,placeholder:'City' %>
+              <%= r.text_field :city, placeholder:'City' %>
             </div>
           </div>
 
@@ -55,7 +55,7 @@
 
           <div class="col-xs-7 col-sm-4 col-md-4 col-lg-2">
             <div class="field">
-              <%= r.text_field :ZIP,placeholder:'94115' %>
+              <%= r.text_field :ZIP, placeholder:'94115' %>
             </div>
           </div>
 
@@ -280,14 +280,14 @@
                       <%= b.text_field :location %>
                     </div>
                   </div>
-                  <!--select 需預設是空的-->
+                  <!--select 需預設是空的 需用資料控制要不要hidden-->
                   <div class="col-xs-5 col-sm-5 col-lg-4 hidden">
                     <div class="field">
                       <%= b.label :pick_up_time %>
                       <%= b.select :pick_up_time,options_for_select(us_states),{},class:'ui dropdown fluid' %>
                     </div>
                   </div>
-
+                  <!--select 需預設是空的 需用資料控制要不要hidden-->
                   <div class="col-sm-12 col-lg-10 hidden">
                     <div class="field">
                       <%= b.label :location %>
