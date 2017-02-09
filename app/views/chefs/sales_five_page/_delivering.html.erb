@@ -2,13 +2,13 @@
     <div class="black_border_block mt25_sm mrl5_sm mrl25_md" data-id="<%= order.id %>">
       <%= render 'chefs/sales_five_page/order_list',order:order %>
       <div class="row">
-        <%= form_tag food_path,method:'get' do %>
+        <%= form_tag yep_or_not_chef_path(:id=>current_user.chef.id), method:'post' do %>
             <div class="col-xs-12">
               <i class="gray_line  mtb25"></i>
             </div>
             <div class="col-xs-12 tac tan_sm ui form db_xs df_sm flex_vertical_center">
               <h3 class="red">Confirmation Number: </h3>
-              <h3 class="red dib mt10 mr10">#1234</h3><%= text_field_tag :'valid_number',nil,style:'width:70px; display:inline-block; border:1px solid #EC1C24;' %>
+              <h3 class="red dib mt10 mr10">#</h3><%= text_field_tag :'confirmation_number',order.confirmation_number[0..3],style:'width:100px; display:inline-block; border:1px solid #EC1C24;' %>
             </div>
             <div class="col-xs-12">
               <i class="gray_line mtb25"></i>

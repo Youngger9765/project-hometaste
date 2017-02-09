@@ -68,7 +68,7 @@ Rails.application.routes.draw do
       get :business
 
       #yep
-      post :yep
+      post :yep_or_not
     end
   end
 
