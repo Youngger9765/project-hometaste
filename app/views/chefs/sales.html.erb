@@ -1,37 +1,46 @@
 <%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
-
     <%= render 'kitchen_photo',f:f ,pen_click:'pen_click' %>
-
     <div class="container">
       <section class="row">
         <div class="col-xs-12 basic_bg_top">
           <div class="row" name="kitchen_banner">
+
             <div class="col-xs-12 df_sm mb15 tac tal_sm">
               <%= render 'chef_photo' ,f:f ,pen_click:'pen_click' %>
               <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm">Mr. Chan’s Kitchen</h1>
             </div>
-            <%= render 'chef_banner' %>
-          </div>
-        </div>
-        <div class="col-xs-12 basic_bg prl15_sm prl30_md">
-          <div class="row">
-            <div class="col-xs-12 five_btn prl35_md mb25 mb0_sm">
-              <%= link_to 'Order summary' ,summary_chef_path,class:'my_black_btn border_none_radius' ,remote:true ,name:'order_summary' %>
-              <%= link_to 'In advance' ,advance_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
-              <%= link_to 'Delivering' ,delivering_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
-              <%= link_to 'Completed' ,completed_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
-              <%= link_to 'Cancelled' ,cancelled_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
-            </div>
 
-            <div class="col-xs-12 prl15_sm" id="chef_show_content">
-              <%= render 'chefs/sales_five_page/summary' ,orders:@orders%>
-            </div>
+            <%= render 'chef_banner' %>
 
           </div>
         </div>
       </section>
     </div>
 <% end %>
+
+<div class="container">
+  <section class="row">
+    <div class="col-xs-12 basic_bg prl15_sm prl30_md">
+      <div class="row">
+        <div class="col-xs-12 five_btn prl35_md mb25 mb0_sm">
+          <%= link_to 'Order summary' ,summary_chef_path,class:'my_black_btn border_none_radius' ,remote:true ,name:'order_summary' %>
+          <%= link_to 'In advance' ,advance_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+          <%= link_to 'Delivering' ,delivering_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+          <%= link_to 'Completed' ,completed_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+          <%= link_to 'Cancelled' ,cancelled_chef_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+        </div>
+
+        <div class="col-xs-12 prl15_sm" id="chef_show_content">
+          <%= render 'chefs/sales_five_page/summary' ,orders:@orders%>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
     $(document).on('click','.my_black_btn_reserve',function(){
