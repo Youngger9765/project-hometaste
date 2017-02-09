@@ -131,7 +131,7 @@ class ChefsController < ApplicationController
 		end
 
 		if @chef.update!(chef_params)
-			redirect_to chef_path(@chef)
+			redirect_to sales_chef_path(@chef)
 		else
 			flash[:alert] = "update fail"
 			render :action => :edit
