@@ -176,7 +176,11 @@ class ChefsController < ApplicationController
 			end
 
 		else
+			# 勾選原因, 評價完使用者後
 			raise
+			order.order_status = "cancelled"
+			order.save!
+			flash[:notice] = "Successfully cancel order"
 		end
 		redirect_to sales_chef_path(@chef)
 	end
