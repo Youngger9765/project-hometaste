@@ -157,7 +157,8 @@ class ChefsController < ApplicationController
 	end
 
 
-	def yep
+	def yep_or_not
+		raise
 		confirmation_number = params[:confirmation_number]
 		order = Order.find(params[:order_id])
 
