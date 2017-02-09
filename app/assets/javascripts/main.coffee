@@ -87,7 +87,7 @@ $(document).ready ->
 
   # ----------------- search -------------------
 
-  $('.menu .item').mouseover ->
+  $('.search_wrap .menu .item').mouseover ->
     $('#keyword_input').val($(this).html())
 
   $('#search_submit').click ->

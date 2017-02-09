@@ -18,6 +18,7 @@
 //= require bootstrap/transition
 //= require bootstrap/carousel
 
+//= require jquery_nested_form
 //= require underscore
 //= require gmaps/google
 //= require gmaps
