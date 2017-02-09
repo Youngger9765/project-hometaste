@@ -89,38 +89,32 @@ class ChefsController < ApplicationController
 	def sales
 		today_orders = @paid_process_orders.where(:pick_up_time => @today_time_range)
 		@orders = today_orders.where( ["pick_up_time > ?", @datetime_now_to_utc] )
-		@orders = Order.all.first(3)
 	end
 
 	def summary
 		# Today's ORDERS
 		today_orders = @paid_process_orders.where(:pick_up_time => @today_time_range)
 		@orders = today_orders.where(["pick_up_time > ?",@datetime_now_to_utc])
-		@orders = Order.all.first(3)
 		render_js
 	end
 
 	def advance
 		# @order 這邊需要幫我寫一下怎麼生出@order
-		@orders = Order.all.first(3)
 		render_js
 	end
 
 	def delivering
 		@orders = @paid_process_orders.where(["pick_up_time < ?",@datetime_now_to_utc])
-		@orders = Order.all.first(3)
 		render_js
 	end
 
 	def completed
 		@orders = @restaurant.orders.where(:payment_status => 'paid').where(:order_status => 'completed')
-		@orders = Order.all.first(3)
 		render_js
 	end
 
 	def cancelled
 		@orders = @restaurant.orders.where(:payment_status => 'paid').where(:order_status => 'cancelled')
-		@orders = Order.all.first(3)
 		render_js
 	end
 
