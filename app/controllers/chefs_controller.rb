@@ -13,7 +13,7 @@ class ChefsController < ApplicationController
 	# before_action :is_current_user?, :except => [:new]
 	# before_action :has_authority?, :except => [:new]
 	before_action :user_admin?, :only => [:approve, :review]
-	before_action :find_orders, :only => [:summary, :delivering, :advance,:sales]
+	before_action :find_orders, :only => [:sales,:summary, :delivering, :advance,:completed,:cancelled]
 
 	def new
 		@user = User.new
@@ -87,13 +87,13 @@ class ChefsController < ApplicationController
 
 	# show
 	def sales
-		today_orders = @paid_process_orders.where(:pick_up_time => @today_time_range)
+		today_orders = @paid_process_orders.where(order_status: "process").where(:pick_up_time => @today_time_range)
 		@orders = today_orders.where( ["pick_up_time > ?", @datetime_now_to_utc] )
 	end
 
 	def summary
 		# Today's ORDERS
-		today_orders = @paid_process_orders.where(:pick_up_time => @today_time_range)
+		today_orders = @paid_process_orders.where(order_status: "process").where(:pick_up_time => @today_time_range)
 		@orders = today_orders.where(["pick_up_time > ?",@datetime_now_to_utc])
 		render_js
 	end
@@ -104,17 +104,17 @@ class ChefsController < ApplicationController
 	end
 
 	def delivering
-		@orders = @paid_process_orders.where(["pick_up_time < ?",@datetime_now_to_utc])
+		@orders = @paid_process_orders.where(order_status: "process").where(["pick_up_time < ?",@datetime_now_to_utc])
 		render_js
 	end
 
 	def completed
-		@orders = @restaurant.orders.where(:payment_status => 'paid').where(:order_status => 'completed')
+		@orders = @paid_process_orders.where(:order_status => 'completed')
 		render_js
 	end
 
 	def cancelled
-		@orders = @restaurant.orders.where(:payment_status => 'paid').where(:order_status => 'cancelled')
+		@orders = @paid_process_orders.where(:order_status => 'cancelled')
 		render_js
 	end
 
@@ -270,7 +270,7 @@ class ChefsController < ApplicationController
 	end
 
 	def find_orders
-		@paid_process_orders = @restaurant.orders.where(:payment_status => "paid").where(order_status: "process")
+		@paid_process_orders = @restaurant.orders.where(:payment_status => "paid")
 		# UTC time
 		datetime_now = Time.now
 		@datetime_now_to_utc = datetime_now.utc
