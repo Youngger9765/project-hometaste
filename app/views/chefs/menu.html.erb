@@ -50,7 +50,7 @@
 						<% if food.is_public%>
 							<%= link_to "save to private",chef_food_path(@chef.id, food.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
 						<%else%>
-							<%= link_to "save to public",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
+							<%= link_to "start selling dish",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
 						<%end%>
 
 						<!-- share -->
