@@ -1,7 +1,7 @@
 namespace :dev do
 
   desc "Rebuild system"
-  task :rebuild => ["db:drop", "db:setup", :fake, :count_order_amount]
+  task :rebuild => ["db:drop", "db:setup",:fake_user, :fake, :count_order_amount]
 
 
   task :fake_user => :environment do
@@ -49,6 +49,68 @@ namespace :dev do
       is_chef: false,
       is_admin: true,
     )
+
+    # create chef
+    puts('create chef')
+
+    User.where(:is_chef=>true).each do |user|
+      Chef.create(
+        user_id: user.id,
+        first_name: Faker::Name.name,
+        last_name: Faker::Name.name,
+        phone_number: user.phone_number,
+        birthday: Faker::Date.between(2.days.ago, Date.today),
+        SSN: Faker::Number.number(10),
+        routing_number: Faker::Number.number(10),
+        account_number: Faker::Number.number(10),
+      )
+    end
+
+    # create restaurants
+    puts('create restaurants')
+
+    Chef.all.each do |chef|
+      restaurant = Restaurant.create(
+        chef_id: chef.id,
+        name: Faker::Name.name,
+        address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+        latitude: Faker::Address.latitude,
+        longitude: Faker::Address.longitude,
+        phone_number: Faker::PhoneNumber.cell_phone,
+        description: Faker::Lorem.paragraph,
+        is_approved: [true, false].sample,
+        city: Faker::Address.city,
+        state: Faker::Address.state,
+        ZIP: Faker::Address.zip,
+        tax_ID: Faker::Number.number(10),
+        tax: rand(1..5),
+        order_reach: rand(50..1000),
+        communication_method: ["email", "text-message"].sample,
+      )
+
+      if [true,false].sample
+        Delivery.create(
+          restaurant_id: restaurant.id,
+          min_order: rand(5..15),
+          area: Faker::Address.city,
+          distance: Faker::Number.number(3),
+          cost: rand(5..10),
+          order_hours: rand(1..5),
+
+        )
+      end
+
+      rand(1..2).times {
+        BulkBuy.create(
+          restaurant_id: restaurant.id,
+          min_order: rand(5..15),
+          cut_off_time: Faker::Time.forward(0),
+          location: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+          pick_up_time: Faker::Time.forward(0),
+        )
+      }
+
+    end
   end
 
 
