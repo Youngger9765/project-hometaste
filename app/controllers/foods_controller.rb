@@ -22,7 +22,7 @@ class FoodsController < ApplicationController
   		@chef = Chef.find(params[:chef_id])
 	  	@food = @chef.restaurant.foods.new(food_params)
 			if @food.save!
-				redirect_to chef_path(@chef)
+				redirect_to menu_chef_path(@chef)
 			else
 				flash[:alert] = "add_dish fail"
 				render :action => :new
@@ -34,7 +34,6 @@ class FoodsController < ApplicationController
   end
 
   def update
-
   	if params[:is_public]
   		@food.is_public = params[:is_public]
 
@@ -68,7 +67,10 @@ class FoodsController < ApplicationController
 	  	:is_public, :unit, :unit_name, :max_order, :availability_date,
 
 	  	:food_photos_attributes => [
-		  		:id, :food_id, :photo,
+		  	:id, :food_id, :photo,
+		  ],
+		  :food_cuisine_ships_attributes => [
+		  	:id, :food_id, :cuisine_id,
 		  ],
 	  )
 	end

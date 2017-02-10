@@ -8,7 +8,14 @@ class Food < ApplicationRecord
   has_many :food_comments
   has_many :food_photos
 
+  has_many :food_cuisine_ships
+  has_many :cuisines, :through => :food_cuisine_ships
+
   accepts_nested_attributes_for :food_photos,
+    :allow_destroy => true,
+    :reject_if => :all_blank
+
+  accepts_nested_attributes_for :food_cuisine_ships,
     :allow_destroy => true,
     :reject_if => :all_blank
 
