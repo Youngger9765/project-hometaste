@@ -86,3 +86,21 @@
     </div>
   <%end%>
 </div>
+
+<!-- lunch or dinner -->
+<div class="row container chef-sub-container center" id="chef-add-dish-container">
+	<div class="form_control col-md-12">
+		<h2>Support Times</h2>
+	</div>
+	<div class="form_control col-md-4 underline-block">
+    <div class="col-xs-6 col-md-3 col-lg-2">
+      <div>
+      	<%= f.check_box :support_lunch %>
+        <%= f.label :support_lunch , 'support_lunch' %>
+
+        <%= f.check_box :support_dinner %>
+        <%= f.label :support_dinner , 'support_dinner' %>
+      </div>
+    </div>
+</div>
+
