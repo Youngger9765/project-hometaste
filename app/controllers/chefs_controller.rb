@@ -144,7 +144,7 @@ class ChefsController < ApplicationController
 	def approve
 		@restaurant = @chef.restaurant
 		if @restaurant.update(:is_approved => true)
-			redirect_to chef_path(@chef)
+			redirect_to sales_chef_path(@chef)
 		else
 			flash[:alert] = "approve fail"
 			render :action => :review
