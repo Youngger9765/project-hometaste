@@ -3,52 +3,56 @@ namespace :dev do
   desc "Rebuild system"
   task :rebuild => ["db:drop", "db:setup", :fake, :count_order_amount]
 
-  task :fake => :environment do
 
-  	# admin
+  task :fake_user => :environment do
+    # admin
     puts('create admin')
 
-  	User.create(
-  		name: "admin",
-  		foodie_id: "admin",
-  		email: "admin@admin.com",
-  		phone_number: Faker::PhoneNumber.cell_phone,
-  		password: 12345678,
-  		confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-  		address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-  		is_chef: false,
-  		is_admin: true,
-		)
+    User.create(
+      name: "admin",
+      foodie_id: "admin",
+      email: "admin@admin.com",
+      phone_number: Faker::PhoneNumber.cell_phone,
+      password: 12345678,
+      confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+      address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+      is_chef: false,
+      is_admin: true,
+    )
 
-		# chef
+    # chef
     puts('create chef')
 
-  	User.create(
-  		name: "chef",
-  		foodie_id: "chef",
-  		email: "chef@chef.com",
-  		phone_number: Faker::PhoneNumber.cell_phone,
-  		password: 12345678,
-  		confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-  		address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-  		is_chef: true,
-  		is_admin: false,
-		)
+    User.create(
+      name: "chef",
+      foodie_id: "chef",
+      email: "chef@chef.com",
+      phone_number: Faker::PhoneNumber.cell_phone,
+      password: 12345678,
+      confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+      address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+      is_chef: true,
+      is_admin: false,
+    )
 
-		# purpleice9765@msn.com
+    # purpleice9765@msn.com
     puts('create me')
 
-  	User.create(
-  		name: "young",
-  		foodie_id: "young",
-  		email: "purpleice9765@msn.com",
-  		phone_number: Faker::PhoneNumber.cell_phone,
-  		password: 12345678,
-  		confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-  		address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-  		is_chef: false,
-  		is_admin: true,
-		)
+    User.create(
+      name: "young",
+      foodie_id: "young",
+      email: "purpleice9765@msn.com",
+      phone_number: Faker::PhoneNumber.cell_phone,
+      password: 12345678,
+      confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+      address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+      is_chef: false,
+      is_admin: true,
+    )
+  end
+
+
+  task :fake => :environment do
 
   	# create users
     puts('create users')
