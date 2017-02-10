@@ -79,6 +79,13 @@
 
 		<!-- big bun content -->
 		<div class="row container menu-sub-container center" id="bigbun-content-container">
+
+			<div class="col-md-offset-1 col-md-10 row container">
+				<%= link_to "+ add big buns", new_chef_big_bun_path(@chef),:class=>"btn btn-lg btn-danger col-md-12"%>
+			</div>
+
+			<div class="clearfix"></div>
+
 			<% @big_buns.each do |big_bun|%>
 				<div class="row container menu-food-container center">
 					<div class="col-md-9 bigbun-info-container">

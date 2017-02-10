@@ -24,7 +24,7 @@ class BigBunsController < ApplicationController
 	  	# TODO: check all start_datetime & stop_datetime
 	  	# 先確認 A.start_time > B.end_time or A.end_time < B.start_time
 	  	big_buns = @chef.big_buns
-	  	
+
 			if @big_bun.save!
 				redirect_to chef_path(@chef)
 			else
