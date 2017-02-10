@@ -24,11 +24,11 @@ class FoodsController < ApplicationController
 			if @food.save!
 				redirect_to chef_path(@chef)
 			else
-				flash[:alert] = "add_fish fail"
+				flash[:alert] = "add_dish fail"
 				render :action => :new
 			end
 		else
-			flash[:alert] = "add_fish fail"
+			flash[:alert] = "add_dish fail"
 			render :action => :new
 		end
   end
