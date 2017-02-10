@@ -321,14 +321,22 @@
                 <div class="col-sm-4 col-md-3 col-lg-2">
                   <div class="field">
                     <%= d.label :distance, "Maximum distance" %>
-                    <%= d.select :distance, options_for_select(0..50,@chef.restaurant.delivery.distance.to_i),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <% if @chef.restaurant.delivery.distance.present?%>
+                      <%= d.select :distance, options_for_select(0..50,@chef.restaurant.delivery.distance.to_i),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <% else %>
+                      <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <% end %>
                   </div>
                 </div>
 
                 <div class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-2 col-lg-offset-1">
                   <div class="field">
                     <%= d.label :order_hours, "Completion time" %>
-                    <%= d.select :order_hours ,options_for_select(0..50,@chef.restaurant.delivery.order_hours.hour.to_i),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <% if @chef.restaurant.delivery.order_hours.present?%>
+                      <%= d.select :order_hours ,options_for_select(0..50,@chef.restaurant.delivery.order_hours.hour.to_i),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <% else %>
+                      <%= d.select :order_hours ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <% end %>
                   </div>
                 </div>
             <%end%>
