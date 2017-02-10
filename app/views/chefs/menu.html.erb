@@ -14,6 +14,11 @@
 		<div class="clearfix"></div>
 		<!-- menu content -->
 		<div class="row container menu-sub-container center" id="menu-content-container">
+			<div class="col-md-offset-1 col-md-10 row container">
+				<%= link_to "+ add dish", new_chef_food_path(@chef),:class=>"btn btn-lg btn-danger col-md-12"%>
+			</div>
+			<div class="clearfix"></div>
+
 			<% @foods.each do |food|%>
 				<div class="row container menu-food-container center">
 					<div class="col-md-9">
