@@ -102,5 +102,39 @@
         <%= f.label :support_dinner , 'support_dinner' %>
       </div>
     </div>
+  </div>
 </div>
 
+
+<!-- support days -->
+<div class="row container chef-sub-container center" id="chef-add-dish-container">
+	<div class="form_control col-md-12">
+		<h2>Support Days</h2>
+	</div>
+	<div class="checkbox_warpper col-xs-12 mt15">
+    <% @week_list.each do |day| %>
+        <div class="field">
+          <div class="ui checkbox mtb0">
+            <input type="checkbox" value=<%=day[:value]%> name="food[support_days][]" id="food_support_days_id-<%=day[:value]%>" tabindex="0" class="hidden">
+            <label><%= day[:name] %></label>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+	<% if @food.support_days.present? %>
+		var support_days =  <%= @food.support_days %>;
+	<%else%>
+		var support_days = []
+	<%end%>
+
+  if (support_days) {
+    for (var i = 0; i < support_days.length; i++) {
+      id = support_days[i];
+      id_name = '#food_support_days_id-' + id;
+      $(id_name).click();
+    }
+  }
+</script>

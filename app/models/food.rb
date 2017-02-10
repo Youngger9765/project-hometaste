@@ -19,6 +19,8 @@ class Food < ApplicationRecord
     :allow_destroy => true,
     :reject_if => :all_blank
 
+  serialize :support_days
+
   def average_score
     food_comments.average(:score) || 0
   end
