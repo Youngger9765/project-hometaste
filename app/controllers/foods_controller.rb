@@ -65,6 +65,7 @@ class FoodsController < ApplicationController
 	  params.require(:food).permit(
 	  	:id, :restaurant_id, :about, :ingredients, :name, :price,
 	  	:is_public, :unit, :unit_name, :max_order, :availability_date,
+	  	:support_lunch, :support_dinner,
 
 	  	:food_photos_attributes => [
 		  	:id, :food_id, :photo,
