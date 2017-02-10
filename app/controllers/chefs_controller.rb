@@ -2,12 +2,12 @@ class ChefsController < ApplicationController
 
 	before_action :find_chef_restaurant, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep, :business, :summary,:delivering,
+		:save_dish, :menu, :sales, :yep_or_not, :business, :summary,:delivering,
 		:completed,:cancelled]
 
 	before_action :find_user, :only =>[
 		:show, :edit, :update, :review, :approve, :add_dish,
-		:save_dish, :menu, :sales, :yep, :summary,:delivering,
+		:save_dish, :menu, :sales, :yep_or_not, :summary,:delivering,
 		:completed,:cancelled]
 
 	# before_action :is_current_user?, :except => [:new]
@@ -131,7 +131,7 @@ class ChefsController < ApplicationController
 		end
 
 		if @chef.update!(chef_params)
-			redirect_to chef_path(@chef)
+			redirect_to sales_chef_path(@chef)
 		else
 			flash[:alert] = "update fail"
 			render :action => :edit
@@ -144,7 +144,7 @@ class ChefsController < ApplicationController
 	def approve
 		@restaurant = @chef.restaurant
 		if @restaurant.update(:is_approved => true)
-			redirect_to chef_path(@chef)
+			redirect_to sales_chef_path(@chef)
 		else
 			flash[:alert] = "approve fail"
 			render :action => :review
@@ -158,22 +158,31 @@ class ChefsController < ApplicationController
 
 
 	def yep_or_not
-		raise
+		submit = params[:commit]
 		confirmation_number = params[:confirmation_number]
 		order = Order.find(params[:order_id])
 
-		if confirmation_number.present?
-			if confirmation_number == order.confirmation_number
-				order.order_status = "completed"
-				order.save!
-				flash[:notice] = "Successfully completed order"
+		if submit == "Yep!"
+			if confirmation_number.present?
+				if confirmation_number == order.confirmation_number
+					order.order_status = "completed"
+					order.save!
+					flash[:notice] = "Successfully completed order"
+				else
+					flash[:alert] = "Confirmation number is wrong!"
+				end
 			else
-				flash[:alert] = "Confirmation number is wrong!"
+				flash[:alert] = "Please input confirmation number"
 			end
+
 		else
-			flash[:alert] = "Please input confirmation number"
+			# 勾選原因, 評價完使用者後
+			raise
+			order.order_status = "cancelled"
+			order.save!
+			flash[:notice] = "Successfully cancel order"
 		end
-		redirect_to chef_path(@chef)
+		redirect_to sales_chef_path(@chef)
 	end
 
 	private

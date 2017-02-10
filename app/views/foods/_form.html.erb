@@ -70,3 +70,19 @@
 		</div>
 	<%end%>
 </div>
+
+<!-- cuisines -->
+<div class="row container chef-sub-container center" id="chef-add-dish-container">
+	<div class="form_control col-md-12">
+		<h2>Cuisine Types</h2>
+	</div>
+
+	<%= f.fields_for :food_cuisine_ships, @food.food_cuisine_ships.each do |food_cuisine_ship| %>
+    <div class="col-sm-4 col-md-4">
+      <div class="field">
+        <%= food_cuisine_ship.label :cuisine_id ,'Cuisine Type' %>
+        <%= food_cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name,{}, class:"", include_blank: "please select" %>
+      </div>
+    </div>
+  <%end%>
+</div>

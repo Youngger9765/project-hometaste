@@ -219,7 +219,7 @@
           <div class="col-sm-7 col-md-6 col-lg-4">
             <div class="field">
               <h5>Orders must reach this amount before you start cooking</h5>
-              <%= f.text_field :account_number%>
+              <%= r.text_field :order_reach%>
             </div>
           </div>
 
@@ -321,14 +321,14 @@
                 <div class="col-sm-4 col-md-3 col-lg-2">
                   <div class="field">
                     <%= d.label :distance, "Maximum distance" %>
-                    <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <%= d.select :distance, options_for_select(0..50,@chef.restaurant.delivery.distance.to_i),{},placeholder:'mi',class:'ui dropdown fluid' %>
                   </div>
                 </div>
 
                 <div class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-2 col-lg-offset-1">
                   <div class="field">
                     <%= d.label :order_hours, "Completion time" %>
-                    <%= d.select :order_hours ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <%= d.select :order_hours ,options_for_select(0..50,@chef.restaurant.delivery.order_hours.hour.to_i),{},placeholder:'hr',class:'ui dropdown fluid' %>
                   </div>
                 </div>
             <%end%>
