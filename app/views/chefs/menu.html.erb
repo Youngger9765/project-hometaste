@@ -104,10 +104,10 @@
 								Big bun#<%= big_bun.id%> : <%=big_bun.style%>
 							</h2>
 							<p>
-								start at: <%=big_bun.start_datetime.strftime('%Y %m %d %H:%M:%S') %>
+								start at: <%=big_bun.start_datetime.localtime.strftime('%Y %m %d %H:%M:%S') %>
 							</p>
 							 <p>
-							 	stop at: <%=big_bun.stop_datetime.strftime('%Y %m %d %H:%M:%S') %>
+							 	stop at: <%=big_bun.stop_datetime.localtime.strftime('%Y %m %d %H:%M:%S') %>
 							 </p>
 						</div>
 

@@ -40,7 +40,6 @@ class BigBunsController < ApplicationController
 	end
 
 	def update
-
   	if params[:is_public]
   		@big_bun.is_public = params[:is_public]
 
@@ -53,6 +52,9 @@ class BigBunsController < ApplicationController
 
 	  	if !@time_error
 	  		if params[:big_bun] && @big_bun.update!(big_bun_params)
+	  			@big_bun.start_datetime = big_bun_params[:start_datetime].to_time.utc.to_s.to_time.to_s
+					@big_bun.stop_datetime = big_bun_params[:stop_datetime].to_time.utc.to_s.to_time.to_s
+					@big_bun.save
 					redirect_to menu_chef_path(@chef)
 				else
 					flash[:alert] = "update fail"
@@ -128,19 +130,33 @@ class BigBunsController < ApplicationController
   	prepare_min = big_bun_params[:'prepare_time(5i)'].to_i
   	start_to_prepare_datetime_to_i = (start_datetime.to_time + prepare_hour.hours + prepare_min.minute).to_i
 
-  	# 確認start_time < stop_time
+  	# 確認start_time 小於 stop_time
   	if start_datetime_i > stop_datetime_i
   		@time_error = true
   		flash[:alert] << "start_datetime should be earlier than stop_datetime"
   	end
 
-  	# 確認start_time + prepare time < stop_time
+  	# 確認start_time + prepare time 須小於 stop_time
   	if start_to_prepare_datetime_to_i > stop_datetime_i
   		@time_error = true
   		flash[:alert] << "prepare time too much"
   	end
 
   	# TODO: check all self big_buns start_datetime & stop_datetime
-  		# 先確認 A.start_time > B.end_time or A.end_time < B.start_time
+  		# 先確認需要 new.end_time < old.start_time or new.start_time > old.end_time
+  	big_buns = @chef.restaurant.big_buns.where.not(:id => @big_bun)
+
+  	big_buns.each do |big_bun|
+  		if start_datetime_i.between?(big_bun.start_datetime.to_i,big_bun.stop_datetime.to_i) || stop_datetime_i.between?(big_bun.start_datetime.to_i,big_bun.stop_datetime.to_i)
+  			@time_error = true
+  			flash[:alert] << "time setting is between big_bun: #{big_bun.style} "
+  		end
+
+  		if start_datetime_i <= big_bun.start_datetime.to_i && stop_datetime_i >= big_bun.stop_datetime.to_i
+  			@time_error = true
+  			flash[:alert] << "time setting included big_bun: #{big_bun.style} "
+  		end
+  	end
+
 	end
 end

@@ -20,7 +20,7 @@
 	<!-- start_datetime -->
 	<div class="form_control col-md-6">
     <%= f.label :start_datetime, "start_datetime" %> <br>
-    <%= f.datetime_field :start_datetime %>
+    <%= f.datetime_field :start_datetime, value: f.object.start_datetime.localtime.strftime("%Y-%m-%dT%H:%M:%S") %>
   </div>
 
 	<div class="clearfix"></div>
@@ -28,7 +28,7 @@
 	<!-- stop_datetime -->
 	<div class="form_control col-md-6">
     <%= f.label :stop_datetime, "stop_datetime" %> <br>
-    <%= f.datetime_field :stop_datetime %>
+    <%= f.datetime_field :stop_datetime, value: f.object.stop_datetime.localtime.strftime("%Y-%m-%dT%H:%M:%S") %>
   </div>
 
 	<div class="clearfix"></div>
