@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
 
 	def create
 		@order = current_user.orders.new(orders_params)
+
 		@order.pick_up_time = pick_datetime
 		@order.customer_name = current_user.name
 		@order.payment_status = 'unpaid'
@@ -101,6 +102,7 @@ class OrdersController < ApplicationController
 	end
 
 	def pick_datetime
+		# TODO: to utc
 		(params[:pick_up_date] +" "+ params[:pick_up_time]).to_datetime
 	end
 

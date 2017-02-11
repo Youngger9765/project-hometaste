@@ -73,14 +73,22 @@ Rails.application.routes.draw do
   end
 
   resources :foods
-  resources :restaurants
-  resources :comments
 
-  resources :orders do
-    member do
-      post :transactions
+  resources :restaurants do
+    resources :orders do
+      member do
+        post :transactions
+      end
     end
   end
+
+  resources :comments
+
+  # resources :orders do
+  #   member do
+  #     post :transactions
+  #   end
+  # end
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1'  do
     get "/search/keyword" => "search#keyword"
