@@ -1,12 +1,27 @@
 <%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
-    <%= render 'kitchen_photo',f:f ,pen_click:'pen_click' %>
+
+    <div name="kitchen_photo">
+      <%= link_to edit_chef_path(@chef) do %>
+          <div class="img_upload pen_click">
+            <label style="background-image:url(<%= @chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists? %>)">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            </label>
+          </div>
+      <% end %>
+    </div>
+
     <div class="container">
       <section class="row">
         <div class="col-xs-12 basic_bg_top">
           <div class="row" name="kitchen_banner">
 
             <div class="col-xs-12 df_sm mb15 tac tal_sm">
-              <%= render 'chef_photo' ,f:f ,pen_click:'pen_click' %>
+
+              <div class="img_upload ml30_sm p10 dib background_white border_main_radius" name="profile">
+                <label style="background-image:url(<%= @chef.user.user_photo.photo.url if @chef.user.user_photo.try(:'photo.file?') %>); cursor: default;"></label>
+              </div>
+
+
               <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm">Mr. Chan’s Kitchen</h1>
             </div>
 

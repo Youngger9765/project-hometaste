@@ -1,4 +1,5 @@
 $(document).ready ->
+  $('.dropdown-toggle').dropdown()
   $('.ui.dropdown').dropdown('refresh');
   $('.ui.checkbox').checkbox();
   $('.ui.accordion').accordion();

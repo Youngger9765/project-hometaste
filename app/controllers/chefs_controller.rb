@@ -12,7 +12,7 @@ class ChefsController < ApplicationController
 
 	# before_action :is_current_user?, :except => [:new]
 	# before_action :has_authority?, :except => [:new]
-	before_action :user_admin?, :only => [:approve, :review]
+# 	before_action :user_admin?, :only => [:approve, :review]
 	before_action :find_orders, :only => [:summary, :delivering, :advance,:sales]
 
 	def new
