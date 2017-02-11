@@ -20,8 +20,15 @@ class OrdersController < ApplicationController
 		@order.customer_name = current_user.name
 		@order.payment_status = 'unpaid'
 		@order.order_status = 'process'
+		flash[:alert] = []
 
-		if @order.save
+		@error = false
+		# check delivery order_min
+		if orders_params[:shipping_method] == "delivery"
+			check_delivery_min_order(params[:food])
+		end
+
+		if !@error && @order.save
 			create_user_bigbun(params[:bigbun])
 			create_user_order_food(params[:food])
 			@order.update_order_price
@@ -30,7 +37,7 @@ class OrdersController < ApplicationController
 			flash[:notice] = "Successfully create order!"
 			redirect_to @order
 		else
-			flash.now[:notice] = "Fail new order!"
+			flash[:alert] << "Fail new order!"
 			render 'new'
 		end
 
@@ -90,7 +97,7 @@ class OrdersController < ApplicationController
 	end
 
 	def orders_params
-		params.require(:order).permit(:shipping_method, :shipping_place, :tip ,:restaurant_id )
+		params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id )
 	end
 
 	def pick_datetime
@@ -119,6 +126,25 @@ class OrdersController < ApplicationController
 			redirect_to root_path
 		else
 			return true
+		end
+	end
+
+	def check_delivery_min_order(foods_hash)
+		restaurant = Restaurant.find(orders_params[:restaurant_id])
+		min_order = restaurant.delivery.min_order
+
+		total_amount = 0
+
+		foods_hash.each do |key,value|
+			food_price = Food.find(key).price
+			quantity = value.to_f
+			amount = food_price*quantity
+			total_amount += amount
+		end
+
+		if total_amount < min_order
+			@error = true
+			flash[:alert] << "your oreder amount is under delivery min_order"
 		end
 	end
 

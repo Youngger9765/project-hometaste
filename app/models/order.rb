@@ -25,7 +25,7 @@ class Order < ApplicationRecord
 	end
 
 	def calc_amount
-		calc_subtotal + calc_delivery + tip + calc_tax
+		calc_subtotal + calc_tax
 	end
 
 	def calc_subtotal

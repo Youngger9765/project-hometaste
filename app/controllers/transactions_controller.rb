@@ -76,7 +76,7 @@ class TransactionsController < ApplicationController
   	end
 
   	@cart.sub_total = @cart.cart_foods.sum(:sub_total)
-  	@cart.total_amount = @cart.tax + @cart.tip + @cart.sub_total
+  	@cart.total_amount = @cart.tax + @cart.sub_total
   	@cart.save!
   end
 
