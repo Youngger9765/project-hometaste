@@ -32,14 +32,14 @@ class Food < ApplicationRecord
 
   def self.filter_price( _case )
     case _case[0]
-    when '$'    ; where('price < ?',10)
-    when '$$'   ; where('price >= ? and price < ?',11,30)
-    when '$$$'  ; where('price >= ? and price < ?',31,60)
-    when '$$$$' ; where('price > ? ',60)
+    when '$'    then where('price < ?',10)
+    when '$$'   then where('price >= ? and price < ?',11,30)
+    when '$$$'  then where('price >= ? and price < ?',31,60)
+    when '$$$$' then where('price > ? ',60)
     end
   end
 
-  def self.filter_features( _case )
+  def self.filter_features(_case)
     foods = self.joins(:restaurant)
     foods = foods.where(:is_public => true) if _case.include?("Today's Meal")
     foods = foods.where('restaurants.id = ?',Delivery.ids) if _case.include?('Delivery')
@@ -51,25 +51,26 @@ class Food < ApplicationRecord
     foods
   end
 
-  def self.filter_distance( _case , coordinate )
+  def self.filter_distance(_case, coordinate)
     lat, long = coordinate
     km = case _case[0]
-         when 'Driving-5min' ; 2
-         when 'Biking-5min'  ; 1
-         when 'Walking-1min' ; 0.1
-         else                ; _case[0].to_i * 0.1
+         when 'Driving-5min' then 2
+         when 'Biking-5min'  then 1
+         when 'Walking-1min' then 0.1
+         else
+           _case[0].to_i * 0.1
          end
     km = 100 if km == 0
-    restaurant_ids = Restaurant.get_around_restaurants( km , lat , long ).ids
+    restaurant_ids = Restaurant.get_around_restaurants(km, lat, long).ids
     where(restaurant_id:restaurant_ids)
   end
 
-  def self.filter_sort( _case )
+  def self.filter_sort(_case)
     case _case[0]
-    when 'BestMatch'        ; self.all
-    when 'Highest Rated'    ; joins(:restaurant).order('restaurants.food_avg_score desc')
-    when 'Most Reviewed'    ; joins(:restaurant).order('restaurants.food_comments_count desc')
-    when 'New'              ; order('updated_at desc')
+    when 'BestMatch'        then self.all
+    when 'Highest Rated'    then joins(:restaurant).order('restaurants.food_avg_score desc')
+    when 'Most Reviewed'    then joins(:restaurant).order('restaurants.food_comments_count desc')
+    when 'New'              then order('updated_at desc')
     end
   end
 
