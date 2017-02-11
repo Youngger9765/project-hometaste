@@ -206,7 +206,7 @@ class ChefsController < ApplicationController
 	  		:order_reach,
 
 	  		:delivery_attributes => [
-		  		:id, :min_order, :area, :distance, :cost, :order_hours,
+		  		:id, :min_order, :area, :distance, :order_hours,
 		  	],
 
 		  	:bulk_buys_attributes => [

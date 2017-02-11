@@ -24,12 +24,6 @@ class OrdersController < ApplicationController
 		if @order.save
 			create_user_bigbun(params[:bigbun])
 			create_user_order_food(params[:food])
-
-			if @order.shipping_method == "delivery"
-				@order.update(:delivery_fee => @order.calc_delivery)
-			else
-				@order.update(:delivery_fee => 0)
-			end
 			@order.update_order_price
 			cookies.delete(:cart_list, path: '/')
 

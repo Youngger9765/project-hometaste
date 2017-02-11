@@ -249,11 +249,6 @@ namespace :dev do
 			)
 
       if order.shipping_method == "delivery"
-        if order.restaurant.delivery
-          order.delivery_fee = order.restaurant.delivery.cost
-        else
-          order.delivery_fee = 0
-        end
       else #bulk_buy
         bulk_buy_id = order.restaurant.bulk_buys.ids.sample
         order.bulk_buy_id = bulk_buy_id
@@ -330,7 +325,7 @@ namespace :dev do
     Order.all.each do |order|
       sum = order.order_food_ships.sum(:amount)
       order.subtotal = sum
-      order.amount = order.restaurant.tax + order.tip + sum + order.delivery_fee
+      order.amount = order.restaurant.tax + order.tip + sum
       order.save!
     end
   end
