@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210150146) do
+ActiveRecord::Schema.define(version: 20170211075016) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -104,14 +104,14 @@ ActiveRecord::Schema.define(version: 20170210150146) do
   end
 
   create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "restaurant_id",                           null: false
+    t.integer  "restaurant_id",                                       null: false
     t.float    "min_order",     limit: 24
     t.string   "area"
     t.float    "distance",      limit: 24
-    t.decimal  "cost",                     precision: 10
+    t.decimal  "cost",                     precision: 10, default: 0
     t.time     "order_hours"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.index ["restaurant_id"], name: "index_deliveries_on_restaurant_id", using: :btree
   end
 
