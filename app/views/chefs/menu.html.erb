@@ -14,6 +14,11 @@
 		<div class="clearfix"></div>
 		<!-- menu content -->
 		<div class="row container menu-sub-container center" id="menu-content-container">
+			<div class="col-md-offset-1 col-md-10 row container">
+				<%= link_to "+ add dish", new_chef_food_path(@chef),:class=>"btn btn-lg btn-danger col-md-12"%>
+			</div>
+			<div class="clearfix"></div>
+
 			<% @foods.each do |food|%>
 				<div class="row container menu-food-container center">
 					<div class="col-md-9">
@@ -50,7 +55,7 @@
 						<% if food.is_public%>
 							<%= link_to "save to private",chef_food_path(@chef.id, food.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
 						<%else%>
-							<%= link_to "save to public",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
+							<%= link_to "start selling dish",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
 						<%end%>
 
 						<!-- share -->
@@ -74,6 +79,13 @@
 
 		<!-- big bun content -->
 		<div class="row container menu-sub-container center" id="bigbun-content-container">
+
+			<div class="col-md-offset-1 col-md-10 row container">
+				<%= link_to "+ add big buns", new_chef_big_bun_path(@chef),:class=>"btn btn-lg btn-danger col-md-12"%>
+			</div>
+
+			<div class="clearfix"></div>
+
 			<% @big_buns.each do |big_bun|%>
 				<div class="row container menu-food-container center">
 					<div class="col-md-9 bigbun-info-container">
@@ -92,10 +104,10 @@
 								Big bun#<%= big_bun.id%> : <%=big_bun.style%>
 							</h2>
 							<p>
-								start at: <%=big_bun.start_datetime.strftime('%Y %m %d %H:%M:%S') %>
+								start at: <%=big_bun.start_datetime.localtime.strftime('%Y %m %d %H:%M:%S') %>
 							</p>
 							 <p>
-							 	stop at: <%=big_bun.stop_datetime.strftime('%Y %m %d %H:%M:%S') %>
+							 	stop at: <%=big_bun.stop_datetime.localtime.strftime('%Y %m %d %H:%M:%S') %>
 							 </p>
 						</div>
 

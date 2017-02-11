@@ -46,13 +46,6 @@ class TransactionsController < ApplicationController
 
   def create_cart
   	@cart = current_user.carts.where(:restaurant_id => @restaurant.id).first || current_user.carts.create(:restaurant_id => @restaurant.id)
-  	
-  	# FAKE
-    if @restaurant.delivery
-      @cart.delivery_fee = @restaurant.delivery.cost
-    else
-      @cart.delivery_fee = 0
-    end
 
   	@cart.tip = @restaurant.tip
   	@cart.tax = @restaurant.tax
@@ -83,7 +76,7 @@ class TransactionsController < ApplicationController
   	end
 
   	@cart.sub_total = @cart.cart_foods.sum(:sub_total)
-  	@cart.total_amount = @cart.delivery_fee + @cart.tax + @cart.tip + @cart.sub_total
+  	@cart.total_amount = @cart.tax + @cart.sub_total
   	@cart.save!
   end
 

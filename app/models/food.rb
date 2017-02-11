@@ -8,29 +8,36 @@ class Food < ApplicationRecord
   has_many :food_comments
   has_many :food_photos
 
+  has_many :food_cuisine_ships
+  has_many :cuisines, :through => :food_cuisine_ships
+
   accepts_nested_attributes_for :food_photos,
     :allow_destroy => true,
     :reject_if => :all_blank
+
+  accepts_nested_attributes_for :food_cuisine_ships,
+    :allow_destroy => true,
+    :reject_if => :all_blank
+
+  serialize :support_days
 
   def average_score
     food_comments.average(:score) || 0
   end
 
-  def self.filter( params , lat_long, ids = self.ids )
+  def self.filter(params, lat_long, ids = self.ids)
     sort = params['Sort By']
     distance = params['Distance']
     price = params['Price']
     # cuisine = params['Cuisine']
     features = params['Features']
 
-    where(id:ids).filter_distance(distance,lat_long)
-        .filter_features(features)
-        .filter_price(price)
-        .filter_sort(sort)
+    where(id:ids).filter_distance(distance,lat_long).filter_features(features)
+        .filter_price(price).filter_sort(sort)
         # .filter_cuisine(cuisine)
   end
 
-  def self.filter_price( _case )
+  def self.filter_price(_case)
     case _case[0]
     when '$'    then where('price < ?',10)
     when '$$'   then where('price >= ? and price < ?',11,30)

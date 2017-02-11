@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124135002) do
+ActiveRecord::Schema.define(version: 20170211160351) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -37,13 +37,15 @@ ActiveRecord::Schema.define(version: 20170124135002) do
   end
 
   create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "restaurant_id",            null: false
-    t.float    "min_order",     limit: 24
+    t.integer  "restaurant_id",             null: false
+    t.float    "min_order",      limit: 24
     t.time     "cut_off_time"
-    t.string   "location"
-    t.time     "pick_up_time"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "location_1"
+    t.time     "pick_up_time_1"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.time     "pick_up_time_2"
+    t.string   "location_2"
     t.index ["restaurant_id"], name: "index_bulk_buys_on_restaurant_id", using: :btree
   end
 
@@ -104,14 +106,14 @@ ActiveRecord::Schema.define(version: 20170124135002) do
   end
 
   create_table "deliveries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "restaurant_id",                           null: false
+    t.integer  "restaurant_id",                                       null: false
     t.float    "min_order",     limit: 24
     t.string   "area"
     t.float    "distance",      limit: 24
-    t.decimal  "cost",                     precision: 10
+    t.decimal  "cost",                     precision: 10, default: 0
     t.time     "order_hours"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.index ["restaurant_id"], name: "index_deliveries_on_restaurant_id", using: :btree
   end
 
@@ -125,6 +127,15 @@ ActiveRecord::Schema.define(version: 20170124135002) do
     t.datetime "updated_at",                              null: false
     t.index ["food_id"], name: "index_food_comments_on_food_id", using: :btree
     t.index ["user_id"], name: "index_food_comments_on_user_id", using: :btree
+  end
+
+  create_table "food_cuisine_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "food_id"
+    t.integer  "cuisine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuisine_id"], name: "index_food_cuisine_ships_on_cuisine_id", using: :btree
+    t.index ["food_id"], name: "index_food_cuisine_ships_on_food_id", using: :btree
   end
 
   create_table "food_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -151,6 +162,9 @@ ActiveRecord::Schema.define(version: 20170124135002) do
     t.string   "unit_name"
     t.float    "max_order",         limit: 24
     t.date     "availability_date"
+    t.boolean  "support_lunch",                                            default: false
+    t.boolean  "support_dinner",                                           default: false
+    t.text     "support_days",      limit: 65535
   end
 
   create_table "order_food_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

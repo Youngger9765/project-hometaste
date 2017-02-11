@@ -219,7 +219,7 @@
           <div class="col-sm-7 col-md-6 col-lg-4">
             <div class="field">
               <h5>Orders must reach this amount before you start cooking</h5>
-              <%= f.text_field :account_number%>
+              <%= r.text_field :order_reach%>
             </div>
           </div>
 
@@ -261,7 +261,7 @@
                   <div class="col-xs-5 col-sm-5 col-lg-4">
                     <div class="field">
                       <%= b.label :cut_off_time %>
-                      <%= b.select :pick_up_time,(0..24).to_a.map{ |x| x.to_s + ':00'} ,{},class:'ui dropdown fluid' %>
+                      <%= b.select :cut_off_time,(0..24).to_a.map{ |x| x.to_s + ':00'} ,{},class:'ui dropdown fluid' %>
                     </div>
                   </div>
 
@@ -269,29 +269,29 @@
 
                   <div class="col-xs-5 col-sm-5 col-lg-4">
                     <div class="field">
-                      <%= b.label :pick_up_time %>
-                      <%= b.select :pick_up_time,(0..24).to_a.map{ |x| x.to_s + ':00'} ,{},class:'ui dropdown fluid' %>
+                      <%= b.label :pick_up_time_1 %>
+                      <%= b.select :pick_up_time_1, (0..24).to_a.map{ |x| x.to_s + ':00'}, {}, class:'ui dropdown fluid' %>
                     </div>
                   </div>
 
                   <div class="col-sm-12 col-lg-10">
                     <div class="field">
-                      <%= b.label :location %>
-                      <%= b.text_field :location %>
+                      <%= b.label :location_1 %>
+                      <%= b.text_field :location_1 %>
                     </div>
                   </div>
                   <!--select 需預設是空的 需用資料控制要不要hidden-->
                   <div class="col-xs-5 col-sm-5 col-lg-4 hidden">
                     <div class="field">
-                      <%= b.label :pick_up_time %>
-                      <%= b.select :pick_up_time,(0..24).to_a.map{ |x| x.to_s + ':00'} ,{},class:'ui dropdown fluid' %>
+                      <%= b.label :pick_up_time_2 %>
+                      <%= b.select :pick_up_time_2, (0..24).to_a.map{ |x| x.to_s + ':00'}, {}, class:'ui dropdown fluid' %>
                     </div>
                   </div>
                   <!--select 需預設是空的 需用資料控制要不要hidden-->
                   <div class="col-sm-12 col-lg-10 hidden">
                     <div class="field">
-                      <%= b.label :location %>
-                      <%= b.text_field :location %>
+                      <%= b.label :location_2 %>
+                      <%= b.text_field :location_2 %>
                     </div>
                   </div>
 
@@ -321,14 +321,22 @@
                 <div class="col-sm-4 col-md-3 col-lg-2">
                   <div class="field">
                     <%= d.label :distance, "Maximum distance" %>
-                    <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <% if @chef.restaurant.delivery.distance.present?%>
+                      <%= d.select :distance, options_for_select(0..50,@chef.restaurant.delivery.distance.to_i),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <% else %>
+                      <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                    <% end %>
                   </div>
                 </div>
 
                 <div class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-2 col-lg-offset-1">
                   <div class="field">
                     <%= d.label :order_hours, "Completion time" %>
-                    <%= d.select :order_hours ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <% if @chef.restaurant.delivery.order_hours.present?%>
+                      <%= d.select :order_hours ,options_for_select(0..50,@chef.restaurant.delivery.order_hours.hour.to_i),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <% else %>
+                      <%= d.select :order_hours ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                    <% end %>
                   </div>
                 </div>
             <%end%>

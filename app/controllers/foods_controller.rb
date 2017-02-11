@@ -12,9 +12,18 @@ class FoodsController < ApplicationController
 
   def new
   	@food = Food.new
+
   	if params[:chef_id]
   		@chef = Chef.find(params[:chef_id])
   	end
+
+  	@week_list = [	{:name => "Monday",:value=>1},
+			  		{:name => "Tuesday",:value=>2},
+					{:name => "Wednesday",:value=>3},
+					{:name => "Thursday",:value=>4},
+					{:name => "Friday",:value=>5},
+					{:name => "Saturday",:value=>6},
+					{:name => "Sunday",:value=>7}]
   end
 
   def create
@@ -22,19 +31,18 @@ class FoodsController < ApplicationController
   		@chef = Chef.find(params[:chef_id])
 	  	@food = @chef.restaurant.foods.new(food_params)
 			if @food.save!
-				redirect_to chef_path(@chef)
+				redirect_to menu_chef_path(@chef)
 			else
-				flash[:alert] = "add_fish fail"
+				flash[:alert] = "add_dish fail"
 				render :action => :new
 			end
 		else
-			flash[:alert] = "add_fish fail"
+			flash[:alert] = "add_dish fail"
 			render :action => :new
 		end
   end
 
   def update
-
   	if params[:is_public]
   		@food.is_public = params[:is_public]
 
@@ -43,6 +51,12 @@ class FoodsController < ApplicationController
   		end
 
   	elsif params[:food] && @food.update!(food_params)
+  		# save support_days
+		@food.support_days = []
+		params[:food][:support_days].each do |day|
+			@food.support_days << day.to_i
+		end
+		@food.save
   		redirect_to menu_chef_path(@chef)
 
   	else
@@ -52,6 +66,13 @@ class FoodsController < ApplicationController
   end
 
   def edit
+  	@week_list = [	{:name => "Monday",:value=>1},
+			  		{:name => "Tuesday",:value=>2},
+					{:name => "Wednesday",:value=>3},
+					{:name => "Thursday",:value=>4},
+					{:name => "Friday",:value=>5},
+					{:name => "Saturday",:value=>6},
+					{:name => "Sunday",:value=>7}]
 
   end
 
@@ -66,9 +87,13 @@ class FoodsController < ApplicationController
 	  params.require(:food).permit(
 	  	:id, :restaurant_id, :about, :ingredients, :name, :price,
 	  	:is_public, :unit, :unit_name, :max_order, :availability_date,
+	  	:support_lunch, :support_dinner, :support_days,
 
 	  	:food_photos_attributes => [
-		  		:id, :food_id, :photo,
+		  	:id, :food_id, :photo,
+		  ],
+		  :food_cuisine_ships_attributes => [
+		  	:id, :food_id, :cuisine_id,
 		  ],
 	  )
 	end

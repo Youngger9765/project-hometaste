@@ -41,22 +41,10 @@
               <td><h3>$ <%= @cart.sub_total%></h3></td>
             </tr>
             <tr>
-              <td><h3>Delivery Fee</h3> </td>
-              <td></td>
-              <td></td>
-              <td><h3>$ <%= @cart.delivery_fee%></h3></td>
-            </tr>
-            <tr>
               <td><h3>Tax</h3> </td>
               <td></td>
               <td></td>
               <td><h3>$ <%= @cart.tax%></h3></td>
-            </tr>
-            <tr>
-              <td><h3>Tip</h3> </td>
-              <td></td>
-              <td></td>
-              <td><h3>$ <%= @cart.tip%></h3></td>
             </tr>
           </tbody>
           <tbody>
@@ -67,13 +55,11 @@
               <td><h1>$<%= @cart.total_amount%></h1></td>
             </tr>
           </tbody>
-          
-
         </table>
-
       </div>
     </div>
   </section>
+
   <section class="row">
     <div class="col-md-12 basic_bg_top pt0 pt30_md">
       <div class="row">

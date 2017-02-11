@@ -34,23 +34,9 @@
         <h2>Subtotal</h2>
         <h2>$<%= @order.subtotal %></h2>
       </div>
-
-      <% if @order.shipping_method = "delivery"%>
-        <% if @order.restaurant.delivery%>
-          <div class="align_two_side">
-            <h2>Delivery Fee</h2>
-            <h2>$<%= @order.delivery_fee %></h2>
-          </div>
-        <%end%>
-      <%end%>
-
       <div class="align_two_side">
         <h2>Tax</h2>
         <h2>$<%= @order.calc_tax %></h2>
-      </div>
-      <div class="align_two_side tip">
-        <h2>Tip</h2>
-        <h2>$<%= @order.tip %></h2>
       </div>
       <i class="gray_line mtb15"></i>
       <div class="align_two_side">
