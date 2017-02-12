@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   resources :foods
 
   resources :restaurants do
-    resources :orders do
+    resources :orders, controller: :orders do
       member do
         post :transactions
       end

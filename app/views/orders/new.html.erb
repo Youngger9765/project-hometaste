@@ -5,7 +5,7 @@
 </div>
 
 
-<%= form_for @order do |f| %>
+<%= form_for @order, url: new_restaurant_order_path(restaurant_id: params[:restaurant_id]) do |f| %>
     <div class="container ui form">
       <section class="row">
         <div class="col-xs-12 basic_bg_top" style="z-index: 10">
@@ -26,7 +26,7 @@
                 <%= f.label :pick_up_time,'Pick up Time' %>
               </div>
               <div class="col-xs-10 col-sm-5 col-md-3 col-lg-2">
-                <%= f.select :pick_up_time, options_for_select([*Date.current..Date.current+30.days].to_a.map{ |x| x.strftime('%m-%d-%Y') }), {}, class:'ui dropdown' %>
+                <%= f.select :pick_up_time, options_for_select([*Date.current].to_a.map{ |x| x.strftime('%m-%d-%Y') }), {}, class:'ui disabled dropdown' %>
               </div>
               <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
