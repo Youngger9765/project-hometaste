@@ -213,6 +213,9 @@ namespace :dev do
         availability_date: Faker::Time.between(DateTime.now - 100, DateTime.now+30),
         about: Faker::Lorem.paragraph,
         ingredients: Faker::Lorem.paragraph,
+        support_lunch: [true, false].sample,
+        support_dinner: [true, false].sample,
+        support_days: [[1,3,5,7],[2,4,6],[1,2,3,4,5],[1,2,3,4,5,6,7],[6,7]].sample,
 			)
 		}
 
@@ -254,9 +257,9 @@ namespace :dev do
 
       if order.shipping_method == "delivery"
       else #bulk_buy
-        bulk_buy_id = order.restaurant.bulk_buys.ids.sample
+        bulk_buy_id = order.restaurant.bulk_buys.where.not(:pick_up_time_1 => nil).ids.sample
         order.bulk_buy_id = bulk_buy_id
-        order.pick_up_time = BulkBuy.find(bulk_buy_id).pick_up_time
+        order.pick_up_time = BulkBuy.find(bulk_buy_id).pick_up_time_1
       end
       order.save!
 		}
