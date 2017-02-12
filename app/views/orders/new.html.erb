@@ -1,43 +1,55 @@
-<%= form_for @order do |f| %>
+<div class="col-md-12 alert_message hidden">
+  <div class="row content">
+    <div class = "red alert-success" id="alert_notice"></div>
+  </div>
+</div>
+
+
+<%= form_for @order, url: new_restaurant_order_path(restaurant_id: params[:restaurant_id]) do |f| %>
     <div class="container ui form">
       <section class="row">
-        <div class="col-xs-12 basic_bg_top">
+        <div class="col-xs-12 basic_bg_top" style="z-index: 10">
           <h1 class="bold tac mb50">Order Information</h1>
           <div class="row reverse_xs reverse_back_md tac tan_sm">
-            <div class="col-xs-12">
-              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-1 mb20_sm mt20 mt0_sm">
+
+            <div class="col-xs-12" style="z-index: 11;">
+              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-2">
+                <%= f.label :shipping_method,'Order Type' %>
+              </div>
+              <div class="col-xs-12 col-sm-5 col-md-3 col-lg-2 mb20_sm">
+                <%= f.select :shipping_method, options_for_select( ['Bulk buy','Delivery' ] ),{},class:'ui dropdown fluid',id:'order_shipping_dropdown' %>
+              </div>
+            </div>
+
+            <div class="col-xs-12" style="z-index: 10">
+              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-2 mb20_sm mt20 mt0_sm">
                 <%= f.label :pick_up_time,'Pick up Time' %>
               </div>
               <div class="col-xs-10 col-sm-5 col-md-3 col-lg-2">
-                <%= date_field_tag :pick_up_date %>
+                <%= f.select :pick_up_time, options_for_select([*Date.current].to_a.map{ |x| x.strftime('%m-%d-%Y') }), {}, class:'ui disabled dropdown' %>
               </div>
               <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </div>
               <div class="col-xs-10 col-sm-5 col-sm-offset-4 col-md-offset-0 col-lg-3 col-md-5 mt20 mt0_sm">
-                <%= time_field_tag :pick_up_time %>
+                <%= f.select :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), {}, class:'ui dropdown', id:'pick_time_dropdown' %>
               </div>
             </div>
+
             <div class="col-xs-12">
-              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-1">
-                <%= f.label :shipping_method,'Order Type' %>
+              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-1 col-lg-1 col-lg-offset-2 mt20 mt0_sm">
+                <%= f.label :shipping_place,'Location' %>
               </div>
 
-              <div class="col-xs-12 col-sm-5 col-md-3 col-lg-2 mb20_sm">
-                <%= f.select :shipping_method, options_for_select( ['bulk_buy','delivery' ] ),{},class:'ui dropdown fluid' %>
-              </div>
-
-              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-1 col-lg-1 mt20 mt0_sm">
-                <%= f.label :shipping_place,'at' %>
-              </div>
-
-              <div class="col-xs-12 col-sm-7 col-md-5 col-lg-5 mb20_sm">
+              <div class="col-xs-12 col-sm-7 col-md-5 col-lg-6 col-lg-offset-1 mb20_sm">
                 <%= f.text_field :shipping_place,placeholder:'555 Montgomery st. Suite 501, San Francisco, CA, 94111' %>
               </div>
             </div>
+
           </div>
         </div>
       </section>
+
       <section class="row">
         <div class="col-xs-12 basic_bg">
           <div class="row">
@@ -73,14 +85,15 @@
           </div>
         </div>
       </section>
+
       <div class="row">
         <% if current_user %>
             <button class="ui button my_btn" name="reach_order">
-              <i class="share_icon_white"></i> Help me reach mssy order!
+              <i class="share_icon_white"></i> Help me reach my order!
             </button>
         <% else %>
             <button class="ui button my_btn" name="reach_order">
-              <i class="share_icon_white"></i> Help me reach mssy order!
+              <i class="share_icon_white"></i> Help me reach my order!
             </button>
         <% end %>
       </div>
@@ -110,10 +123,85 @@
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
+
     $('#need_to_login').click(function(e){
       e.preventDefault()
       $('#auth_link_modal').modal('show');
-    })
-  })
+    });
 
+
+    var order_shipping_place = $('#order_shipping_place');
+    var order_shipping_dropdown = $('#order_shipping_dropdown');
+    var pick_time_dropdown = $('#pick_time_dropdown');
+
+    function order_type_is_Delivery() {
+      return order_shipping_dropdown.dropdown('get value')[0] === 'Delivery'
+    }
+
+    function check_order_type(){
+      if (order_type_is_Delivery()){
+        order_shipping_place.prop('readonly', false);
+      }else{
+        order_shipping_place.prop('readonly', true);
+        order_shipping_place.val('')
+      }
+    }
+
+    check_order_type();
+    order_shipping_dropdown.change(function(){
+      check_order_type();
+    });
+
+    pick_time_dropdown.change(function(){
+      if (!order_type_is_Delivery()){
+        $.ajax({
+          url: '/api/v1/check_pickup_time',
+          dataType: "json",
+          type: 'GET',
+          data: {
+            text: location_val,
+            restaurant_id: get_restaurant_id()
+          },
+          complete:function(data){
+            $('.alert_message').removeClass('hidden')
+            $('#alert_notice').html($.parseJSON(data.responseText).message)
+          }
+        })
+      }
+    });
+
+
+
+    var delayTimer;
+    order_shipping_place.keyup(function(){
+      if (order_type_is_Delivery()){
+        var location_val = order_shipping_place.val();
+        clearTimeout(delayTimer);
+        delayTimer = setTimeout(function() {
+          $.ajax({
+            url: '/api/v1/check_delivery_location',
+            dataType: "json",
+            type: 'GET',
+            data: {
+              text: location_val,
+              restaurant_id: get_restaurant_id()
+            },
+            complete:function(data){
+              $('.alert_message').removeClass('hidden')
+              $('#alert_notice').html($.parseJSON(data.responseText).message)
+            }
+          })
+        }, 1000);
+      }
+    });
+    function get_restaurant_id(){
+      var restaurant_id;
+      Object.keys( $.parseJSON($.cookie('cart_list')) ).forEach(function(key){
+        if (key.indexOf('restaurant') !== -1){
+          restaurant_id = +key.replace('restaurant_','')
+        }
+      })
+      return restaurant_id
+    }
+  })
 </script>

@@ -8,8 +8,8 @@
         <div class="col-xs-12 visible-xs">
           <% content_for :img_title do %>
               <div class="col-xs-12 col-sm-3">
-                <div class="background_white p10 border_main_radius" name="img_background_white">
-                  <div class="square_img border_main_radius" style="background-image: url(<%= image_path @restaurant.main_photo %>);"></div>
+                <div class="background_white p10 border_main_radius background_white_absolute">
+                  <div class="square_img border_main_radius background_gray" style="background-image: url(<%= image_path @restaurant.main_photo %>);"></div>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-9">
@@ -151,7 +151,7 @@
                   <i class="fa fa-map-marker red" aria-hidden="true"></i>
                 </div>
                 <div class="col-xs-10">
-                  <h4 class="normal"><%= bulk_buy.location%></h4>
+                  <h4 class="normal"><%= bulk_buy.location_1 %></h4>
                 </div>
                 <div class="col-xs-12">
                   <i class="red_line"></i>
@@ -212,11 +212,11 @@
     $(document).on('click','#advance_tab.white,#today_tab.white',function(){
       $('#advance_tab,#today_tab').toggleClass('background_red').toggleClass('white').toggleClass('red')
       $('.advance_tab,.today_tab').toggleClass('hidden')
-    })
+    });
     $(document).on('click','.product_lists > i',function(){
       $('.product_lists > i').toggleClass('hidden')
       $('.advance_tab,.today_tab').toggleClass('list_status')
-    })
+    });
   })
 </script>
 

@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   resources :foods
 
   resources :restaurants do
-    resources :orders do
+    resources :orders, controller: :orders do
       member do
         post :transactions
       end
@@ -97,6 +97,7 @@ Rails.application.routes.draw do
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
     get "/getDishesByFilter" => "mains#getDishesByFilter"
     get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"
+    get "/check_delivery_location" => "orders#check_delivery_location"
   end
 
 

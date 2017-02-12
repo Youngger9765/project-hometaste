@@ -86,55 +86,78 @@ $(document).ready ->
   render_order_new_list=() ->
     product_list = $('.product_list').first()
     cart_list = get_cart_list()
-    Object.keys(cart_list).forEach (restaurant,i,a) ->
-      Object.keys(cart_list["#{restaurant}"]).forEach (food,i,a) ->
+    restaurant_id = +location.pathname.match(/\/\d+\//gi)[0].replace(/\//g,'')
+#    Object.keys(cart_list).forEach (restaurant,i,a) ->
+    current_restaurant = cart_list["restaurant_#{restaurant_id}"]
+    Object.keys(current_restaurant).forEach (food,i,a) ->
+      if food.indexOf('food') != -1
+        if i != 0
+          product_list.clone().insertAfter('.product_list:last');
 
-        if food.indexOf('food') != -1
-          if i != 0
-            product_list.clone().insertAfter('.product_list:last');
+        this_list = $('.product_list:last')
+        this_list.removeClass('hidden')
+#        restaurant_id = +restaurant.replace('restaurant_','')
+        restaurant_tax = +current_restaurant['tax']
+        food_id = +food.replace('food_','')
+        qty = +current_restaurant["#{food}"]['qty']
+        name = current_restaurant["#{food}"]['name']
+        img_url = current_restaurant["#{food}"]['img_url']
+        price = +current_restaurant["#{food}"]['price']
 
-          this_list = $('.product_list:last')
-          this_list.removeClass('hidden')
-          restaurant_id = +restaurant.replace('restaurant_','')
-          restaurant_tax = +cart_list["#{restaurant}"]['tax']
-          food_id = +food.replace('food_','')
-          qty = +cart_list["#{restaurant}"]["#{food}"]['qty']
-          name = cart_list["#{restaurant}"]["#{food}"]['name']
-          img_url = cart_list["#{restaurant}"]["#{food}"]['img_url']
-          price = +cart_list["#{restaurant}"]["#{food}"]['price']
-
-          this_list.find('[name=food_price]').html(price)
-          this_list.find('[name=food_name]').html(name)
-          this_list.find('#txtNum').val(qty)
-          this_list.find('.food_data_info')
-            .attr('data-food-name',name)
-            .attr('data-food-id',food_id)
-            .attr('data-food-price',price)
-            .attr('data-restaurant-id',restaurant_id)
-            .attr('data-restaurant-tax',restaurant_tax)
+        this_list.find('[name=food_price]').html(price)
+        this_list.find('[name=food_name]').html(name)
+        this_list.find('#txtNum').val(qty)
+        this_list.find('.food_data_info')
+          .attr('data-food-name',name)
+          .attr('data-food-id',food_id)
+          .attr('data-food-price',price)
+          .attr('data-restaurant-id',restaurant_id)
+          .attr('data-restaurant-tax',restaurant_tax)
 
 
   render_total_price=() ->
     cart_list = get_cart_list()
     tax_price = 0
     food_price = 0
-    Object.keys(cart_list).forEach (restaurant,i,a) ->
-      restaurant_tax = +cart_list["#{restaurant}"]['tax']
-      Object.keys(cart_list["#{restaurant}"]).forEach (food,i,a) ->
+    restaurant_id = $('[data-restaurant-id]').data('restaurant-id')
+    current_restaurant = cart_list["restaurant_#{restaurant_id}"]
+    if current_restaurant
+      restaurant_tax = +current_restaurant['tax']
+
+      Object.keys(current_restaurant).forEach (food,i,a) ->
         if food.indexOf('food') != -1
-          qty = +cart_list["#{restaurant}"]["#{food}"]['qty']
-          price = +cart_list["#{restaurant}"]["#{food}"]['price']
+          qty = +current_restaurant["#{food}"]['qty']
+          price = +current_restaurant["#{food}"]['price']
           tax_price += qty * price * restaurant_tax / 100
           food_price += qty * price
-    tip = parseFloat( $('input.tip_input').val() )
-    total_price = (tax_price + food_price )
+
+
+    tip = parseFloat( $('input.tip_input').val() ) || 0
+    total_price = (tax_price + food_price + tip) || 0
     $('[name=subtotal]').html(food_price.toFixed(2))
     $('[name=tax]').html(tax_price.toFixed(2))
     $('[name=alltotal]').html(total_price.toFixed(2))
     $('[name=cart_total_price]').html(food_price.toFixed(2))
 
+#    Object.keys(cart_list).forEach (restaurant,i,a) ->
+#    restaurant_tax = +cart_list["#{restaurant}"]['tax']
+#    Object.keys(cart_list["#{restaurant}"]).forEach (food,i,a) ->
+#      if food.indexOf('food') != -1
+#        qty = +cart_list["#{restaurant}"]["#{food}"]['qty']
+#        price = +cart_list["#{restaurant}"]["#{food}"]['price']
+#        tax_price += qty * price * restaurant_tax / 100
+#        food_price += qty * price
+#    tip = parseFloat( $('input.tip_input').val() )
+#    total_price = (tax_price + food_price )
+#    $('[name=subtotal]').html(food_price.toFixed(2))
+#    $('[name=tax]').html(tax_price.toFixed(2))
+#    $('[name=alltotal]').html(total_price.toFixed(2))
+#    $('[name=cart_total_price]').html(food_price.toFixed(2))
+
   render_food_qty()
-  render_total_price()
+  if location.pathname.replace(/restaurants\/\d*\//gi,'') != "/orders/new"
+    render_total_price()
+
 
   # food qty up or down 不計算加減，每點一次就撈一次現值
   $(document).on 'click', ".product_spineer_button" , ->
@@ -148,7 +171,7 @@ $(document).ready ->
     $('.bigbun_modal').modal('hide')
 
   #-----------       order new page render     ---------------------
-  if location.pathname == "/orders/new"
+  if location.pathname.replace(/restaurants\/\d*\//gi,'') == "/orders/new"
     render_order_new_list()
     render_total_price()
     $('input.tip_input').change ->

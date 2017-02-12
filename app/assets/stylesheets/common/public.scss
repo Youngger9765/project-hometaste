@@ -51,6 +51,7 @@ button:focus{
 }
 .ui.form input:not([type='submit']),.ui.form select,.ui.form .ui.dropdown{
   height: 36px;
+  padding-top: 11px;
 }
 .ui.checkbox input:checked ~ .box:after, .ui.checkbox input:checked ~ label:after{
   @extend .red;
