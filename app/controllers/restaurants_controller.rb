@@ -11,8 +11,8 @@ class RestaurantsController < ApplicationController
   def show
     @user = current_user || User.new
 
-    time_range = (Time.now().beginning_of_day()..Time.now().end_of_day())
-    @today_orders = @chef.restaurant.orders.where(:created_at => time_range).where(:payment_status => "paid")
+    time_range = (Time.now.localtime.beginning_of_day().utc..Time.now.localtime.end_of_day().utc)
+    @today_orders = @chef.restaurant.orders.where(:payment_status => "paid").where(:pick_up_time => time_range)
 
     if @restaurant.order_reach > 0
       @reach_percent = (@today_orders.sum(:amount)*100/@restaurant.order_reach).to_f
