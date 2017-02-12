@@ -11,7 +11,7 @@
     <div>
       <h3 class="red">$<%= food.price %>/ Bowl</h3>
     </div>
-    <div class="food_data_info" <%= food_restaurant_info(food) %>>
+    <div class="food_data_info <%= advance %>" <%= food_restaurant_info(food) %>>
       <%= render 'common/spinner', qty: 0  %>
     </div>
     <div>

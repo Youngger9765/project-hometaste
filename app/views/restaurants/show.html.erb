@@ -184,13 +184,14 @@
       <i class="block_icon_red pl35 ml35 hidden cursor_pointer" aria-hidden="true"></i>
 
       <div class="today_tab">
-        <% @restaurant.foods.sample(2).each do |food| %>
-            <%= render 'common/product_list' ,food:food %>
+        <% @restaurant.foods.last(2).each do |food| %>
+            <%= render 'common/product_list', food:food, advance: '' %>
         <% end %>
       </div>
+
       <div class="advance_tab hidden">
-        <% @restaurant.foods.sample(3).each do |food| %>
-            <%= render 'common/product_list' ,food:food %>
+        <% @restaurant.foods.first(3).each do |food| %>
+            <%= render 'common/product_list', food:food, advance: 'advance_food' %>
         <% end %>
       </div>
 
@@ -212,6 +213,10 @@
     $(document).on('click','#advance_tab.white,#today_tab.white',function(){
       $('#advance_tab,#today_tab').toggleClass('background_red').toggleClass('white').toggleClass('red')
       $('.advance_tab,.today_tab').toggleClass('hidden')
+//      判斷是否為 advance 狀態
+      $('.add_to_cart').toggleClass('advance_status')
+
+      render_total_price()
     });
     $(document).on('click','.product_lists > i',function(){
       $('.product_lists > i').toggleClass('hidden')
