@@ -1,6 +1,8 @@
-<div class="add_to_cart">
+<div class="add_to_cart" data-link="<%= new_restaurant_order_path(@restaurant ? @restaurant : @food, date: Date.current) %>"
+     data-original-link="<%= new_restaurant_order_path(@restaurant ? @restaurant : @food) %>">
+
   <h3 class="dib"><i class="cart_icon_white"></i>$<span name="cart_total_price">0</span></h3>
-  <a href="<%= new_restaurant_order_path(@restaurant ? @restaurant : @food) %>"><button>NEXT</button></a>
+  <a href="<%= new_restaurant_order_path(@restaurant ? @restaurant : @food, date: Date.current) %>"><button>NEXT</button></a>
 </div>
 
 
