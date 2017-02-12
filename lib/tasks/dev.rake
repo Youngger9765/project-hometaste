@@ -189,8 +189,10 @@ namespace :dev do
           restaurant_id: restaurant.id,
           min_order: rand(5..15),
           cut_off_time: Faker::Time.forward(0),
-          location: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-          pick_up_time: Faker::Time.forward(0),
+          location_1: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+          pick_up_time_1: Faker::Time.forward(0),
+          location_2: [Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address, nil].sample,
+          pick_up_time_2: [Faker::Time.forward(0),nil].sample,
         )
       }
 

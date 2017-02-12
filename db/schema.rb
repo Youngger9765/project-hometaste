@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170212065658) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "pick_up_time_1"
+    t.datetime "pick_up_time"
     t.integer  "user_id"
     t.integer  "restaurant_id"
     t.string   "customer_name"
