@@ -25,6 +25,10 @@ class Food < ApplicationRecord
     food_comments.average(:score) || 0
   end
 
+  def self.today_foods(foods_ids)
+    where(:id => foods_ids)
+  end
+
   def self.filter(params, lat_long, ids = self.ids)
     sort = params['Sort By']
     distance = params['Distance']

@@ -23,7 +23,7 @@ class FoodsController < ApplicationController
 					{:name => "Thursday",:value=>4},
 					{:name => "Friday",:value=>5},
 					{:name => "Saturday",:value=>6},
-					{:name => "Sunday",:value=>7}]
+					{:name => "Sunday",:value=>0}]
   end
 
   def create
@@ -72,7 +72,7 @@ class FoodsController < ApplicationController
 					{:name => "Thursday",:value=>4},
 					{:name => "Friday",:value=>5},
 					{:name => "Saturday",:value=>6},
-					{:name => "Sunday",:value=>7}]
+					{:name => "Sunday",:value=>0}]
 
   end
 
