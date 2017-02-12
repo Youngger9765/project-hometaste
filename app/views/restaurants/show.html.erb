@@ -130,11 +130,11 @@
         <h3 class="tar_sm bold">Goal: $<%= @restaurant.order_reach%></h3>
       </div>
       <div>
-        <h3 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(-30%); margin-bottom: 15px;">Reached</h3>
+        <h3 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(0%); margin-bottom: 15px;">Reached</h3>
         <div class="ui indicating progress"  data-percent="<%= @reach_percent %>">
           <div class="bar"></div>
         </div>
-        <h2 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(-27%);">$ <%= @today_orders.sum(:amount)%></h2>
+        <h2 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(0%);">$ <%= @today_orders.sum(:amount)%></h2>
       </div>
     </div>
   </section>
