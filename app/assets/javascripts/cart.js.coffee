@@ -12,7 +12,8 @@ $(document).ready ->
 
 
   check_advance_staus=() ->
-    return $('.add_to_cart').attr('class').indexOf('advance') != -1
+    if $('.add_to_cart').size() > 0
+      return $('.add_to_cart').attr('class').indexOf('advance') != -1
 
   render_food_qty = () ->
     list = get_cart_list()
