@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
 	def edit
 		@cuisines = Cuisine.all
+		@prefered_cuisine_ids = @user.prefered_cuisine_ids || []
 	end
 
 	def update
