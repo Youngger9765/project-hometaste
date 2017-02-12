@@ -7,7 +7,7 @@
 </div>
 
 
-<%= form_for @order, url: new_restaurant_order_path(restaurant_id: params[:restaurant_id]) do |f| %>
+<%= form_for @order, url: restaurant_orders_path(restaurant_id: params[:restaurant_id]) do |f| %>
     <div class="container ui form">
       <section class="row">
         <div class="col-xs-12 basic_bg_top" style="z-index: 10">
@@ -28,13 +28,13 @@
                 <%= f.label :pick_up_time,'Pick up Time' %>
               </div>
               <div class="col-xs-10 col-sm-4 col-md-3 col-lg-2">
-                <%= f.select :pick_up_time, options_for_select([*Date.current].to_a.map{ |x| x.strftime('%m-%d-%Y') }), {}, class:'ui disabled dropdown fluid' %>
+                <%= select_tag :pick_up_date, options_for_select([deal_params_date]), class:'ui disabled dropdown fluid' %>
               </div>
               <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </div>
-              <div class="col-xs-10 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm">
-                <%= f.select :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), {}, class:'ui dropdown', id:'pick_time_dropdown fluid' %>
+              <div class="col-xs-12 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm">
+                <%= select_tag :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), class:'ui dropdown fluid', id:'pick_time_dropdown' %>
               </div>
             </div>
 

@@ -10,10 +10,21 @@ $(document).ready ->
   save_in_cookie=( data ) ->
     $.cookie('cart_list', JSON.stringify(data), { expires: 1, path: '/' } )
 
+  catch_params_date=() ->
+    date = /\?date=.*(\d{4}).*-.*(\d{2}).*-.*(\d{2}).*&?/.exec(location.search)
+    if date
+      return (date[1] + '-' + date[2] + '-' + date[3])
+    else
+      new Date().getFullYear()+'-'+ (new Date().getMonth()+1)+'-'+ new Date().getDate()
+
 
   check_advance_staus=() ->
-    if $('.add_to_cart').size() > 0
-      return $('.add_to_cart').attr('class').indexOf('advance') != -1
+    today = new Date(new Date().getFullYear()+'-'+ (new Date().getMonth()+1)+'-'+ new Date().getDate())
+    params_date = new Date(catch_params_date()+' 00:00:00')
+    if params_date > today
+      true
+    else if $('.add_to_cart').size() > 0
+      $('.add_to_cart').attr('class').indexOf('advance') != -1
 
   render_food_qty = () ->
     list = get_cart_list()
@@ -35,17 +46,27 @@ $(document).ready ->
     bigbun_id = modal.data('bigbun-id')
     restaurant_id = modal.data('restaurant-id')
     bigbun_code = modal.find('#bigbun_code').html()
+    prepare_time = modal.data('prepare-time')
+    stop_time = modal.data('stop-time')
 
     info_object = get_cart_list() || {}
     if info_object["restaurant_#{restaurant_id}"]
-      info_object["restaurant_#{restaurant_id}"]["bigbun_#{bigbun_id}"] = bigbun_code
+      info_object["restaurant_#{restaurant_id}"]["bigbun_#{bigbun_id}"] =
+        bigbun_code: bigbun_code,
+        prepare_time: prepare_time,
+        stop_time: stop_time
     else
-      info_object["restaurant_#{restaurant_id}"] = "bigbun_#{bigbun_id}":bigbun_code
+      info_object["restaurant_#{restaurant_id}"] =
+        "bigbun_#{bigbun_id}":
+          bigbun_code: bigbun_code,
+          prepare_time: prepare_time,
+          stop_time: stop_time
 
     save_in_cookie(info_object)
 
 
-#    需判斷today advance 區分兩個資料結構
+
+  #    需判斷today advance 區分兩個資料結構
   deal_food_list=(_this) ->
     _data = $(_this).closest('.food_data_info')
     restaurant_id = _data.data('restaurant-id')
@@ -102,17 +123,23 @@ $(document).ready ->
   render_order_new_list=() ->
     product_list = $('.product_list').first()
     cart_list = get_cart_list()
-    restaurant_id = +location.pathname.match(/\/\d+\//gi)[0].replace(/\//g,'')
+    restaurant_id = +(/\/(\d+)\//gi).exec(location.pathname)[1]
 #    Object.keys(cart_list).forEach (restaurant,i,a) ->
     current_restaurant = cart_list["restaurant_#{restaurant_id}"]
+    #    預設都是 today 如果發現是 advance 就在資料前加 advance
+
+    if check_advance_staus()
+      advance = 'advance_'
+    else
+      advance = ''
+
     Object.keys(current_restaurant).forEach (food,i,a) ->
-      if food.indexOf('food') != -1
+      if food.indexOf("#{advance}food") == 0
         if i != 0
           product_list.clone().insertAfter('.product_list:last');
 
         this_list = $('.product_list:last')
         this_list.removeClass('hidden')
-#        restaurant_id = +restaurant.replace('restaurant_','')
         restaurant_tax = +current_restaurant['tax']
         food_id = +food.replace('food_','')
         qty = +current_restaurant["#{food}"]['qty']
@@ -129,6 +156,8 @@ $(document).ready ->
           .attr('data-food-price',price)
           .attr('data-restaurant-id',restaurant_id)
           .attr('data-restaurant-tax',restaurant_tax)
+
+    product_list.remove()
 
 
   render_total_price=() ->

@@ -55,4 +55,10 @@ module OrdersHelper
         ['Wyoming', 'WY']
     ]
   end
+
+  def deal_params_date
+    params[:date].to_time.strftime('%F')
+  rescue
+    Date.current.to_time.strftime('%F')
+  end
 end
