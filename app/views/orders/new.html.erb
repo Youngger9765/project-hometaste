@@ -1,6 +1,8 @@
 <div class="col-md-12 alert_message hidden">
   <div class="row content">
-    <div class = "red alert-success" id="alert_notice"></div>
+    <div class = "red alert-success" id="alert_notice">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p></p>
+    </div>
   </div>
 </div>
 
@@ -188,7 +190,7 @@
             },
             complete:function(data){
               $('.alert_message').removeClass('hidden')
-              $('#alert_notice').html($.parseJSON(data.responseText).message)
+              $('#alert_notice p').html($.parseJSON(data.responseText).message)
             }
           })
         }, 1000);

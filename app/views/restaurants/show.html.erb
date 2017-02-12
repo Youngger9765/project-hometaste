@@ -207,9 +207,47 @@
     <%= render 'common/bigbun', restaurant: @restaurant , bigbun:@restaurant.get_available_bigbun,food:nil %>
 <% end %>
 
+<div class="date_pick ui small modal prl50_sm">
+  <div class="header"><h3 class="tac">Pick a Date</h3></div>
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p></p>
+  <div class="content">
+    <span>* Default is tomorrow</span>
+    <div class="description">
+      <div class="ui calendar mt15 mb30" id="date_pick"></div>
+    </div>
+    <div class="actions tac mb15">
+      <div class="ui button my_btn mr20" id="pick_date_search">Search</div>
+      <div class="ui button cancel my_btn_reserve ml20">Cancel</div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'semantic_ui/calendar.min' %>
+<%= stylesheet_link_tag 'semantic_ui/calendar.min' %>
+
 <script type="text/javascript" charset="utf-8">
+
   $(document).ready(function(){
+    var tomorrow = new Date(new Date().setDate(new Date().getDate()+1));
+    var date_pick = $('#date_pick')
+
     $('.ui.progress').progress();
+
+    date_pick.calendar({
+      minDate: tomorrow,
+      maxDate: new Date(new Date().setDate(new Date().getDate()+31)),
+      type: 'date',
+      text: {
+        days: ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat']
+      },
+      inline: true
+    });
+    date_pick.calendar('set date',tomorrow.getMonth()+1 +" "+ tomorrow.getDate() +' '+ tomorrow.getFullYear())
+
+    $(document).on('click','#advance_tab.white',function(){
+      $('.date_pick.small.modal').modal('show');
+    })
+
     $(document).on('click','#advance_tab.white,#today_tab.white',function(){
       $('#advance_tab,#today_tab').toggleClass('background_red').toggleClass('white').toggleClass('red')
       $('.advance_tab,.today_tab').toggleClass('hidden')
@@ -218,10 +256,18 @@
 
       render_total_price()
     });
+
     $(document).on('click','.product_lists > i',function(){
       $('.product_lists > i').toggleClass('hidden')
       $('.advance_tab,.today_tab').toggleClass('list_status')
     });
+
+    $('#pick_date_search').on('click',function(){
+      var _date = date_pick.calendar('get date')
+      var date = _date.getMonth()+1 +"-"+ _date.getDate() +'-'+ _date.getFullYear()
+      $('.date_pick.ui.modal').modal('hide')
+      $('.add_to_cart a').attr('href',$('.add_to_cart a').attr('href')+'?date='+date)
+    })
   })
 </script>
 

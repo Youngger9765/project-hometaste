@@ -148,6 +148,14 @@ input[type=submit]{
     color: $main_red;
   }
 }
+.alert_message{
+  z-index: 10;
+  .close{
+    right: 50px;
+    top: 10px;
+    position: absolute;
+  }
+}
 
 @media (max-width: $screen-sm-max){
   h2{
