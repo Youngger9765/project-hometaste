@@ -13,7 +13,74 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @pick_up_time = @restaurant.bulk_buys
+
+    order_date = params[:date].to_date
+    date_now = Time.now.localtime.to_date
+
+    if order_date == date_now
+      # check cut off time
+      time_now = Time.now.localtime
+      @pick_up_time_array =[]
+      @time_location_dictionary =[]
+
+      @restaurant.bulk_buys.each do |bulk_buy|
+
+        if bulk_buy.pick_up_time_1.present?
+          pick_up_time = bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S").to_time
+
+          if pick_up_time > time_now
+
+            if pick_up_time > time_now
+              @pick_up_time_array << bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S")
+              dict = {}
+              dict[:pick_up_time] = bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S")
+              dict[:location] = bulk_buy.location_1
+              @time_location_dictionary << dict
+            end
+          end
+        end
+
+        if bulk_buy.pick_up_time_2.present?
+          pick_up_time = bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S").to_time
+
+          if pick_up_time > time_now
+            @pick_up_time_array << bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S")
+            dict = {}
+            dict[:pick_up_time] = bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S")
+            dict[:location] = bulk_buy.location_1
+            @time_location_dictionary << dict
+          end
+        end
+      end
+
+    else
+      # give all pick_up_time
+      bulk_buys = @restaurant.bulk_buys
+      @pick_up_time_array =[]
+      @time_location_dictionary =[]
+
+      bulk_buys.each do |bulk_buy|
+
+        # time_1
+        if bulk_buy.pick_up_time_1
+          @pick_up_time_array << bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S")
+          dict = {}
+          dict[:pick_up_time] = bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S")
+          dict[:location] = bulk_buy.location_1
+          @time_location_dictionary << dict
+        end
+
+        # time_2
+        if bulk_buy.pick_up_time_2
+          @pick_up_time_array << bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S")
+          dict = {}
+          dict[:pick_up_time] = bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S")
+          dict[:location] = bulk_buy.location_2
+          @time_location_dictionary << dict
+        end
+      end
+    end
+
   end
 
   def create

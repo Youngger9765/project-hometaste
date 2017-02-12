@@ -101,15 +101,19 @@ namespace :dev do
       end
 
       rand(1..2).times {
-        BulkBuy.create(
+        bulk_buy = BulkBuy.create(
           restaurant_id: restaurant.id,
           min_order: rand(5..15),
           cut_off_time: Faker::Time.forward(0),
-          location_1: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
           pick_up_time_1: Faker::Time.forward(0),
-          location_2: [Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address, nil].sample,
+          location_1: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
           pick_up_time_2: [Faker::Time.forward(0),nil].sample,
         )
+
+        if bulk_buy.pick_up_time_2.present?
+          bulk_buy.location_2 = Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address
+          bulk_buy.save!
+        end
       }
 
     end
@@ -185,15 +189,19 @@ namespace :dev do
       end
 
       rand(1..2).times {
-        BulkBuy.create(
+        bulk_buy = BulkBuy.create(
           restaurant_id: restaurant.id,
           min_order: rand(5..15),
           cut_off_time: Faker::Time.forward(0),
-          location_1: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
           pick_up_time_1: Faker::Time.forward(0),
-          location_2: [Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address, nil].sample,
+          location_1: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
           pick_up_time_2: [Faker::Time.forward(0),nil].sample,
         )
+
+        if bulk_buy.pick_up_time_2.present?
+          bulk_buy.location_2 = Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address
+          bulk_buy.save!
+        end
       }
 
 		end
@@ -215,7 +223,7 @@ namespace :dev do
         ingredients: Faker::Lorem.paragraph,
         support_lunch: [true, false].sample,
         support_dinner: [true, false].sample,
-        support_days: [[1,3,5,7],[2,4,6],[1,2,3,4,5],[1,2,3,4,5,6,7],[6,7]].sample,
+        support_days: [[1,3,5,0],[2,4,6],[1,2,3,4,5],[1,2,3,4,5,6,0],[6,0]].sample,
 			)
 		}
 

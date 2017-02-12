@@ -1,8 +1,10 @@
 class MainController < ApplicationController
 
+	before_action :get_today_foods_ids
+
 	def index
 		approved_restaurant = Restaurant.where(:is_approved => true)
-		@foods = Food.where(:restaurant_id => approved_restaurant.ids).includes(:restaurant).sample(100)
+		@foods = Food.where(:restaurant_id => approved_restaurant.ids).includes(:restaurant).today_foods(@foods_ids).sample(100)
 
 		# restaurant's feature
 		today_meal_restaurant_ids = Food.where(:is_public => true).pluck(:restaurant_id).uniq
@@ -26,6 +28,18 @@ class MainController < ApplicationController
   def save_search_results_in_cookies
     ids = @foods.map{|x|x.id}
     cookies.signed[:search_results] = {value: {food: ids} }
+  end
+
+  def get_today_foods_ids
+  	wday_now = Time.now.localtime.wday
+  	@foods_ids =[]
+    public_foods = Food.where(:is_public => true)
+
+    public_foods.each do |food|
+      @foods_ids << food.id if food.support_days.include?(wday_now)
+    end
+
+    @foods_ids
   end
 
 end
