@@ -116,7 +116,7 @@
     <div class="col-xs-12 basic_bg pl0_sm product_lists">
       <h3 class="ml150_md ml20_xs bold mb25">You may also want</h3>
       <% @restaurant.foods.sample(1).each do |food| %>
-          <%= render 'common/product_list' ,food:food   %>
+          <%= render 'common/product_list' ,food:food, advance:'' %>
       <% end %>
     </div>
   </section>

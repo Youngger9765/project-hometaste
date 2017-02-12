@@ -81,14 +81,14 @@ class Food < ApplicationRecord
     end
   end
 
-  def self.filter_cuisine( _case )
+  def self.filter_cuisine(_case)
     if _case.include?('Any Cuisine')
       self.all
     else
       _cases = _case.uniq
-      _cases = _case.map {|x| "%#{ x.to_s.split(' ')[0].to_s.gsub(/[^a-zA-Z0-9\-]/,'') }%" }
-      cuisine_ids = _cases.map {|x|  Cuisine.where('name like ?',x).ids}.flatten
-      restaurant_id = RestaurantCuisineShip.where(cuisine_id:cuisine_ids).pluck(:restaurant_id)
+      _cases = _case.map { |x| "%#{ x.to_s.split(' ')[0].to_s.gsub(/[^a-zA-Z0-9\-]/,'') }%" }
+      cuisine_ids = _cases.map { |x| Cuisine.where('name like ?', x).ids}.flatten
+      restaurant_id = RestaurantCuisineShip.where(cuisine_id: cuisine_ids).pluck(:restaurant_id)
       Restaurant.where(id:restaurant_id)
     end
   end

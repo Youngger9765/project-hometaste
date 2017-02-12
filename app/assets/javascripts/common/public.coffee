@@ -11,4 +11,6 @@ $(document).ready ->
   $(document).on 'click','.navbar-collapse.in',(e) ->
     if $(e.target).is('a')
       $(this).collapse('hide')
+  $('.alert_message .close').on 'click', ->
+    $('.alert_message').hide()
 

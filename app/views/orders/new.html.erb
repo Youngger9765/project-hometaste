@@ -1,6 +1,8 @@
 <div class="col-md-12 alert_message hidden">
   <div class="row content">
-    <div class = "red alert-success" id="alert_notice"></div>
+    <div class = "red alert-success" id="alert_notice">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p></p>
+    </div>
   </div>
 </div>
 
@@ -10,38 +12,38 @@
       <section class="row">
         <div class="col-xs-12 basic_bg_top" style="z-index: 10">
           <h1 class="bold tac mb50">Order Information</h1>
-          <div class="row reverse_xs reverse_back_md tac tan_sm">
+          <div class="row tac tan_sm">
 
             <div class="col-xs-12" style="z-index: 11;">
-              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-2">
+              <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-2 col-lg-offset-2 tar_md tac_lg">
                 <%= f.label :shipping_method,'Order Type' %>
               </div>
-              <div class="col-xs-12 col-sm-5 col-md-3 col-lg-2 mb20_sm">
+              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 mb20_sm">
                 <%= f.select :shipping_method, options_for_select( ['Bulk buy','Delivery' ] ),{},class:'ui dropdown fluid',id:'order_shipping_dropdown' %>
               </div>
             </div>
 
             <div class="col-xs-12" style="z-index: 10">
-              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-3 col-lg-2 col-lg-offset-2 mb20_sm mt20 mt0_sm">
+              <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-2 col-lg-offset-2 mb20_sm mt20 mt0_sm  tar_md tac_lg">
                 <%= f.label :pick_up_time,'Pick up Time' %>
               </div>
-              <div class="col-xs-10 col-sm-5 col-md-3 col-lg-2">
-                <%= f.select :pick_up_time, options_for_select([*Date.current].to_a.map{ |x| x.strftime('%m-%d-%Y') }), {}, class:'ui disabled dropdown' %>
+              <div class="col-xs-10 col-sm-4 col-md-3 col-lg-2">
+                <%= f.select :pick_up_time, options_for_select([*Date.current].to_a.map{ |x| x.strftime('%m-%d-%Y') }), {}, class:'ui disabled dropdown fluid' %>
               </div>
               <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </div>
-              <div class="col-xs-10 col-sm-5 col-sm-offset-4 col-md-offset-0 col-lg-3 col-md-5 mt20 mt0_sm">
-                <%= f.select :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), {}, class:'ui dropdown', id:'pick_time_dropdown' %>
+              <div class="col-xs-10 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm">
+                <%= f.select :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), {}, class:'ui dropdown', id:'pick_time_dropdown fluid' %>
               </div>
             </div>
 
             <div class="col-xs-12">
-              <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-offset-0 col-md-1 col-lg-1 col-lg-offset-2 mt20 mt0_sm">
+              <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-2 col-lg-offset-2 mt20 mt0_sm tar_md tac_lg">
                 <%= f.label :shipping_place,'Location' %>
               </div>
 
-              <div class="col-xs-12 col-sm-7 col-md-5 col-lg-6 col-lg-offset-1 mb20_sm">
+              <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6 mb20_sm">
                 <%= f.text_field :shipping_place,placeholder:'555 Montgomery st. Suite 501, San Francisco, CA, 94111' %>
               </div>
             </div>
@@ -170,8 +172,6 @@
       }
     });
 
-
-
     var delayTimer;
     order_shipping_place.keyup(function(){
       if (order_type_is_Delivery()){
@@ -188,7 +188,7 @@
             },
             complete:function(data){
               $('.alert_message').removeClass('hidden')
-              $('#alert_notice').html($.parseJSON(data.responseText).message)
+              $('#alert_notice p').html($.parseJSON(data.responseText).message)
             }
           })
         }, 1000);

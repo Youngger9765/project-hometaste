@@ -1,0 +1,22 @@
+.calendar .ui.table td.active{
+  background: $main_red !important;
+  color: #FFF !important;
+}
+.ui.modal.date_pick .close{
+  width:auto;
+  height:auto;
+  top: 15px;
+  right: 15px;
+  opacity: 1;
+  font-size: 30px;
+  color: $main_red;
+  padding: 6px 11px 6px 12px;
+  border-radius: 50%;
+  border: 1px solid $main_red;
+}
+//@media (max-width: $screen-xs-max){
+//  .ui.small.modal {
+//    width: 100%;
+//    margin: 0em 0em 0em -50%;
+//  }
+//}
