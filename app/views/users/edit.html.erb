@@ -258,13 +258,11 @@
       };
     }
 
-    var prefered_cuisine_ids = <%= @user.prefered_cuisine_ids%> || [];
-    if (prefered_cuisine_ids) {
-      for (var i = 0; i < prefered_cuisine_ids.length; i++) {
-        id = prefered_cuisine_ids[i];
-        id_name = '#user-prefered_cuisine_ids-' + id;
-        $(id_name).click();
-      }
+    var prefered_cuisine_ids = <%= @prefered_cuisine_ids %>
+    for (var i = 0; i < prefered_cuisine_ids.length; i++) {
+      id = prefered_cuisine_ids[i];
+      id_name = '#user-prefered_cuisine_ids-' + id;
+      $(id_name).click();
     }
   })
 </script>

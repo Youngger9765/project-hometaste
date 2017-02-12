@@ -34,7 +34,9 @@
             <i class="fa fa-clock-o red fa-2x mt10"></i>
           </div>
           <div class="pt5 mra_xs mra_sm">
-            <h6><%= order.pick_up_time.localtime.strftime('%G/%I/%H %R') %></h6>
+            <% if order.pick_up_time.present?%>
+              <h6><%= order.pick_up_time.localtime.strftime('%G/%I/%H %R') %></h6>
+            <%end%>
           </div>
         </div>
         <i class="gray_line visible-xs"></i>
