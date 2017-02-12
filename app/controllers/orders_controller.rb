@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
   before_action :find_order, :except => [:new,:create]
+  before_action :find_restaurant
   before_action :is_chef?
 
   Braintree::Configuration.environment = :sandbox
@@ -67,14 +68,14 @@ class OrdersController < ApplicationController
     )
 
     if result.success?
-      # TODO: update order
+      @order.update(orders_params)
       @order.payment_status = "paid"
       @order.confirmation_number = result.transaction.id
       @order.save!
 
       flash[:notice] = "Successfully paid!"
       @thankyou = true
-      redirect_to order_path(@order.id)
+      redirect_to restaurant_order_path(@restaurant.id,@order.id)
     else
       render :show
     end
@@ -98,8 +99,14 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def find_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
+  end
+
   def orders_params
-    params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id )
+    params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id,
+                                  :mobile_number, :email, :billing_address,
+                                  :billing_city, :billing_state, :billing_zip_code )
   end
 
   def pick_datetime

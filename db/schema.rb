@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211160351) do
+ActiveRecord::Schema.define(version: 20170212065658) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -196,6 +196,12 @@ ActiveRecord::Schema.define(version: 20170211160351) do
     t.string   "confirmation_number"
     t.string   "cancelled_reason"
     t.integer  "bulk_buy_id"
+    t.string   "mobile_number"
+    t.string   "email"
+    t.string   "billing_address"
+    t.string   "billing_city"
+    t.string   "billing_state"
+    t.string   "billing_zip_code"
   end
 
   create_table "restaurant_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
