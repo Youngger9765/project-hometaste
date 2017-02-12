@@ -1,6 +1,6 @@
 class MainController < ApplicationController
 
-	before_action :today_foods_ids
+	before_action :get_today_foods_ids
 
 	def index
 		approved_restaurant = Restaurant.where(:is_approved => true)
@@ -30,7 +30,7 @@ class MainController < ApplicationController
     cookies.signed[:search_results] = {value: {food: ids} }
   end
 
-  def today_foods_ids
+  def get_today_foods_ids
   	wday_now = Time.now.localtime.wday
   	@foods_ids =[]
     public_foods = Food.where(:is_public => true)
