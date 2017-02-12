@@ -1,10 +1,56 @@
-<section class="row">
-  <div class="col-xs-12 basic_bg">
-    <div class="row">
-      <h1 class="bold tac mb50">Payment Information</h1>
-      <div class="col-md-10 col-md-offset-1">
-        <i class="gray_line mb50_sm mb30"></i>
-        <form id="checkout-form" action="/orders/<%=@order.id%>/transactions" method="post">
+<form id="checkout-form" action="/restaurants/<%=@order.restaurant_id%>/orders/<%=@order.id%>/transactions" method="post">
+  <section class="row">
+    <div class="col-xs-12 basic_bg">
+      <div class="row">
+        <h1 class="bold tac mb50">Your Contact Information</h1>
+
+        <div class="col-md-10 col-md-offset-1">
+          <i class="gray_line mb50_sm mb30"></i>
+            <div class="row">
+              <div class="col-sm-5">
+                <%= label_tag :mobile_number,'Mobile Number:' %>
+              </div>
+              <div class="col-sm-6">
+                <%= text_field_tag 'order[mobile_number]', current_user.phone_number%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <%= label_tag :email,'E-mail:' %>
+              </div>
+              <div class="col-sm-8">
+                <%= email_field_tag 'order[email]', current_user.email %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+                <%= label_tag :billing_address,'Billing Address:' %>
+              </div>
+              <div class="col-sm-6">
+                <%= text_field_tag 'order[billing_address]', current_user.address, placeholder: 'address'  %>
+              </div>
+              <div class="col-sm-4 col-sm-offset-5">
+                <%= text_field_tag 'order[billing_city]', current_user.city, placeholder: 'city' %>
+              </div>
+              <div class="col-sm-2">
+                <%= text_field_tag 'order[billing_state]', current_user.state, placeholder: 'state'  %>
+              </div>
+              <div class="col-sm-6 col-sm-offset-5">
+                <%= text_field_tag 'order[billing_zip_code]', current_user.ZIP, placeholder: 'zip code'  %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="row">
+    <div class="col-xs-12 basic_bg">
+      <div class="row">
+        <h1 class="bold tac mb50">Payment Information</h1>
+        <div class="col-md-10 col-md-offset-1">
+          <i class="gray_line mb50_sm mb30"></i>
           <div id="error-message"></div>
           <div class="row">
             <div class="col-sm-5">
@@ -43,11 +89,12 @@
               <input id='checkout-form-submit' type="submit" value="Pay <%= @order.amount %>" class="my_btn mt30 hidden">
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+</form>
 
 
 
