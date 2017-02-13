@@ -22,3 +22,4 @@ $(document).ready ->
 
   window.alert_message = -> alert_message()
   window.alert_text = ''
+  window.order_location_invalid = true

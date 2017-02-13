@@ -19,9 +19,10 @@ class OrdersController < ApplicationController
 
     if order_date == date_now
       # check cut off time
-      time_now = Time.now.localtime
-      @pick_up_time_array =[]
-      @time_location_dictionary =[]
+      # time_now = Time.now.localtime
+      time_now = Time.now.at_beginning_of_day
+      @pick_up_time_array = []
+      @time_location_dictionary = []
 
       @restaurant.bulk_buys.each do |bulk_buy|
 
@@ -56,8 +57,8 @@ class OrdersController < ApplicationController
     else
       # give all pick_up_time
       bulk_buys = @restaurant.bulk_buys
-      @pick_up_time_array =[]
-      @time_location_dictionary =[]
+      @pick_up_time_array = []
+      @time_location_dictionary = []
 
       bulk_buys.each do |bulk_buy|
 
@@ -172,8 +173,8 @@ class OrdersController < ApplicationController
                                   :mobile_number, :email, :billing_address, :pick_up_time,
                                   :billing_city, :billing_state, :billing_zip_code,
                                   order_food_ships_attributes: [
-                                    :food_id, :quantity
-                                  ])
+                                                                 :food_id, :quantity
+                                                               ])
   end
 
   def get_pick_up_time

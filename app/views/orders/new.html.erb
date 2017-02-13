@@ -10,12 +10,14 @@
                 <%= f.label :shipping_method,'Order Type' %>
               </div>
               <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 mb20_sm">
-                <%= f.select :shipping_method, options_for_select( ['Bulk buy','Delivery' ] ),{},class:'ui dropdown fluid',id:'order_shipping_dropdown' %>
+                <%= f.select :shipping_method,
+                             options_for_select( ['Bulk buy','Delivery' ], disabled: ('Bulk buy' if @pick_up_time_array.empty?) ),
+                             {},class:'ui dropdown fluid',id:'order_shipping_dropdown' %>
               </div>
             </div>
 
             <div class="col-xs-12" style="z-index: 10">
-              <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-2 col-lg-offset-2 mb20_sm mt20 mt0_sm  tar_md tac_lg">
+              <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-3 col-lg-2 col-lg-offset-2 mb20_sm mt20 mt0_sm tar_md tac_lg">
                 <%= f.label :pick_up_time,'Pick up Time' %>
               </div>
               <div class="col-xs-10 col-sm-4 col-md-3 col-lg-2">
@@ -24,8 +26,14 @@
               <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </div>
-              <div class="col-xs-12 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm">
-                <%= f.select :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), class:'ui dropdown fluid', id:'pick_time_dropdown' %>
+              <div class="hidden_wrapper col-xs-12 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm <%= 'hidden' if @pick_up_time_array.empty? %>">
+                <%= f.select :pick_up_time, options_for_select(@pick_up_time_array), {},
+                             class:'ui dropdown fluid' , id:'pick_time_dropdown' %>
+              </div>
+
+              <div class="hidden_wrapper col-xs-12 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm <%= 'hidden' if @pick_up_time_array.present? %>">
+                <%= f.select :pick_up_time, options_for_select(@restaurant.delivery_time), {},
+                             class:'ui dropdown fluid', id:'pick_time_dropdown' %>
               </div>
             </div>
 
@@ -34,9 +42,16 @@
                 <%= f.label :shipping_place,'Location' %>
               </div>
 
-              <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6 mb20_sm">
-                <%= f.text_field :shipping_place,placeholder:'555 Montgomery st. Suite 501, San Francisco, CA, 94111' %>
+              <div class="hidden_wrapper col-xs-12 col-sm-9 col-md-6 col-lg-6 mb20_sm <%= 'hidden' if @pick_up_time_array.empty? %>">
+                <%= f.select :shipping_place, options_for_select(@time_location_dictionary.map { |x| x[:location] }), {},
+                             class:'ui dropdown fluid disabled' %>
               </div>
+
+              <div class="hidden_wrapper col-xs-12 col-sm-9 col-md-6 col-lg-6 mb20_sm <%= 'hidden' if @pick_up_time_array.present? %>">
+                <%= f.text_field :shipping_place, placeholder:'555 Montgomery st. Suite 501, San Francisco, CA, 94111',
+                                 class:'ui dropdown fluid' %>
+              </div>
+
             </div>
 
           </div>
@@ -112,6 +127,10 @@
   body{
     padding-bottom: 80px;
   }
+  .ui.disabled.dropdown{
+    opacity: 0.7;
+    border-color: red;
+  }
 </style>
 
 <script type="text/javascript" charset="utf-8">
@@ -123,9 +142,9 @@
     });
 
 
-    var order_shipping_place = $('#order_shipping_place');
+    var order_shipping_place = $('[name="order[shipping_place]"][type="text"]');
     var order_shipping_dropdown = $('#order_shipping_dropdown');
-    var pick_time_dropdown = $('#pick_time_dropdown');
+    var pick_time_dropdown = $('[name="order[pick_up_time]"]');
 
     function order_type_is_Delivery() {
       return order_shipping_dropdown.dropdown('get value')[0] === 'Delivery'
@@ -139,28 +158,21 @@
         order_shipping_place.val('')
       }
     }
+    var time_location_dictionary= '<%= raw @time_location_dictionary %>'
+    pick_time_dropdown.on('change',function(){
+      if (!order_type_is_Delivery()){
+        var now_time = $('[name="order[pick_up_time]"]').parents('.hidden_wrapper:visible').find('.ui.dropdown').dropdown('get value')
+        var regex = new RegExp(now_time+'\", :location\=>\"(.*?)\"')
+        var location = regex.exec(time_location_dictionary)[1]
+        $('[name="order[shipping_place]"]').parents('.hidden_wrapper:visible').find('.ui.dropdown').dropdown('set selected',location)
+      }
+    })
 
     check_order_type();
     order_shipping_dropdown.change(function(){
       check_order_type();
-    });
-
-    pick_time_dropdown.change(function(){
-      if (!order_type_is_Delivery()){
-        $.ajax({
-          url: '/api/v1/check_pickup_time',
-          dataType: "json",
-          type: 'GET',
-          data: {
-            text: location_val,
-            restaurant_id: get_restaurant_id()
-          },
-          complete:function(data){
-            $('.alert_message').removeClass('hidden')
-            $('#alert_notice').html($.parseJSON(data.responseText).message)
-          }
-        })
-      }
+      pick_time_dropdown.parents('.hidden_wrapper').toggleClass('hidden')
+      $('[name="order[shipping_place]"]').parents('.hidden_wrapper').toggleClass('hidden')
     });
 
     var delayTimer;
@@ -175,23 +187,17 @@
             type: 'GET',
             data: {
               text: location_val,
-              restaurant_id: get_restaurant_id()
+              restaurant_id: <%= params[:restaurant_id] %>
             },
             complete:function(data){
+              if ($.parseJSON(data.responseText).status === 'success'){
+                window.order_location_invalid = false
+              }
               alert_message(window.alert_text=$.parseJSON(data.responseText).message)
             }
           })
         }, 1000);
       }
     });
-    function get_restaurant_id(){
-      var restaurant_id;
-      Object.keys( $.parseJSON($.cookie('cart_list')) ).forEach(function(key){
-        if (key.indexOf('restaurant') !== -1){
-          restaurant_id = +key.replace('restaurant_','')
-        }
-      })
-      return restaurant_id
-    }
   })
 </script>

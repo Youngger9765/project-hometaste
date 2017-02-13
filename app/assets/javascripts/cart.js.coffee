@@ -12,6 +12,9 @@ $(document).ready ->
   save_in_cookie=( data ) ->
     $.cookie('cart_list', JSON.stringify(data), { expires: 1, path: '/' } )
 
+  order_type_isnt_Delivery=() ->
+    $('#order_shipping_dropdown').dropdown('get value')[0] == 'Delivery'
+
   catch_params_date=() ->
     date = /\?date=.*(\d{4}).*-.*(\d{2}).*-.*(\d{2}).*&?/.exec(location.search);
     if date
@@ -258,6 +261,9 @@ $(document).ready ->
       if cart_empty() || cart_zero()
         alert_message(window.alert_text= 'You need to buy some food!')
         return
+      else if order_type_isnt_Delivery() || window.order_location_invalid
+        alert_message(window.alert_text= "Enter valid location, or can't next action!")
+        return
       else
         advance = ''
         form = $('.orders_new form')
@@ -265,6 +271,9 @@ $(document).ready ->
         cart_list = get_cart_list()
         restaurant_id = get_restautant_id_by_path()
         current_restaurant = cart_list["restaurant_#{restaurant_id}"]
+
+        $('[name="order[pick_up_time]"]').parents('.hidden').remove()  #前端有兩個pick up time 要刪掉隱藏的那個
+        $('[name="order[shipping_place]"]').parents('.hidden').remove()  #前端有兩個location 要刪掉隱藏的那個
 
         $.each $('.food_data_info'),(index,food) ->
           qty = +$(food).find('input[type=text]').val()
@@ -291,3 +300,4 @@ $(document).ready ->
   window.render_food_qty = -> render_food_qty()
   window.deal_food_list = -> deal_food_list()
   window.render_total_price = -> render_total_price()
+  window.get_cart_list = -> get_cart_list()
