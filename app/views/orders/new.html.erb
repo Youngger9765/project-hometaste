@@ -7,7 +7,7 @@
 </div>
 
 
-<%= form_for @order, url: restaurant_orders_path(restaurant_id: params[:restaurant_id]) do |f| %>
+<%= form_for @order, url: restaurant_orders_path(restaurant_id: params[:restaurant_id],:date => params[:date]),:method=>"POST" do |f| %>
     <div class="container ui form">
       <section class="row">
         <div class="col-xs-12 basic_bg_top" style="z-index: 10">
