@@ -99,7 +99,9 @@ class ChefsController < ApplicationController
   end
 
   def advance
-    # @order 這邊需要幫我寫一下怎麼生出@order
+    not_today_orders = @paid_process_orders.where(order_status: "process").where.not(:pick_up_time => @today_time_range)
+    advance_orders = not_today_orders.where(["pick_up_time > ?",@datetime_now_to_utc])
+    @orders = advance_orders
     render_js
   end
 
