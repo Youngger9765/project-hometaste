@@ -2,12 +2,12 @@ class ChefsController < ApplicationController
 
   before_action :find_chef_restaurant, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
-    :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:delivering,
+    :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
     :completed,:cancelled]
 
   before_action :find_user, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
-    :save_dish, :menu, :sales, :yep_or_not, :summary,:delivering,
+    :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
     :completed,:cancelled]
 
   # before_action :is_current_user?, :except => [:new]
