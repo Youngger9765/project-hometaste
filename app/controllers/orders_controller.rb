@@ -86,7 +86,7 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.new(orders_params)
 
-    @order.pick_up_time = pick_datetime
+    @order.pick_up_time = get_pick_up_time
     @order.customer_name = current_user.name
     @order.payment_status = 'unpaid'
     @order.order_status = 'process'
@@ -105,7 +105,7 @@ class OrdersController < ApplicationController
       cookies.delete(:cart_list, path: '/')
 
       flash[:notice] = "Successfully create order!"
-      redirect_to @order
+      redirect_to restaurant_order_path(@restaurant,@order)
     else
       flash[:alert] << "Fail new order!"
       render 'new'
@@ -172,13 +172,13 @@ class OrdersController < ApplicationController
 
   def orders_params
     params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id,
-                                  :mobile_number, :email, :billing_address,
+                                  :mobile_number, :email, :billing_address, :pick_up_time,
                                   :billing_city, :billing_state, :billing_zip_code )
   end
 
-  def pick_datetime
-    # TODO: to utc
-    (params[:pick_up_date] +" "+ params[:pick_up_time]).to_datetime
+  def get_pick_up_time
+    # Save to utc
+    (params[:date] +" "+ params[:order][:pick_up_time]).to_time.utc
   end
 
   def create_user_bigbun(params)
