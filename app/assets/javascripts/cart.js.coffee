@@ -101,7 +101,7 @@ $(document).ready ->
     qty = +$(_this).siblings('#txtNum').val()
     img = $('[data-food-pic="' + food_id + '"]').first().css('background-image');
 
-    if _data.data('advance-time') != -1
+    if _data.data('advance-time')
       advance_time = '_' + _data.data('advance-time')
 
 #    預設都是 today 如果發現是 advance 就在資料前加 advance
