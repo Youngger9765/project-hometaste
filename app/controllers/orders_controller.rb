@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
     end
 
     if !@error && @order.save
-      # create_user_bigbun(params[:bigbun])
+      create_user_bigbun(params[:order][:'bigbun-id'])
       cookies.delete(:cart_list, path: '/')
 
       flash[:notice] = "Successfully create order!"
@@ -184,17 +184,9 @@ class OrdersController < ApplicationController
 
   def create_user_bigbun(params)
     if params
-      params.each do |key|
-        current_user.user_big_bun_ships.find_or_create_by(order_id: @order.id, big_bun_id: key.to_i)
-      end
-    end
-  end
-
-  def create_user_order_food(params)
-    if params
-      params.each do |key, value|
-        @order.order_food_ships.find_or_create_by(food_id: key.to_i, quantity: value.to_i)
-      end
+      # params.each do |key|
+      current_user.user_big_bun_ships.find_or_create_by(order_id: @order.id, big_bun_id: params.to_i)
+      # end
     end
   end
 

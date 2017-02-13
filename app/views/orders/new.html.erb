@@ -69,7 +69,7 @@
               <div class="product_list df_sm ptb15 hidden">
                 <%= render 'product_lists' %>
               </div>
-              <div class="bigbun_list df_sm ptb15">
+              <div class="bigbun_list df_sm ptb15" data-default-img="<%= image_path 'tmp/kitchen_1.png' %>">
                 <%= render 'bigbun_list',f:f %>
               </div>
             </div>
@@ -196,8 +196,40 @@
               alert_message(window.alert_text=$.parseJSON(data.responseText).message)
             }
           })
-        }, 1000);
+        }, 800);
       }
     });
+
+    $('#bigbun_code').on('change',function(){
+      var input = $(this)
+      clearTimeout(delayTimer);
+      delayTimer = setTimeout(function() {
+        var current_restaurant = get_cart_list()['restaurant_<%= params[:restaurant_id] %>']
+        var now_time = new Date($('body').data('current-time'))
+        if (!current_restaurant){
+          alert_message(window.alert_text="You didn't choose any Big bun")
+          return
+        } //沒有車
+        $.each(Object.keys(current_restaurant),function(i,e){
+          if (e.indexOf('bigbun') === 0){
+            var prepare =  new Date(current_restaurant[e]['prepare_time'])
+            var stop = new Date(current_restaurant[e]['stop_time'])
+
+            if ( prepare < now_time && now_time < stop && (current_restaurant[e]['bigbun_code'] === input.val()) ){
+              alert_message(window.alert_text='Big bun code valid,Good choice!')
+              var img_url = current_restaurant[e]['img_url']
+              var id = +e.replace('bigbun_','')
+              input.parents('.bigbun_list').data('bigbun-id',id)
+              input.parents('.bigbun_list').find('.background_img_setting').css('background-image',"url("+ img_url + ")")
+            }else{
+              input.parents('.bigbun_list').data('bigbun-id',-1)
+              input.parents('.bigbun_list').find('.background_img_setting').css('background-image',"url("+ input.parents('.bigbun_list').data('default-img') + ")")
+              alert_message(window.alert_text="You enter invalid bigbun code, or out of time!")
+            }
+          }
+        })
+      }, 300);
+    })
   })
 </script>
+<!--073b2ef1-->

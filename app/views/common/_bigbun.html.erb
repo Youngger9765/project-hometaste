@@ -1,4 +1,4 @@
-<div class="ui modal bigbun_modal" id="bigbun_modal_<%= food.try(:id) %>" data-bigbun-id="<%= bigbun.id %>" data-prepare-time="<%= bigbun.prepare_time %>" data-stop-time="<%= bigbun.stop_datetime %>" data-restaurant-id="<%= restaurant.id %>">
+<div class="ui modal bigbun_modal" id="bigbun_modal_<%= food.try(:id) %>" data-bigbun-id="<%= bigbun.id %>" data-prepare-time="<%= bigbun.prepare_time.in_time_zone %>" data-stop-time="<%= bigbun.stop_datetime.in_time_zone %>" data-restaurant-id="<%= restaurant.id %>">
   <i class="close icon"></i>
   <h4 class="bold">Congratulation!</h4>
   <i class="gray_line"></i>

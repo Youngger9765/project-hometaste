@@ -12,7 +12,7 @@ $(document).ready ->
   save_in_cookie=( data ) ->
     $.cookie('cart_list', JSON.stringify(data), { expires: 1, path: '/' } )
 
-  order_type_isnt_Delivery=() ->
+  order_type_is_Delivery=() ->
     $('#order_shipping_dropdown').dropdown('get value')[0] == 'Delivery'
 
   catch_params_date=() ->
@@ -79,6 +79,7 @@ $(document).ready ->
   deal_bigbun_list=(_this) ->
     modal = $(_this).closest('.bigbun_modal')
     bigbun_id = modal.data('bigbun-id')
+    img_url = modal.find('img').attr('src')
     restaurant_id = modal.data('restaurant-id')
     bigbun_code = modal.find('#bigbun_code').html()
     prepare_time = modal.data('prepare-time')
@@ -88,11 +89,13 @@ $(document).ready ->
     if info_object["restaurant_#{restaurant_id}"]
       info_object["restaurant_#{restaurant_id}"]["bigbun_#{bigbun_id}"] =
         bigbun_code: bigbun_code,
+        img_url: img_url,
         prepare_time: prepare_time,
         stop_time: stop_time
     else
       info_object["restaurant_#{restaurant_id}"] =
         "bigbun_#{bigbun_id}":
+          img_url: img_url,
           bigbun_code: bigbun_code,
           prepare_time: prepare_time,
           stop_time: stop_time
@@ -261,7 +264,7 @@ $(document).ready ->
       if cart_empty() || cart_zero()
         alert_message(window.alert_text= 'You need to buy some food!')
         return
-      else if order_type_isnt_Delivery() || window.order_location_invalid
+      else if order_type_is_Delivery() && window.order_location_invalid
         alert_message(window.alert_text= "Enter valid location, or can't next action!")
         return
       else
@@ -282,6 +285,8 @@ $(document).ready ->
           form.append($("<input>").attr("type", "hidden").attr("name", "order[order_food_ships_attributes]["+index+"][quantity]").val(qty));
 
         form.append($("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id));
+        if $('.bigbun_list').data('bigbun-id') != -1
+          form.append($("<input>").attr("type", "hidden").attr("name", "order[bigbun-id]").val($('.bigbun_list').data('bigbun-id')));
 #        Object.keys(current_restaurant).forEach (_key,i,a) ->
 #          if _key.indexOf('bigbun') != -1
 #            code = cart_list["#{restaurant}"]["#{_key}"]

@@ -20,8 +20,8 @@ class User < ApplicationRecord
   has_many :user_big_bun_ships
 
   accepts_nested_attributes_for :user_photo,
-    :allow_destroy => true,
-    :reject_if => :all_blank
+                                allow_destroy: true,
+                                reject_if: :all_blank
 
   serialize :prefered_cuisine_ids
 
@@ -204,10 +204,10 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-      self.is_admin
+    self.is_admin
   end
 
   def virtual_name
-    
+
   end
 end
