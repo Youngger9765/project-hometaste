@@ -271,7 +271,9 @@
 
     $('#pick_date_search').on('click',function(){
       var _date = date_pick.calendar('get date');
-      var date = _date.getFullYear() +'-'+ (_date.getMonth()+1) +"-"+ _date.getDate();
+      var day = ("0" + _date.getDate()).slice(-2)
+      var month = ("0" + (_date.getMonth() + 1)).slice(-2)
+      var date = _date.getFullYear() +'-'+ month +"-"+ day;
       var link = $('.add_to_cart a');
 
       $('.date_pick.ui.modal').modal('hide');

@@ -85,7 +85,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new(orders_params)
-
     @order.pick_up_time = get_pick_up_time
     @order.customer_name = current_user.name
     @order.payment_status = 'unpaid'
@@ -99,9 +98,7 @@ class OrdersController < ApplicationController
     end
 
     if !@error && @order.save
-      create_user_bigbun(params[:bigbun])
-      create_user_order_food(params[:food])
-      @order.update_order_price
+      # create_user_bigbun(params[:bigbun])
       cookies.delete(:cart_list, path: '/')
 
       flash[:notice] = "Successfully create order!"
@@ -173,12 +170,15 @@ class OrdersController < ApplicationController
   def orders_params
     params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id,
                                   :mobile_number, :email, :billing_address, :pick_up_time,
-                                  :billing_city, :billing_state, :billing_zip_code )
+                                  :billing_city, :billing_state, :billing_zip_code,
+                                  order_food_ships_attributes: [
+                                    :food_id, :quantity
+                                  ])
   end
 
   def get_pick_up_time
     # Save to utc
-    (params[:date] +" "+ params[:order][:pick_up_time]).to_time.utc
+    (params[:date] + ' ' + params[:order][:pick_up_time]).to_time.utc
   end
 
   def create_user_bigbun(params)
@@ -191,8 +191,8 @@ class OrdersController < ApplicationController
 
   def create_user_order_food(params)
     if params
-      params.each do |key,value|
-        @order.order_food_ships.find_or_create_by( food_id: key.to_i,quantity: value.to_i)
+      params.each do |key, value|
+        @order.order_food_ships.find_or_create_by(food_id: key.to_i, quantity: value.to_i)
       end
     end
   end

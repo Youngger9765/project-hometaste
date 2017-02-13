@@ -8,14 +8,13 @@
   <%= javascript_include_tag 'application' %>
 </head>
 
-<body class="<%= controller_name + '_' + action_name %>" data-current-time="<%= Time.current %>" data-current-date="<%= Time.current.strftime('%F') %>">
+<body class="<%= controller_name + '_' + action_name %>" data-current-time="<%= Time.current %>" data-current-date="<%= Time.current.strftime('%F') %>" data-order-date="<%= deal_params_date %>">
 
 <%= render 'common/navbar' %>
 
-
 <div class="col-md-12 alert_message <%= 'hidden' if flash.blank? %>">
   <div class="row content">
-    <div style = "color: green" class ="alert-success">
+    <div style = "color: green" class ="alert-success" id="alert_notice">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <p><%= flash[:notice]%></p>
     </div>
@@ -24,7 +23,7 @@
 
 <div class="col-md-12 alert_message <%= 'hidden' if flash.blank? %>">
   <div class="row content">
-    <div style = "color: red" class ="alert-danger">
+    <div style = "color: red" class ="alert-danger" id="alert_danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <p><%= flash[:alert]%></p>
     </div>

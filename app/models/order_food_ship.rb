@@ -4,6 +4,6 @@ class OrderFoodShip < ApplicationRecord
 	after_create :calc_amount
 
 	def calc_amount
-		update( amount:food.price * quantity )
+		update(amount: food.price * quantity)
 	end
 end

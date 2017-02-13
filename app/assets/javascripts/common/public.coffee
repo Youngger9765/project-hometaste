@@ -16,8 +16,9 @@ $(document).ready ->
   $('.alert_message .close').on 'click', ->
     $('.alert_message').addClass('hidden')
 
-  alert_message=(message) ->
-    $('.alert_message').removeClass('hidden')
-    $('#alert_notice p').html(message)
+  alert_message=() ->
+    $('#alert_notice').parents('.alert_message').removeClass('hidden')
+    $('#alert_notice p').html(alert_text)
 
   window.alert_message = -> alert_message()
+  window.alert_text = ''

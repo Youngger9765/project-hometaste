@@ -19,4 +19,5 @@ module ApplicationHelper
     data-restaurant-id=#{restaurant_id} data-restaurant-tax=#{tax}
     data-restaurant-cost=#{cost} data-restaurant-distance=#{distance}"
   end
+
 end

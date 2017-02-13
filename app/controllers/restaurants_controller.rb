@@ -28,7 +28,7 @@ class RestaurantsController < ApplicationController
 
 
     # advance 的 example
-    @date = params[:date] ? params[:date] : Date.current
+    @date = deal_params_date(params[:date])
     @advance_foods_ids = get_in_advance_foods_ids(@date)
     @advance_foods = Food.where(id: @advance_foods_ids)
 
@@ -43,6 +43,12 @@ class RestaurantsController < ApplicationController
   end
 
   private
+
+  def deal_params_date(params)
+    params.to_time.strftime('%F')
+  rescue
+    Date.current.to_time.strftime('%F')
+  end
 
   def find_restaurant
     @restaurant = Restaurant.includes(:big_buns,:bulk_buys).find(params[:id])

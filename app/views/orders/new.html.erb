@@ -1,12 +1,3 @@
-<div class="col-md-12 alert_message hidden">
-  <div class="row content">
-    <div class = "red alert-success" id="alert_notice">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p></p>
-    </div>
-  </div>
-</div>
-
-
 <%= form_for @order, url: restaurant_orders_path(restaurant_id: params[:restaurant_id],:date => params[:date]),:method=>"POST" do |f| %>
     <div class="container ui form">
       <section class="row">
@@ -34,7 +25,7 @@
                 <i class="fa fa-calendar" aria-hidden="true"></i>
               </div>
               <div class="col-xs-12 col-sm-3 col-md-offset-0 col-lg-3 col-md-3 mt20 mt0_sm">
-                <%= select_tag :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), class:'ui dropdown fluid', id:'pick_time_dropdown' %>
+                <%= f.select :pick_up_time, options_for_select([[Time.current.strftime('%H:%M')]]), class:'ui dropdown fluid', id:'pick_time_dropdown' %>
               </div>
             </div>
 
@@ -187,7 +178,7 @@
               restaurant_id: get_restaurant_id()
             },
             complete:function(data){
-              alert_message($.parseJSON(data.responseText).message)
+              alert_message(window.alert_text=$.parseJSON(data.responseText).message)
             }
           })
         }, 1000);
