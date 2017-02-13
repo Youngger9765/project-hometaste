@@ -187,8 +187,7 @@
               restaurant_id: get_restaurant_id()
             },
             complete:function(data){
-              $('.alert_message').removeClass('hidden')
-              $('#alert_notice p').html($.parseJSON(data.responseText).message)
+              alert_message($.parseJSON(data.responseText).message)
             }
           })
         }, 1000);

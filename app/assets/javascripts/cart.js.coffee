@@ -14,29 +14,48 @@ $(document).ready ->
     date = /\?date=.*(\d{4}).*-.*(\d{2}).*-.*(\d{2}).*&?/.exec(location.search)
     if date
       return (date[1] + '-' + date[2] + '-' + date[3])
-    else
-      new Date().getFullYear()+'-'+ (new Date().getMonth()+1)+'-'+ new Date().getDate()
 
+  get_restautant_id_by_path = ->
+    +location.pathname.replace(/restaurants\/\d*\//gi, '')
 
-  check_advance_staus=() ->
-    today = new Date(new Date().getFullYear()+'-'+ (new Date().getMonth()+1)+'-'+ new Date().getDate())
+  check_advance_status=() ->
+    today = $('body').data('current-date')
     params_date = new Date(catch_params_date()+' 00:00:00')
     if params_date > today
       true
     else if $('.add_to_cart').size() > 0
       $('.add_to_cart').attr('class').indexOf('advance') != -1
+    else
+      false
+
+  now_advance_date=() ->
+    if check_advance_status
+      $('.advance_food').data('advance-time')
+    else
+      ''
+
+#      if true will return time, or false
+  get_advance_date=(food) ->
+    if food.indexOf("advance_food") == 0 && /advance_food_\d+_(\d+-\d+-\d+)/.exec(food)
+      /advance_food_\d+_(\d+-\d+-\d+)/.exec(food)[1]
+    else
+      false
+
+  get_advance_id=(food) ->
+    +/\advance_food_(\d+)_/.exec(food)[1]
 
   render_food_qty = () ->
     list = get_cart_list()
     Object.keys(list).forEach (restaurant,i,a) ->
-      Object.keys(list["#{restaurant}"]).forEach (food,i,a) ->
+      Object.keys(list[restaurant]).forEach (food,i,a) ->
 #        如果是advance的話就render advance的數量  不是advance就是today
-        if food.indexOf("advance_food") == 0
-          qty = +list["#{restaurant}"]["#{food}"]['qty']
-          id = +food.replace('advance_food_','')
-          $('.advance_food[data-food-id="' + id + '"]').find('#txtNum').val(qty)
+        if get_advance_date(food)
+          qty = +list[restaurant][food]['qty']
+          id = get_advance_id(food)
+          $('.advance_food[data-food-id="' + id + '"][data-advance-time="'+get_advance_date(food)+'"]').find('#txtNum').val(qty)
+
         else if food.indexOf("food") == 0
-          qty = +list["#{restaurant}"]["#{food}"]['qty']
+          qty = +list[restaurant][food]['qty']
           id = +food.replace('food_','')
           $(':not(.advance_food)[data-food-id="' + id + '"]').find('#txtNum').val(qty)
 
@@ -68,6 +87,9 @@ $(document).ready ->
 
   #    需判斷today advance 區分兩個資料結構
   deal_food_list=(_this) ->
+    advance = ''
+    img_url = ''
+    advance_time = ''
     _data = $(_this).closest('.food_data_info')
     restaurant_id = _data.data('restaurant-id')
     restaurant_tax = parseFloat(_data.data('restaurant-tax'))
@@ -79,28 +101,27 @@ $(document).ready ->
     qty = +$(_this).siblings('#txtNum').val()
     img = $('[data-food-pic="' + food_id + '"]').first().css('background-image');
 
+    if _data.data('advance-time') != -1
+      advance_time = '_' + _data.data('advance-time')
+
 #    預設都是 today 如果發現是 advance 就在資料前加 advance
-    if check_advance_staus()
+    if check_advance_status()
       advance = 'advance_'
-    else
-      advance = ''
 
     if img
       img_url = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-    else
-      img_url = ''
 
     info_object = get_cart_list()
     if qty > 0
       if info_object["restaurant_#{restaurant_id}"]
-        info_object["restaurant_#{restaurant_id}"]["#{advance}food_#{food_id}"] =
+        info_object["restaurant_#{restaurant_id}"]["#{advance}food_#{food_id + advance_time}"] =
           qty:qty,
           price:food_price
           img_url:img_url
           name:name
       else
         info_object["restaurant_#{restaurant_id}"] =
-          "#{advance}food_#{food_id}":
+          "#{advance}food_#{food_id + advance_time}":
             qty:qty,
             price:food_price
             img_url:img_url
@@ -128,7 +149,7 @@ $(document).ready ->
     current_restaurant = cart_list["restaurant_#{restaurant_id}"]
     #    預設都是 today 如果發現是 advance 就在資料前加 advance
 
-    if check_advance_staus()
+    if check_advance_status()
       advance = 'advance_'
     else
       advance = ''
@@ -142,10 +163,10 @@ $(document).ready ->
         this_list.removeClass('hidden')
         restaurant_tax = +current_restaurant['tax']
         food_id = +food.replace('food_','')
-        qty = +current_restaurant["#{food}"]['qty']
-        name = current_restaurant["#{food}"]['name']
-        img_url = current_restaurant["#{food}"]['img_url']
-        price = +current_restaurant["#{food}"]['price']
+        qty = +current_restaurant[food]['qty']
+        name = current_restaurant[food]['name']
+        img_url = current_restaurant[food]['img_url']
+        price = +current_restaurant[food]['price']
 
         this_list.find('[name=food_price]').html(price)
         this_list.find('[name=food_name]').html(name)
@@ -164,23 +185,31 @@ $(document).ready ->
     cart_list = get_cart_list()
     tax_price = 0
     food_price = 0
+    date = ''
+    advance = ''
+    date = '_' + now_advance_date()
 #    判斷是否為 advance
-    if check_advance_staus()
+    if check_advance_status()
       advance = 'advance_'
-    else
-      advance = ''
 
     restaurant_id = $('[data-restaurant-id]').data('restaurant-id')
     current_restaurant = cart_list["restaurant_#{restaurant_id}"]
     if current_restaurant
       restaurant_tax = +current_restaurant['tax']
-      Object.keys(current_restaurant).forEach (food,i,a) ->
-        if food.indexOf("#{advance}food") == 0
-          qty = +current_restaurant["#{food}"]['qty']
-          price = +current_restaurant["#{food}"]['price']
-          tax_price += qty * price * restaurant_tax / 100
-          food_price += qty * price
 
+      Object.keys(current_restaurant).forEach (food,i,a) ->
+        if check_advance_status()
+          if food.indexOf("#{advance}food") == 0 && food.indexOf(date) > 0
+            qty = +current_restaurant[food]['qty']
+            price = +current_restaurant[food]['price']
+            food_price += qty * price
+        else
+          if food.indexOf("food") == 0
+            qty = +current_restaurant[food]['qty']
+            price = +current_restaurant[food]['price']
+            food_price += qty * price
+
+    tax_price += food_price * restaurant_tax / 100
     tip = parseFloat( $('input.tip_input').val() ) || 0
     total_price = (tax_price + food_price + tip) || 0
     $('[name=subtotal]').html(food_price.toFixed(2))
@@ -222,25 +251,29 @@ $(document).ready ->
         form = $('.orders_new form')
         data = form.serialize()
         cart_list = get_cart_list()
-        Object.keys(cart_list).forEach (restaurant,i,a) ->
 
-          restaurant_id = +restaurant.replace('restaurant_','')
-          input = $("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id);
-          form.append($(input));
+        restaurant_id = get_restautant_id_by_path()
+        input = $("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id);
+        form.append($(input));
+        current_restaurant = cart_list["restaurant_#{restaurant_id}"]
+        #    預設都是 today 如果發現是 advance 就在資料前加 advance
+        if check_advance_status()
+          advance = 'advance_'
+        else
+          advance = ''
 
-          Object.keys(cart_list["#{restaurant}"]).forEach (_key,i,a) ->
+        Object.keys(current_restaurant).forEach (_key,i,a) ->
+          if _key.indexOf("#{advance}food") == 0
+            qty = +current_restaurant["#{_key}"]['qty']
+            food_id = +_key.replace("#{advance}food_",'')
+            input = $("<input>").attr("type", "hidden").attr("name", "food[#{food_id}]").val(qty);
+            form.append($(input));
 
-            if _key.indexOf('food') != -1
-              qty = +cart_list["#{restaurant}"]["#{_key}"]['qty']
-              food_id = +_key.replace('food_','')
-              input = $("<input>").attr("type", "hidden").attr("name", "food[#{food_id}]").val(qty);
-              form.append($(input));
-
-            else if _key.indexOf('bigbun') != -1
-              code = cart_list["#{restaurant}"]["#{_key}"]
-              bigbun_id = +_key.replace('bigbun_','')
-              input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
-              form.append($(input));
+          else if _key.indexOf('bigbun') != -1
+            code = cart_list["#{restaurant}"]["#{_key}"]
+            bigbun_id = +_key.replace('bigbun_','')
+            input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
+            form.append($(input));
 
         #      $.removeCookie('cart_list',{path:'/'})
         $(this).off('submit').submit();
@@ -249,3 +282,6 @@ $(document).ready ->
   window.render_food_qty = -> render_food_qty()
   window.deal_food_list = -> deal_food_list()
   window.render_total_price = -> render_total_price()
+
+
+#  要把全部afvance food食物清掉

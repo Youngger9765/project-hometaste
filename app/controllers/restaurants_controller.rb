@@ -28,13 +28,18 @@ class RestaurantsController < ApplicationController
 
 
     # advance 的 example
-    # @advance_foods_ids = get_in_advance_foods_ids('2017-1-10')
-    # @advance_foods = Food.where(id:@advance_foods_ids)
-
+    @date = params[:date] ? params[:date] : Date.current
+    @advance_foods_ids = get_in_advance_foods_ids(@date)
+    @advance_foods = Food.where(id: @advance_foods_ids)
 
     # score_rate_i = @restaurant.food_avg_score.to_i
     # score_rate_f = ((@restaurant.food_avg_score - score_rate_i)/0.5).to_i
     # @score_rate = score_rate_i.to_s + ("_5" * score_rate_f)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private
@@ -49,7 +54,7 @@ class RestaurantsController < ApplicationController
 
   def get_today_foods_ids
     wday_now = Time.now.localtime.wday
-    today_foods_ids =[]
+    today_foods_ids = []
     public_foods = @restaurant.foods.where(:is_public => true)
 
     public_foods.each do |food|
@@ -61,7 +66,7 @@ class RestaurantsController < ApplicationController
 
   def get_in_advance_foods_ids(date)
     wday = date.to_time.localtime.wday
-    advance_foods_ids =[]
+    advance_foods_ids = []
     public_foods = @restaurant.foods.where(:is_public => true)
 
     public_foods.each do |food|

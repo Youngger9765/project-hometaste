@@ -122,59 +122,59 @@ namespace :dev do
 
   task :fake => :environment do
 
-  	# create users
+    # create users
     puts('create users')
 
-  	100.times {
-  		User.create(
-	  		name: Faker::Name.name,
-	  		foodie_id: Faker::Name.name,
-	  		email: Faker::Internet.email,
-	  		phone_number: Faker::PhoneNumber.cell_phone,
-	  		password: Faker::Internet.password(10, 20),
-	  		confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-	  		address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-	  		is_chef: [true, false].sample,
-  		)
-  	}
+    100.times {
+      User.create(
+        name: Faker::Name.name,
+        foodie_id: Faker::Name.name,
+        email: Faker::Internet.email,
+        phone_number: Faker::PhoneNumber.cell_phone,
+        password: Faker::Internet.password(10, 20),
+        confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+        address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+        is_chef: [true, false].sample,
+      )
+    }
 
-  	# create chef
+    # create chef
     puts('create chef')
 
-  	User.where(:is_chef=>true).each do |user|
-  		Chef.create(
-  			user_id: user.id,
-	  		first_name: Faker::Name.name,
-	  		last_name: Faker::Name.name,
-	  		phone_number: user.phone_number,
-	  		birthday: Faker::Date.between(2.days.ago, Date.today),
-	  		SSN: Faker::Number.number(10),
-	  		routing_number: Faker::Number.number(10),
-	  		account_number: Faker::Number.number(10),
-  		)
-  	end
+    User.where(:is_chef=>true).each do |user|
+      Chef.create(
+        user_id: user.id,
+        first_name: Faker::Name.name,
+        last_name: Faker::Name.name,
+        phone_number: user.phone_number,
+        birthday: Faker::Date.between(2.days.ago, Date.today),
+        SSN: Faker::Number.number(10),
+        routing_number: Faker::Number.number(10),
+        account_number: Faker::Number.number(10),
+      )
+    end
 
-  	# create restaurants
+    # create restaurants
     puts('create restaurants')
 
     Chef.all.each do |chef|
-    	restaurant = Restaurant.create(
-    		chef_id: chef.id,
-    		name: Faker::Name.name,
-    		address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-    		latitude: Faker::Address.latitude,
-    		longitude: Faker::Address.longitude,
-    		phone_number: Faker::PhoneNumber.cell_phone,
-    		description: Faker::Lorem.paragraph,
-    		is_approved: [true, false].sample,
-    		city: Faker::Address.city,
-    		state: Faker::Address.state,
-    		ZIP: Faker::Address.zip,
-    		tax_ID: Faker::Number.number(10),
+      restaurant = Restaurant.create(
+        chef_id: chef.id,
+        name: Faker::Name.name,
+        address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+        latitude: Faker::Address.latitude,
+        longitude: Faker::Address.longitude,
+        phone_number: Faker::PhoneNumber.cell_phone,
+        description: Faker::Lorem.paragraph,
+        is_approved: [true, false].sample,
+        city: Faker::Address.city,
+        state: Faker::Address.state,
+        ZIP: Faker::Address.zip,
+        tax_ID: Faker::Number.number(10),
         tax: rand(1..5),
         order_reach: rand(50..1000),
-    		communication_method: ["email", "text-message"].sample,
-    	)
+        communication_method: ["email", "text-message"].sample,
+      )
 
       if [true,false].sample
         Delivery.create(
@@ -204,17 +204,17 @@ namespace :dev do
         end
       }
 
-		end
+    end
 
-		# create foods
+    # create foods
     puts('create foods')
 
-		300.times {
-			Food.create(
-				restaurant_id: Restaurant.all.ids.sample,
-				name: Faker::Pokemon.name,
-				price: Faker::Commerce.price/10,
-				is_public: [true, false].sample,
+    300.times {
+      Food.create(
+        restaurant_id: Restaurant.all.ids.sample,
+        name: Faker::Pokemon.name,
+        price: Faker::Commerce.price/10,
+        is_public: [true, false].sample,
         unit: Faker::Number.between(1, 100),
         unit_name: ["quart", "kg", "piece", "package"].sample,
         max_order: Faker::Number.between(1, 100),
@@ -223,9 +223,9 @@ namespace :dev do
         ingredients: Faker::Lorem.paragraph,
         support_lunch: [true, false].sample,
         support_dinner: [true, false].sample,
-        support_days: [[1,3,5,0],[2,4,6],[1,2,3,4,5],[1,2,3,4,5,6,0],[6,0]].sample,
-			)
-		}
+        support_days: [[1,3,5,0],[2,4,6],[1,2,3,4,5],[1,2,3,4,5,6,0],[6,0]].sample
+      )
+    }
 
     # create food_comments
     puts('create food_comments')
@@ -244,24 +244,24 @@ namespace :dev do
       restaurant.save!
     }
 
-		# create orders
+    # create orders
     puts('create orders')
 
-		200.times {
-			order = Order.create(
-				user_id: User.all.ids.sample,
-				restaurant_id: Restaurant.all.ids.sample,
-				customer_name: Faker::Name.name,
-				shipping_method: ["bulk_buy", "delivery"].sample,
-				shipping_place: Faker::Address.city + Faker::Address.street_name,
-				amount: Faker::Commerce.price,
+    200.times {
+      order = Order.create(
+        user_id: User.all.ids.sample,
+        restaurant_id: Restaurant.all.ids.sample,
+        customer_name: Faker::Name.name,
+        shipping_method: ["bulk_buy", "delivery"].sample,
+        shipping_place: Faker::Address.city + Faker::Address.street_name,
+        amount: Faker::Commerce.price,
         tip: rand(1..5),
-				payment_method: ["paypal", "credit_card"].sample,
-				payment_status: ["unpaid", "paid"].sample,
-				order_status: ["completed","process","cancelled"].sample,
+        payment_method: ["paypal", "credit_card"].sample,
+        payment_status: ["unpaid", "paid"].sample,
+        order_status: ["completed","process","cancelled"].sample,
         delivery_fee: 0,
         created_at: Faker::Time.between(DateTime.now-720 , DateTime.now),
-			)
+      )
 
       if order.shipping_method == "delivery"
       else #bulk_buy
@@ -270,27 +270,27 @@ namespace :dev do
         order.pick_up_time = BulkBuy.find(bulk_buy_id).pick_up_time_1
       end
       order.save!
-		}
+    }
 
-		# create order_food_ships
+    # create order_food_ships
     puts('create order_food_ships')
 
-		1000.times {
-			order = OrderFoodShip.create(
-				order_id: Order.all.ids.sample,
-				food_id: Food.all.ids.sample,
-				quantity: Faker::Number.between(1, 5),
-			)
+    1000.times {
+      order = OrderFoodShip.create(
+        order_id: Order.all.ids.sample,
+        food_id: Food.all.ids.sample,
+        quantity: Faker::Number.between(1, 5),
+      )
 
-			quantity = order.quantity
-			price = Food.find(order.food_id).price
+      quantity = order.quantity
+      price = Food.find(order.food_id).price
 
-			order.amount = quantity * price
-			order.save!
+      order.amount = quantity * price
+      order.save!
     }
 
     # create restaurant_cuisine_ships
-		puts('create restaurant_cuisine_ships')
+    puts('create restaurant_cuisine_ships')
 
     Restaurant.all.each do |restaurant|
       3.times{
@@ -334,7 +334,7 @@ namespace :dev do
       )
     end
 
-	end
+  end
 
   task :count_order_amount => :environment do
     Order.all.each do |order|

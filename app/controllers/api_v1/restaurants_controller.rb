@@ -3,14 +3,14 @@ class ApiV1::RestaurantsController < ApiController
 	def getRestaurantsByMap
 		coordinate
 		@restaurants = Restaurant.where( latitude: coordinate[:south]..coordinate[:north],
-																		 longitude: coordinate[:west]..coordinate[:east] ).limit(params[:qty]).sample(9)
+																																			longitude: coordinate[:west]..coordinate[:east] ).limit(params[:qty]).sample(9)
 		@hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
 			marker.lat restaurant.latitude
 			marker.lng restaurant.longitude
 			marker.infowindow restaurant.address
 			marker.json({ id: restaurant.id,
-										close_url: "#{ ActionController::Base.helpers.image_path 'close.png'}",
-										html: gmap_html(restaurant,0.5) })
+																	close_url: "#{ ActionController::Base.helpers.image_path 'close.png'}",
+																	html: gmap_html(restaurant,0.5) })
 		end
 		render json: { gmap_hash: @hash }, status: 200
 	end

@@ -1,0 +1,12 @@
+$('.advance_tab').html('')
+<% @advance_foods.each do |food| %>
+  $('.advance_tab').append("<%=j render 'common/advance_product_list', food:food %>")
+<% end %>
+
+<% if @advance_foods.size == 0 %>
+  $('.alert_message').removeClass('hidden')
+  $('.alert_message p').html('Today has no advance food!')
+<% end %>
+
+render_food_qty()
+render_total_price()
