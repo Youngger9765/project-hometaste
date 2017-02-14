@@ -7,9 +7,9 @@ class ApiV1::OrdersController < ApplicationController
     if @restaurant.delivery && distance < @restaurant.delivery.distance
       render json: { status: 'success', message: 'Your location is good to delivery!' }
     elsif @restaurant.delivery && distance > @restaurant.delivery.distance
-      render json: { status: 'success', message: "Your location too far away, we couldn't offer service sorry #{distance}km!" }
+      render json: { status: 'error', message: "Your location too far away, we couldn't offer service sorry #{distance}km!" }
     else
-      render json: { status: 'success', message: "Plase enter right address or vaild address!" }
+      render json: { status: 'error', message: 'Please enter right address or valid address!' }
     end
   end
 end

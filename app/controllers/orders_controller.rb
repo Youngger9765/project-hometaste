@@ -19,9 +19,10 @@ class OrdersController < ApplicationController
 
     if order_date == date_now
       # check cut off time
-      time_now = Time.now.localtime
-      @pick_up_time_array =[]
-      @time_location_dictionary =[]
+      # time_now = Time.now.localtime
+      time_now = Time.now.at_beginning_of_day
+      @pick_up_time_array = []
+      @time_location_dictionary = []
 
       @restaurant.bulk_buys.each do |bulk_buy|
 
@@ -56,8 +57,8 @@ class OrdersController < ApplicationController
     else
       # give all pick_up_time
       bulk_buys = @restaurant.bulk_buys
-      @pick_up_time_array =[]
-      @time_location_dictionary =[]
+      @pick_up_time_array = []
+      @time_location_dictionary = []
 
       bulk_buys.each do |bulk_buy|
 
@@ -85,7 +86,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new(orders_params)
-
     @order.pick_up_time = get_pick_up_time
     @order.customer_name = current_user.name
     @order.payment_status = 'unpaid'
@@ -99,9 +99,7 @@ class OrdersController < ApplicationController
     end
 
     if !@error && @order.save
-      create_user_bigbun(params[:bigbun])
-      create_user_order_food(params[:food])
-      @order.update_order_price
+      create_user_bigbun(params[:order][:'bigbun-id'])
       cookies.delete(:cart_list, path: '/')
 
       flash[:notice] = "Successfully create order!"
@@ -173,27 +171,22 @@ class OrdersController < ApplicationController
   def orders_params
     params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id,
                                   :mobile_number, :email, :billing_address, :pick_up_time,
-                                  :billing_city, :billing_state, :billing_zip_code )
+                                  :billing_city, :billing_state, :billing_zip_code,
+                                  order_food_ships_attributes: [
+                                                                 :food_id, :quantity
+                                                               ])
   end
 
   def get_pick_up_time
     # Save to utc
-    (params[:date] +" "+ params[:order][:pick_up_time]).to_time.utc
+    (params[:date] + ' ' + params[:order][:pick_up_time]).to_time.utc
   end
 
   def create_user_bigbun(params)
     if params
-      params.each do |key|
-        current_user.user_big_bun_ships.find_or_create_by(order_id: @order.id, big_bun_id: key.to_i)
-      end
-    end
-  end
-
-  def create_user_order_food(params)
-    if params
-      params.each do |key,value|
-        @order.order_food_ships.find_or_create_by( food_id: key.to_i,quantity: value.to_i)
-      end
+      # params.each do |key|
+      current_user.user_big_bun_ships.find_or_create_by(order_id: @order.id, big_bun_id: params.to_i)
+      # end
     end
   end
 

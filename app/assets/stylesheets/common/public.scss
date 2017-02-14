@@ -149,7 +149,8 @@ input[type=submit]{
   }
 }
 .alert_message{
-  z-index: 10;
+  z-index: 50;
+  position: fixed;
   .close{
     right: 50px;
     top: 10px;

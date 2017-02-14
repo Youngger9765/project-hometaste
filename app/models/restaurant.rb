@@ -82,6 +82,17 @@ class Restaurant < ApplicationRecord
     Food.where(id: collect_food_ids).where('foods.updated_at > ?', Time.current - 7.days ).limit(num)
   end
 
+  def delivery_time(to = Time.current.end_of_day, step = 15.minutes)
+    cut_off_time = bulk_buys.reduce([]) { |all,ele| all << ele.cut_off_time if ele.cut_off_time > Time.current }
+    cut_off_time = if cut_off_time.present?
+                     cut_off_time[0].at_end_of_hour + 1.second
+                   else
+                     [Time.current.at_end_of_hour + 1.second]
+                   end
+    cut_off_time.tap { |array| array << array.last + step while array.last < to }
+    cut_off_time.map { |x| x.strftime('%R') }
+  end
+
   def self.get_around_restaurants(km = 2, *coordinate)
     restaurant_ids = []
     lat, long = coordinate
@@ -101,7 +112,7 @@ class Restaurant < ApplicationRecord
     features = params['Features']
 
     where(id: ids).filter_distance(distance, latlong).filter_features(features)
-        .filter_cuisine(cuisine).filter_price(price).filter_sort(sort)
+      .filter_cuisine(cuisine).filter_price(price).filter_sort(sort)
   end
 
   def self.filter_price(_case)

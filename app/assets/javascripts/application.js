@@ -20,7 +20,7 @@
 
 //= require jquery_nested_form
 //= require underscore
+//= require_tree ./common
 //= require gmaps/google
 //= require gmaps
-//= require_tree ./common
 //= require cart

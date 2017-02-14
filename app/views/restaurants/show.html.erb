@@ -1,6 +1,15 @@
+<div class="col-md-12 alert_message hidden">
+  <div class="row content">
+    <div class = "red alert-success" id="alert_notice">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p></p>
+    </div>
+  </div>
+</div>
+
 <div class="col-xs-12 banner" style="background-image:url(<%= image_path @restaurant.main_photo %>);">
   <div class="mrla db flr_sm mr50_sm bigbun <%= bigbun_status_class(@restaurant.get_available_bigbun) %>"></div>
 </div>
+
 <div class="container">
   <section class="row">
     <div class="col-xs-12 basic_bg_top pt0 pt30_md">
@@ -145,7 +154,7 @@
       <div class="row df_sm">
         <div class="col-xs-12 col-sm-5 location_map">
           <h3>Pick up locations:</h3>
-          <% @restaurant.bulk_buys.each do |bulk_buy|%>
+          <% @restaurant.bulk_buys.each do |bulk_buy| %>
               <div class="row">
                 <div class="col-xs-2 tac pt10">
                   <i class="fa fa-map-marker red" aria-hidden="true"></i>
@@ -157,7 +166,7 @@
                   <i class="red_line"></i>
                 </div>
               </div>
-          <%end%>
+          <% end %>
         </div>
         <div class="col-xs-12 col-sm-7">
           <div class="background_img_setting" style="background-image:url(<%= image_path('tmp/kitchen_map.png') %>);" name="location_map"></div>
@@ -184,16 +193,12 @@
       <i class="block_icon_red pl35 ml35 hidden cursor_pointer" aria-hidden="true"></i>
 
       <div class="today_tab">
-        <% @restaurant.foods.last(2).each do |food| %>
+        <% @today_foods.each do |food| %>
             <%= render 'common/product_list', food:food, advance: '' %>
         <% end %>
       </div>
 
-      <div class="advance_tab hidden">
-        <% @restaurant.foods.first(3).each do |food| %>
-            <%= render 'common/product_list', food:food, advance: 'advance_food' %>
-        <% end %>
-      </div>
+      <div class="advance_tab hidden"></div>
 
     </div>
   </section>
@@ -226,7 +231,6 @@
 <%= stylesheet_link_tag 'semantic_ui/calendar.min' %>
 
 <script type="text/javascript" charset="utf-8">
-
   $(document).ready(function(){
     var tomorrow = new Date(new Date().setDate(new Date().getDate()+1));
     var date_pick = $('#date_pick')
@@ -257,7 +261,6 @@
       $('.advance_tab,.today_tab').toggleClass('hidden');
 //      判斷是否為 advance 狀態
       $('.add_to_cart').toggleClass('advance_status');
-
       render_total_price()
     });
 
@@ -268,11 +271,20 @@
 
     $('#pick_date_search').on('click',function(){
       var _date = date_pick.calendar('get date');
-      var date = _date.getFullYear() +'-'+ (_date.getMonth()+1) +"-"+ _date.getDate();
+      var day = ("0" + _date.getDate()).slice(-2)
+      var month = ("0" + (_date.getMonth() + 1)).slice(-2)
+      var date = _date.getFullYear() +'-'+ month +"-"+ day;
       var link = $('.add_to_cart a');
 
       $('.date_pick.ui.modal').modal('hide');
-      link.attr('href',$('.add_to_cart').data('original-link')+'?date='+date)
+      link.attr('href',$('.add_to_cart').data('original-link')+'?date='+date);
+
+      $.ajax({
+        type: 'get',
+        async: false,
+        url: '<%= restaurant_path(@restaurant) %>'+'.js',
+        data: {date:date}
+      });
     })
   })
 </script>

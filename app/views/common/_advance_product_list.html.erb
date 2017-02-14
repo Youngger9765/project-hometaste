@@ -1,0 +1,37 @@
+<div class="row df_sm mb20_md">
+  <div class="col-sm-6 col-xs-12 list_status_carousel">
+    <% if food.food_photos.present? %>
+        <%= render 'common/product_carousel' ,food:food %>
+    <% end %>
+  </div>
+  <div class="col-sm-6 col-xs-12 pl100_md pl60_sm list_status_info">
+    <div>
+      <h3 class="mt15 mt5_sm"><%= food.name %></h3>
+    </div>
+    <div>
+      <h3 class="red">$<%= food.price %>/ Bowl</h3>
+    </div>
+    <div class="food_data_info advance_food" data-advance-time="<%= @date %>" <%= food_restaurant_info(food) %>>
+      <%= render 'common/spinner', qty: 0  %>
+    </div>
+    <div>
+      <h4 class="blck normal">2 Left <i class="l_line"></i> 12 Ordered</h4>
+    </div>
+    <div>
+      <h4 class="black mt25 mb25">Ingredients: <p class="mt10" style="font-size: 18px;"><%= truncate(food.ingredients,length: 70) %></p>
+      </h4>
+    </div>
+    <div class="hidden-sm mb20 mb0_sm">
+      <i class="fa fa-heart red mr25 mt20_sm" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+      <a href="" class="gray flr mt0_sm mt15_md"><h4>More...</h4></a>
+    </div>
+  </div>
+</div>
+<div class="row list_status_social_link mtb15_sm">
+  <div class="col-xs-6 visible-sm tar">
+    <i class="fa fa-heart red mr25" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+  </div>
+  <div class="col-xs-6 visible-sm">
+    <a href="" class="gray flr"><h4>More...</h4></a>
+  </div>
+</div>

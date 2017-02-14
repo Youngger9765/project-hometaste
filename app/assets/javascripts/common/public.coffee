@@ -11,6 +11,15 @@ $(document).ready ->
   $(document).on 'click','.navbar-collapse.in',(e) ->
     if $(e.target).is('a')
       $(this).collapse('hide')
-  $('.alert_message .close').on 'click', ->
-    $('.alert_message').hide()
 
+
+  $('.alert_message .close').on 'click', ->
+    $('.alert_message').addClass('hidden')
+
+  alert_message=() ->
+    $('#alert_notice').parents('.alert_message').removeClass('hidden')
+    $('#alert_notice p').html(alert_text)
+
+  window.alert_message = -> alert_message()
+  window.alert_text = ''
+  window.order_location_invalid = true
