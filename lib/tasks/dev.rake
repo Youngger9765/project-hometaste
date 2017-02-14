@@ -95,7 +95,7 @@ namespace :dev do
           area: Faker::Address.city,
           distance: Faker::Number.number(3),
           cost: rand(5..10),
-          order_hours: rand(1..5),
+          completion_time: rand(1..5),
 
         )
       end
@@ -183,7 +183,7 @@ namespace :dev do
           area: Faker::Address.city,
           distance: Faker::Number.number(3),
           cost: rand(5..10),
-          order_hours: rand(1..5),
+          completion_time: rand(1..5),
 
         )
       end
