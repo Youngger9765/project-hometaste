@@ -208,11 +208,11 @@ class ChefsController < ApplicationController
         :order_reach,
 
         :delivery_attributes => [
-          :id, :min_order, :area, :distance, :order_hours,
+          :id, :min_order, :area, :distance, :completion_time,
         ],
 
         :bulk_buys_attributes => [
-          :id, :cut_off_time, :location, :pick_up_time,
+          :id, :cut_off_time, :location_1, :pick_up_time_1, :location_2, :pick_up_time_2
         ],
 
         :restaurant_cuisine_ships_attributes => [
