@@ -258,19 +258,35 @@
                     <h4 class="bold mb15">Setting<%= b.index + 1 %></h4>
                   </div>
 
+                  <% bulk_buy_id= @chef.restaurant.bulk_buys.ids[b.index]%>
+                  <% if bulk_buy_id.present? %>
+                    <% @cut_off_time = @chef.restaurant.bulk_buys.find(bulk_buy_id).cut_off_time%>
+                    <% @cut_off_time = @cut_off_time.localtime.hour.to_s+ ":" + @cut_off_time.localtime.strftime('%M') %>
+                  <% else%>
+                    <% @cut_off_time = nil %>
+                  <%end%>
+
                   <div class="col-xs-5 col-sm-5 col-lg-4">
                     <div class="field">
                       <%= b.label :cut_off_time %>
-                      <%= b.select :cut_off_time,(0..24).to_a.map{ |x| x.to_s + ':00'} ,{},class:'ui dropdown fluid' %>
+                      <%= b.select :cut_off_time,options_for_select((0..24).to_a.map{ |x| x.to_s + ':00'},@cut_off_time) ,{:include_blank => true},class:'ui dropdown fluid' %>
                     </div>
                   </div>
 
                   <div class="clearfix"></div>
 
+                  <% bulk_buy_id= @chef.restaurant.bulk_buys.ids[b.index]%>
+                  <% if bulk_buy_id.present? %>
+                    <% @pick_up_time_1 = @chef.restaurant.bulk_buys.find(bulk_buy_id).pick_up_time_1%>
+                    <% @pick_up_time_1 = @pick_up_time_1.localtime.hour.to_s+ ":" + @pick_up_time_1.localtime.strftime('%M') %>
+                  <% else%>
+                    <% @pick_up_time_1 = nil %>
+                  <%end%>
+
                   <div class="col-xs-5 col-sm-5 col-lg-4">
                     <div class="field">
                       <%= b.label :pick_up_time_1 %>
-                      <%= b.select :pick_up_time_1, (0..24).to_a.map{ |x| x.to_s + ':00'}, {}, class:'ui dropdown fluid' %>
+                      <%= b.select :pick_up_time_1, options_for_select((0..24).to_a.map{ |x| x.to_s + ':00'},@pick_up_time_1), {:include_blank => true}, class:'ui dropdown fluid' %>
                     </div>
                   </div>
 
@@ -281,10 +297,23 @@
                     </div>
                   </div>
                   <!--select 需預設是空的 需用資料控制要不要hidden-->
+
+                  <% bulk_buy_id= @chef.restaurant.bulk_buys.ids[b.index]%>
+                  <% if bulk_buy_id.present? %>
+                    <% @pick_up_time_2 = @chef.restaurant.bulk_buys.find(bulk_buy_id).pick_up_time_2%>
+                    <% if @pick_up_time_2.present? %>
+                      <% @pick_up_time_2 = @pick_up_time_2.localtime.hour.to_s+ ":" + @pick_up_time_2.localtime.strftime('%M') %>
+                    <%else%>
+                      <% @pick_up_time_2 = nil %>
+                    <%end%>
+                  <% else%>
+                    <% @pick_up_time_2 = nil %>
+                  <%end%>
+
                   <div class="col-xs-5 col-sm-5 col-lg-4 hidden">
                     <div class="field">
                       <%= b.label :pick_up_time_2 %>
-                      <%= b.select :pick_up_time_2, (0..24).to_a.map{ |x| x.to_s + ':00'}, {}, class:'ui dropdown fluid' %>
+                      <%= b.select :pick_up_time_2, options_for_select((0..24).to_a.map{ |x| x.to_s + ':00'},@pick_up_time_2), {:include_blank => true}, class:'ui dropdown fluid' %>
                     </div>
                   </div>
                   <!--select 需預設是空的 需用資料控制要不要hidden-->
@@ -322,9 +351,9 @@
                   <div class="field">
                     <%= d.label :distance, "Maximum distance" %>
                     <% if @chef.restaurant.delivery.distance.present?%>
-                      <%= d.select :distance, options_for_select(0..50,@chef.restaurant.delivery.distance.to_i),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                      <%= d.select :distance, options_for_select(0..50,@chef.restaurant.delivery.distance.to_i),{:include_blank => true},placeholder:'mi',class:'ui dropdown fluid' %>
                     <% else %>
-                      <%= d.select :distance, options_for_select(0..50),{},placeholder:'mi',class:'ui dropdown fluid' %>
+                      <%= d.select :distance, options_for_select(0..50),{:include_blank => true},placeholder:'mi',class:'ui dropdown fluid' %>
                     <% end %>
                   </div>
                 </div>
@@ -335,7 +364,7 @@
                     <% if @chef.restaurant.delivery.completion_time.present?%>
                       <%= d.select :completion_time ,options_for_select(0..50,@chef.restaurant.delivery.completion_time.hour.to_i),{},placeholder:'hr',class:'ui dropdown fluid' %>
                     <% else %>
-                      <%= d.select :completion_time ,options_for_select(0..50),{},placeholder:'hr',class:'ui dropdown fluid' %>
+                      <%= d.select :completion_time ,options_for_select(0..50),{:include_blank => true},placeholder:'hr',class:'ui dropdown fluid' %>
                     <% end %>
                   </div>
                 </div>

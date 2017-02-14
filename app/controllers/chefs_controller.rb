@@ -133,6 +133,25 @@ class ChefsController < ApplicationController
     end
 
     if @chef.update!(chef_params)
+      # 處理bulk_buy 時間 to utc
+      chef_params[:restaurant_attributes][:bulk_buys_attributes].keys.each do |key|
+        b_buy = chef_params[:restaurant_attributes][:bulk_buys_attributes][key]
+        bulk_buy_id = b_buy[:id]
+        cut_off_time = nil
+        pick_up_time_1 = nil
+        pick_up_time_2 = nil
+
+        cut_off_time = b_buy[:cut_off_time].to_time.utc if b_buy[:cut_off_time].present?
+        pick_up_time_1 = b_buy[:pick_up_time_1].to_time.utc if b_buy[:pick_up_time_1].present?
+        pick_up_time_2 = b_buy[:pick_up_time_2].to_time.utc if b_buy[:pick_up_time_2].present?
+
+        bulk_buy = BulkBuy.find(bulk_buy_id).update(:cut_off_time => cut_off_time,
+                                                    :pick_up_time_1 => pick_up_time_1,
+                                                    :pick_up_time_2 => pick_up_time_2
+                                                      )
+
+      end
+
       redirect_to sales_chef_path(@chef)
     else
       flash[:alert] = "update fail"
