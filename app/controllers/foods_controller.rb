@@ -90,7 +90,7 @@ class FoodsController < ApplicationController
 	  	:support_lunch, :support_dinner, :support_days,
 
 	  	:food_photos_attributes => [
-		  	:id, :food_id, :photo,
+		  	:id, :food_id, :photo, :remove_photo
 		  ],
 		  :food_cuisine_ships_attributes => [
 		  	:id, :food_id, :cuisine_id,

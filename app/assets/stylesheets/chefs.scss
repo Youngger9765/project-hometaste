@@ -19,34 +19,6 @@
     }
   }
 }
-[class^=chefs]{
-  .ui.form{
-    .field{
-      label{
-        margin-bottom: 10px !important;
-        font-size: 14px;
-      }
-      input,select,.ui.dropdown{
-        margin-bottom: 20px !important;
-      }
-    }
-  }
-  .img_upload{
-    margin-right: 0 !important;
-  }
-  .basic_bg_top{
-    a[class*=_btn],a[class*=_btn_reserve]{
-      height:100px ;
-      padding-top: 15px;
-      &:hover{
-        color: inherit;
-      }
-    }
-  }
-  .fa-calendar{
-    font-size: 30px;
-  }
-}
 .chef_product_lists .background_img_setting{
   padding-top: 25%;
 }
