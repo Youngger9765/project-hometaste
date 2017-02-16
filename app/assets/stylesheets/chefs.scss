@@ -36,6 +36,31 @@
   }
 }
 }
+.chefs_menu{
+  .css_carousel{
+    .content img{
+      height: 220px;
+    }
+    .group label{
+      height: 48px;
+      width: 48px;
+      top: 50%;
+      margin-top: -24px;
+      line-height: 50px;
+      font-size: 25px;
+    }
+    label.previous{
+      margin-left: 15px;
+    }
+    label.next{
+      margin-right: 15px;
+    }
+  }
+  .basic_bg_bottom{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
 
 @media (max-width: 507px) {
   [name=order_summary]{
@@ -61,6 +86,11 @@
     label{
       width: 200px;
       height: 200px;
+    }
+  }
+  .chefs_menu{
+    .black_border_block{
+      width: calc(100% + 35px);
     }
   }
 }

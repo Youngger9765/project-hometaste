@@ -1,20 +1,17 @@
-<div class="container chef-container center" >
-	<div class="row col-md-offset-1">
-		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%> <%=params[:controller]%></span></h3>
-	</div>
-	<div class="row">
-		<%= form_for setup_big_bun(@big_bun), :url => chef_big_buns_path(@chef.id), :method => :post do |f| %>
+<%= form_for setup_big_bun(@big_bun), :url => chef_big_buns_path(@chef.id), :method => :post do |f| %>
+    <div class="container">
+      <section class="row">
+        <div class="col-xs-12 basic_bg_top ui form">
+          <div class="row">
+            <%= render :partial => 'form', :locals => { :f => f } %>
 
-			<%= render :partial => 'form', :locals => { :f => f } %>
+            <div class="col-xs-12 tac mt15 mt30_sm">
+              <%= f.submit 'SUBMIT',class: 'my_btn' %>
+            </div>
 
-			<div class="form_control col-md-offset-1 col-md-10">
-				<%= f.submit "SUBMIT",:class=>"btn btn-success center", :id=>"chef-submit-btn"%>
-			</div>
-		<%end%>
-	</div>
-</div>
+          </div>
+        </div>
 
-
-
-
-
+      </section>
+    </div>
+<% end %>

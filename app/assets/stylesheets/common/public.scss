@@ -150,6 +150,7 @@ input[type=submit]{
 }
 .alert_message{
   z-index: 50;
+  width: 100%;
   position: fixed;
   .close{
     right: 50px;
@@ -157,7 +158,7 @@ input[type=submit]{
     position: absolute;
   }
 }
-[class^=chefs],[class^=foods]{
+[class^=chefs],[class^=foods],[class^=big_buns]{
   .ui.form{
     .field{
       label{
@@ -172,7 +173,7 @@ input[type=submit]{
   .img_upload{
     margin-right: 0 !important;
   }
-  .basic_bg_top{
+  .basic_bg_top .four_btn{
     a[class*=_btn],a[class*=_btn_reserve]{
       height:100px ;
       padding-top: 15px;

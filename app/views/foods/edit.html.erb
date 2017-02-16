@@ -1,20 +1,18 @@
-<div class="container chef-container center" >
-	<div class="row col-md-offset-1">
-		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
-	</div>
-	<div class="row">
-		<%= form_for setup_food(@food), :url => chef_food_path(@chef.id), :method => :patch do |f| %>
+<%= form_for setup_food(@food), :url => chef_food_path(@chef.id), :method => :patch do |f| %>
+    <div class="container">
+      <section class="row">
+        <div class="col-xs-12 basic_bg_top ui form">
+          <div class="row">
+            <%= render :partial => 'form', :locals => { :f => f } %>
 
-			<%= render :partial => 'form', :locals => { :f => f } %>
+            <div class="col-xs-12 tac mt15 mt30_sm">
+              <%= f.submit 'Upload to menu',:class=>"my_btn", :id=>"chef-submit-btn"%>
+            </div>
+          </div>
+        </div>
 
-			<div class="form_control col-md-offset-1 col-md-10">
-				<%= f.submit "SUBMIT",:class=>"btn btn-success center", :id=>"chef-submit-btn"%>
-			</div>
-		<%end%>
-	</div>
-</div>
-
-
-
+      </section>
+    </div>
+<% end %>
 
 

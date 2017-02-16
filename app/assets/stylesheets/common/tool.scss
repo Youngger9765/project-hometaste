@@ -130,6 +130,9 @@
 .flex_space_around{
   @include flex_(inherit,space-around);
 }
+.flex_space_between{
+  @include flex_(inherit,space-between);
+}
 .flex-direction_column{
   -ms-flex-direction: column;
   -webkit-flex-direction: column;

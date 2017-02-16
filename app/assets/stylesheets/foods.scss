@@ -23,6 +23,20 @@
     font-size: 19px;
   }
 }
+.basic_bg_bottom{
+  position: relative;
+  &.red:after{
+    @extend .background_red;
+    content: ' ';
+    display: inline-block;
+    width: 220px;
+    height: 10px;
+    left: 50%;
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+}
 @media (max-width: $screen-sm-max) {
   .foods_show{
     .banner {

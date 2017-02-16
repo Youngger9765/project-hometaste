@@ -1,8 +1,8 @@
 class FoodsController < ApplicationController
 
 	before_action :find_chef, :only =>[:update,:create,:edit,:destroy]
-	before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
-	before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
+	# before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
+	# before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
 	before_action :find_food, :only =>[:update,:edit,:destroy]
 
   def show
