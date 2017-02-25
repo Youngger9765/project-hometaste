@@ -1,60 +1,77 @@
-<div class="row container chef-sub-container center" id="chef-add-dish-container">
 
-	<!-- style -->
-	<div class="form_control col-md-12">
-    <%= f.label :style, "Style" %> <br>
-    <%= f.text_field :style %>
-  </div>
 
-	<div class="clearfix"></div>
-
-  <!-- unit -->
-  <div class="form_control col-md-4 underline-block">
-    <%= f.label :unit, "Total Unit" %> <br>
-    <div class="col-md-6"><%= f.number_field :unit, :class=>"number-block" %></div>
-    <div class="col-md-6">pieces</div>
-  </div>
-
-  <div class="clearfix"></div>
-
-	<!-- start_datetime -->
-	<div class="form_control col-md-6">
-    <%= f.label :start_datetime, "start_datetime" %> <br>
-    <%= f.datetime_field :start_datetime, value: f.object.start_datetime.localtime.strftime("%Y-%m-%dT%H:%M:%S") %>
-  </div>
-
-	<div class="clearfix"></div>
-
-	<!-- stop_datetime -->
-	<div class="form_control col-md-6">
-    <%= f.label :stop_datetime, "stop_datetime" %> <br>
-    <%= f.datetime_field :stop_datetime, value: f.object.stop_datetime.localtime.strftime("%Y-%m-%dT%H:%M:%S") %>
-  </div>
-
-	<div class="clearfix"></div>
-
-	<!-- stop_datetime -->
-	<div class="form_control col-md-6">
-    <%= f.label :prepare_time, "prepare_time(H:M)" %> <br>
-    <%= f.time_select :prepare_time, ampm: false, minute_step: 30 %>
-  </div>
-
-	<div class="clearfix"></div>
-
-	<hr>
-
-  <!-- photo -->
-  <h3>Upload Picture</h3>
-	<%= f.fields_for :big_bun_photo do |photo| %>
-		<div class="form-group col-md-4 restaurant-dish-photo-div">
-			<div class="restaurant-dish-photo">
-				<% if @big_bun.big_bun_photo.id?%>
-					<%= image_tag(@big_bun.big_bun_photo.photo(:thumb))%>
-				<%end%>
-				<%= photo.file_field :photo %>
-			</div>
-		</div>
-	<%end%>
-
+<!-- style -->
+<div class="col-md-12">
+  <div class="field">
+  <%= f.label :style, 'Big Bun style:' %>
+  <%= f.text_field :style %>
+</div>
 </div>
 
+<div class="clearfix"></div>
+
+<!-- start_datetime -->
+<div class="col-md-6">
+  <div class="field date_select_modify">
+    <%= f.label :start_datetime, 'Start time:' %>
+    <%= f.datetime_select :start_datetime, {value: f.object.try(:'start_datetime.localtime.strftime("%Y-%m-%dT%H:%M:%S")')}, {class:'ui dropdown'} %>
+  </div>
+</div>
+
+
+<!-- stop_datetime -->
+<div class="col-md-6">
+  <div class="field date_select_modify">
+    <%= f.label :stop_datetime, 'End time:' %>
+    <%= f.datetime_select :stop_datetime, {value: f.object.try(:'stop_datetime.localtime.strftime("%Y-%m-%dT%H:%M:%S")')}, {class:'ui dropdown'} %>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<!-- stop_datetime -->
+<!--<div class="col-md-6">-->
+<!--<%#= f.label :prepare_time, 'prepare_time(H:M)' %>-->
+<!--<%#= f.time_select :prepare_time, ampm: false, minute_step: 30 %>-->
+<!--</div>-->
+
+<div class="clearfix"></div>
+
+<!-- unit -->
+<div class="col-md-4 underline-block">
+  <div class="field">
+    <%= f.label :unit, 'Qty' %>
+    <%= f.number_field :unit, :class=>"number-block" %>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="col-xs-12">
+  <i class="gray_line"></i>
+</div>
+
+
+<!-- photo -->
+<div class="col-xs-12">
+  <h3>Upload Picture</h3>
+</div>
+
+<%= f.fields_for :big_bun_photo do |photo| %>
+    <div class="col-md-12 tac_xs tal_sm">
+      <div class="img_upload p10 dib background_white border_main_radius">
+        <%= photo.label :photo ,style:"background-image:url(#{photo.object.photo if photo.object.photo.file?})" do %>
+            <i class="photo_icon"></i>
+            <h4>Upload a profile photo</h4>
+        <% end %>
+        <%= photo.file_field :photo ,class:'hidden'%>
+        <%= photo.label :remove_photo, class: 'mt15 square_icon fa fa-trash-o border_red remove_img' do %>
+            <%= photo.check_box :remove_photo, class: 'hidden' %>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+<div class="col-xs-12">
+  <i class="gray_line"></i>
+</div>

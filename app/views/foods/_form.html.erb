@@ -1,134 +1,149 @@
-<div class="row container chef-sub-container center" id="chef-add-dish-container">
-
-	<!-- Name -->
-	<div class="form_control col-md-12">
-    <%= f.label :name, "Name of the dish/food" %> <br>
-    <%= f.text_field :name %>
-  </div>
-
-	<!-- About -->
-  <div class="form_control col-md-12">
-    <%= f.label :about, "About" %> <br>
-    <%= f.text_area :about %>
-  </div>
-
-	<!-- ingredients -->
-  <div class="form_control col-md-12">
-    <%= f.label :ingredients, "Ingredients" %> <br>
-    <%= f.text_area :ingredients %>
-  </div>
-
-	<!-- Unit -->
-	<div class="row form_control col-md-11" id="chef-dish-unit">
-		<div class="form_control col-md-12"><h3>Unit of Measure</h3> </div>
-		<div class="form_control col-md-2">
-			<%= f.number_field :unit, :step => 0.01, :placeholder => "1.2" %>
-    </div>
-
-    <div class="form_control col-md-2">
-	    <%= f.text_field :unit_name , :placeholder => "quart"%>
-    </div>
-	</div>
-
-  <!-- Price -->
-  <div class="form_control col-md-2 underline-block">
-    <%= f.label :price, "price" %> <br>
-    <%= f.number_field :price, :step => 0.01, :placeholder => "$" %>
-  </div>
-
-	<div class="clearfix"></div>
-
-	<!-- Max Order -->
-	<div class="form_control col-md-4 underline-block">
-    <%= f.label :max_order, "Max Order Availible" %> <br>
-    <%= f.number_field :max_order, :step => 0.01%>
-  </div>
-
-  <div class="clearfix"></div>
-
-	<!-- date -->
-	<div class="form_control col-md-4 underline-block">
-    <%= f.label :availability_date, "Availible date" %> <br>
-    <%= f.date_field :availability_date, :step => 0.01%>
-  </div>
-</div>
-
-<!-- photos -->
-<div class="row container chef-sub-container center" id="chef-add-dish-container">
-	<div class="form_control col-md-12">
-		<h2>Upload Pictures</h2>
-	</div>
-
-	<%= f.fields_for :food_photos, @food.food_photos.each do |photo| %>
-		<div class="form-group col-md-4 restaurant-dish-photo-div">
-			<div class="restaurant-dish-photo">
-				<% if @food.food_photos[photo.index].id?%>
-					<%= image_tag(@food.food_photos[photo.index].photo(:thumb))%>
-				<%end%>
-				<%= photo.file_field :photo %>
-			</div>
-		</div>
-	<%end%>
-</div>
-
-<!-- cuisines -->
-<div class="row container chef-sub-container center" id="chef-add-dish-container">
-	<div class="form_control col-md-12">
-		<h2>Cuisine Types</h2>
-	</div>
-
-	<%= f.fields_for :food_cuisine_ships, @food.food_cuisine_ships.each do |food_cuisine_ship| %>
-    <div class="col-sm-4 col-md-4">
+<div class="col-xs-12">
+  <div class="row">
+    <!-- Name -->
+    <div class="col-md-12">
       <div class="field">
-        <%= food_cuisine_ship.label :cuisine_id ,'Cuisine Type' %>
-        <%= food_cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name,{}, class:"", include_blank: "please select" %>
+        <%= f.label :name, 'Name of the dish/food' %>
+        <%= f.text_field :name %>
       </div>
     </div>
-  <%end%>
-</div>
 
-<!-- lunch or dinner -->
-<div class="row container chef-sub-container center" id="chef-add-dish-container">
-	<div class="form_control col-md-12">
-		<h2>Support Times</h2>
-	</div>
-	<div class="form_control col-md-4 underline-block">
-    <div class="col-xs-6 col-md-3 col-lg-2">
-      <div>
-      	<%= f.check_box :support_lunch %>
-        <%= f.label :support_lunch , 'support_lunch' %>
-
-        <%= f.check_box :support_dinner %>
-        <%= f.label :support_dinner , 'support_dinner' %>
+    <!-- About -->
+    <div class="col-md-12">
+      <div class="field">
+        <%= f.label :about, "About" %>
+        <%= f.text_area :about %>
       </div>
     </div>
-  </div>
-</div>
 
+    <!-- ingredients -->
+    <div class="col-md-12">
+      <div class="field">
+        <%= f.label :ingredients, "Ingredients" %>
+        <%= f.text_area :ingredients %>
+      </div>
+    </div>
 
-<!-- support days -->
-<div class="row container chef-sub-container center" id="chef-add-dish-container">
-	<div class="form_control col-md-12">
-		<h2>Support Days</h2>
-	</div>
-	<div class="checkbox_warpper col-xs-12 mt15">
-    <% @week_list.each do |day| %>
-        <div class="field">
-          <div class="ui checkbox mtb0">
-            <input type="checkbox" value=<%=day[:value]%> name="food[support_days][]" id="food_support_days_id-<%=day[:value]%>" tabindex="0" class="hidden">
-            <label><%= day[:name] %></label>
+    <%= f.fields_for :food_cuisine_ships, @food.food_cuisine_ships.each do |food_cuisine_ship| %>
+        <div class="col-xs-10 col-sm-4 col-md-3">
+          <div class="field">
+            <%= food_cuisine_ship.label :cuisine_id ,'Cuisine Type' %>
+            <%= food_cuisine_ship.collection_select :cuisine_id, Cuisine.all, :id, :name,{}, class:"", include_blank: "please select" %>
           </div>
         </div>
     <% end %>
+
+    <div class="clearfix"></div>
+
+    <!-- Unit -->
+    <div class="col-xs-10 col-sm-4 col-md-3">
+      <div class="field">
+        <%= f.label :unit, 'QTY' %>
+        <%= f.number_field :unit, step: 0.01, placeholder: 'Select amount' %>
+      </div>
+    </div>
+
+    <div class="col-xs-10 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+      <div class="field">
+        <%= f.label :unit_name ,'Unit of measure' %>
+        <%= f.text_field :unit_name, placeholder: 'Select unit'%>
+      </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+    <!-- Price -->
+    <div class="col-xs-10 col-sm-4 col-md-3">
+      <div class="field">
+        <%= f.label :price %>
+        <%= f.number_field :price, :step => 0.01, placeholder: '$' %>
+      </div>
+    </div>
+
+    <!-- Max Order -->
+    <div class="col-xs-10 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+      <div class="field">
+        <%= f.label :max_order, 'Max Available Order' %>
+        <%= f.number_field :max_order, step: 0.01 %>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- lunch or dinner -->
+    <div class="col-xs-10 col-md-12">
+      <h4 class="bold">Availability</h4>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="ui checkbox" style="width: 150px;">
+        <%= f.check_box :support_lunch %>
+        <%= f.label :support_lunch , 'Lunch' %>
+      </div>
+      <div class="ui checkbox" style="width: 150px;">
+        <%= f.check_box :support_dinner %>
+        <%= f.label :support_dinner , 'Dinner' %>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- support days -->
+    <div class="col-xs-12">
+      <% @week_list.each do |day| %>
+          <div class="ui checkbox" style="width: 150px;">
+            <input type="checkbox" value=<%=day[:value]%> name="food[support_days][]" id="food_support_days_id-<%=day[:value]%>" tabindex="0" class="hidden">
+            <label><%= day[:name] %></label>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12">
+      <hr class="gray_line">
+    </div>
+
+    <!-- photos -->
+    <div class="col-xs-12">
+      <h4 class="bold">Upload dish images</h4>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="row">
+        <%= f.fields_for :food_photos, @food.food_photos.each do |photo| %>
+            <div class="col-xs-12 col-sm-6 col-md-4 tac_xs tal_sm">
+              <div class="img_upload p10 dib background_white border_main_radius">
+                <%= photo.label :photo ,style:"background-image:url(#{photo.object.photo if photo.object.photo.file?})" do %>
+                    <i class="photo_icon"></i>
+                    <h4>Upload a profile photo</h4>
+                <% end %>
+                <%= photo.file_field :photo ,class:'hidden'%>
+                <%= photo.label :remove_photo, class: 'mt15 square_icon fa fa-trash-o border_red remove_img' do %>
+                    <%= photo.check_box :remove_photo, class: 'hidden' %>
+                <% end %>
+              </div>
+
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <hr class="gray_line">
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
-	<% if @food.support_days.present? %>
-		var support_days =  <%= @food.support_days %>;
-	<%else%>
-		var support_days = []
-	<%end%>
+  $('.remove_img').click(function(e){
+    e.preventDefault()
+    $(this).toggleClass('img_removed')
+  });
+
+  <% if @food.support_days.present? %>
+  var support_days = <%= @food.support_days %>;
+  <% else %>
+  var support_days = []
+  <% end %>
 
   if (support_days) {
     for (var i = 0; i < support_days.length; i++) {

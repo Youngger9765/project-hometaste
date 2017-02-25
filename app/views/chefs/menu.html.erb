@@ -1,219 +1,171 @@
-<div class="container chef-container center" id="chef-menu-container" >
-	<div class="row col-md-offset-1">
-		<h3><%=link_to "HOME", root_path%><span> > <%=params[:action]%></span></h3>
-	</div>
-	<div class="row container chef-menu-container center">
-		<div id="chef-menu-title">
-			<div class="col-md-6 center btn btn-default" id="menu-title-btn">
-				Main Menu
-			</div>
-			<div class="col-md-6 center btn btn-default" id="bigbun-title-btn">
-				Big Bun
-			</div>
-		</div>
-		<div class="clearfix"></div>
-		<!-- menu content -->
-		<div class="row container menu-sub-container center" id="menu-content-container">
-			<div class="col-md-offset-1 col-md-10 row container">
-				<%= link_to "+ add dish", new_chef_food_path(@chef),:class=>"btn btn-lg btn-danger col-md-12"%>
-			</div>
-			<div class="clearfix"></div>
+<div class="container">
+  <section class="row mt40">
+    <div class="col-xs-6 pl0">
+      <div class="basic_bg_bottom tac mb0 cursor_pointer red" id="one_tab">
+        <h2 class="m0">Main Menu</h2>
+      </div>
+    </div>
 
-			<% @foods.each do |food|%>
-				<div class="row container menu-food-container center">
-					<div class="col-md-9">
-						<!-- photo -->
-						<div class="col-md-12 center">
+    <div class="col-xs-6 pr0">
+      <div class=" basic_bg_bottom tac mb0 background_black white cursor_pointer" id="two_tab">
+        <h2 class="m0">Big Bun</h2>
+      </div>
+    </div>
 
-							<% if food.food_photos.size > 0%>
-								<div class="col-md-11 food-photo-div">
-									<% food.food_photos.each_with_index do |food_photo, index|%>
-										<%= image_tag(food_photo.photo(:original),:class=>"food-photo-#{index} food-photo", :data => index)%>
-									<%end%>
-								</div>
-								<div class="col-md-1 photo-select-btn-div">
-									<i class="photo-select-btn btn btn-default btn-xs fa fa-chevron-circle-right right" aria-hidden="true"></i>
-								</div>
+    <div class="col-xs-12 basic_bg_top prl0 prl20_sm">
+      <div class="one_tab ">
+        <div class="col-xs-12">
+          <%= link_to '+ Add dish', new_chef_food_path(@chef), class:'fluid my_btn mb30' %>
+        </div>
+        <% @foods.each do |food|%>
+            <div class="col-xs-12">
+              <div class="black_border_block mrl0_sm prl30">
+                <div class="row">
+                  <div class="col-xs-12 col-md-8 col-md-offset-2 mb15">
+                    <h2 class="ml15 mt0 bold tac tal_sm mtb20" style="font-size: 24px;"><%= food.name %></h2>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2" style="height: 220px;">
+                    <% if food.food_photos.size > 0 %>
+                        <div class='css_carousel'>
+                          <div class='wrap2'>
+                            <% food.food_photos.each_with_index do |food_photo,i| %>
+                                <div class='group'>
+                                  <input type='radio' name='test' id='<%= i %>' value='<%= i %>' <%= 'checked' if i ==0 %>>
+                                  <label for='<%= i-1 < 0 ? food.food_photos.size - 1 : i-1 %>' class='previous'></label>
+                                  <label for='<%= i+1 > food.food_photos.size - 1 ? 0 : i+1 %>' class='next'></label>
+                                  <div class='content'>
+                                    <img style="background-image:url(<%= food_photo.photo %>);"
+                                         class="background_img_setting border_main_radius">
+                                  </div>
+                                </div>
+                            <% end %>
+                          </div>
+                        </div>
+                    <% else %>
+                        <%= image_tag('empty_img.png') %>
+                    <% end %>
+                  </div>
+                  <div class="flex-direction_column df col-xs-12 col-sm-6 mt20 mt0_sm" style="height: 220px;">
 
-							<%else%>
-								<%= image_tag("empty_img.png")%>
-							<%end%>
-						</div>
-						<!-- Name -->
-						<div class="col-md-6">
-							<%= food.name%>
-						</div>
-						<!-- $ unit -->
-						<div class="col-md-6">
-							$ <%= food.price%> | <%= food.unit%> <%=food.unit_name%>
-						</div>
-					</div>
+                    <h3>
+                      <span class="bold mr25">Price:</span>
+                      <span>$<%= food.price%></span>
+                    </h3>
+                    <h3>
+                      <span class="bold mr25">Qty:</span>
+                      <span><%= food.unit%> <%=food.unit_name%></span>
+                    </h3>
 
-					<div class="col-md-3 food-btn-container">
+                    <div class="mta_xs flex_space_between">
+                      <% if food.is_public %>
+                          <%= link_to chef_food_path(@chef.id, food.id, :is_public => false), :method => :patch do %>
+                              <i class="square_icon border_red fa fa-lock" aria-hidden="true"></i>
+                          <% end %>
+                      <% else %>
+                          <%= link_to chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch do %>
+                              <i class="square_icon border_red fa fa-unlock" aria-hidden="true"></i>
+                          <% end %>
+                      <% end %>
 
-						<!-- private -->
-						<% if food.is_public%>
-							<%= link_to "save to private",chef_food_path(@chef.id, food.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
-						<%else%>
-							<%= link_to "start selling dish",chef_food_path(@chef.id, food.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
-						<%end%>
+                      <!-- share -->
+                      <%= link_to "" do %>
+                          <i class="square_icon border_red fa fa-share-alt" aria-hidden="true"></i>
+                      <% end %>
 
-						<!-- share -->
-						<%= link_to "",:class=>"btn btn-default" do %>
-						  <i class="fa fa-share-alt" aria-hidden="true"></i>
-						<% end %>
+                      <!-- edit -->
+                      <%= link_to edit_chef_food_path(@chef.id,food.id) do %>
+                          <i class="square_icon border_red fa fa-pencil" aria-hidden="true"></i>
+                      <% end %>
 
-						<!-- edit -->
-						<%= link_to edit_chef_food_path(@chef.id,food.id),:class=>"btn btn-default" do %>
-						  <i class="fa fa-pencil" aria-hidden="true"></i>
-						<% end %>
+                      <!-- delete -->
+                      <%= link_to chef_food_path(@chef.id,food.id), :method => :delete do %>
+                          <i class="square_icon border_red fa fa-trash" aria-hidden="true"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
 
-						<!-- delete -->
-						<%= link_to chef_food_path(@chef.id,food.id), :method => :delete, :class=>"btn btn-default" do %>
-						  <i class="fa fa-trash" aria-hidden="true"></i>
-						<% end %>
-					</div>
-				</div>
-			<%end%>
-		</div>
+      <div class="two_tab hidden">
 
-		<!-- big bun content -->
-		<div class="row container menu-sub-container center" id="bigbun-content-container">
+        <div class="col-xs-12">
+          <%= link_to '+ Add big buns', new_chef_big_bun_path(@chef), class:'fluid my_btn mb30' %>
+        </div>
 
-			<div class="col-md-offset-1 col-md-10 row container">
-				<%= link_to "+ add big buns", new_chef_big_bun_path(@chef),:class=>"btn btn-lg btn-danger col-md-12"%>
-			</div>
+        <% @big_buns.each do |big_bun|%>
+            <div class="col-xs-12">
+              <div class="black_border_block mrl0_sm prl30">
+                <div class="row">
+                  <div class="col-xs-12 col-md-8 col-md-offset-2 mb15">
+                    <h2 class="ml15 mt0 bold tac tal_sm mtb20" style="font-size: 24px;">Big bun#<%= big_bun.id%> : <%=big_bun.style%></h2>
+                  </div>
 
-			<div class="clearfix"></div>
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2" style="height: 220px;">
+                    <% if big_bun.big_bun_photo%>
+                        <div style="background-image:url(<%= image_path big_bun.big_bun_photo.photo(:original) %>); height: 100%;" class="background_img_setting border_main_radius"></div>
+                    <% else %>
+                        <div style="background-image:url(<%= image_path 'empty_img.png' %>); height: 100%;" class="background_img_setting border_main_radius"></div>
+                    <% end %>
+                  </div>
 
-			<% @big_buns.each do |big_bun|%>
-				<div class="row container menu-food-container center">
-					<div class="col-md-9 bigbun-info-container">
-						<!-- photo -->
-						<div class="col-md-12 center bigbun-photo-div">
-							<% if big_bun.big_bun_photo%>
-								<%= image_tag(big_bun.big_bun_photo.photo(:original))%>
-							<%else%>
-								<%= image_tag("empty_img.png")%>
-							<%end%>
-						</div>
+                  <div class="col-xs-12 col-sm-6 col-md-4 flex-direction_column df mt20 mt0_sm" style="height: 220px;">
+                    <h3>
+                      <span class="bold mr25">start at:</span>
+                      <span><%= big_bun.start_datetime.localtime.strftime('%Y/%m/%d %H:%M') %></span>
+                    </h3>
+                    <h3>
+                      <span class="bold mr25">stop at:</span>
+                      <span><%= big_bun.stop_datetime.localtime.strftime('%Y/%m/%d %H:%M') %></span>
+                    </h3>
+                    <h3>
+                      <span class="bold mr25">Qty:</span>
+                      <span><%= big_bun.unit %></span>
+                    </h3>
+                    <div class="mta_xs flex_space_between">
 
-						<!-- Style -->
-						<div class="col-md-8" id="bigbun-title-div">
-							<h2>
-								Big bun#<%= big_bun.id%> : <%=big_bun.style%>
-							</h2>
-							<p>
-								start at: <%=big_bun.start_datetime.localtime.strftime('%Y %m %d %H:%M:%S') %>
-							</p>
-							 <p>
-							 	stop at: <%=big_bun.stop_datetime.localtime.strftime('%Y %m %d %H:%M:%S') %>
-							 </p>
-						</div>
+                      <% if big_bun.is_public %>
+                          <%= link_to chef_big_bun_path(@chef.id, big_bun.id, :is_public => false), :method => :patch do %>
+                              <i class="square_icon border_red fa fa-lock" aria-hidden="true"></i>
+                          <% end %>
+                      <% else %>
+                          <%= link_to chef_big_bun_path(@chef.id, big_bun.id, :is_public => true), :method => :patch do %>
+                              <i class="square_icon border_red fa fa-unlock" aria-hidden="true"></i>
+                          <% end %>
+                      <% end %>
 
-						<!-- $ unit -->
-						<div class="col-md-4">
-							<%= big_bun.unit%> pieces
-						</div>
-					</div>
+                      <!-- share -->
+                      <%= link_to "" do %>
+                          <i class="square_icon border_red fa fa-share-alt" aria-hidden="true"></i>
+                      <% end %>
 
-					<div class="col-md-3 bigbun-btn-container">
+                      <!-- edit -->
+                      <%= link_to edit_chef_big_bun_path(@chef.id,big_bun.id) do %>
+                          <i class="square_icon border_red fa fa-pencil" aria-hidden="true"></i>
+                      <% end %>
 
-						<!-- private -->
-						<% if big_bun.is_public%>
-							<%= link_to "save to private",chef_big_bun_path(@chef.id, big_bun.id, :is_public => false), :method => :patch, :class=>"btn btn-danger"%>
-						<%else%>
-							<%= link_to "save to public",chef_big_bun_path(@chef.id, big_bun.id, :is_public => true), :method => :patch,:class=>"btn btn-success"%>
-						<%end%>
+                      <!-- delete -->
+                      <%= link_to chef_big_bun_path(@chef.id,big_bun.id), :method => :delete do %>
+                          <i class="square_icon border_red fa fa-trash" aria-hidden="true"></i>
+                      <% end %>
+                    </div>
 
-						<!-- share -->
-						<%= link_to "",:class=>"btn btn-default" do %>
-						  <i class="fa fa-share-alt" aria-hidden="true"></i>
-						<% end %>
-
-						<!-- edit -->
-						<%= link_to edit_chef_big_bun_path(@chef.id,big_bun.id),:class=>"btn btn-default" do %>
-						  <i class="fa fa-pencil" aria-hidden="true"></i>
-						<% end %>
-
-						<!-- delete -->
-						<%= link_to chef_big_bun_path(@chef.id,big_bun.id), :method => :delete, :class=>"btn btn-default" do %>
-						  <i class="fa fa-trash" aria-hidden="true"></i>
-						<% end %>
-					</div>
-				</div>
-			<%end%>
-		</div>
-
-	</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
 </div>
 
 
-<script type="text/javascript">
-
-	var default_photo = function(){
-		$('.food-photo').hide();
-		$('.food-photo-0').show();
-		$('.food-photo-0').addClass("active");
-	}
-
-	var change_photo = function(){
-		$('.food-photo').click(function(){
-			$(this).hide();
-			$(this).removeClass('active');
-
-			var photo_count = $(this).parent().find('.food-photo').length
-			var data_number = Number($(this).attr('data'));
-
-			if (photo_count > 1 && data_number < photo_count-1) {
-				var new_data_number = data_number + 1
-				var photo_class = '.food-photo-' + new_data_number
-				$(this).parent().find(photo_class).show();
-				$(this).parent().find(photo_class).addClass("active");
-
-			} else if(photo_count == 1) {
-				$(this).show();
-				$(this).addClass("active");
-
-			} else {
-				var new_data_number = 0
-				var photo_class = '.food-photo-' + new_data_number
-				$(this).parent().find(photo_class).show();
-				$(this).parent().find(photo_class).addClass("active");
-			}
-		});
-	}
-
-	var trigger_photo_btn = function(){
-		$('.photo-select-btn').click(function(){
-			$(this).parent().find(".food-photo.active").click();
-		});
-	}
-
-	var show_content_by_title = function(){
-		$('#bigbun-content-container').hide();
-		$('#menu-title-btn').css('background-color','red');
-
-		$('#menu-title-btn').click(function(){
-			$('#menu-title-btn').css('background-color','red');
-			$('#bigbun-title-btn').css('background-color','white');
-			$('#menu-content-container').show();
-			$('#bigbun-content-container').hide();
-		});
-
-		$('#bigbun-title-btn').click(function(){
-			$('#menu-title-btn').css('background-color','white');
-			$('#bigbun-title-btn').css('background-color','red');
-			$('#menu-content-container').hide();
-			$('#bigbun-content-container').show();
-		});
-	};
-
-	default_photo();
-	change_photo();
-	trigger_photo_btn();
-	show_content_by_title();
+<script type="text/javascript" charset="utf-8">
+  $(document).on('click','#one_tab.white,#two_tab.white',function(){
+    $('#one_tab,#two_tab').toggleClass('background_black').toggleClass('white').toggleClass('red');
+    $('.one_tab,.two_tab').toggleClass('hidden');
+  });
 </script>
-
-
-

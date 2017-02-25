@@ -38,17 +38,15 @@ class UsersController < ApplicationController
 
 	def purchase
 		@client_token = Braintree::ClientToken.generate
-		# @orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
-		@orders = @user.orders
-		datetime_now = Time.now.utc.localtime
-		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
+		@datetime_now = Time.now.utc.localtime
+		@time_now_to_Num = @datetime_now.strftime( "%H%M%S" )
 	end
 
 	def paid
-		# @orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
-		@orders = @user.orders
-		datetime_now = Time.now.utc.localtime
-		@time_now_to_Num = datetime_now.strftime( "%H%M%S" )
+		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")
+		@datetime_now = Time.now.utc.localtime
+		@time_now_to_Num = @datetime_now.strftime( "%H%M%S" )
 
 		render_js
 	end
@@ -75,11 +73,9 @@ class UsersController < ApplicationController
 
 			# check cut off time
 			if @order.bulk_buy.present?
-				cut_off_time = @order.bulk_buy.cut_off_time.localtime
-				cut_off_time_to_Num = cut_off_time.strftime( "%H%M%S" )
+				check_order_cut_off_time(@order)
 
-				# User can cancel before cut off time
-				if time_now_to_Num <= cut_off_time_to_Num
+				if @cancel_availible
 					@order.update(:order_status => "cancelled")
 					flash[:notice] = "Successfully cancelled."
 
@@ -87,7 +83,7 @@ class UsersController < ApplicationController
 					order_refund
 
 				else
-					flash[:notice] = "You can't cancel this order! It is already over cut off time."
+					flash[:alert] = "You can't cancel this order! It is already over cut off time."
 				end
 			else
 				# check delivery
@@ -179,6 +175,29 @@ class UsersController < ApplicationController
 
 	def find_order
 		@order = Order.find(params[:order_id])
+	end
+
+	def check_order_cut_off_time(order)
+		datetime_now = Time.now.utc.localtime
+		time_now_to_Num = datetime_now.strftime( "%H%M%S" )
+		@cancel_availible = false
+		# <!-- 昨天以前的order -->
+		if order.pick_up_time.localtime.to_date < datetime_now.to_date
+            @cancel_availible = false
+
+        # <!-- 今天的order -->
+        elsif order.pick_up_time.localtime.to_date == datetime_now.to_date
+          # <!-- 如果超過了 cut-off time -->
+          	if order.bulk_buy.cut_off_time.localtime.strftime("%H%M%S") < time_now_to_Num
+            	@cancel_availible = false
+         	else
+            	@cancel_availible = true
+          	end
+
+        # <!-- 明天以後的order -->
+        else
+          	@cancel_availible = true
+        end
 	end
 
 	def order_refund

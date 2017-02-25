@@ -3,7 +3,7 @@
     <div name="kitchen_photo">
       <%= link_to edit_chef_path(@chef) do %>
           <div class="img_upload pen_click">
-            <label style="background-image:url(<%= @chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists? %>)">
+            <label style="background-image:url(<%= @chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists? %>); width:100%; border-radius: 0">
             <i class="fa fa-pencil" aria-hidden="true"></i>
             </label>
           </div>
@@ -22,7 +22,7 @@
               </div>
 
 
-              <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm">Mr. Chan’s Kitchen</h1>
+              <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm"><%= @chef.restaurant.name%></h1>
             </div>
 
             <%= render 'chef_banner' %>

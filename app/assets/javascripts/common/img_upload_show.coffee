@@ -6,6 +6,6 @@ $(document).ready ->
     reader.onload = (file) ->
       img = new Image();
       img.src = file.target.result;
-      $(event.target).siblings('label').css("background-image","url(" + img.src + ")").addClass('hover')
+      $(event.target).siblings('label:not(.remove_img)').css("background-image","url(" + img.src + ")").addClass('hover')
 
     reader.readAsDataURL(image);

@@ -1,7 +1,12 @@
 .img_upload{
   margin: 0 auto;
   overflow: hidden;
-  label{
+  .remove_img:hover,.img_removed{
+    @extend .background_red;
+    @extend .white;
+    @extend .cursor_pointer;
+  }
+  label:not(.remove_img){
     margin: auto;
     width: 260px;
     height: 260px;

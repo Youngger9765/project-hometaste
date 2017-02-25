@@ -19,34 +19,6 @@
     }
   }
 }
-[class^=chefs]{
-  .ui.form{
-    .field{
-      label{
-        margin-bottom: 10px !important;
-        font-size: 14px;
-      }
-      input,select,.ui.dropdown{
-        margin-bottom: 20px !important;
-      }
-    }
-  }
-  .img_upload{
-    margin-right: 0 !important;
-  }
-  .basic_bg_top{
-    a[class*=_btn],a[class*=_btn_reserve]{
-      height:100px ;
-      padding-top: 15px;
-      &:hover{
-        color: inherit;
-      }
-    }
-  }
-  .fa-calendar{
-    font-size: 30px;
-  }
-}
 .chef_product_lists .background_img_setting{
   padding-top: 25%;
 }
@@ -63,6 +35,31 @@
     }
   }
 }
+}
+.chefs_menu{
+  .css_carousel{
+    .content img{
+      height: 220px;
+    }
+    .group label{
+      height: 48px;
+      width: 48px;
+      top: 50%;
+      margin-top: -24px;
+      line-height: 50px;
+      font-size: 25px;
+    }
+    label.previous{
+      margin-left: 15px;
+    }
+    label.next{
+      margin-right: 15px;
+    }
+  }
+  .basic_bg_bottom{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 @media (max-width: 507px) {
@@ -89,6 +86,11 @@
     label{
       width: 200px;
       height: 200px;
+    }
+  }
+  .chefs_menu{
+    .black_border_block{
+      width: calc(100% + 35px);
     }
   }
 }

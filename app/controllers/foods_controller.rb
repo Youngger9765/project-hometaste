@@ -1,8 +1,8 @@
 class FoodsController < ApplicationController
 
 	before_action :find_chef, :only =>[:update,:create,:edit,:destroy]
-	before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
-	before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
+	# before_action :is_current_user?, :only => [:update, :create,:edit,:destroy]
+	# before_action :has_authority?, :only => [:update, :create,:edit,:destroy]
 	before_action :find_food, :only =>[:update,:edit,:destroy]
 
   def show
@@ -90,7 +90,7 @@ class FoodsController < ApplicationController
 	  	:support_lunch, :support_dinner, :support_days,
 
 	  	:food_photos_attributes => [
-		  	:id, :food_id, :photo,
+		  	:id, :food_id, :photo, :remove_photo
 		  ],
 		  :food_cuisine_ships_attributes => [
 		  	:id, :food_id, :cuisine_id,

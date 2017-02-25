@@ -53,7 +53,8 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 
       coordinate = deal_coordinate(ne,sw)
 
-      if prevent_prerender && check_in_bound(coordinate) && show_card_num == 0
+#      if prevent_prerender && check_in_bound(coordinate) && show_card_num == 0
+      if prevent_prerender && check_in_bound(coordinate)
         rerender_map(coordinate)
       prevent_prerender = true
 
@@ -84,4 +85,5 @@ rerender_map=(coordinate)->
       west:coordinate['w'],
       qty:qty
     success: (data)->
-      buildMap(data.gmap_hash)
+      if data.qty > 0
+        buildMap(data.gmap_hash)

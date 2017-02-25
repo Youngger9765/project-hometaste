@@ -81,9 +81,10 @@ Rails.application.routes.draw do
         post :transactions
       end
     end
+    resources :comments
   end
 
-  resources :comments
+
 
   # resources :orders do
   #   member do
@@ -91,14 +92,16 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1'  do
-    get "/search/keyword" => "search#keyword"
-    get "/search/filter" => "search#filter"
+  scope path: '/api/v1/', module: 'api_v1', as: 'v1'  do
+    get '/search/keyword' => 'search#keyword'
+    get '/search/filter' => 'search#filter'
+    get '/cuisines/get_foods' => 'cuisines#get_foods'
+    get '/cuisines/get_restaurants' => 'cuisines#get_restaurants'
   end
-  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
-    get "/getDishesByFilter" => "mains#getDishesByFilter"
-    get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"
-    get "/check_delivery_location" => "orders#check_delivery_location"
+  scope path: '/api/v1/', module: 'api_v1', as: 'v1', defaults: { format: :json } do
+    get '/getDishesByFilter' => 'mains#getDishesByFilter'
+    get '/getRestaurantsByMap' => 'restaurants#getRestaurantsByMap'
+    get '/check_delivery_location' => 'orders#check_delivery_location'
   end
 
 

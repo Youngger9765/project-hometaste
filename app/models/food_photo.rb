@@ -1,5 +1,6 @@
 class FoodPhoto < ApplicationRecord
 
+	attr_accessor :remove_photo
 	belongs_to :food
 
 	has_attached_file :photo, styles: { medium: "300x300#", thumb: "100x100#" },

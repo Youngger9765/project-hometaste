@@ -247,12 +247,18 @@ $(document).ready ->
   $(document).on 'click', ".product_spineer_button" , ->
     deal_food_list(this)
     render_total_price()
+    if in_order_new()
+      remove_qty_zero_food.bind(this)()
+
 
   # bigbun add
   $(document).on 'click', ".bigbun_modal #redeem_now" , ->
     deal_bigbun_list(this)
     $('.bigbun_modal').modal('hide')
 
+  remove_qty_zero_food=() ->
+    if $(this).siblings('input').val() == '0'
+      $(this).parents('.product_list').remove()
 
   #-----------       order new page render     ---------------------
   if in_order_new()
@@ -287,12 +293,6 @@ $(document).ready ->
         form.append($("<input>").attr("type", "hidden").attr("name", "order[restaurant_id]").val(restaurant_id));
         if $('.bigbun_list').data('bigbun-id') != -1
           form.append($("<input>").attr("type", "hidden").attr("name", "order[bigbun-id]").val($('.bigbun_list').data('bigbun-id')));
-#        Object.keys(current_restaurant).forEach (_key,i,a) ->
-#          if _key.indexOf('bigbun') != -1
-#            code = cart_list["#{restaurant}"]["#{_key}"]
-#            bigbun_id = +_key.replace('bigbun_','')
-#            input = $("<input>").attr("type", "hidden").attr("name", "bigbun[#{bigbun_id}]").val(code);
-#            form.append($(input));
 
         #      $.removeCookie('cart_list',{path:'/'})
         $(this).off('submit').submit();
