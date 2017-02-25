@@ -21,3 +21,30 @@ production:
   host: localhost
   username: root
   password:
+
+
+
+# 
+# development:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: o2o_module_dev
+#   host: localhost
+#   username: root
+#   password:
+
+# test:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: o2o_module_test
+#   host: localhost
+#   username: root
+#   password:
+
+# production:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: o2o_module
+#   host: localhost
+#   username: root
+#   password:

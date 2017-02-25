@@ -51,6 +51,8 @@ class ChefsController < ApplicationController
         # save chef & restaurant & delivery & bulk_buys
         if @chef.save
 
+          bulk_buy_time_to_utc
+
           if !bulk_buy_checked
             @chef.restaurant.bulk_buys.destroy_all
           end
@@ -133,6 +135,9 @@ class ChefsController < ApplicationController
     end
 
     if @chef.update!(chef_params)
+      # 處理bulk_buy 時間 to utc
+      bulk_buy_time_to_utc
+
       redirect_to sales_chef_path(@chef)
     else
       flash[:alert] = "update fail"
@@ -296,4 +301,33 @@ class ChefsController < ApplicationController
     @local_datetime_end_to_utc = local_datetime_end.utc
     @today_time_range = (@local_datetime_beginning_to_utc..@local_datetime_end_to_utc)
   end
+
+  def bulk_buy_time_to_utc
+    chef_params[:restaurant_attributes][:bulk_buys_attributes].keys.each do |key|
+      b_buy = chef_params[:restaurant_attributes][:bulk_buys_attributes][key]
+
+
+      bulk_buy_id = @chef.restaurant.bulk_buy_ids[key.to_i]
+
+      if bulk_buy_id.nil?
+        # 如果拿不到id 就不要往下做了
+        return
+      end
+
+      cut_off_time = nil
+      pick_up_time_1 = nil
+      pick_up_time_2 = nil
+
+      cut_off_time = b_buy[:cut_off_time].to_time.utc if b_buy[:cut_off_time].present?
+      pick_up_time_1 = b_buy[:pick_up_time_1].to_time.utc if b_buy[:pick_up_time_1].present?
+      pick_up_time_2 = b_buy[:pick_up_time_2].to_time.utc if b_buy[:pick_up_time_2].present?
+
+      bulk_buy = BulkBuy.find(bulk_buy_id).update(:cut_off_time => cut_off_time,
+                                                  :pick_up_time_1 => pick_up_time_1,
+                                                  :pick_up_time_2 => pick_up_time_2
+                                                    )
+
+    end
+  end
+
 end

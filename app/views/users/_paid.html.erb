@@ -12,11 +12,30 @@
         </div>
 
         <% if order.shipping_method == "bulk_buy"%>
-            <!-- TODO: 確認 cut off time 的local time -->
-            <% if order.bulk_buy.cut_off_time.localtime.strftime("%H%M%S") > @time_now_to_Num%>
-                <div class="col-sm-6 col-xs-12 tac tar_sm">
-                  <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
-                </div>
+
+            <% show_cancel = true %>
+            <!-- 昨天以前的order -->
+            <% if order.pick_up_time.localtime.to_date < @datetime_now.to_date %>
+              <% show_cancel = false %>
+
+            <!-- 今天的order -->
+            <% elsif order.pick_up_time.localtime.to_date == @datetime_now.to_date%>
+              <!-- 如果超過了 cut-off time -->
+              <% if order.bulk_buy.cut_off_time.localtime.strftime("%H%M%S") < @time_now_to_Num%>
+                <% show_cancel = false %>
+              <% else %>
+                <% show_cancel = true %>
+              <%end%>
+
+            <!-- 明天以後的order -->
+            <% else %>
+              <% show_cancel = true %>
+            <% end %>
+
+            <% if show_cancel%>
+              <div class="col-sm-6 col-xs-12 tac tar_sm">
+                <%= link_to "Cancel this order", cancel_order_user_path(@user,:order_id => order) ,:method => "POST",:class=>"my_btn_reserve mt25 mt0_sm"%>
+              </div>
             <%end%>
         <%else%>
             <!-- delivery -->

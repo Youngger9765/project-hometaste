@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/home_admin', as: 'rails_admin'
   get 'transactions/new'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
