@@ -45,14 +45,14 @@ class Food < ApplicationRecord
     sort = params['Sort By']
     distance = params['Distance']
     price = params['Price']
-    # cuisine = params['Cuisine']
+    cuisine = params['Cuisine']
     features = params['Features']
 
     where(id:ids).filter_distance(distance,lat_long)
         .filter_features(features)
         .filter_price(price)
         .filter_sort(sort)
-    # .filter_cuisine(cuisine)
+        .filter_cuisine(cuisine)
   end
 
   def self.filter_price(_case)
@@ -105,9 +105,9 @@ class Food < ApplicationRecord
     else
       _cases = _case.uniq
       _cases = _case.map { |x| "%#{ x.to_s.split(' ')[0].to_s.gsub(/[^a-zA-Z0-9\-]/,'') }%" }
-      cuisine_ids = _cases.map { |x| Cuisine.where('name like ?', x).ids}.flatten
-      restaurant_id = RestaurantCuisineShip.where(cuisine_id: cuisine_ids).pluck(:restaurant_id)
-      Restaurant.where(id:restaurant_id)
+      cuisine_ids = _cases.map { |x| Cuisine.where('name like ?', x).ids }.flatten
+      food_id = FoodCuisineShip.where(cuisine_id: cuisine_ids).pluck(:food_id)
+      where(id: food_id)
     end
   end
 end

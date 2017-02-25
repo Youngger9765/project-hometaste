@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def show
     @comment = FoodComment.new
     @foods = @restaurant.foods
+    @comments = @restaurant.foods
   end
 
   private

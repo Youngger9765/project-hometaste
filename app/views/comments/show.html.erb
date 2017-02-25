@@ -52,91 +52,51 @@
   </div>
   <div class="row">
     <%= form_for @comment, url:restaurant_comments_path(restaurant_id: params[:restaurant_id]), method: 'post' do |f| %>
-      <div class="col-xs-12 basic_bg">
-        <h3 class="title text-center bold mb15">Leave a comment</h3>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="row">
-              <div class="col-md-2 col-sm-3 col-xs-10 col-xs-offset-1 col-sm-offset-0">
-                <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
-              </div>
-              <div class="col-md-10 col-sm-9 col-xs-12">
-                <div>
-                  <h3 class="dib">Tag a dish :</h3>
-                  <%= f.select :food_id, options_from_collection_for_select(@foods, 'id', 'name'), {}, class:'ui selection dropdown hometaste_dropdown' %>
+        <div class="col-xs-12 basic_bg">
+          <h3 class="title text-center bold mb15">Leave a comment</h3>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row">
+                <div class="col-md-2 col-sm-3 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+                  <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
                 </div>
-                <div class="align_two_side_sm">
-                  <h3 class="dib">Taste :</h3>
-                  <%= f.hidden_field :taste, value: '1' %>
-                  <div class="ui star rating"></div>
-                </div>
-                <div class="align_two_side_sm">
-                  <h3 class="dib">Value :</h3>
-                  <%= f.hidden_field :value, value: '1' %>
-                  <div class="ui star rating"></div>
-                </div>
-                <div class="align_two_side_sm">
-                  <h3 class="dib">On time pick up/delivery :</h3>
-                  <%= f.hidden_field :delivery, value: '1' %>
-                  <div class="ui star rating"></div>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                  <div>
+                    <h3 class="dib">Tag a dish :</h3>
+                    <%= f.select :food_id, options_from_collection_for_select(@foods, 'id', 'name'), {}, class:'ui selection dropdown hometaste_dropdown' %>
+                  </div>
+                  <div class="align_two_side_sm">
+                    <h3 class="dib">Taste :</h3>
+                    <%= f.hidden_field :taste, value: '1' %>
+                    <div class="ui star rating"></div>
+                  </div>
+                  <div class="align_two_side_sm">
+                    <h3 class="dib">Value :</h3>
+                    <%= f.hidden_field :value, value: '1' %>
+                    <div class="ui star rating"></div>
+                  </div>
+                  <div class="align_two_side_sm">
+                    <h3 class="dib">On time pick up/delivery :</h3>
+                    <%= f.hidden_field :delivery, value: '1' %>
+                    <div class="ui star rating"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div>
+            <%= f.text_area :comment, placeholder: 'Leave your comment here...', cols: '30', rows: '10' %>
+          </div>
+          <div class="text-center">
+            <%= f.submit :submit, class: 'ui button my_btn' %>
+          </div>
         </div>
-        <div>
-          <%= f.text_area :comment, placeholder: 'Leave your comment here...', cols: '30', rows: '10' %>
-        </div>
-        <div class="text-center">
-          <%= f.submit :submit, class: 'ui button my_btn' %>
-        </div>
-      </div>
     <% end %>
   </div>
   <div class="row">
-    <div class="col-xs-12 basic_bg">
-      <h3 class="title text-center bold mb15">Reviews</h3>
-      <div class="row">
-        <div class="col-md-2 col-sm-3">
-          <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
-          <h5 class="text-center">Rostad Ducj</h5>
-        </div>
-        <div class="col-md-2 col-sm-3">
-          <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
-          <h5 class="text-center">Shiba iny</h5>
-        </div>
-        <div class="col-md-8 col-sm-12">
-          <div class="align_two_side_sm">
-            <h3 class="dib">Summery :</h3>
-            <div class="show_rated_3"></div>
-          </div>
-          <div class="align_two_side_sm">
-            <h3 class="dib">Taste :</h3>
-            <div class="show_rated_3"></div>
-          </div>
-          <div class="align_two_side_sm">
-            <h3 class="dib">Value :</h3>
-            <div class="show_rated_3"></div>
-          </div>
-          <div class="align_two_side_sm">
-            <h3 class="dib">On time pick up/develiery :</h3>
-            <div class="show_rated_3"></div>
-          </div>
-        </div>
-        <div class="col-md-10 col-md-offset-2 col-xs-12">
-          <i class="gray_line"></i>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
-          <span class="pull-right gray">2016/12/11</span>
-        </div>
-        <div class="col-md-10 col-md-offset-2 col-xs-12">
-          <i class="gray_line"></i>
-          <h5 class="red bold">Reply</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
-          <span class="pull-right gray">2016/12/11</span>
-        </div>
-      </div>
-      <i class="red_line"></i>
-    </div>
+    <% @comments.each do |comment| %>
+        <%= render 'comments', comment: comment %>
+    <% end %>
   </div>
   <div class="load_more">
     <input type="button" value="Load more">
