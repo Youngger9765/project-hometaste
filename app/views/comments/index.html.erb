@@ -8,13 +8,13 @@
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
           <div class="align_two_side_sm">
-            <h3 class="title pull-left bold mt15">Mr.chan kitchen</h3>
+            <h3 class="title pull-left bold mt15"><%= @restaurant.name%></h3>
             <button class="ui button my_btn pull-right hidden-xs hidden-sm" name="menu_btn">MENU<i class="fa fa-caret-right ml10" aria-hidden="true"></i></button>
           </div>
           <div>
             <div class="show_rated_3">
             </div>
-            <span>200 reviews</span>
+            <span><%= @restaurant.food_comments_count %> reviews</span>
           </div>
           <div class="visible-xs visible-sm menu_btn">
             <button class="ui button my_btn" name="menu_btn">MENU<i class="fa fa-caret-right ml10" aria-hidden="true"></i></button>
@@ -22,7 +22,7 @@
           <% content_for :top_reviews do %>
               <i class="red_line" name="top_bg_line"></i>
               <div class="align_two_side_sm">
-                <h3 class="dib">Summery :</h3>
+                <h3 class="dib">Summary :</h3>
                 <div class="show_rated_3"></div>
               </div>
               <div class="align_two_side_sm">
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="row">
-    <%= form_for @comment, url:restaurant_comments_path(restaurant_id: params[:restaurant_id]), method: 'post' do |f| %>
+    <%= form_for @comment, url: create_food_comment_restaurant_comments_path(:restaurant_id => @restaurant.id), method: 'post' do |f| %>
         <div class="col-xs-12 basic_bg">
           <h3 class="title text-center bold mb15">Leave a comment</h3>
           <div class="row">
@@ -67,17 +67,17 @@
                   </div>
                   <div class="align_two_side_sm">
                     <h3 class="dib">Taste :</h3>
-                    <%= f.hidden_field :taste, value: '1' %>
+                    <%= f.hidden_field :taste_score, value: '1' %>
                     <div class="ui star rating"></div>
                   </div>
                   <div class="align_two_side_sm">
                     <h3 class="dib">Value :</h3>
-                    <%= f.hidden_field :value, value: '1' %>
+                    <%= f.hidden_field :value_score, value: '1' %>
                     <div class="ui star rating"></div>
                   </div>
                   <div class="align_two_side_sm">
                     <h3 class="dib">On time pick up/delivery :</h3>
-                    <%= f.hidden_field :delivery, value: '1' %>
+                    <%= f.hidden_field :on_time_score, value: '1' %>
                     <div class="ui star rating"></div>
                   </div>
                 </div>
@@ -94,8 +94,8 @@
     <% end %>
   </div>
   <div class="row">
-    <% @comments.each do |comment| %>
-        <%= render 'comments', comment: comment %>
+    <% @food_comments.each do |food_comment| %>
+        <%= render 'food_comments', food_comment: food_comment %>
     <% end %>
   </div>
   <div class="load_more">

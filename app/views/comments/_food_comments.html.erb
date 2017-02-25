@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-8 col-sm-12">
       <div class="align_two_side_sm">
-        <h3 class="dib">Summery :</h3>
+        <h3 class="dib">Summary :</h3>
         <div class="show_rated_3"></div>
       </div>
       <div class="align_two_side_sm">
@@ -29,8 +29,8 @@
     </div>
     <div class="col-md-10 col-md-offset-2 col-xs-12">
       <i class="gray_line"></i>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
-      <span class="pull-right gray">2016/12/11</span>
+      <p><%= food_comment.comment%></p>
+      <span class="pull-right gray"><%= food_comment.created_at.localtime.strftime("%Y/%m/%d")%></span>
     </div>
     <div class="col-md-10 col-md-offset-2 col-xs-12">
       <i class="gray_line"></i>
