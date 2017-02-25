@@ -50,17 +50,15 @@
 
 <div class="container">
   <div class="row foods restaurants cards" id="results" data-sum_qty="<%= @sum_qty %>" data-page="1">
-    <%= render 'foods',foods:@foods %>
+    <%= render 'foods',foods: @foods %>
   </div>
   <div class="load_more" id="load_more">
     <input type="button" value="Load more">
   </div>
 </div>
 
-<% @foods.each do |food| %>
-    <% if food.restaurant.get_available_bigbun.is_a?(ActiveRecord::Base) %>
-        <%= render 'common/bigbun', food: food, bigbun: food.restaurant.get_available_bigbun, restaurant: food.restaurant %>
-    <% end %>
+<% @food_available_bigbun_array.each do |group| %>
+        <%= render 'common/bigbun', food: group[0], bigbun: group[1], restaurant: group[0].restaurant %>
 <% end %>
 
 <%= javascript_include_tag 'main' %>

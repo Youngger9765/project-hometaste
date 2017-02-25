@@ -12,7 +12,7 @@ class ApiV1::RestaurantsController < ApiController
 																	close_url: "#{ ActionController::Base.helpers.image_path 'close.png'}",
 																	html: gmap_html(restaurant,0.5) })
 		end
-		render json: { gmap_hash: @hash }, status: 200
+		render json: { gmap_hash: @hash, qty: @hash.size }, status: 200
 	end
 
 	private
@@ -76,7 +76,7 @@ class ApiV1::RestaurantsController < ApiController
 
                 </div>
           </div>
-</div>"
+			</div>"
 		return html
 	end
 end

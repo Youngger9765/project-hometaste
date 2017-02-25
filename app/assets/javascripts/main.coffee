@@ -147,6 +147,10 @@ $(document).ready ->
     $('.ui.small.modal').modal('hide');
 
 
+  window.cards_num = -> cards_num()
+  window.render_food_card = (cards) -> render_food_card(cards)
+  window.modify_card_column = () -> modify_card_column()
+
 
 
 

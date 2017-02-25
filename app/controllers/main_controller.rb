@@ -1,44 +1,58 @@
 class MainController < ApplicationController
 
-	before_action :get_today_foods_ids
+  before_action :get_today_foods_ids
 
-	def index
-		approved_restaurant = Restaurant.where(:is_approved => true)
-		@foods = Food.where(:restaurant_id => approved_restaurant.ids).includes(:restaurant).today_foods(@foods_ids).sample(100)
+  def index
+    @lat = request.location.data['latitude'].to_f
+    @long = request.location.data['longitude'].to_f
 
-		# restaurant's feature
-		today_meal_restaurant_ids = Food.where(:is_public => true).pluck(:restaurant_id).uniq
-		@today_meal = approved_restaurant.where(id: today_meal_restaurant_ids)
+    approved_restaurant = Restaurant.get_around_restaurants( 599999 ,@lat,@long).where(:is_approved => true)
+    @foods = Food.where(:restaurant_id => approved_restaurant.ids)
+                 .includes(:restaurant, :cuisines, :food_photos)
+                 .today_foods(@foods_ids)
+    @cuisines = Cuisine.all
 
-		bulk_buy_restaurant_ids = BulkBuy.pluck(:restaurant_id).uniq
-		@bulk_buy = approved_restaurant.where(id:bulk_buy_restaurant_ids)
+    array = []
+    @foods.each do |food|
+      if food.get_available_bigbun
+        array << [food, food.get_available_bigbun]
+      end
+    end
+    @food_available_bigbun_array = array
 
-		delivery_restaurant_ids = Delivery.pluck(:restaurant_id).uniq
-		@delivery = approved_restaurant.where(id:delivery_restaurant_ids)
-
-		big_bun_restaurant_ids = BigBun.where(:is_public => true).pluck(:restaurant_id).uniq
-		@offer_big_bun = approved_restaurant.where(id:big_bun_restaurant_ids)
-		@cuisines = Cuisine.all
-
-		save_search_results_in_cookies
+    save_search_results_in_cookies
   end
 
-	private
+
+
+  # restaurant's feature
+  # today_meal_restaurant_ids = Food.where(:is_public => true).pluck(:restaurant_id).uniq
+  # @today_meal = approved_restaurant.where(id: today_meal_restaurant_ids)
+  #
+  # bulk_buy_restaurant_ids = BulkBuy.pluck(:restaurant_id).uniq
+  # @bulk_buy = approved_restaurant.where(id:bulk_buy_restaurant_ids)
+  #
+  # delivery_restaurant_ids = Delivery.pluck(:restaurant_id).uniq
+  # @delivery = approved_restaurant.where(id:delivery_restaurant_ids)
+  #
+  # big_bun_restaurant_ids = BigBun.where(:is_public => true).pluck(:restaurant_id).uniq
+  # @offer_big_bun = approved_restaurant.where(id:big_bun_restaurant_ids)
+
+
+  private
 
   def save_search_results_in_cookies
-    ids = @foods.map{|x|x.id}
-    cookies.signed[:search_results] = {value: {food: ids} }
+    cookies.signed[:search_results] = {value: {food: @foods.ids} }
   end
 
   def get_today_foods_ids
-  	wday_now = Time.now.localtime.wday
-  	@foods_ids =[]
+    wday_now = Time.now.localtime.wday
+    @foods_ids =[]
     public_foods = Food.where(:is_public => true)
 
     public_foods.each do |food|
       @foods_ids << food.id if food.support_days.include?(wday_now)
     end
-
     @foods_ids
   end
 

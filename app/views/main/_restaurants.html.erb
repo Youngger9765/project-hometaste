@@ -1,40 +1,46 @@
 <% restaurants.each do |restaurant| %>
-    <%= link_to restaurant do %>
-        <div class="col-md-4 col-xs-6">
-          <div class="ui fluid card">
-            <div class="image">
-              <img data-src="<%= image_path 'tmp/kitchen.png' %>">
-            </div>
-            <div class="content">
-              <h4><%= link_to restaurant do %><%= restaurant.name %><% end %></h4>
-              <div class="rating_wrapping">
-                <div class="show_rated_<%= restaurant.food_score %>"></div>
-                <span name="reivews">200 Reviews</span>
-              </div>
-              <div class="num_counts">
-                <i class="fa fa-heart red mr5" aria-hidden="true"></i>
-                <span>102 Likes</span>
-                <i class="cloche_icon_red" aria-hidden="true"></i>
-                <span>238 Orders</span>
-              </div>
-              <div class="hidden-xs">
-                <% restaurant.cuisines.first(3).each do |cuisine| %>
-                    <span class="sub_link mr5"><%= cuisine.name %></span>
-                <% end %>
-              </div>
-
-              <div class="flex_center_start location">
-                <div class="ui icon button address flex_center" data-tooltip="Address" data-inverted="">
-                  <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
-                </div>
-                <div class="flex_center">
-                  <p><%= restaurant.address %></p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
+    <div class="col-md-4 col-xs-6">
+      <div class="ui fluid card">
+        <div class="image">
+          <%= link_to restaurant do %>
+              <img data-src="<%= image_path restaurant.main_photo %>">
+          <% end %>
         </div>
-    <% end %>
+        <div class="content">
+          <h4>
+            <%= link_to restaurant do %>
+                <%= restaurant.name %>
+            <% end %>
+          </h4>
+          <div class="rating_wrapping">
+            <div class="show_rated_<%= restaurant.food_score %>"></div>
+            <span name="reivews">200 Reviews</span>
+          </div>
+          <div class="num_counts">
+            <i class="fa fa-heart red mr5" aria-hidden="true"></i>
+            <span>102 Likes</span>
+            <i class="cloche_icon_red" aria-hidden="true"></i>
+            <span>238 Orders</span>
+          </div>
+          <div class="hidden-xs">
+            <% restaurant.cuisines.first(3).each do |cuisine| %>
+                <%= link_to v1_cuisines_get_restaurants_path(cuisine_id: cuisine.id), remote: true do %>
+                <span class="sub_link mr5"><%= cuisine.name %></span>
+            <% end %>
+            <% end %>
+          </div>
+
+          <div class="flex_center_start location">
+            <div class="ui icon button address flex_center" data-tooltip="Address" data-inverted="">
+              <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+            </div>
+            <div class="flex_center">
+              <p><%= restaurant.address + ' , ' + restaurant.city + ' , ' + restaurant.state %></p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 <% end %>

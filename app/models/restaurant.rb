@@ -74,11 +74,11 @@ class Restaurant < ApplicationRecord
     all.collect {|x| x.foods.ids }.flatten
   end
 
-  def self.get_popular_foods(num = 200)
+  def self.get_popular_foods(num = 100)
     Food.where(id: collect_food_ids).joins(:food_comments).order('food_comments.score desc').limit(num)
   end
 
-  def self.new_in_foods(num = 200)
+  def self.new_in_foods(num = 100)
     Food.where(id: collect_food_ids).where('foods.updated_at > ?', Time.current - 7.days ).limit(num)
   end
 

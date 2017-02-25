@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'transactions/new'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -90,14 +91,16 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1'  do
-    get "/search/keyword" => "search#keyword"
-    get "/search/filter" => "search#filter"
+  scope path: '/api/v1/', module: 'api_v1', as: 'v1'  do
+    get '/search/keyword' => 'search#keyword'
+    get '/search/filter' => 'search#filter'
+    get '/cuisines/get_foods' => 'cuisines#get_foods'
+    get '/cuisines/get_restaurants' => 'cuisines#get_restaurants'
   end
-  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
-    get "/getDishesByFilter" => "mains#getDishesByFilter"
-    get "/getRestaurantsByMap" => "restaurants#getRestaurantsByMap"
-    get "/check_delivery_location" => "orders#check_delivery_location"
+  scope path: '/api/v1/', module: 'api_v1', as: 'v1', defaults: { format: :json } do
+    get '/getDishesByFilter' => 'mains#getDishesByFilter'
+    get '/getRestaurantsByMap' => 'restaurants#getRestaurantsByMap'
+    get '/check_delivery_location' => 'orders#check_delivery_location'
   end
 
 

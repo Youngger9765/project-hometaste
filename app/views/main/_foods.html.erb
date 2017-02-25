@@ -15,45 +15,52 @@
       <i class="fa fa-weixin" aria-hidden="true"></i>
     </div>
 <% end %>
+
 <% foods.each do |food| %>
-    <%= link_to food do %>
-        <div class="col-md-4 col-xs-6">
-          <div class="ui fluid card" data-id="<%= food.id %>">
-            <div class="image">
-              <div class="db bigbun <%= bigbun_status_class(food.restaurant.get_available_bigbun) %>"></div>
-              <img data-src="<%= image_path 'tmp/product.png' %>">
+    <div class="col-md-4 col-xs-6">
+      <div class="ui fluid card" data-id="<%= food.id %>">
+        <div class="image">
+          <% @food_available_bigbun_array.each do |group| %>
+              <% if group[0].id == food.id %>
+                  <div class="db bigbun <%= bigbun_status_class(group[1]) %>"></div>
+              <% end %>
+          <% end %>
+          <%= link_to food do %>
+              <img data-src="<%= image_path food.food_photos.first.try(:photo).to_s %>">
               <div class="card_hover_link hidden hidden-xs">
                 <%= content_for :card_hover_link %>
               </div>
-            </div>
-            <div class="content">
-              <div class="ui icon button address" data-tooltip="Address" data-inverted="">
-                <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
-              </div>
-
-              <p class="description"><%= food.restaurant.name %></p>
-
-              <hr>
-              <div class="address_detail hidden">
-                <p><%= food.restaurant.address %></p>
-                <hr>
-              </div>
-
-              <p class="header"><%= food.name %></p>
-
-              <p class="description">$<%= food.price %>/ Half</p>
-              <div class="hidden-xs">
-                <% food.restaurant.cuisines.first(3).each do |cuisine| %>
+          <% end %>
+        </div>
+        <div class="content">
+          <div class="ui icon button address" data-tooltip="Address" data-inverted="">
+            <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+          </div>
+          <p class="description">
+            <%= link_to food.restaurant.name, food.restaurant %>
+          </p>
+          <hr>
+          <div class="address_detail hidden">
+            <p><%= food.restaurant.address %></p>
+            <hr>
+          </div>
+          <p class="header">
+            <%= link_to food.name, food %>
+          </p>
+          <p class="description">$<%= food.price %>/ Half</p>
+          <div class="hidden-xs">
+            <% food.cuisines.first(3).each do |cuisine| %>
+                <%= link_to v1_cuisines_get_foods_path(cuisine_id: cuisine.id), remote: true do %>
                     <span class="sub_link mr5"><%= cuisine.name %></span>
                 <% end %>
-              </div>
-              <div class="show_rated_<%= food.restaurant.food_score %> mt10"></div>
-              <div class="card_hover_link visible-xs">
-                <%= content_for :card_hover_link %>
-              </div>
-            </div>
+            <% end %>
+          </div>
+          <div class="show_rated_<%= food.restaurant.food_score %> mt10"></div>
+          <div class="card_hover_link visible-xs">
+            <%= content_for :card_hover_link %>
           </div>
         </div>
-    <% end %>
+      </div>
+    </div>
 <% end %>
 

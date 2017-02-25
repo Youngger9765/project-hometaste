@@ -13,27 +13,32 @@ class ApiV1::SearchController < ApplicationController
     end
 
     if @food_ids
-      @foods = Food.filter( params[:checked_list] , [@lat,@long] )
+      @foods = Food.filter( params[:checked_list] , [@lat, @long] )
     elsif @restaurant_ids
-      @restaurants = Restaurant.filter( params[:checked_list] , [@lat,@long] )
+      @restaurants = Restaurant.filter( params[:checked_list] , [@lat, @long] )
     end
 
     respond_to do |format|
-      format.js {render 'api_v1/search/results'}
+      format.js { render 'api_v1/search/results' }
     end
   end
 
   def keyword
-    restaurants = Restaurant.get_around_restaurants( 10000 ,@lat,@long)
+    restaurants = Restaurant.get_around_restaurants(50000, @lat, @long)
     case @keyword
-    when 'Kitchenorchef' ; @restaurants = restaurants
-    when 'Mostpopular'   ; @foods = restaurants.get_popular_foods
-    when 'Newinstore'    ; @foods = restaurants.new_in_foods
+    when 'Kitchenorchef' then @restaurants = restaurants
+    when 'Mostpopular'   then @foods = restaurants.get_popular_foods
+    when 'Newinstore'    then @foods = restaurants.new_in_foods
     else
-      @foods = Food.ransack(name_cont_any:@keyword)
+      @foods = Food.ransack(name_cont_any: @keyword)
                    .result(distinct: true)
                    .joins(:restaurant)
-                   .where(restaurant_id:restaurants.ids)
+                   .where(restaurant_id: restaurants.ids)
+      if @foods.size == 0
+        @restaurants = Restaurant.ransack(name_cont_any: @keyword)
+                           .result(distinct: true)
+                           .where(id: restaurants.ids)
+      end
     end
 
     @sum_qty = @restaurants ? @restaurants.size : @foods.size
@@ -53,13 +58,13 @@ class ApiV1::SearchController < ApplicationController
   end
 
   def get_cookies_search_results
-    _type = cookies.signed[:search_results].keys[0]
+    _type = cookies.signed[:search_results].keys.first
     instance_variable_set("@#{_type}_ids", cookies.signed[:search_results][_type])
   end
 
   def get_user_lat_and_long
     if Geocoder.coordinates(@location)
-      @lat ,@long = Geocoder.coordinates(@location)
+      @lat, @long = Geocoder.coordinates(@location)
     else
       @lat = request.location.data['latitude'].to_f
       @long = request.location.data['longitude'].to_f
@@ -67,7 +72,7 @@ class ApiV1::SearchController < ApplicationController
   end
 
   def save_results_in_cookies
-    cookies.signed[:search_results] = if @foods
+    cookies.signed[:search_results] = if @foods.present?
                                         {value: {food: @foods.ids} }
                                       else
                                         {value: {restaurant: @restaurants.ids} }
