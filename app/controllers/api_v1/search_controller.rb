@@ -65,6 +65,8 @@ class ApiV1::SearchController < ApplicationController
   def get_user_lat_and_long
     if Geocoder.coordinates(@location)
       @lat, @long = Geocoder.coordinates(@location)
+    elsif Geocoder.coordinates(current_user.try(:address))
+      @lat, @long = Geocoder.coordinates(current_user.address)
     else
       @lat = request.location.data['latitude'].to_f
       @long = request.location.data['longitude'].to_f

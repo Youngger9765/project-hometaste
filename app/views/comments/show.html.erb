@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="row">
-    <form action="">
+    <%= form_for @comment, url:restaurant_comments_path(restaurant_id: params[:restaurant_id]), method: 'post' do |f| %>
       <div class="col-xs-12 basic_bg">
         <h3 class="title text-center bold mb15">Leave a comment</h3>
         <div class="row">
@@ -61,42 +61,37 @@
                 <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
               </div>
               <div class="col-md-10 col-sm-9 col-xs-12">
-                <div class="">
+                <div>
                   <h3 class="dib">Tag a dish :</h3>
-                  <div class="ui selection dropdown hometaste_dropdown">
-                    <input type="hidden" name="gender">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">Gender</div>
-                    <div class="menu">
-                      <div class="item" data-value="1">Male</div>
-                      <div class="item" data-value="0">Female</div>
-                    </div>
-                  </div>
+                  <%= f.select :food_id, options_from_collection_for_select(@foods, 'id', 'name'), {}, class:'ui selection dropdown hometaste_dropdown' %>
                 </div>
                 <div class="align_two_side_sm">
                   <h3 class="dib">Taste :</h3>
-                  <div class="ui star rating" data-rating="0"></div>
+                  <%= f.hidden_field :taste, value: '1' %>
+                  <div class="ui star rating"></div>
                 </div>
                 <div class="align_two_side_sm">
                   <h3 class="dib">Value :</h3>
-                  <div class="ui star rating" data-rating="0"></div>
+                  <%= f.hidden_field :value, value: '1' %>
+                  <div class="ui star rating"></div>
                 </div>
                 <div class="align_two_side_sm">
-                  <h3 class="dib">On time pick up/develiery :</h3>
-                  <div class="ui star rating" data-rating="0"></div>
+                  <h3 class="dib">On time pick up/delivery :</h3>
+                  <%= f.hidden_field :delivery, value: '1' %>
+                  <div class="ui star rating"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <textarea name="" id="" cols="30" rows="10" placeholder="Leave your comment here..."></textarea>
+          <%= f.text_area :comment, placeholder: 'Leave your comment here...', cols: '30', rows: '10' %>
         </div>
         <div class="text-center">
-          <input type="submit" class="ui button my_btn" value="Submit">
+          <%= f.submit :submit, class: 'ui button my_btn' %>
         </div>
       </div>
-    </form>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-xs-12 basic_bg">
@@ -148,5 +143,8 @@
   </div>
 </div>
 <script type="text/javascript" charset="utf-8">
-  $('.ui.rating').rating({initialRating: 0, maxRating: 5});
+  $('.ui.rating').rating({initialRating: 1, maxRating: 5});
+  $('.ui.rating').click(function(){
+    $(this).siblings('input').val($(this).rating('get rating'))
+  })
 </script>

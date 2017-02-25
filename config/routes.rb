@@ -81,9 +81,10 @@ Rails.application.routes.draw do
         post :transactions
       end
     end
+    resources :comments
   end
 
-  resources :comments
+
 
   # resources :orders do
   #   member do
