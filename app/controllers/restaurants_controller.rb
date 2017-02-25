@@ -32,8 +32,8 @@ class RestaurantsController < ApplicationController
     @advance_foods_ids = get_in_advance_foods_ids(@date)
     @advance_foods = Food.where(id: @advance_foods_ids)
 
-    # score_rate_i = @restaurant.food_avg_score.to_i
-    # score_rate_f = ((@restaurant.food_avg_score - score_rate_i)/0.5).to_i
+    # score_rate_i = @restaurant.food_avg_summary_score.to_i
+    # score_rate_f = ((@restaurant.food_avg_summary_score - score_rate_i)/0.5).to_i
     # @score_rate = score_rate_i.to_s + ("_5" * score_rate_f)
 
     respond_to do |format|

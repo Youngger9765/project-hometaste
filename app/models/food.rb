@@ -93,7 +93,7 @@ class Food < ApplicationRecord
   def self.filter_sort(_case)
     case _case.first
     when 'BestMatch'        then all
-    when 'Highest Rated'    then joins(:restaurant).order('restaurants.food_avg_score desc')
+    when 'Highest Rated'    then joins(:restaurant).order('restaurants.food_avg_summary_score desc')
     when 'Most Reviewed'    then joins(:restaurant).order('restaurants.food_comments_count desc')
     when 'New'              then order('updated_at desc')
     end

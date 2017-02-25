@@ -81,7 +81,12 @@ Rails.application.routes.draw do
         post :transactions
       end
     end
-    resources :comments
+
+    resources :comments do
+      collection do
+        post :create_food_comment
+      end
+    end
   end
 
 

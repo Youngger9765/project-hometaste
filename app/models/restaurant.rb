@@ -3,6 +3,7 @@ class Restaurant < ApplicationRecord
   has_many :foods
   has_many :orders
   has_many :restaurant_comments
+  has_many :food_comments
   has_one  :delivery
   has_many :bulk_buys
   has_many :big_buns
@@ -59,7 +60,7 @@ class Restaurant < ApplicationRecord
   end
 
   def food_score
-    score = food_avg_score.round(1)
+    score = food_avg_summary_score.round(1)
     score = if score.to_s[-1].to_i >= 5
               (score.to_s[0].to_i + 1).to_i
             elsif score.to_s[-1].to_i > 0
@@ -157,7 +158,7 @@ class Restaurant < ApplicationRecord
   def self.filter_sort(_case)
     case _case[0]
     when 'BestMatch'        then self.all
-    when 'Highest Rated'    then order('food_avg_score desc')
+    when 'Highest Rated'    then order('food_avg_summary_score desc')
     when 'Most Reviewed'    then order('food_comments_count desc')
     when 'New'              then order('updated_at desc')
     end
@@ -175,12 +176,15 @@ class Restaurant < ApplicationRecord
     end
   end
 
-  def get_food_avg_score
-    food_ids = foods.pluck(:id)
-    if FoodComment.find_by(food_id: food_ids)
-      FoodComment.where(food_id: food_ids).average(:score)
-    else
-      0
+  def update_score
+    food_comment_ids = self.food_comments.pluck(:id)
+
+    if food_comment_ids.present?
+      self.food_avg_taste_score = FoodComment.where(:id => food_comment_ids).average(:taste_score)
+      self.food_avg_value_score = FoodComment.where(:id => food_comment_ids).average(:value_score)
+      self.food_avg_on_time_score = FoodComment.where(:id => food_comment_ids).average(:on_time_score)
+      self.food_avg_summary_score = FoodComment.where(:id => food_comment_ids).average(:summary_score)
+      self.save!
     end
   end
 

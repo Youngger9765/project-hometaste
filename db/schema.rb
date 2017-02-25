@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214140521) do
+ActiveRecord::Schema.define(version: 20170225143011) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -118,13 +118,17 @@ ActiveRecord::Schema.define(version: 20170214140521) do
   end
 
   create_table "food_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",                                 null: false
-    t.integer  "food_id",                                 null: false
-    t.text     "comment",    limit: 65535,                null: false
-    t.float    "score",      limit: 24
-    t.boolean  "is_public",                default: true, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "user_id",                                    null: false
+    t.integer  "food_id",                                    null: false
+    t.text     "comment",       limit: 65535,                null: false
+    t.float    "summary_score", limit: 24
+    t.boolean  "is_public",                   default: true, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.float    "taste_score",   limit: 24
+    t.float    "value_score",   limit: 24
+    t.float    "on_time_score", limit: 24
+    t.integer  "restaurant_id"
     t.index ["food_id"], name: "index_food_comments_on_food_id", using: :btree
     t.index ["user_id"], name: "index_food_comments_on_user_id", using: :btree
   end
@@ -264,9 +268,12 @@ ActiveRecord::Schema.define(version: 20170214140521) do
     t.integer  "main_photo_file_size"
     t.datetime "main_photo_updated_at"
     t.integer  "food_comments_count",                         default: 0
-    t.float    "food_avg_score",                limit: 24,    default: 0.0
+    t.float    "food_avg_summary_score",        limit: 24,    default: 3.0
     t.float    "tax",                           limit: 24,    default: 0.0
     t.float    "order_reach",                   limit: 24
+    t.float    "food_avg_taste_score",          limit: 24,    default: 3.0
+    t.float    "food_avg_value_score",          limit: 24,    default: 3.0
+    t.float    "food_avg_on_time_score",        limit: 24,    default: 3.0
     t.index ["ZIP"], name: "index_restaurants_on_ZIP", using: :btree
     t.index ["chef_id"], name: "index_restaurants_on_chef_id", using: :btree
     t.index ["city"], name: "index_restaurants_on_city", using: :btree
