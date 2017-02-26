@@ -264,11 +264,15 @@
 .load_more {
   display: block;
   text-align: center;
-  input {
+  a,input {
     @extend .background_red;
     @extend .white;
     @extend .border_sub_radius;
     @extend .border_red;
+    display: block;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: inherit;
     font-size: 1em;
     width: 175px;

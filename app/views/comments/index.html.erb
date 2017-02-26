@@ -1,4 +1,4 @@
-<div class="col-xs-12 banner" style="background-image:url(<%= image_path('tmp/kitchen_1.png') %>);"></div>
+<div class="col-xs-12 banner background_img_setting" style="background-image:url(<%= image_path('tmp/kitchen_1.png') %>); height: 300px;"></div>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 basic_bg_top">
@@ -14,7 +14,7 @@
           <div>
             <div class="show_rated_3">
             </div>
-            <span><%= @restaurant.food_comments_count %> reviews</span>
+            <span id="comments_count"><%= @restaurant.food_comments_count %></span> <span>reviews</span>
           </div>
           <div class="visible-xs visible-sm menu_btn">
             <button class="ui button my_btn" name="menu_btn">MENU<i class="fa fa-caret-right ml10" aria-hidden="true"></i></button>
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="row">
-    <%= form_for @comment, url: create_food_comment_restaurant_comments_path(:restaurant_id => @restaurant.id), method: 'post' do |f| %>
+    <%= form_for @comment, url: create_food_comment_restaurant_comments_path(:restaurant_id => @restaurant.id), method: 'post', remote: true do |f| %>
         <div class="col-xs-12 basic_bg">
           <h3 class="title text-center bold mb15">Leave a comment</h3>
           <div class="row">
@@ -85,26 +85,43 @@
             </div>
           </div>
           <div>
-            <%= f.text_area :comment, placeholder: 'Leave your comment here...', cols: '30', rows: '10' %>
+            <div class="field">
+              <%= f.text_area :comment, placeholder: 'Leave your comment here...', cols: '30', rows: '10', class:'mb0' %>
+            </div>
           </div>
           <div class="text-center">
-            <%= f.submit :submit, class: 'ui button my_btn' %>
+            <%= f.submit :submit, class: 'ui button my_btn mt20' %>
           </div>
         </div>
     <% end %>
   </div>
-  <div class="row">
-    <% @food_comments.each do |food_comment| %>
-        <%= render 'food_comments', food_comment: food_comment %>
-    <% end %>
+  <div class="row" id="foods_comments">
+    <%= render 'food_comments' %>
   </div>
-  <div class="load_more">
-    <input type="button" value="Load more">
-  </div>
+  <% if @next_page %>
+      <div class="load_more">
+        <%= link_to 'Load More', restaurant_comments_path(page: @next_page ), remote: true, id: 'load-more' %>
+      </div>
+  <% end %>
+
 </div>
 <script type="text/javascript" charset="utf-8">
-  $('.ui.rating').rating({initialRating: 1, maxRating: 5});
-  $('.ui.rating').click(function(){
-    $(this).siblings('input').val($(this).rating('get rating'))
+
+  $(document).ready(function(){
+    $('.ui.rating').rating({initialRating: 1, maxRating: 5});
+    $('.ui.rating').click(function(){
+      $(this).siblings('input').val($(this).rating('get rating'))
+    })
+    $('form').form({
+      on: 'blur',
+      inline : true,
+      fields: {
+        food_comment_comment: {
+          identifier: 'food_comment_comment',
+          rules: [{type   : 'maxLength[255]', prompt : 'Please enter at most 255 characters'}]
+        }
+      }
+    });
   })
+
 </script>

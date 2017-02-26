@@ -20,6 +20,6 @@ $(document).ready ->
     $('#alert_notice').parents('.alert_message').removeClass('hidden')
     $('#alert_notice p').html(alert_text)
 
-  window.alert_message = -> alert_message()
+  window.alert_message = (text)-> alert_message(text)
   window.alert_text = ''
   window.order_location_invalid = true

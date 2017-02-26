@@ -1,0 +1,6 @@
+$('#foods_comments').append("<%=j render 'food_comments' ,food_comments: @food_comments %>")
+<% if @next_page %>
+  $("#load-more").attr("href", "<%= restaurant_comments_path(page: @next_page ) %>")
+<% else %>
+  $("#load-more").remove();
+<% end %>
