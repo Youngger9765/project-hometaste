@@ -12,7 +12,7 @@
             <button class="ui button my_btn pull-right hidden-xs hidden-sm" name="menu_btn">MENU<i class="fa fa-caret-right ml10" aria-hidden="true"></i></button>
           </div>
           <div>
-            <div class="show_rated_3">
+            <div class="show_rated_<%= rated_score(@restaurant.food_avg_summary_score) %>">
             </div>
             <span id="comments_count"><%= @restaurant.food_comments_count %></span> <span>reviews</span>
           </div>
@@ -23,19 +23,19 @@
               <i class="red_line" name="top_bg_line"></i>
               <div class="align_two_side_sm">
                 <h3 class="dib">Summary :</h3>
-                <div class="show_rated_3"></div>
+                <div class="show_rated_<%= rated_score(@restaurant.food_avg_summary_score) %>"></div>
               </div>
               <div class="align_two_side_sm">
                 <h3 class="dib">Taste :</h3>
-                <div class="show_rated_3"></div>
+                <div class="show_rated_<%= rated_score(@restaurant.food_avg_taste_score) %>"></div>
               </div>
               <div class="align_two_side_sm">
                 <h3 class="dib">Value :</h3>
-                <div class="show_rated_3"></div>
+                <div class="show_rated_<%= rated_score(@restaurant.food_avg_value_score) %>"></div>
               </div>
               <div class="align_two_side_sm">
                 <h3 class="dib">On time pick up/develiery :</h3>
-                <div class="show_rated_3"></div>
+                <div class="show_rated_<%= rated_score(@restaurant.food_avg_on_time_score) %>"></div>
               </div>
           <% end %>
           <div class="hidden-xs hidden-sm">
