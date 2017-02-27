@@ -1,0 +1,8 @@
+<% if @message %>
+$('.alert_message').removeClass('hidden')
+$('.alert_message p').html('<%= @message %>')
+<% else %>
+  $('textarea').val('')
+  $('#comments_count').html('<%= @food_comments_count %>')
+  $('#foods_comments').html("<%=j render 'food_comments' ,food_comments: @food_comments %>")
+<% end %>
