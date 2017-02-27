@@ -319,10 +319,12 @@ class ChefsController < ApplicationController
       pick_up_time_2 = nil
 
       cut_off_time = b_buy[:cut_off_time].to_time.utc if b_buy[:cut_off_time].present?
+      cut_off_time_local = b_buy[:cut_off_time] if b_buy[:cut_off_time].present?
       pick_up_time_1 = b_buy[:pick_up_time_1].to_time.utc if b_buy[:pick_up_time_1].present?
       pick_up_time_2 = b_buy[:pick_up_time_2].to_time.utc if b_buy[:pick_up_time_2].present?
 
       bulk_buy = BulkBuy.find(bulk_buy_id).update(:cut_off_time => cut_off_time,
+                                                  :cut_off_time_local => cut_off_time_local,
                                                   :pick_up_time_1 => pick_up_time_1,
                                                   :pick_up_time_2 => pick_up_time_2
                                                     )

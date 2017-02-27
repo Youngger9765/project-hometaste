@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225143011) do
+ActiveRecord::Schema.define(version: 20170227151633) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -37,15 +37,16 @@ ActiveRecord::Schema.define(version: 20170225143011) do
   end
 
   create_table "bulk_buys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "restaurant_id",             null: false
-    t.float    "min_order",      limit: 24
+    t.integer  "restaurant_id",                 null: false
+    t.float    "min_order",          limit: 24
     t.time     "cut_off_time"
     t.string   "location_1"
     t.time     "pick_up_time_1"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.time     "pick_up_time_2"
     t.string   "location_2"
+    t.time     "cut_off_time_local"
     t.index ["restaurant_id"], name: "index_bulk_buys_on_restaurant_id", using: :btree
   end
 
