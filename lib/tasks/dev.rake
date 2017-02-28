@@ -1,3 +1,19 @@
+# encoding: utf-8
+
+namespace :production do
+  desc "cron job excute" #此處可自行輸入task的描述
+
+  task :cehck_order_reach => :environment do
+    print "======cron job excute======="
+    print(Time.now().localtime)
+
+    hour_now = Time.now.utc.hour
+    hour_before_1 = Time.now.utc.hour - 1
+
+
+  end
+end
+
 namespace :dev do
 
   desc "Rebuild system"
@@ -109,7 +125,7 @@ namespace :dev do
       )
 
       if [true,false].sample
-        Delivery.create(
+        delivery = Delivery.create(
           restaurant_id: restaurant.id,
           min_order: rand(5..15),
           area: Faker::Address.city,
@@ -124,10 +140,11 @@ namespace :dev do
         bulk_buy = BulkBuy.create(
           restaurant_id: restaurant.id,
           min_order: rand(5..15),
-          cut_off_time: Faker::Time.forward(0),
-          pick_up_time_1: Faker::Time.forward(0),
+          cut_off_time: "#{rand(0..12)}:00:00".to_time,
+          cut_off_time_local: "#{rand(0..12)}:00:00".to_time,
+          pick_up_time_1: "#{rand(0..12)}:00:00".to_time,
           location_1: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-          pick_up_time_2: [Faker::Time.forward(0),nil].sample,
+          pick_up_time_2: "#{rand(13..23)}:00:00".to_time,
         )
 
         if bulk_buy.pick_up_time_2.present?
@@ -162,7 +179,7 @@ namespace :dev do
     # create food_comments
     puts('create food_comments')
 
-    1000.times {
+    100.times {
       restaurant_id = Restaurant.ids.sample
       food_id = Restaurant.find(restaurant_id).foods.ids.sample
 
@@ -189,7 +206,7 @@ namespace :dev do
     # create orders
     puts('create orders')
 
-    200.times {
+    100.times {
       order = Order.create(
         user_id: User.all.ids.sample,
         restaurant_id: Restaurant.all.ids.sample,
@@ -217,7 +234,7 @@ namespace :dev do
     # create order_food_ships
     puts('create order_food_ships')
 
-    1000.times {
+    500.times {
       order = OrderFoodShip.create(
         order_id: Order.all.ids.sample,
         food_id: Food.all.ids.sample,
