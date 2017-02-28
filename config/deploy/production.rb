@@ -6,11 +6,11 @@
 # dev:52.69.31.74
 
 # hometaste Main
-# server '69.195.140.213', user: 'deploy', roles: %w{app db web}, my_property: :my_value
+server '69.195.140.213', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 
 
 # hometaste test
-server '52.69.31.74', user: 'deploy', roles: %w{app db web}, my_property: :my_value
+# server '52.69.31.74', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 
 
 # fable in linode

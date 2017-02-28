@@ -1,43 +1,45 @@
-<div class="col-xs-12 basic_bg">
-  <h3 class="title text-center bold mb15">Reviews</h3>
-  <div class="row">
-    <div class="col-md-2 col-sm-3">
-      <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
-      <h5 class="text-center">Rostad Ducj</h5>
-    </div>
-    <div class="col-md-2 col-sm-3">
-      <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
-      <h5 class="text-center">Shiba iny</h5>
-    </div>
-    <div class="col-md-8 col-sm-12">
-      <div class="align_two_side_sm">
-        <h3 class="dib">Summary :</h3>
-        <div class="show_rated_3"></div>
+<% @food_comments.each do |food_comment| %>
+    <div class="col-xs-12 basic_bg">
+      <h3 class="title text-center bold mb15">Reviews</h3>
+      <div class="row">
+        <div class="col-md-2 col-sm-3">
+          <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
+          <h5 class="text-center"><%= food_comment.food.name %></h5>
+        </div>
+        <div class="col-md-2 col-sm-3">
+          <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
+          <h5 class="text-center"><%= food_comment.user.name %></h5>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <div class="align_two_side_sm">
+            <h3 class="dib">Summary :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.summary_score) %>"></div>
+          </div>
+          <div class="align_two_side_sm">
+            <h3 class="dib">Taste :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.taste_score) %>"></div>
+          </div>
+          <div class="align_two_side_sm">
+            <h3 class="dib">Value :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.value_score) %>"></div>
+          </div>
+          <div class="align_two_side_sm">
+            <h3 class="dib">On time pick up/develiery :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.on_time_score) %>"></div>
+          </div>
+        </div>
+        <div class="col-md-10 col-md-offset-2 col-xs-12">
+          <i class="gray_line"></i>
+          <p><%= food_comment.comment%></p>
+          <span class="pull-right gray"><%= food_comment.created_at.localtime.strftime("%Y/%m/%d")%></span>
+        </div>
+        <div class="col-md-10 col-md-offset-2 col-xs-12">
+          <i class="gray_line"></i>
+          <h5 class="red bold">Reply</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
+          <span class="pull-right gray">2016/12/11</span>
+        </div>
       </div>
-      <div class="align_two_side_sm">
-        <h3 class="dib">Taste :</h3>
-        <div class="show_rated_3"></div>
-      </div>
-      <div class="align_two_side_sm">
-        <h3 class="dib">Value :</h3>
-        <div class="show_rated_3"></div>
-      </div>
-      <div class="align_two_side_sm">
-        <h3 class="dib">On time pick up/develiery :</h3>
-        <div class="show_rated_3"></div>
-      </div>
+      <i class="red_line"></i>
     </div>
-    <div class="col-md-10 col-md-offset-2 col-xs-12">
-      <i class="gray_line"></i>
-      <p><%= food_comment.comment%></p>
-      <span class="pull-right gray"><%= food_comment.created_at.localtime.strftime("%Y/%m/%d")%></span>
-    </div>
-    <div class="col-md-10 col-md-offset-2 col-xs-12">
-      <i class="gray_line"></i>
-      <h5 class="red bold">Reply</h5>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
-      <span class="pull-right gray">2016/12/11</span>
-    </div>
-  </div>
-  <i class="red_line"></i>
-</div>
+<% end %>
