@@ -169,7 +169,7 @@ class OrdersController < ApplicationController
   end
 
   def orders_params
-    params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id,
+    params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id, :bulk_buy_id,
                                   :mobile_number, :email, :billing_address, :pick_up_time,
                                   :billing_city, :billing_state, :billing_zip_code,
                                   order_food_ships_attributes: [
