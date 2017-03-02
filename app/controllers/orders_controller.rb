@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
               dict = {}
               dict[:pick_up_time] = bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S")
               dict[:location] = bulk_buy.location_1
+              dict[:bulk_buy_id] = bulk_buy.id
               @time_location_dictionary << dict
             end
           end
@@ -49,6 +50,7 @@ class OrdersController < ApplicationController
             dict = {}
             dict[:pick_up_time] = bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S")
             dict[:location] = bulk_buy.location_1
+            dict[:bulk_buy_id] = bulk_buy.id
             @time_location_dictionary << dict
           end
         end
@@ -68,6 +70,7 @@ class OrdersController < ApplicationController
           dict = {}
           dict[:pick_up_time] = bulk_buy.pick_up_time_1.localtime.strftime("%H:%M:%S")
           dict[:location] = bulk_buy.location_1
+          dict[:bulk_buy_id] = bulk_buy.id
           @time_location_dictionary << dict
         end
 
@@ -77,6 +80,7 @@ class OrdersController < ApplicationController
           dict = {}
           dict[:pick_up_time] = bulk_buy.pick_up_time_2.localtime.strftime("%H:%M:%S")
           dict[:location] = bulk_buy.location_2
+          dict[:bulk_buy_id] = bulk_buy.id
           @time_location_dictionary << dict
         end
       end
