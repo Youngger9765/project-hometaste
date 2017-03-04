@@ -90,13 +90,15 @@ class ChefsController < ApplicationController
   # show
   def sales
     today_orders = @paid_process_orders.where(order_status: "process").where(:pick_up_time => @today_time_range)
-    @orders = today_orders.where( ["pick_up_time > ?", @datetime_now_to_utc] )
+    @orders = today_orders.where(["pick_up_time > ?", @datetime_now_to_utc])
+    @orders = Order.all.last(3)
   end
 
   def summary
     # Today's ORDERS
-    today_orders = @paid_process_orders.where(order_status: "process").where(:pick_up_time => @today_time_range)
-    @orders = today_orders.where(["pick_up_time > ?",@datetime_now_to_utc])
+    # today_orders = @paid_process_orders.where(order_status: "process").where(:pick_up_time => @today_time_range)
+    # @orders = today_orders.where(["pick_up_time > ?",@datetime_now_to_utc])
+    @orders = Order.all.last(3)
     render_js
   end
 
