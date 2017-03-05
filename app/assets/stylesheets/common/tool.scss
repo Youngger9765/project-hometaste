@@ -325,6 +325,7 @@
       [class*=_btn],[class*=_btn_reserve]{
         margin: 0;
         border-right: none;
+        min-width: 70px;
       }
     }
     .five_btn{
@@ -333,7 +334,8 @@
       padding: 0;
       [class*=_btn],[class*=_btn_reserve]{
         margin: 0;
-        min-width: 80px;
+        min-width: 70px;
+        font-size: 12px;
         border-right: none;
         padding: 0;
       }

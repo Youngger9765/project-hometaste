@@ -20,25 +20,25 @@
   <div class="col-xs-12">
     <div class="row">
 
-      <div class="col-xs-12">
-        <i class="fa fa-map-marker fa-2x red mt15 pr15 tac" style="width: 50px;"></i>
+      <div class="col-xs-12 df mt20">
+        <i class="fa fa-map-marker fa-2x red pr15 tac" style="width: 50px;"></i>
         <span style="font-size: 16px;"><%= order.shipping_place %></span>
       </div>
 
-      <div class="col-xs-12">
-        <i class="fa fa-clock-o red fa-2x mt15 pr15 tac" style="width: 50px;"></i>
+      <div class="col-xs-12 df mt15">
+        <i class="fa fa-clock-o red fa-2x pr15 tac" style="width: 50px;"></i>
         <% if order.pick_up_time.present?%>
             <span style="font-size: 16px;"><%= order.pick_up_time.localtime.strftime('%Y/%m/%d %H:%M') %></span>
         <% end %>
       </div>
 
-      <div class="col-xs-12">
-        <i class="fa fa-phone red fa-2x mt15 pr15 tac" aria-hidden="true" style="width: 50px;"></i>
+      <div class="col-xs-12 df mt15">
+        <i class="fa fa-phone red fa-2x pr15 tac" aria-hidden="true" style="width: 50px;"></i>
         <span style="font-size: 16px;">091231232321</span>
       </div>
 
-      <div class="col-sm-6 col-xs-12">
-        <i class="fa fa-envelope red fa-2x mt15 pr15 tac" aria-hidden="true" style="width: 50px;"></i>
+      <div class="col-sm-6 col-xs-12 df mt15">
+        <i class="fa fa-envelope red fa-2x pr15 tac" aria-hidden="true" style="width: 50px;"></i>
         <span style="font-size: 16px;">nycfoodlover@somemail.com</span>
       </div>
 
