@@ -20,7 +20,8 @@
   }
 }
 .chef_product_lists .background_img_setting{
-  padding-top: 25%;
+  width: 160px;
+  height: 120px;
 }
 [class^=chef]{
 .basic_bg{
@@ -66,6 +67,12 @@
   [name=order_summary]{
     line-height: 18px !important;
     padding-top: 7px !important;
+  }
+}
+@media (max-width: $screen-sm-max) {
+  .chef_product_lists .background_img_setting{
+    width: 120px;
+    height: 90px;
   }
 }
 @media (max-width: $screen-xs-max) {

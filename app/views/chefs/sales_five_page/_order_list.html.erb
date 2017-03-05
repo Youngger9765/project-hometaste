@@ -1,5 +1,5 @@
-<div class="row df_sm">
-  <div class="col-md-8 col-sm-7 col-xs-12">
+<div class="row">
+  <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12 mt10 flex_vertical_center">
         <div class="dib border_sub_radius border_black background_img_setting mla_xs mln_sm" style="background-image: url(<%= image_path order.restaurant.main_photo %>); width: 40px; height: 40px;"></div>
@@ -17,33 +17,35 @@
     </div>
   </div>
 
-  <div class="col-md-4 col-sm-5 col-xs-12">
-    <div class="row height_fluid df">
-      <div class="col-xs-12 pt20 pt60_sm df flex-direction_column height_fluid">
-        <i class="gray_line visible-xs"></i>
-        <div class="df">
-          <div class="pr15 mla_xs mln_sm">
-            <i class="fa fa-map-marker fa-2x red mt15"></i>
-          </div>
-          <div class="pt5 mra_xs mra_sm">
-            <h6 style="line-height: 24px;"><%= order.shipping_place %></h6>
-          </div>
-        </div>
-        <div class="df mt15">
-          <div class="pr15 mla_xs mln_sm">
-            <i class="fa fa-clock-o red fa-2x mt10"></i>
-          </div>
-          <div class="pt5 mra_xs mra_sm">
-            <% if order.pick_up_time.present?%>
-              <h6><%= order.pick_up_time.localtime.strftime('%Y/%m/%d %H:%M') %></h6>
-            <%end%>
-          </div>
-        </div>
-        <i class="gray_line visible-xs"></i>
-        <div class="mta_xs">
-          <h3 class="bold tac tal_sm mb0_sm">Total Payment : $<%= order.amount %></h3>
-        </div>
+  <div class="col-xs-12">
+    <div class="row">
+
+      <div class="col-xs-12 df mt20">
+        <i class="fa fa-map-marker fa-2x red pr15 tac" style="width: 50px;"></i>
+        <span style="font-size: 16px;"><%= order.shipping_place %></span>
       </div>
+
+      <div class="col-xs-12 df mt15">
+        <i class="fa fa-clock-o red fa-2x pr15 tac" style="width: 50px;"></i>
+        <% if order.pick_up_time.present?%>
+            <span style="font-size: 16px;"><%= order.pick_up_time.localtime.strftime('%Y/%m/%d %H:%M') %></span>
+        <% end %>
+      </div>
+
+      <div class="col-xs-12 df mt15">
+        <i class="fa fa-phone red fa-2x pr15 tac" aria-hidden="true" style="width: 50px;"></i>
+        <span style="font-size: 16px;">091231232321</span>
+      </div>
+
+      <div class="col-sm-6 col-xs-12 df mt15">
+        <i class="fa fa-envelope red fa-2x pr15 tac" aria-hidden="true" style="width: 50px;"></i>
+        <span style="font-size: 16px;">nycfoodlover@somemail.com</span>
+      </div>
+
+      <div class="col-sm-6 col-xs-12">
+        <h3 class="bold tac tar_sm mb0_sm mt30 mt20_sm">Total Payment : $<%= order.amount %></h3>
+      </div>
+
     </div>
   </div>
 </div>
