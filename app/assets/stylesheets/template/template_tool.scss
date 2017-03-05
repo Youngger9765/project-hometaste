@@ -1,5 +1,7 @@
 .background_white_absolute{
-  bottom:-60px;
+  bottom:-100px;
   position: absolute;
   width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }

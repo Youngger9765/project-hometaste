@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-2 tac mb20 mbn_sm">
+    <i class="cart_icon_red"></i>
+    <h4 class="red">Bulk Buy</h4>
+  </div>
+  <div class="col-xs-12 col-sm-10">
+    <div class="row">
+      <div class="col-lg-2 col-sm-3">
+        <h4 class="bold mb20">Lunch</h4>
+        <h4>Cut off time:</h4>
+
+        <% @restaurant.bulk_buys.each do |bulk_buy|%>
+            <%if bulk_buy.cut_off_time.strftime('%H').to_i <= 13 %>
+                <h4 class="mt0_md mt10"><%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
+            <%else%>
+                <h4 class="mt0_md mt10"><%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
+            <%end%>
+        <%end%>
+      </div>
+      <div class="col-lg-10 col-sm-9">
+        <h4 class="invisible bold mb20_sm">Lunch</h4>
+        <div class="row">
+          <div class="col-lg-6 col-xs-12">
+            <h4>Pick up option 1:</h4>
+            <div class="df mt20">
+              <i class="fa fa-map-marker fa-2x red pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">12 : 00</span>
+            </div>
+            <div class="df mt15">
+              <i class="fa fa-clock-o red fa-2x pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">2821 California st. San Francisco CA 94115</span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 mt20 mt0_lg">
+            <h4>Pick up option 2:</h4>
+            <div class="df mt20">
+              <i class="fa fa-map-marker fa-2x red pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">12 : 00</span>
+            </div>
+            <div class="df mt15">
+              <i class="fa fa-clock-o red fa-2x pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">2821 California st. San Francisco CA 94115</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-2">
+  </div>
+  <div class="col-xs-12 col-sm-10 mt30 mtn_sm">
+    <div class="row">
+      <div class="col-lg-2 col-sm-3">
+        <h4 class="bold mb20">Dinner</h4>
+        <h4>Cut off time:</h4>
+
+        <% @restaurant.bulk_buys.each do |bulk_buy|%>
+            <%if bulk_buy.cut_off_time.strftime('%H').to_i <= 13 %>
+                <h4 class="mt0_md mt10"><%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
+            <%else%>
+                <h4 class="mt0_md mt10"><%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
+            <%end%>
+        <%end%>
+      </div>
+      <div class="col-lg-10 col-sm-9">
+        <h4 class="invisible bold mb20_sm">Dinner</h4>
+        <div class="row">
+          <div class="col-lg-6 col-xs-12">
+            <h4>Pick up option 1:</h4>
+            <div class="df mt20">
+              <i class="fa fa-map-marker fa-2x red pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">12 : 00</span>
+            </div>
+            <div class="df mt15">
+              <i class="fa fa-clock-o red fa-2x pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">2821 California st. San Francisco CA 94115</span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 mt20 mt0_lg">
+            <h4>Pick up option 2:</h4>
+            <div class="df mt20">
+              <i class="fa fa-map-marker fa-2x red pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">12 : 00</span>
+            </div>
+            <div class="df mt15">
+              <i class="fa fa-clock-o red fa-2x pr15 tac" style="width: 50px;"></i>
+              <span style="font-size: 16px;">2821 California st. San Francisco CA 94115</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
