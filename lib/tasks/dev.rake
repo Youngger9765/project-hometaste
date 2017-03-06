@@ -4,12 +4,24 @@ namespace :production do
   desc "cron job excute" #此處可自行輸入task的描述
 
   task :cehck_order_reach => :environment do
-    print "======cron job excute======="
-    print(Time.now().localtime)
+    puts "======cron job excute======="
+    puts(Time.now().localtime)
 
     hour_now = Time.now.utc.hour
-    hour_before_1 = Time.now.utc.hour - 1
+    # 先找出這個時間需要看的bulk_buys.each do |bulk_buy|
 
+      # 再找出bulk buy 的各別 orders，
+      # 再找出今天的order
+
+      # 找出bulk buy 的 餐廳 的 delivery's.order
+      # 找出今天的 且 created_at 在Time.now之前的
+
+      # 確認所有金額總數
+
+      # 如果金額太小 --> cancel --> 退費
+      # 如果超過 --> delivery
+
+    # end
 
   end
 end
@@ -21,7 +33,7 @@ namespace :dev do
 
   task :fake => :environment do
 
-    @fake_100_user = true
+    @fake_100_user = false
 
     # admin
     puts('create admin')
@@ -68,23 +80,23 @@ namespace :dev do
       is_admin: true,
     )
 
-    if @fake_100_user
-      # create users
-      puts('create 100 users')
+    # if @fake_100_user
+    #   # create users
+    #   puts('create 100 users')
 
-      100.times {
-        User.create(
-          name: Faker::Name.name,
-          foodie_id: Faker::Name.name,
-          email: Faker::Internet.email,
-          phone_number: Faker::PhoneNumber.cell_phone,
-          password: Faker::Internet.password(10, 20),
-          confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-          address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-          is_chef: [true, false].sample,
-        )
-      }
-    end
+    #   100.times {
+    #     User.create(
+    #       name: Faker::Name.name,
+    #       foodie_id: Faker::Name.name,
+    #       email: Faker::Internet.email,
+    #       phone_number: Faker::PhoneNumber.cell_phone,
+    #       password: Faker::Internet.password(10, 20),
+    #       confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+    #       address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+    #       is_chef: [true, false].sample,
+    #     )
+    #   }
+    # end
 
     # create chef
     puts('create chef')

@@ -17,7 +17,7 @@
         <div class="col-xs-12 visible-xs">
           <% content_for :img_title do %>
               <div class="col-xs-12 col-sm-3">
-                <div class="background_white p10 border_main_radius background_white_absolute">
+                <div class="background_white p10 border_main_radius background_white_absolute" style="width: 200px;">
                   <div class="square_img border_main_radius background_gray" style="background-image: url(<%= image_path @restaurant.main_photo %>);"></div>
                 </div>
               </div>
@@ -39,7 +39,7 @@
             <h4 class="dib"><%= @restaurant.orders.count %> Total orders</h4>
           </div>
           <div class="col-sm-6 col-xs-12 pt10 pl60_sm">
-            <% @restaurant.cuisines.each do |cuisine| %>
+            <% @restaurant.cuisines.first(3).each do |cuisine| %>
                 <span class="sub_link ml15"><%= cuisine.name %></span>
             <% end %>
           </div>
@@ -49,59 +49,70 @@
             <span class="db_sm"><%= @restaurant.food_comments_count %>  reviews</span>
           </div>
         </div>
-
-        <div class="col-xs-12 df">
-          <div class="dib_sm tac ml10_sm">
-            <i class="cart_icon_red"></i>
-            <h4>Bulk Buy</h4>
+        <div class="col-xs-12">
+          <div class="align_two_side_sm">
+            <h3 class="dib">Orders reached:</h3>
+            <h3 class="bold mt20 mbn_sm">2 HOURS LEFT</h3>
           </div>
           <div>
-            <div class="dib_sm ml40 ml100_lg">
-              <h4>Cut off time:</h4>
+            <h3 class="tar_sm bold">Goal: $<%= @restaurant.order_reach%></h3>
+          </div>
+          <div>
+            <h3 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(0%); margin-bottom: 15px;">Reached</h3>
+            <div class="ui indicating progress"  data-percent="<%= @reach_percent %>">
+              <div class="bar"></div>
             </div>
-            <div class="cleafix"></div>
-            <% @restaurant.bulk_buys.each do |bulk_buy|%>
-                <div class="dib_sm ml40 ml100_lg">
-                  <%if bulk_buy.cut_off_time.strftime('%H').to_i <= 13 %>
-                      <h4>Launch <%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
-                  <%else%>
-                      <h4>Dinner <%= bulk_buy.cut_off_time.strftime('%H:%M') %></h4>
-                  <%end%>
-                </div>
-            <%end%>
+            <h2 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(0%);">$ <%= @today_orders.sum(:amount)%></h2>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="row">
+    <div class="col-xs-12 basic_bg">
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render 'bulk_buy' %>
+        </div>
+
+        <div class="col-xs-12 mt20">
+          <div class="fluid background_img_setting" style="background-image:url(<%= image_path('tmp/kitchen_map.png') %>); height: 280px;" name="location_map"></div>
+        </div>
+
         <div class="col-xs-12">
           <i class="red_line mb30_md"></i>
         </div>
 
-        <div class="col-xs-12 df">
-          <div class="dib_sm tac ml10_sm">
-            <i class="moto_icon_red"></i>
-            <h4>Delivery</h4>
-          </div>
-          <div>
-            <div class="dib_sm ml40 ml100_lg">
-              <h4>Min. delivery  order:</h4>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 col-sm-2 tac mb20 mbn_sm">
+              <i class="moto_icon_red"></i>
+              <h4 class="red">Delivery</h4>
+            </div>
+
+            <div class="col-xs-4 col-sm-3">
+              <h4>Min. order:</h4>
               <h4 class="mb15">
                 <% if @restaurant.delivery%>
                     <%= @restaurant.delivery.min_order %>
                 <%end%>
               </h4>
             </div>
-            <div class="dib_sm ml40 ml100_lg">
-              <h4>Delivery distance: </h4>
+            <div class="col-xs-4 col-sm-3">
+              <h4>Distance: </h4>
               <h4 class="mb15">
                 <% if @restaurant.delivery%>
                     <%= @restaurant.delivery.distance %> mi
                 <%end%>
               </h4>
             </div>
-            <div class="dib_sm ml40 ml100_lg">
+            <div class="col-xs-4 col-sm-3">
               <h4>Order hours:</h4>
               <h4 class="mb15">
                 <% if @restaurant.delivery %>
-                    <%= @restaurant.delivery.completion_time %> hr
+                    <%= @restaurant.delivery.completion_time.strftime('%H') %> hr
                 <%end%>
               </h4>
             </div>
@@ -111,65 +122,18 @@
         <div class="col-xs-12">
           <i class="red_line mb30_md"></i>
         </div>
-        <div class="col-xs-12 df">
-          <div class="dib_sm tac ml10_sm">
-            <i class="cert_icon_red"></i>
-            <h4>Certificate</h4>
-          </div>
-          <div>
-            <div class="dib_sm ml30 ml90_lg">
-              <h4>Culinary Union Training Center:</h4>
-              <h4 class="mb15">Food Server</h4>
+
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 col-sm-2 tac mb20 mbn_sm">
+              <i class="cert_icon_red"></i>
+              <h4 class="red">Certificate</h4>
             </div>
-            <div class="dib_sm ml30_xs ml40_sm ml100_lg">
-              <h4>California Culinary Academy:</h4>
-              <h4>Graduated</h4>
+            <div class="col-xs-6 col-xs-offset-3 col-sm-offset-0">
+                <h4>Food EST Number:</h4>
+                <h4 class="mb15"><%= @restaurant.certificated_num %></h4>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="row">
-    <div class="col-xs-12 basic_bg">
-      <div class="align_two_side">
-        <h3 class="dib">Orders reached:</h3>
-      </div>
-      <div>
-        <h3 class="tar_sm bold">Goal: $<%= @restaurant.order_reach%></h3>
-      </div>
-      <div>
-        <h3 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(0%); margin-bottom: 15px;">Reached</h3>
-        <div class="ui indicating progress"  data-percent="<%= @reach_percent %>">
-          <div class="bar"></div>
-        </div>
-        <h2 class="red" style="margin-left: <%= @reach_percent %>%; transform: translateX(0%);">$ <%= @today_orders.sum(:amount)%></h2>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="row">
-    <div class="col-xs-12 basic_bg">
-      <div class="row df_sm">
-        <div class="col-xs-12 col-sm-5 location_map">
-          <h3>Pick up locations:</h3>
-          <% @restaurant.bulk_buys.each do |bulk_buy| %>
-              <div class="row">
-                <div class="col-xs-2 tac pt10">
-                  <i class="fa fa-map-marker red" aria-hidden="true"></i>
-                </div>
-                <div class="col-xs-10">
-                  <h4 class="normal"><%= bulk_buy.location_1 %></h4>
-                </div>
-                <div class="col-xs-12">
-                  <i class="red_line"></i>
-                </div>
-              </div>
-          <% end %>
-        </div>
-        <div class="col-xs-12 col-sm-7">
-          <div class="background_img_setting" style="background-image:url(<%= image_path('tmp/kitchen_map.png') %>);" name="location_map"></div>
         </div>
 
       </div>
