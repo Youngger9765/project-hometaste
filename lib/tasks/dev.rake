@@ -7,21 +7,14 @@ namespace :production do
     puts "cron job excute"
     puts(Time.now().localtime)
 
-    hour_now = Time.now.utc.hour
-    # 先找出這個時間需要看的bulk_buys.each do |bulk_buy|
-
-      # 再找出bulk buy 的各別 orders，
-      # 再找出今天的order
-
-      # 找出bulk buy 的 餐廳 的 delivery's.order
-      # 找出今天的 且 created_at 在Time.now之前的
-
-      # 確認所有金額總數
-
-      # 如果金額太小 --> cancel --> 退費
-      # 如果超過 --> delivery
-
-    # end
+    hour_now = Time.now.utc.hour.to_s
+    cut_off_time = "2000-01-01 " + hour_now + ":00:00"
+    # 先找出這個時間需要看的
+    bulk_buys = BulkBuy.where(:cut_off_time => cut_off_time)
+    bulk_buys.each do |bulk_buy|
+      restaurant = bulk_buy.restaurant
+      restaurant.check_order_reach(bulk_buy.id)
+    end
 
   end
 end
