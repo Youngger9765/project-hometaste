@@ -4,7 +4,7 @@ namespace :production do
   desc "cron job excute" #此處可自行輸入task的描述
 
   task :cehck_order_reach => :environment do
-    puts "======cron job excute======="
+    puts "cron job excute"
     puts(Time.now().localtime)
 
     hour_now = Time.now.utc.hour
