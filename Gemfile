@@ -62,9 +62,6 @@ gem "braintree", "~> 2.69.1"
 # Admin
 gem 'rails_admin', '~> 1.0'
 
-# cron job
-gem 'whenever', :require => false
-
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
