@@ -28,9 +28,7 @@ namespace :dev do
 
   task :fake => :environment do
 
-    @fake_100_user = true
-
-    # admin
+    # admin@admin.com
     puts('create admin')
 
     User.create(
@@ -45,7 +43,7 @@ namespace :dev do
       is_admin: true,
     )
 
-    # chef
+    # chef@chef.com
     puts('create chef')
 
     User.create(
@@ -60,7 +58,7 @@ namespace :dev do
       is_admin: false,
     )
 
-    # purpleice9765@msn.com
+    # me
     puts('create me')
 
     User.create(
@@ -75,23 +73,21 @@ namespace :dev do
       is_admin: true,
     )
 
-    if @fake_100_user
-      # create users
-      puts('create 100 users')
+    # create 50 users
+    puts('create 50 users')
 
-      100.times {
-        User.create(
-          name: Faker::Name.name,
-          foodie_id: Faker::Name.name,
-          email: Faker::Internet.email,
-          phone_number: Faker::PhoneNumber.cell_phone,
-          password: Faker::Internet.password(10, 20),
-          confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-          address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-          is_chef: [true, false].sample,
-        )
-      }
-    end
+    50.times {
+      User.create(
+        name: Faker::Name.name,
+        foodie_id: Faker::Name.name,
+        email: Faker::Internet.email,
+        phone_number: Faker::PhoneNumber.cell_phone,
+        password: Faker::Internet.password(10, 20),
+        confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+        address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+        is_chef: [true, false].sample,
+      )
+    }
 
     # create chef
     puts('create chef')
