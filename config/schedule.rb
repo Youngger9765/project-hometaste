@@ -25,7 +25,7 @@ env :PATH, ENV['PATH'] #要用bundle時必須要加
 set :output, 'log/cron.log' #設定log的路徑
 
 job_type :rake,    "cd :path && :environment_variable=:environment bundle exec rake :task --silent :output"
-# 1.minute 1.day 1.week 1.month 1.year is also supported
+# 1.minute 1.hour 1.day 1.week 1.month 1.year is also supported
 every '2 * * * *' do
     rake "production:cehck_order_reach"
 end

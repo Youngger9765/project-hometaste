@@ -11,6 +11,8 @@ namespace :production do
     cut_off_time = "2000-01-01 " + hour_now + ":00:00"
     # 先找出這個時間需要看的
     bulk_buys = BulkBuy.where(:cut_off_time => cut_off_time)
+    puts "bulk_buys.ids"
+    puts(bulk_buys.ids)
     bulk_buys.each do |bulk_buy|
       restaurant = bulk_buy.restaurant
       restaurant.check_order_reach(bulk_buy.id)
