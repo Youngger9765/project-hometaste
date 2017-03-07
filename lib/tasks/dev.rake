@@ -33,7 +33,7 @@ namespace :dev do
 
   task :fake => :environment do
 
-    @fake_100_user = false
+    @fake_100_user = true
 
     # admin
     puts('create admin')
