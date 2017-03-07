@@ -7,21 +7,16 @@ namespace :production do
     puts "cron job excute"
     puts(Time.now().localtime)
 
-    hour_now = Time.now.utc.hour
-    # 先找出這個時間需要看的bulk_buys.each do |bulk_buy|
-
-      # 再找出bulk buy 的各別 orders，
-      # 再找出今天的order
-
-      # 找出bulk buy 的 餐廳 的 delivery's.order
-      # 找出今天的 且 created_at 在Time.now之前的
-
-      # 確認所有金額總數
-
-      # 如果金額太小 --> cancel --> 退費
-      # 如果超過 --> delivery
-
-    # end
+    hour_now = Time.now.utc.hour.to_s
+    cut_off_time = "2000-01-01 " + hour_now + ":00:00"
+    # 先找出這個時間需要看的
+    bulk_buys = BulkBuy.where(:cut_off_time => cut_off_time)
+    puts "bulk_buys.ids"
+    puts(bulk_buys.ids)
+    bulk_buys.each do |bulk_buy|
+      restaurant = bulk_buy.restaurant
+      restaurant.check_order_reach(bulk_buy.id)
+    end
 
   end
 end
@@ -121,14 +116,14 @@ namespace :dev do
       restaurant = Restaurant.create(
         chef_id: chef.id,
         name: Faker::Name.name,
-        address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-        latitude: Faker::Address.latitude,
-        longitude: Faker::Address.longitude,
+        address: "New York City " + Faker::Address.street_name + Faker::Address.secondary_address,
+        latitude: 40.730610 + rand(-0.3..0.3),
+        longitude: -73.935242 + rand(-0.3..0.3),
         phone_number: Faker::PhoneNumber.cell_phone,
         description: Faker::Lorem.paragraph,
         is_approved: [true, false].sample,
-        city: Faker::Address.city,
-        state: Faker::Address.state,
+        city: "New York City",
+        state: "NY",
         ZIP: Faker::Address.zip,
         tax_ID: Faker::Number.number(10),
         tax: rand(1..5),

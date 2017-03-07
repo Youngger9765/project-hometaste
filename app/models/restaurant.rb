@@ -188,4 +188,41 @@ class Restaurant < ApplicationRecord
     end
   end
 
+  def check_order_reach(bulk_buy_id=1)
+
+    datetime_now = Time.now
+    datetime_now_to_utc = datetime_now.utc
+
+    # 要確認時區的開始時間
+    # TODO:加入request 的time_zone
+    local_datetime_beginning = Time.now.utc.localtime.beginning_of_day
+    local_datetime_end = Time.now.utc.localtime.end_of_day
+
+    local_datetime_beginning_to_utc = local_datetime_beginning.utc
+    local_datetime_end_to_utc = local_datetime_end.utc
+    today_time_range = (local_datetime_beginning_to_utc..local_datetime_end_to_utc)
+
+    # 處理 bulk_buy
+    bulk_buy = BulkBuy.find(bulk_buy_id)
+    # paid 且 處理中
+    paid_process_orders = bulk_buy.orders.where(:payment_status => "paid").where(order_status: "process")
+    # 今天的orders
+    today_paid_process_orders = paid_process_orders.where(:pick_up_time => today_time_range)
+    bulk_buy_amount = today_paid_process_orders.sum(:amount)
+
+    # 處理delivery (現在檢查的就一定是cutoff 前建立的)
+    delivery_orders = self.orders.where(:shipping_method => "delivery").where(:payment_status => "paid").where(order_status: "process")
+    today_delivery_orders = delivery_orders.where(:pick_up_time => today_time_range)
+    delivery_amount = today_delivery_orders.sum(:amount)
+
+    # return delivery_amount.to_s
+    total_amount = bulk_buy_amount + delivery_amount
+
+    if total_amount < self.order_reach
+      today_paid_process_orders.update(:order_status => "cancelled")
+      today_delivery_orders.update(:order_status => "cancelled")
+    end
+
+  end
+
 end
