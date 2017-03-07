@@ -80,23 +80,23 @@ namespace :dev do
       is_admin: true,
     )
 
-    # if @fake_100_user
-    #   # create users
-    #   puts('create 100 users')
+    if @fake_100_user
+      # create users
+      puts('create 100 users')
 
-    #   100.times {
-    #     User.create(
-    #       name: Faker::Name.name,
-    #       foodie_id: Faker::Name.name,
-    #       email: Faker::Internet.email,
-    #       phone_number: Faker::PhoneNumber.cell_phone,
-    #       password: Faker::Internet.password(10, 20),
-    #       confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-    #       address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-    #       is_chef: [true, false].sample,
-    #     )
-    #   }
-    # end
+      100.times {
+        User.create(
+          name: Faker::Name.name,
+          foodie_id: Faker::Name.name,
+          email: Faker::Internet.email,
+          phone_number: Faker::PhoneNumber.cell_phone,
+          password: Faker::Internet.password(10, 20),
+          confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+          address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+          is_chef: [true, false].sample,
+        )
+      }
+    end
 
     # create chef
     puts('create chef')
