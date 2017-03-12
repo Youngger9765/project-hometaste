@@ -26,7 +26,7 @@
               <% end %>
           <% end %>
           <%= link_to food do %>
-              <img data-src="<%= image_path food.food_photos.first.try(:photo).to_s %>">
+              <img data-src="<%= image_path food_main_photo(food) %>">
               <div class="card_hover_link hidden hidden-xs">
                 <%= content_for :card_hover_link %>
               </div>

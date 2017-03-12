@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-7 col-xs-12">
           <h1><%= @food.name %></h1>
-          <% @food.restaurant.cuisines.each do |cuisine| %>
+          <% @food.restaurant.cuisines.first(3).each do |cuisine| %>
               <span class="sub_link ml15"><%= cuisine.name %></span>
           <% end %>
           <div class="col-xs-12 visible-xs visible-sm mt20">
