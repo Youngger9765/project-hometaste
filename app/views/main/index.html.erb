@@ -1,3 +1,23 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '493204660884103',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+</script>
+<!--<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>-->
 <div class="col-xs-12 banner">
   <div class="row">
     <div class="title">
@@ -40,6 +60,9 @@
 </div>
 
 
+<a class="jiathis_button_weixin">微信</a>
+
+
 <div class="location_map hidden">
   <div class="col-xs-12">
     <div class="row">
@@ -55,11 +78,39 @@
   <div class="load_more" id="load_more">
     <input type="button" value="Load more">
   </div>
+
 </div>
 
 <% @food_available_bigbun_array.each do |group| %>
-        <%= render 'common/bigbun', food: group[0], bigbun: group[1], restaurant: group[0].restaurant %>
+    <%= render 'common/bigbun', food: group[0], bigbun: group[1], restaurant: group[0].restaurant %>
 <% end %>
 
 <%= javascript_include_tag 'main' %>
 
+<script>
+  $(document).on('click','.fa-facebook',function(e){
+    e.preventDefault()
+    var id = $(this).parents('.card').data('id')
+    FB.ui({
+      method: 'share',
+      display: 'popup',
+      href: location.protocol+'//'+location.hostname + ':3000/food/' + id ,
+    }, function(response){});
+  })
+
+  $(document).on('click','.fa-twitter',function(e){
+    e.preventDefault()
+    var id = $(this).parents('.card').data('id')
+    var url = 'https://twitter.com/intent/tweet?text=Delicious food&url='+
+      location.protocol+'//'+location.hostname + ':3000/food/' + id+'&hashtags=food&via=HomeTeste';
+    var win = window.open(url, '_blank');
+    win.focus();
+  })
+  function setShare(title, url) {
+    jiathis_config.title = title;
+    jiathis_config.url = url;
+  }
+  var jiathis_config = {}
+</script>
+<!--<script type="text/javascript" src="http://v1.jiathis.com/code/jia.js?uid=您的UID" charset="utf-8"></script>-->
+<script type="text/javascript" src="http://v1.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>

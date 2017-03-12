@@ -10,9 +10,15 @@
     </div>
     <div class="ui custom popup top left transition hidden">
       <i class="fa fa-facebook" aria-hidden="true"></i>
-      <i class="fa fa-instagram" aria-hidden="true"></i>
       <i class="fa fa-twitter" aria-hidden="true"></i>
+      <a href="asdasd"></a>
+      <!--<div onmouseover="setShare('JiaThis发布最新WordPress分享插件', 'http://www.jiathis.com/news/html/jiathis-wordpress-plugin');">  &lt;!&ndash;自定义第二个分享标题和链接&ndash;&gt;-->
+        <div class="jiathis_style">
+          <a href="http://www.jiathis.com/share/?uid=1" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">
       <i class="fa fa-weixin" aria-hidden="true"></i>
+          </a>
+        </div>
+      <!--</div>-->
     </div>
 <% end %>
 
@@ -26,7 +32,8 @@
               <% end %>
           <% end %>
           <%= link_to food do %>
-              <img data-src="<%= image_path food.food_photos.first.try(:photo).to_s %>">
+              <!--<img data-src="<%#= image_path food.food_photos.first.try(:photo).to_s %>">-->
+              <img data-src="<%= image_path 'tmp/product.png' %>">
               <div class="card_hover_link hidden hidden-xs">
                 <%= content_for :card_hover_link %>
               </div>
