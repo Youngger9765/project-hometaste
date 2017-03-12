@@ -123,6 +123,26 @@ class ChefsController < ApplicationController
   end
 
   def business
+    @completed_orders = @chef.restaurant.orders.where(:order_status => 'completed')
+    # 取得並顯示總收入
+    @total_orders_income = @completed_orders.sum(:amount)
+    # 取得並顯示總賣出份數
+    @total_orders_count = @completed_orders.count()
+    # 取得並顯示本月收入
+    @this_month = Time.now.localtime.month
+    @this_month_completed_orders = @completed_orders.where('extract(month from updated_at) = ?', @this_month)
+    @this_month_income = @this_month_completed_orders.sum(:amount)
+    # 取得並顯示評分數
+    @food_avg_summary_score = @restaurant.food_avg_summary_score
+    # 取得並顯示最受歡迎餐點
+    @ships = OrderFoodShip.where(:order_id => @completed_orders.ids)
+    @ships.each do |ship|
+
+    end
+
+    raise
+    # @most_popular_food = 
+    # 可以導出日期區間的銷售報表 (csv)
   end
 
   def edit

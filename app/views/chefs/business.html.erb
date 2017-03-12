@@ -22,24 +22,24 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 p50">
                   <div class="red_circular">
-                    <h2 class="bold red">USD $150,000</h2>
+                    <h2 class="bold red">USD $<%=@total_orders_income%></h2>
                   </div>
                 </div>
                 <div class="col-xs-12">
                   <h4 class="mtb20_sm mtb15 dib bold">Total orders:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">200</h4>
+                  <h4 class="mtb20_sm mtb15 dib ml30"><%=@total_orders_count%></h4>
                 </div>
                 <div class="col-xs-12">
                   <h4 class="mtb20_sm mtb15 dib bold">Total revenue:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">$150,000</h4>
+                  <h4 class="mtb20_sm mtb15 dib ml30">$<%=@total_orders_income%></h4>
                 </div>
                 <div class="col-xs-12">
                   <h4 class="mtb20_sm mtb15 dib bold">Total sale this month: </h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">$20,000</h4>
+                  <h4 class="mtb20_sm mtb15 dib ml30">$<%= @this_month_income%></h4>
                 </div>
                 <div class="col-xs-12">
                   <h4 class="mtb20_sm mtb15 dib bold">Rating:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">4.5</h4>
+                  <h4 class="mtb20_sm mtb15 dib ml30"><%= @food_avg_summary_score%></h4>
                 </div>
                 <div class="col-xs-12">
                   <h4 class="mtb20_sm mtb15 dib bold">Most popular item:</h4>
