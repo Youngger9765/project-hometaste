@@ -37,8 +37,11 @@ Rails.application.routes.draw do
       post :yep_order
 
       get :review
-      get :like
       get :message
+
+      get :like
+      get :kitchen
+      get :food
     end
   end
 
