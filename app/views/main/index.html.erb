@@ -39,7 +39,6 @@
   </div>
 </div>
 
-
 <div class="location_map hidden">
   <div class="col-xs-12">
     <div class="row">
@@ -55,10 +54,11 @@
   <div class="load_more" id="load_more">
     <input type="button" value="Load more">
   </div>
+
 </div>
 
 <% @food_available_bigbun_array.each do |group| %>
-        <%= render 'common/bigbun', food: group[0], bigbun: group[1], restaurant: group[0].restaurant %>
+    <%= render 'common/bigbun', food: group[0], bigbun: group[1], restaurant: group[0].restaurant %>
 <% end %>
 
 <%= javascript_include_tag 'main' %>
