@@ -37,6 +37,13 @@
     transform: translateX(-50%);
   }
 }
+.custom.popup{
+  background-color: $main_red;
+  border-color: $main_red;
+  &:before{
+    background-color: $main_red !important;
+  }
+}
 @media (max-width: $screen-sm-max) {
   .foods_show{
     .banner {
