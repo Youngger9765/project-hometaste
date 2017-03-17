@@ -136,12 +136,18 @@ class ChefsController < ApplicationController
     @food_avg_summary_score = @restaurant.food_avg_summary_score
     # 取得並顯示最受歡迎餐點
     @ships = OrderFoodShip.where(:order_id => @completed_orders.ids)
-    @ships.each do |ship|
+    @food_ids = @ships.pluck(:food_id)
 
+    food_dict = {}
+    @food_ids.each do |food_id|
+      total_cnt = @ships.where(:food_id => food_id).sum(:quantity)
+      food_dict[food_id] = total_cnt
     end
 
-    raise
-    # @most_popular_food = 
+    most_popular_food_id = food_dict.max_by{|k,v| v}[0]
+    @most_popular_quantity = food_dict.max_by{|k,v| v}[1]
+    @most_popular_food = Food.find(most_popular_food_id)
+
     # 可以導出日期區間的銷售報表 (csv)
   end
 
