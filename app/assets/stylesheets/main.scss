@@ -359,7 +359,27 @@ body.main_index{
     height: 40px;
   }
 }
+
+.main_terms,.main_conditions{
+  .conditions,.terms{
+    p{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    li{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
 @media (max-width: $screen-xs-max){
+  .main_terms,.main_conditions{
+    .conditions,.terms{
+      p{
+        font-size: 14px;
+      }
+    }
+  }
   .filters{
     margin-top:0;
     margin-bottom: -10px;

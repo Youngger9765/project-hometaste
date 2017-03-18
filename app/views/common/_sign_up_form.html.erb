@@ -30,7 +30,7 @@
           <div class="field">
             <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Confirm Password" %>
           </div>
-          <span name="term">By singing up,you agree with our <a href="">terms and conditions.</a></span>
+          <span name="term">By singing up,you agree with our <a href="<%= terms_path %>">terms</a> and <a href="<%= conditions_path %>">conditions.</a></span>
           <div class="actions">
             <%= f.submit "Sign up" ,class:'ui button my_btn', :id =>"sign_up_btn"%>
           </div>

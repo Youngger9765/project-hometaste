@@ -7,13 +7,6 @@ $(document).ready ->
     $('.cards .col-xs-6:odd').addClass('padding_left_7_xs')
     $('.cards .col-xs-6:even').addClass('padding_right_7_xs')
     $('.card').each (index) ->
-      button = $(this).find('.custom.button')
-      popup = $(this).find('.custom.popup')
-      button.popup({
-        popup: popup,
-        position: 'top right',
-        hoverable: true
-      })
       $(this).hover ->
         $(this).find('.card_hover_link').toggleClass('hidden')
       if (index+1) % 2 == 0
