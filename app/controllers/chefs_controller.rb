@@ -144,10 +144,15 @@ class ChefsController < ApplicationController
       food_dict[food_id] = total_cnt
     end
 
-    most_popular_food_id = food_dict.max_by{|k,v| v}[0]
-    @most_popular_quantity = food_dict.max_by{|k,v| v}[1]
-    @most_popular_food = Food.find(most_popular_food_id)
-
+    if food_dict.size == 0
+      @most_popular_quantity = 0
+      @most_popular_food = nil
+    else
+      most_popular_food_id = food_dict.max_by{|k,v| v}[0]
+      @most_popular_quantity = food_dict.max_by{|k,v| v}[1]
+      @most_popular_food = Food.find(most_popular_food_id)
+    end
+         
     # 可以導出日期區間的銷售報表 (csv)
   end
 
