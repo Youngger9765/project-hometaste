@@ -36,6 +36,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def message; end
+
 	def like
 		@orders = Order.all
 		@datetime_now = Time.now.utc.localtime
