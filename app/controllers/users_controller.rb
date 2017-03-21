@@ -36,6 +36,21 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def like
+		@orders = Order.all
+		@datetime_now = Time.now.utc.localtime
+	end
+
+	def kitchen
+		@orders = Order.all
+		@datetime_now = Time.now.utc.localtime
+	end
+
+	def food
+		@orders = Order.all
+		@datetime_now = Time.now.utc.localtime
+	end
+
 	def purchase
 		@client_token = Braintree::ClientToken.generate
 		@orders = @user.orders.where(:payment_status => "paid").where(:order_status => "process")

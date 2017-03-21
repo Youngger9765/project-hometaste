@@ -129,6 +129,9 @@
   }
 }
 @media (max-width: $screen-xs-max){
+  button[name=unlike]{
+    margin-top: 30px;
+  }
   .my_purchase_lists{
     .background_img_setting{
       padding-top: 30%;

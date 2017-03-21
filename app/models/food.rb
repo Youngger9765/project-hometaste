@@ -22,7 +22,7 @@ class Food < ApplicationRecord
   serialize :support_days
 
   def average_score
-    score = food_comments.average(:score) || 0
+    score = food_comments.average(:summary_score) || 0
     score = score.round(1)
     if score.to_s[-1].to_i >= 5
       (score.to_s[0].to_i + 1).to_i

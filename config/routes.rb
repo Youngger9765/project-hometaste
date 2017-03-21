@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get "main/index" => "main#index"
   get "admin" => "admin/users#index"
 
+
+  get 'conditions' => 'main#conditions'
+  get 'terms' => 'main#terms'
+
   namespace :admin do
     resources :main
     resources :orders do
@@ -37,8 +41,11 @@ Rails.application.routes.draw do
       post :yep_order
 
       get :review
-      get :like
       get :message
+
+      get :like
+      get :kitchen
+      get :food
     end
   end
 

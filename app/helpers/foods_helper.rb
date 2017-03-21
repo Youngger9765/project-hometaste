@@ -16,6 +16,14 @@ module FoodsHelper
 			food_cuisine_ships_request.times{food.food_cuisine_ships.build}
 		end
 
-	  food
+		food
+	end
+
+	def food_main_photo(food)
+		if food.food_photos.present?
+			food.food_photos.first.try(:photo).to_s
+		else
+      ActionController::Base.helpers.asset_path('tmp/product.png')
+		end
 	end
 end

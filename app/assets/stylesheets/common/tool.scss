@@ -222,6 +222,24 @@
   @extend .black;
   @extend .btn_setting;
 }
+.two_btn{
+  @extend .df;
+  @extend .flex_center;
+  [class*=_btn],[class*=_btn_reserve]{
+    @include calc(width,'100% / 3');
+    margin: 5px;
+    &:focus{
+      color: #FFFFFF;
+    }
+    i{
+      font-size: 40px;
+    }
+    p{
+      line-height: 10px;
+      margin: 0;
+    }
+  }
+}
 .four_btn{
   @extend .df;
   [class*=_btn],[class*=_btn_reserve]{
@@ -318,6 +336,17 @@
 }
 @media (max-width: $screen-xs-max ){
   [class*=basic_bg]{
+    .two_btn{
+      @include calc(width,'100% + 10px');
+      margin-left: -5px;
+      padding: 0;
+      [class*=_btn],[class*=_btn_reserve]{
+        @include calc(width,'100% / 2');
+        margin: 0;
+        border-right: none;
+        min-width: 70px;
+      }
+    }
     .four_btn{
       @include calc(width,'100% + 10px');
       margin-left: -5px;

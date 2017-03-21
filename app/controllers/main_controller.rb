@@ -23,7 +23,9 @@ class MainController < ApplicationController
     save_search_results_in_cookies
   end
 
+  def terms; end
 
+  def conditions; end
 
   # restaurant's feature
   # today_meal_restaurant_ids = Food.where(:is_public => true).pluck(:restaurant_id).uniq
