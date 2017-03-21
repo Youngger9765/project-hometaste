@@ -21,6 +21,12 @@ class User < ApplicationRecord
   has_many :food_comments
   has_many :user_big_bun_ships
 
+  has_many :user_food_likings
+  has_many :liking_foods , :source => :food, :through => :user_food_likings
+
+  has_many :user_restaurant_likings
+  has_many :liking_restaurants , :source => :restaurant, :through => :user_restaurant_likings
+
   accepts_nested_attributes_for :user_photo,
                                 allow_destroy: true,
                                 reject_if: :all_blank

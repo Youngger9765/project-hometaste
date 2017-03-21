@@ -11,6 +11,9 @@ class Food < ApplicationRecord
   has_many :food_cuisine_ships
   has_many :cuisines, through: :food_cuisine_ships
 
+  has_many :user_food_likings
+  has_many :liking_users , :source => :user, :through => :user_food_likings
+
   accepts_nested_attributes_for :food_photos,
                                 :allow_destroy => true,
                                 :reject_if => :all_blank

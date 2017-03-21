@@ -14,6 +14,9 @@ class Restaurant < ApplicationRecord
   has_many :restaurant_cuisine_ships
   has_many :cuisines, :through => :restaurant_cuisine_ships
 
+  has_many :user_restaurant_likings
+  has_many :liking_users , :source => :user, :through => :user_restaurant_likings
+
   accepts_nested_attributes_for :delivery,
                                 :allow_destroy => true,
                                 :reject_if => :all_blank
