@@ -37,19 +37,34 @@ class UsersController < ApplicationController
 	end
 
 	def like
-		@liking_restaurants = @user.liking_restaurants
-		@liking_foods = @user.liking_foods
-		@datetime_now = Time.now.utc.localtime
+		user_id = params[:user_id]
+		restaurant_id = params[:restaurant_id]
+		food_id = params[:food_id]
+
+		if user_id.present?
+			if restaurant_id.present?
+				liking = UserRestaurantLiking.new(:user_id => user_id, :restaurant_id => restaurant_id)
+				liking.save!
+			elsif food_id.present?
+				user_food_likings
+				liking = UserFoodLiking.new(:user_id => user_id, :food_id => food_id)
+				liking.save!
+			end
+		end
 	end
 
 	def unlike
-		if @user_id.present?
-			if @restaurant_id.present?
-				liking = UserRestaurantLiking.find_by(:user_id => @user_id, :restaurant_id => @restaurant_id)
+		user_id = params[:user_id]
+		restaurant_id = params[:restaurant_id]
+		food_id = params[:food_id]
+
+		if user_id.present?
+			if restaurant_id.present?
+				liking = UserRestaurantLiking.find_by(:user_id => user_id, :restaurant_id => restaurant_id)
 				liking.destroy
-			elsif @food_id.present?
+			elsif food_id.present?
 				user_food_likings
-				liking = UserFoodLiking.find_by(:user_id => @user_id, :food_id => @food_id)
+				liking = UserFoodLiking.find_by(:user_id => user_id, :food_id => food_id)
 				liking.destroy
 			end
 		end
