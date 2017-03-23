@@ -1,0 +1,9 @@
+<% if @liking_food_size %>
+$('.liking_food_size').html(<%= @liking_food_size %>)
+$('.food_liking_<%= @food_id %>, .food_unliking_<%= @food_id %>').toggleClass('hidden')
+$('#remove_liking_foods_<%= @food_id %>').remove()
+<% elsif @liking_restaurant_size %>
+$('.liking_restaurant_size').html(<%= @liking_restaurant_size %>)
+$('.restaurant_liking_<%= @restaurant_id %>, .restaurant_unliking_<%= @restaurant_id %>').toggleClass('hidden')
+$('#remove_liking_restaurants_<%= @restaurant_id %>').remove()
+<% end %>

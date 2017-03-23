@@ -74,19 +74,19 @@
       height: 270px;
     }
     .basic_bg_top .social_buttons{
-      button{
+      a,button{
         margin:0 -2px;
         width: 80px;
         height: 50px;
         @include border_radius(0);
       }
-      button:first-child{
+      a,button:first-child{
         @include border-radius-(bottom, left ,5px);
       }
-      button:nth-child(2){
+      a,button:nth-child(2){
         border-left:1px solid white;
       }
-      button:last-child{
+      a,button:last-child{
         border-left:1px solid white;
         @include border-radius-(bottom, right ,5px);
       }
@@ -119,13 +119,13 @@
       margin-left: -8px;
       width: calc(100% + 11px);
       padding: 0;
-      button{
-        width: 50%;
+      a,button{
+        width: 33.4%;
       }
-      button:first-child{
+      a,button:first-child{
         @include border-radius-(bottom, left ,0);
       }
-      button:last-child{
+      a,button:last-child{
         border-left:1px solid white;
         @include border-radius-(bottom, right ,0);
       }

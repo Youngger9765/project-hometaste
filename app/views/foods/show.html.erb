@@ -24,14 +24,26 @@
 
       <div class="row">
         <div class="col-xs-12 tar social_buttons">
-          <button class="ui button my_btn small_btn"><i class="fa fa-heart-o white" aria-hidden="true"></i>137</button>
-          <button class="ui button my_btn small_btn"><i class="fa fa-plus-circle white" aria-hidden="true"></i>Like</button>
+
+          <%= link_to like_user_path(food_id: @food.id, user_id: current_user.try(:id)), method:'post', remote:true,
+                      class:"ui button my_btn small_btn food_liking_#{@food.id} #{'hidden' if current_user && current_user.user_food_likings.pluck(:food_id).include?(@food.id)}" do %>
+              <i class="fa fa-heart-o white" aria-hidden="true"></i>
+              <span class="liking_food_size"><%= @food.user_food_likings.size %></span>
+          <% end %>
+
+          <%= link_to unlike_user_path(food_id: @food.id, user_id: current_user.try(:id)), method:'post',remote:true,
+                      class:"ui button my_btn small_btn food_unliking_#{@food.id} #{'hidden' unless current_user && current_user.user_food_likings.pluck(:food_id).include?(@food.id)}" do %>
+              <i class="fa fa-heart white" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
+              <span class="liking_food_size"><%= @food.user_food_likings.size %></span>
+          <% end %>
+
+          <a href="<%= restaurant_comments_path(@food.restaurant) %>" class="ui button my_btn small_btn"><i class="fa fa-star-o" aria-hidden="true" style="font-size: 18px; margin-right: 5px;"></i>Reviews</a>
           <button class="popup_button ui button my_btn small_btn"><i class="share_icon_white" aria-hidden="true"></i>Share</button>
           <div class="ui custom popup top left transition hidden">
             <i class="fa fa-facebook square_icon" aria-hidden="true" id="shareBtn"></i>
             <i class="fa fa-twitter square_icon" aria-hidden="true"></i>
             <a class="jiathis_button_weixin">
-            <i class="fa fa-weixin square_icon" aria-hidden="true"></i>
+              <i class="fa fa-weixin square_icon" aria-hidden="true"></i>
             </a>
           </div>
         </div>
@@ -112,8 +124,8 @@
             <% end %>
             <button class="flr_sm mt20_sm ui button my_btn_reserve">Menu</button>
           </div>
-          <div class="flex_space_between">
-            <div class="dib hidden-xs">
+          <div class="flex_space_between flex_vertical_center">
+            <div class="dib hidden-xs" style="margin-top: -5px;">
               <i class="show_rated_4"></i><span class="">122 Likes</span>
             </div>
             <i class="l_line hidden-xs"></i>
@@ -173,8 +185,7 @@
   $(document).on('click','.fa-twitter',function(e){
     e.preventDefault()
     var id = $(this).parents('.card').data('id')
-    var url = 'https://twitter.com/intent/tweet?text=Delicious food&url='+
-      location.protocol+'//'+location.hostname + ':3000/food/' + id+'&hashtags=food&via=HomeTeste';
+    var url = 'https://twitter.com/intent/tweet?text=Delicious food&url=<%= request.url %>/food/' + id+'&hashtags=food&via=HomeTeste';
     var win = window.open(url, '_blank');
     win.focus();
   })
