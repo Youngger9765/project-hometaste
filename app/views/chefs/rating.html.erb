@@ -1,0 +1,138 @@
+<%= form_for setup_chef(@chef), :url => chef_path(@chef), :method => "patch" do |f| %>
+
+    <div name="kitchen_photo">
+      <%= link_to edit_chef_path(@chef) do %>
+          <div class="img_upload pen_click">
+            <label style="background-image:url(<%= @chef.restaurant.main_photo.url if @chef.restaurant.main_photo.exists? %>); width:100%; border-radius: 0">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </label>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="container">
+      <section class="row">
+        <div class="col-xs-12 basic_bg_top">
+          <div class="row" name="kitchen_banner">
+
+            <div class="col-xs-12 df_sm mb15 tac tal_sm">
+
+              <div class="img_upload ml30_sm p10 dib background_white border_main_radius" name="profile">
+                <label style="background-image:url(<%= @chef.user.user_photo.photo.url if @chef.user.user_photo.try(:'photo.file?') %>); cursor: default;"></label>
+              </div>
+
+
+              <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm"><%= @chef.restaurant.name%></h1>
+            </div>
+
+            <%= render 'chef_banner' %>
+
+          </div>
+        </div>
+      </section>
+    </div>
+<% end %>
+
+<div class="container">
+  <section class="row">
+    <div class="col-xs-12 basic_bg prl15_sm prl30_md">
+      <div class="row">
+        <div class="col-xs-12 five_btn prl35_md mb25 mb0_sm">
+          <!--直接都用同個action 用params[:type]去撈資料來換掉 id=chef_rating_content內容=-->
+          <%= link_to  rating_chef_path(@chef, type: 6), class:'my_black_btn border_none_radius' ,remote:true do %>
+              All (<span id="all_rating">0</span>)
+          <% end %>
+          <%= link_to  rating_chef_path(@chef, typy: 5), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
+              5 Stars (<span id="five_rating">0</span>)
+          <% end %>
+          <%= link_to  rating_chef_path(@chef, type:4), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
+              4 Stars (<span id="four_rating">0</span>)
+          <% end %>
+          <%= link_to  rating_chef_path(@chef, type:3), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
+              3 Stars (<span id="three_rating">0</span>)
+          <% end %>
+          <%= link_to  rating_chef_path(@chef, type:2), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
+              2 Stars (<span id="two_rating">0</span>)
+          <% end %>
+          <%= link_to  rating_chef_path(@chef, type:1), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
+              1 Stars (<span id="one_rating">0</span>)
+          <% end %>
+        </div>
+
+        <div class="col-xs-12 prl15_sm" id="chef_rating_content">
+          <% @food_comments.each do |food_comment| %>
+
+              <div class="black_border_block mt25_sm mrl5_sm mrl25_md" id="food_comment_<%= food_comment.id %>">
+                <div class="row df">
+                  <div class="col-md-2 col-sm-3">
+                    <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
+                  </div>
+                  <div class="col-md-2 col-sm-3">
+                    <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 vertical_space_around">
+                    <h3 class="bold"><%= food_comment.food.name %></h3>
+                    <h4 class="bold mt0"><%= food_comment.user.name %></h4>
+                    <div class="show_rated_<%= rated_score(food_comment.summary_score) %>" style="font-size: 20px;"></div>
+                  </div>
+                  <div class="col-md-2 col-sm-12">
+                    <!--如果有回覆紀錄Reply字串改成Edit-->
+                    <button class="my_btn comment_reply_btn flr">Reply</button>
+                    <button class="my_btn comment_edit_btn flr hidden">Edit</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-10 col-md-offset-2 col-xs-12">
+                    <i class="gray_line"></i>
+                    <p><%= food_comment.comment%></p>
+                    <span class="pull-right gray"><%= food_comment.created_at.localtime.strftime("%Y/%m/%d")%></span>
+                  </div>
+                  <div class="col-md-10 col-md-offset-2 col-xs-12">
+                    <div class="hidden comment_reply">
+                      <% if @reply %>
+                          <i class="gray_line"></i>
+                          <h5 class="red bold">Reply</h5>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
+                          <span class="pull-right gray">2016/12/11</span>
+                      <% end %>
+                    </div>
+                    <div class="hidden comment_reply_textarea">
+                      <i class="gray_line"></i>
+                      <!--如果有回覆了就直接噴在textarea上，textarea一開始不關有沒有回覆都要被render出來，就回覆也直接噴在上面但hidden-->
+                      <%= form_for foods_path, remote: true do |f| %>
+                          <%= f.label :comment, 'Reply', class:'bold red' %>
+                          <%= f.text_area :comment, style:'border-radius:5px;', rows:'5' %>
+                          <%= f.submit :send, class:'flr my_btn', style:'width: 115px;height: 40px;' %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $(document).on('click','.my_black_btn_reserve',function(){
+      $(this).siblings('.my_black_btn').removeClass('my_black_btn').addClass('my_black_btn_reserve');
+      $(this).removeClass('my_black_btn_reserve').addClass('my_black_btn');
+    })
+    $(document).on('click','.comment_reply_btn',function(){
+      var parent = $(this).parents('.black_border_block')
+      $(this).hide()
+      if (parent.find('.comment_reply_textarea,.comment_reply').hasClass('hidden')){
+        parent.find('.comment_reply_textarea').removeClass('hidden')
+      }else if (parent.find('.comment_reply_textarea').hasClass('hidden') && !parent.find('.comment_reply').hasClass('hidden')){
+        parent.find('.comment_reply_btn').hide()
+        parent.find('.comment_edit_btn').show()
+      }
+    })
+  })
+</script>
