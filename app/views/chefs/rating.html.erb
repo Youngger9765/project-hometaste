@@ -37,7 +37,7 @@
   <section class="row">
     <div class="col-xs-12 basic_bg prl15_sm prl30_md">
       <div class="row">
-        <div class="col-xs-12 five_btn prl35_md mb25 mb0_sm">
+        <div class="col-xs-12 six_btn prl35_md mb25 mb0_sm" style="-ms-flex-wrap: wrap; -webkit-flex-wrap: wrap; flex-wrap: wrap">
           <!--直接都用同個action 用params[:type]去撈資料來換掉 id=chef_rating_content內容=-->
           <%= link_to  rating_chef_path(@chef, type: 6), class:'my_black_btn border_none_radius' ,remote:true do %>
               All (<span id="all_rating">0</span>)
@@ -48,6 +48,7 @@
           <%= link_to  rating_chef_path(@chef, type:4), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
               4 Stars (<span id="four_rating">0</span>)
           <% end %>
+          <div class="visible-xs mt5" style="flex-basis: 100%;"></div>
           <%= link_to  rating_chef_path(@chef, type:3), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
               3 Stars (<span id="three_rating">0</span>)
           <% end %>
@@ -63,19 +64,19 @@
           <% @food_comments.each do |food_comment| %>
 
               <div class="black_border_block mt25_sm mrl5_sm mrl25_md" id="food_comment_<%= food_comment.id %>">
-                <div class="row df">
-                  <div class="col-md-2 col-sm-3">
+                <div class="row df_sm">
+                  <div class="col-md-2 col-sm-3 col-xs-5 col-xs-offset-1 col-sm-offset-0">
                     <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
                   </div>
-                  <div class="col-md-2 col-sm-3">
+                  <div class="col-md-2 col-sm-3 col-xs-5">
                     <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
                   </div>
-                  <div class="col-md-6 col-sm-12 vertical_space_around">
+                  <div class="col-md-6 col-sm-4 col-xs-12 vertical_space_around tac tal_sm">
                     <h3 class="bold"><%= food_comment.food.name %></h3>
-                    <h4 class="bold mt0"><%= food_comment.user.name %></h4>
-                    <div class="show_rated_<%= rated_score(food_comment.summary_score) %>" style="font-size: 20px;"></div>
+                    <h4 class="bold mtbn_sm mtb20"><%= food_comment.user.name %></h4>
+                    <div class="show_rated_<%= rated_score(food_comment.summary_score) %> mt10 mtn_sm" style="font-size: 20px;"></div>
                   </div>
-                  <div class="col-md-2 col-sm-12">
+                  <div class="col-md-2 col-sm-2 hidden-xs">
                     <!--如果有回覆紀錄Reply字串改成Edit-->
                     <button class="my_btn comment_reply_btn flr">Reply</button>
                     <button class="my_btn comment_edit_btn flr hidden">Edit</button>
@@ -106,6 +107,11 @@
                       <% end %>
                     </div>
                   </div>
+                </div>
+                <div class="col-md-2 col-sm-2 visible-xs tac">
+                  <!--如果有回覆紀錄Reply字串改成Edit-->
+                  <button class="my_btn comment_reply_btn mt20">Reply</button>
+                  <button class="my_btn comment_edit_btn hidden mt20">Edit</button>
                 </div>
               </div>
           <% end %>
