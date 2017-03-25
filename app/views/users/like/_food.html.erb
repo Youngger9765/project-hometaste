@@ -1,23 +1,23 @@
-
 <% @liking_foods.each do |food| %>
-    <div class="black_border_block mt25_sm mrl5_sm mrl25_md">
+    <div class="black_border_block mt25_sm mrl5_sm mrl25_md" id="remove_liking_foods_<%= food.id %>">
 
       <div class="row df_sm">
         <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3">
           <div class="background_img_setting border_main_radius mt15 mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
         </div>
         <div class="col-xs-12 col-sm-8 col-md-9 vertical_space_around tac tan_sm">
-          <h3 class="bold mt30 mtn_sm">Mr. Chan’s Kitchen</h3>
-          <h2 class="mt0_sm mb5_sm mb10 bold ml0_sm" style="font-size: 30px;">Roasted Duck</h2>
-          <div class="show_rated_4" style="font-size: 20px;"></div>
+          <h3 class="bold mt30 mtn_sm"><%= food.restaurant.name %></h3>
+          <h2 class="mt0_sm mb5_sm mb10 bold ml0_sm" style="font-size: 30px;"><%= food.name %></h2>
+          <div class="show_rated_<%= food.average_score %>" style="font-size: 20px;"></div>
           <div style="font-size: 16px;" class="mtb20 mtb10_sm flex_space_between flex_vertical_center flex_wrap">
-            <span>200 reviews</span>
+            <span><%= food.food_comments.size %> reviews</span>
             <span>|</span>
-            <span>100 likes</span>
+            <span><%= food.liking_users.size %> likes</span>
             <span>|</span>
-            <span>100 ordered</span>
+            <span><%= food.restaurant.orders.size %> ordered</span>
             <div class="clearfix visible-xs" style="flex-basis: 100%;"></div>
-            <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm" name="unlike">Unlike</button>
+            <%= link_to 'Unlike', unlike_user_path(food_id: food.id, user_id: current_user.try(:id)),
+                        method:'post',remote:true, class:"my_btn ml100_md ml50_sm mrla_xs mrn_sm" %>
           </div>
         </div>
       </div>

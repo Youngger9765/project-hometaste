@@ -9,12 +9,17 @@
       <div class="row">
 
         <div class="col-xs-12 two_btn prl35_md mb25 mb0_sm">
-          <%= link_to 'Kitchen' ,kitchen_user_path,class:'my_black_btn border_none_radius' ,remote:true %>
-          <%= link_to 'Food' ,food_user_path,class:'my_black_btn_reserve border_none_radius' ,remote:true %>
+          <button href="<%= kitchen_user_path %>" class="my_black_btn border_none_radius like_button" style="height: 50px;">Kitchen</button>
+          <button href="<%= food_user_path %>" class="my_black_btn_reserve border_none_radius like_button" style="height: 50px;">Food</button>
         </div>
 
         <div class="col-xs-12 prl15_sm" id="my_purchase_content">
+          <div class="like_page">
+          <%= render 'users/like/kitchen' %>
+          </div>
+          <div class="like_page hidden">
           <%= render 'users/like/food' %>
+          </div>
         </div>
       </div>
     </section>
@@ -25,6 +30,9 @@
     $(document).on('click','.my_black_btn_reserve',function(){
       $(this).siblings('.my_black_btn').removeClass('my_black_btn').addClass('my_black_btn_reserve');
       $(this).removeClass('my_black_btn_reserve').addClass('my_black_btn');
+    })
+    $('.like_button').click(function(){
+      $('.like_page').toggleClass('hidden')
     })
   })
 </script>

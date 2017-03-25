@@ -3,7 +3,7 @@ class ChefsController < ApplicationController
   before_action :find_chef_restaurant, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
     :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
-    :completed,:cancelled]
+    :completed,:cancelled, :rating]
 
   before_action :find_user, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
@@ -177,6 +177,10 @@ class ChefsController < ApplicationController
   end
 
   def review
+  end
+
+  def rating
+    @food_comments = FoodComment.limit(5)
   end
 
   def approve

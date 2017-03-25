@@ -1,3 +1,22 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '648951988624959',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <div class="col-md-12 alert_message hidden">
   <div class="row content">
     <div class = "red alert-success" id="alert_notice">
@@ -17,7 +36,7 @@
         <div class="col-xs-12 visible-xs">
           <% content_for :img_title do %>
               <div class="col-xs-12 col-sm-3">
-                <div class="background_white p10 border_main_radius background_white_absolute" style="width: 200px;">
+                <div class="background_white p10 border_main_radius background_white_absolute" style="bottom:-60px;width: 200px;">
                   <div class="square_img border_main_radius background_gray" style="background-image: url(<%= image_path @restaurant.main_photo %>);"></div>
                 </div>
               </div>
@@ -28,8 +47,30 @@
           <%= content_for :img_title %>
         </div>
         <div class="col-xs-12 tar social_buttons mb30_xs mb0_sm">
-          <button class="ui button my_btn small_btn"><i class="fa fa-heart-o white" aria-hidden="true"></i>137</button>
-          <button class="ui button my_btn small_btn"><i class="share_icon_white" aria-hidden="true"></i>Share</button>
+          <%= link_to like_user_path(restaurant_id: @restaurant.id, user_id: current_user.try(:id)), method:'post', remote:true,
+                      class:"ui button my_btn small_btn restaurant_liking_#{@restaurant.id} #{'hidden' if current_user && current_user.user_restaurant_likings.pluck(:restaurant_id).include?(@restaurant.id)}" do %>
+              <i class="fa fa-heart-o white" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
+              <span class="liking_restaurant_size"><%= @restaurant.user_restaurant_likings.size %></span>
+          <% end %>
+
+          <%= link_to unlike_user_path(restaurant_id: @restaurant.id, user_id: current_user.try(:id)), method:'post',remote:true,
+                      class:"ui button my_btn small_btn restaurant_unliking_#{@restaurant.id} #{'hidden' unless current_user && current_user.user_restaurant_likings.pluck(:restaurant_id).include?(@restaurant.id)}" do %>
+              <i class="fa fa-heart white" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
+              <span class="liking_restaurant_size"><%= @restaurant.user_restaurant_likings.size %></span>
+          <% end %>
+
+          <a href="<%= restaurant_comments_path(restaurant_id: params[:id]) %>" class="ui button my_btn small_btn">
+            <i class="fa fa-star-o" aria-hidden="true" style="font-size: 18px; margin-right: 5px;"></i>Reviews
+          </a>
+
+          <button class="popup_button ui button my_btn small_btn"><i class="share_icon_white" aria-hidden="true"></i>Share</button>
+          <div class="ui custom popup top left transition hidden">
+            <i class="fa fa-facebook square_icon" aria-hidden="true" id="shareBtn"></i>
+            <i class="fa fa-twitter square_icon" aria-hidden="true"></i>
+            <a class="jiathis_button_weixin">
+              <i class="fa fa-weixin square_icon" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
         <div class="col-xs-12 hidden-xs">
           <%= content_for :img_title %>
@@ -250,6 +291,29 @@
         data: {date:date}
       });
     })
+
+    $('.popup_button').popup({
+      popup: $('.custom.popup'),
+      position: 'top right',
+      hoverable: true
+    })
+
+    $(document).on('click','.fa-twitter',function(e){
+      e.preventDefault()
+      var url = 'https://twitter.com/intent/tweet?text=Delicious food&url=<%= request.url %>&hashtags=food&via=HomeTeste';
+      var win = window.open(url, '_blank');
+      win.focus();
+    })
+
+    $('#shareBtn').click(function(){
+      FB.ui({
+        method: 'share',
+        display: 'popup',
+        href: '<%= request.original_url %>',
+      }, function(response){});
+    })
   })
 </script>
 
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>

@@ -103,6 +103,13 @@
     height: 60px;
   }
 }
+.users_liked{
+  .black_border_block{
+    a:hover{
+      color: #FFFFFF !important;
+    }
+  }
+}
 @media (max-width: $screen-md-max){
   .users_edit{
     .checkbox_warpper{

@@ -43,9 +43,12 @@ Rails.application.routes.draw do
       get :review
       get :message
 
-      get :like
+      get :liked
       get :kitchen
       get :food
+
+      post :like
+      post :unlike
     end
   end
 

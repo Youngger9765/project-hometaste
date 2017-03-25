@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-	before_action :find_user, :except =>[:new]
-	before_action :is_current_user?, :except =>[:new]
+	before_action :find_user, :except =>[:new, :like, :unlike]
+	before_action :is_current_user?, :except =>[:new, :like, :unlike]
 	before_action :find_order, :only =>[:cancel_order,:not_yet_order,:yep_order]
 
 	Braintree::Configuration.environment = :sandbox
@@ -38,35 +38,45 @@ class UsersController < ApplicationController
 
 	def like
 		user_id = params[:user_id]
-		restaurant_id = params[:restaurant_id]
-		food_id = params[:food_id]
+		@restaurant_id = params[:restaurant_id]
+		@food_id = params[:food_id]
 
 		if user_id.present?
-			if restaurant_id.present?
-				liking = UserRestaurantLiking.new(:user_id => user_id, :restaurant_id => restaurant_id)
+			if @restaurant_id.present?
+				liking = UserRestaurantLiking.new(user_id: user_id, restaurant_id: @restaurant_id)
 				liking.save!
-			elsif food_id.present?
-				user_food_likings
-				liking = UserFoodLiking.new(:user_id => user_id, :food_id => food_id)
+        @liking_restaurant_size = Restaurant.find(@restaurant_id).user_restaurant_likings.size
+			elsif @food_id.present?
+				liking = UserFoodLiking.new(user_id: user_id, food_id: @food_id)
 				liking.save!
+        @liking_food_size = Food.find(@food_id).user_food_likings.size
 			end
+		end
+
+		respond_to do |format|
+			format.js {render 'like'}
 		end
 	end
 
 	def unlike
 		user_id = params[:user_id]
-		restaurant_id = params[:restaurant_id]
-		food_id = params[:food_id]
+		@restaurant_id = params[:restaurant_id]
+		@food_id = params[:food_id]
 
 		if user_id.present?
-			if restaurant_id.present?
-				liking = UserRestaurantLiking.find_by(:user_id => user_id, :restaurant_id => restaurant_id)
+			if @restaurant_id.present?
+				liking = UserRestaurantLiking.find_by(:user_id => user_id, :restaurant_id => @restaurant_id)
 				liking.destroy
-			elsif food_id.present?
-				user_food_likings
-				liking = UserFoodLiking.find_by(:user_id => user_id, :food_id => food_id)
+        @liking_restaurant_size = Restaurant.find(@restaurant_id).user_restaurant_likings.size
+			elsif @food_id.present?
+				liking = UserFoodLiking.find_by(:user_id => user_id, :food_id => @food_id)
 				liking.destroy
+        @liking_food_size = Food.find(@food_id).user_food_likings.size
 			end
+		end
+
+		respond_to do |format|
+			format.js {render 'like'}
 		end
 	end
 
@@ -75,8 +85,9 @@ class UsersController < ApplicationController
 		@datetime_now = Time.now.utc.localtime
 	end
 
-	def food
-		@liking_foods = @user.liking_foods
+	def liked
+		@liking_restaurants = @user.liking_restaurants.includes(:restaurant_comments, :liking_users, :orders)
+		@liking_foods = @user.liking_foods.includes(:food_comments, :liking_users, :restaurant)
 		@datetime_now = Time.now.utc.localtime
 	end
 

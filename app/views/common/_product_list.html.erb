@@ -18,11 +18,20 @@
       <h4 class="blck normal">2 Left <i class="l_line"></i> 12 Ordered</h4>
     </div>
     <div>
-      <h4 class="black mt25 mb25">Ingredients: <p class="mt10" style="font-size: 18px;"><%= truncate(food.ingredients,length: 70) %></p>
+      <h4 class="black mt25 mb25">Ingredients: <p class="mt10" style="font-size: 17px;"><%= truncate(food.ingredients,length: 70) %></p>
       </h4>
     </div>
     <div class="hidden-sm mb20 mb0_sm">
-      <i class="fa fa-heart red mr25 mt20_sm" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+      <%= link_to like_user_path(food_id: food.id, user_id: current_user.try(:id)), method:'post', remote:true,
+                  class:"food_liking_#{food.id} #{'hidden' if current_user && current_user.user_food_likings.pluck(:food_id).include?(food.id)}" do %>
+          <i class="fa fa-heart-o red mr25 mt20_sm" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+      <% end %>
+
+      <%= link_to unlike_user_path(food_id: food.id, user_id: current_user.try(:id)), method:'post',remote:true,
+                  class:"food_unliking_#{food.id} #{'hidden' unless current_user && current_user.user_food_likings.pluck(:food_id).include?(food.id)}" do %>
+          <i class="fa fa-heart red mr25 mt20_sm" aria-hidden="true" name="heart"></i><i class="share_icon_red" name="shard"></i>
+      <% end %>
+
       <a href="" class="gray flr mt0_sm mt15_md"><h4>More...</h4></a>
     </div>
   </div>
