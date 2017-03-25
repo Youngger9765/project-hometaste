@@ -40,23 +40,23 @@
         <div class="col-xs-12 six_btn prl35_md mb25 mb0_sm" style="-ms-flex-wrap: wrap; -webkit-flex-wrap: wrap; flex-wrap: wrap">
           <!--直接都用同個action 用params[:type]去撈資料來換掉 id=chef_rating_content內容=-->
           <%= link_to  rating_chef_path(@chef, type: 6), class:'my_black_btn border_none_radius' ,remote:true do %>
-              All (<span id="all_rating">0</span>)
+              All (<span id="all_rating"><%=@star_all_num%></span>)
           <% end %>
-          <%= link_to  rating_chef_path(@chef, typy: 5), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
-              5 Stars (<span id="five_rating">0</span>)
+          <%= link_to  rating_chef_path(@chef, type: 5), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
+              5 Stars (<span id="five_rating"><%=@star_5_num%></span>)
           <% end %>
           <%= link_to  rating_chef_path(@chef, type:4), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
-              4 Stars (<span id="four_rating">0</span>)
+              4 Stars (<span id="four_rating"><%=@star_4_num%></span>)
           <% end %>
           <div class="visible-xs mt5" style="flex-basis: 100%;"></div>
           <%= link_to  rating_chef_path(@chef, type:3), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
-              3 Stars (<span id="three_rating">0</span>)
+              3 Stars (<span id="three_rating"><%=@star_3_num%></span>)
           <% end %>
           <%= link_to  rating_chef_path(@chef, type:2), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
-              2 Stars (<span id="two_rating">0</span>)
+              2 Stars (<span id="two_rating"><%=@star_2_num%></span>)
           <% end %>
           <%= link_to  rating_chef_path(@chef, type:1), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
-              1 Stars (<span id="one_rating">0</span>)
+              1 Stars (<span id="one_rating"><%=@star_1_num%></span>)
           <% end %>
         </div>
 
