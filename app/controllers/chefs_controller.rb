@@ -180,7 +180,37 @@ class ChefsController < ApplicationController
   end
 
   def rating
-    @food_comments = FoodComment.limit(5)
+    star_type = params[:type]
+    @all_food_comments = @chef.restaurant.food_comments
+    @star_all_num = @all_food_comments.size
+    @star_1_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 1,2)
+    @star_1_num = @star_1_food_comments.size
+    @star_2_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 2,3)
+    @star_2_num = @star_2_food_comments.size
+    @star_3_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 3,4)
+    @star_3_num = @star_3_food_comments.size
+    @star_4_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4,5)
+    @star_4_num = @star_4_food_comments.size
+    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 5,6)
+    @star_5_num = @star_5_food_comments.size
+
+    # default rating 使用
+    @food_comments = @all_food_comments
+
+    # 有call ajax 使用，再麻煩補上 render js
+    if star_type == "5"
+      @food_comments = @star_5_food_comments
+    elsif star_type == "4"
+      @food_comments = @star_4_food_comments
+    elsif star_type == "3"
+      @food_comments = @star_3_food_comments
+    elsif star_type == "2"
+      @food_comments = @star_2_food_comments
+    elsif star_type == "1"
+      @food_comments = @star_1_food_comments
+    elsif star_type == "6"
+      @food_comments = @all_food_comments
+    end
   end
 
   def approve
