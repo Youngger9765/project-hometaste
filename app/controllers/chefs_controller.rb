@@ -180,7 +180,7 @@ class ChefsController < ApplicationController
   end
 
   def rating
-    @food_comments = FoodComment.limit(5)
+    @food_comments = @chef.restaurant.food_comments
   end
 
   def approve
