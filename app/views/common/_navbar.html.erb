@@ -44,12 +44,12 @@
 
             <% if current_user.is_chef %>
                 <li class="visible-xs"><%= link_to('Chef’s Homepage', sales_chef_path(current_user.chef)) %></li>
-                <li class="visible-xs"><%= link_to('Menu', message_chef_path) %></li>
+                <li class="visible-xs"><%= link_to('Menu', menu_chef_path(current_user.chef)) %></li>
                 <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
 
             <% else %>
                 <li class="visible-xs"><%= link_to('My account', purchase_user_path(current_user)) %></li>
-                <li class="visible-xs"><%= link_to('Menu', message_chef_path(current_user)) %></li>
+                <div class="visible-xs"><%= link_to('Message',message_user_path(current_user)) %></div>
                 <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
             <% end %>
 
