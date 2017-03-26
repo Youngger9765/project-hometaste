@@ -197,7 +197,6 @@ class ChefsController < ApplicationController
     # default rating 使用
     @food_comments = @all_food_comments
 
-    # 有call ajax 使用，再麻煩補上 render js
     if star_type == "5"
       @food_comments = @star_5_food_comments
     elsif star_type == "4"

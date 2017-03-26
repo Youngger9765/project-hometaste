@@ -4,6 +4,8 @@ class FoodComment < ApplicationRecord
 	belongs_to :user
 	belongs_to :restaurant
 
+	has_many :food_comment_replies
+
 	# validates :user_id, presence: true
 	# validates :food_id, presence: true
 	# validates :restaurant_id, presence: true
