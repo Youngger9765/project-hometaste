@@ -92,3 +92,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@mixin number_button($_){
+  @extend .df;
+  [class*=_btn],[class*=_btn_reserve]{
+    @include calc(width,"100% / #{$_}");
+    margin: 5px;
+    &:focus{
+      color: #FFFFFF;
+    }
+    i{
+      font-size: 40px;
+    }
+    p{
+      line-height: 10px;
+      margin: 0;
+    }
+  }
+}

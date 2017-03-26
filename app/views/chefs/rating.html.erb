@@ -37,7 +37,7 @@
   <section class="row">
     <div class="col-xs-12 basic_bg prl15_sm prl30_md">
       <div class="row">
-        <div class="col-xs-12 five_btn prl35_md mb25 mb0_sm">
+        <div class="col-xs-12 six_btn prl35_md mb25 mb0_sm" style="-ms-flex-wrap: wrap; -webkit-flex-wrap: wrap; flex-wrap: wrap">
           <!--直接都用同個action 用params[:type]去撈資料來換掉 id=chef_rating_content內容=-->
           <%= link_to  rating_chef_path(@chef, type: 6), class:'my_black_btn border_none_radius' ,remote:true do %>
               All (<span id="all_rating"><%=@star_all_num%></span>)
@@ -48,6 +48,7 @@
           <%= link_to  rating_chef_path(@chef, type:4), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
               4 Stars (<span id="four_rating"><%=@star_4_num%></span>)
           <% end %>
+          <div class="visible-xs mt5" style="flex-basis: 100%;"></div>
           <%= link_to  rating_chef_path(@chef, type:3), class:'my_black_btn_reserve border_none_radius' ,remote:true do %>
               3 Stars (<span id="three_rating"><%=@star_3_num%></span>)
           <% end %>
@@ -60,55 +61,8 @@
         </div>
 
         <div class="col-xs-12 prl15_sm" id="chef_rating_content">
-          <% @food_comments.each do |food_comment| %>
 
-              <div class="black_border_block mt25_sm mrl5_sm mrl25_md" id="food_comment_<%= food_comment.id %>">
-                <div class="row df">
-                  <div class="col-md-2 col-sm-3">
-                    <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
-                  </div>
-                  <div class="col-md-2 col-sm-3">
-                    <div class="square_img border_main_radius" style="background-image: url(<%= image_path 'tmp/kitchen_3.png' %>"></div>
-                  </div>
-                  <div class="col-md-6 col-sm-12 vertical_space_around">
-                    <h3 class="bold"><%= food_comment.food.name %></h3>
-                    <h4 class="bold mt0"><%= food_comment.user.name %></h4>
-                    <div class="show_rated_<%= rated_score(food_comment.summary_score) %>" style="font-size: 20px;"></div>
-                  </div>
-                  <div class="col-md-2 col-sm-12">
-                    <!--如果有回覆紀錄Reply字串改成Edit-->
-                    <button class="my_btn comment_reply_btn flr">Reply</button>
-                    <button class="my_btn comment_edit_btn flr hidden">Edit</button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-10 col-md-offset-2 col-xs-12">
-                    <i class="gray_line"></i>
-                    <p><%= food_comment.comment%></p>
-                    <span class="pull-right gray"><%= food_comment.created_at.localtime.strftime("%Y/%m/%d")%></span>
-                  </div>
-                  <div class="col-md-10 col-md-offset-2 col-xs-12">
-                    <div class="hidden comment_reply">
-                      <% if @reply %>
-                          <i class="gray_line"></i>
-                          <h5 class="red bold">Reply</h5>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus consectetur eius id, minima quaerat quidem. Accusantium aut dolor nihil.</p>
-                          <span class="pull-right gray">2016/12/11</span>
-                      <% end %>
-                    </div>
-                    <div class="hidden comment_reply_textarea">
-                      <i class="gray_line"></i>
-                      <!--如果有回覆了就直接噴在textarea上，textarea一開始不關有沒有回覆都要被render出來，就回覆也直接噴在上面但hidden-->
-                      <%= form_for foods_path, remote: true do |f| %>
-                          <%= f.label :comment, 'Reply', class:'bold red' %>
-                          <%= f.text_area :comment, style:'border-radius:5px;', rows:'5' %>
-                          <%= f.submit :send, class:'flr my_btn', style:'width: 115px;height: 40px;' %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          <% end %>
+              <%= render 'food_rating' %>
         </div>
 
       </div>

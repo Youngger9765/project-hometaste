@@ -211,6 +211,11 @@ class ChefsController < ApplicationController
     elsif star_type == "6"
       @food_comments = @all_food_comments
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def approve
