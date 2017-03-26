@@ -206,6 +206,19 @@ namespace :dev do
       restaurant.save!
     }
 
+    # create food_comment_replies
+    puts('create food_comment_replies')
+
+    FoodComment.each do |comment|
+      is_reply = [true,false].sample
+      if is_reply
+        Reply = FoodCommentReply.create(
+          food_comment_id: comment.id,
+          text: Faker::Lorem.paragraph,
+        )
+      end
+    end
+
     # create orders
     puts('create orders')
 
