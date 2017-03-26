@@ -42,10 +42,11 @@
                           </div>
                         </div>
                     <% else %>
-                        <%= image_tag('empty_img.png') %>
+                        <img style="background-image:url(<%= image_path 'empty_img.png' %>);"
+                             class="background_img_setting fluid height_fluid">
                     <% end %>
                   </div>
-                  <div class="flex-direction_column df col-xs-12 col-sm-6 mt20 mt0_sm" style="height: 220px;">
+                  <div class="flex-direction_column df col-xs-12 col-sm-6 col-md-4 mt20 mt0_sm" style="height: 220px;">
 
                     <h3>
                       <span class="bold mr25">Price:</span>
