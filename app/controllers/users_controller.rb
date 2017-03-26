@@ -36,6 +36,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def message; end
+
 	def like
 		user_id = params[:user_id]
 		@restaurant_id = params[:restaurant_id]

@@ -33,7 +33,7 @@
                 <% else %>
 
                     <div class="item"><%= link_to('My account', purchase_user_path(current_user)) %></div>
-                    <div class="item"><%= link_to('Message','') %></div>
+                    <div class="item"><%= link_to('Message',message_user_path(current_user)) %></div>
                     <div class="item"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></div>
                 <% end %>
               </div>
@@ -42,16 +42,16 @@
 
         <% if current_user %>
 
-          <% if current_user.is_chef %>
-            <li class="visible-xs"><%= link_to('Chef’s Homepage', sales_chef_path(current_user.chef)) %></li>
-            <li class="visible-xs"><%= link_to('Menu', '') %></li>
-            <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+            <% if current_user.is_chef %>
+                <li class="visible-xs"><%= link_to('Chef’s Homepage', sales_chef_path(current_user.chef)) %></li>
+                <li class="visible-xs"><%= link_to('Menu', message_chef_path) %></li>
+                <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
 
-          <% else %>
-            <li class="visible-xs"><%= link_to('My account', purchase_user_path(current_user)) %></li>
-            <li class="visible-xs"><%= link_to('Message', '') %></li>
-            <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
-          <% end %>
+            <% else %>
+                <li class="visible-xs"><%= link_to('My account', purchase_user_path(current_user)) %></li>
+                <li class="visible-xs"><%= link_to('Menu', message_chef_path(current_user)) %></li>
+                <li class="visible-xs"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+            <% end %>
 
         <% else %>
             <li><a class="sign_up">Sign up</a><span class="hidden-xs">|</span></li>

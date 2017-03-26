@@ -1,0 +1,49 @@
+.message_modal{
+  position: fixed;
+  left: 60px;
+  bottom: 60px;
+  width: 300px;
+  height: 482px;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 1000;
+  background-color: #FFFFFF;
+  display: none;
+  -webkit-box-shadow: -3px 9px 25px 5px rgba(136,136,136,0.7);
+  -moz-box-shadow: -3px 9px 25px 5px rgba(136,136,136,0.7);
+  box-shadow: -3px 9px 25px 5px rgba(136,136,136,0.7);
+  @extend .flex;
+  @extend .flex-direction_column;
+  .message_top{
+    padding: 1px;
+    @extend .background_red;
+    text-align: center;
+    z-index: 10;
+    -webkit-box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
+    -moz-box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
+    box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
+  }
+  .message_body{
+    height: 332px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .message_room{
+      border-bottom: 1px solid RGBA(240, 240, 240, 1.00);
+    }
+    .message_content{
+      width:187px;
+      overflow: hidden;
+    }
+  }
+  .message_bottom{
+    text-align: center;
+    border-top: 1px solid RGBA(240, 240, 240, 1.00);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    button{
+      margin-bottom: 20px;
+      margin-top: 16px;
+    }
+  }
+}
