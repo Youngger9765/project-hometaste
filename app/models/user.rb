@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :big_buns
   has_many :carts
   has_many :food_comments
+  has_many :food_comment_replies
   has_many :user_big_bun_ships
 
   has_many :user_food_likings

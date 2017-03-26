@@ -182,7 +182,7 @@ namespace :dev do
     # create food_comments
     puts('create food_comments')
 
-    100.times {
+    500.times {
       restaurant_id = Restaurant.ids.sample
       food_id = Restaurant.find(restaurant_id).foods.ids.sample
 
@@ -191,9 +191,9 @@ namespace :dev do
         food_id: food_id,
         restaurant_id: restaurant_id,
         comment: Faker::Lorem.paragraph,
-        taste_score: rand(0..5),
-        value_score: rand(0..5),
-        on_time_score: rand(0..5),
+        taste_score: rand(1..5),
+        value_score: rand(1..5),
+        on_time_score: rand(1..5),
         is_public: true,
       )
 
@@ -209,13 +209,15 @@ namespace :dev do
     # create food_comment_replies
     puts('create food_comment_replies')
 
-    FoodComment.each do |comment|
+    FoodComment.all.each do |comment|
       is_reply = [true,false].sample
       if is_reply
-        Reply = FoodCommentReply.create(
+        reply = FoodCommentReply.create(
+          user_id: User.where.not(:is_chef => true).ids.sample,
           food_comment_id: comment.id,
-          text: Faker::Lorem.paragraph,
+          content: Faker::Lorem.paragraph,
         )
+        reply.save!
       end
     end
 
