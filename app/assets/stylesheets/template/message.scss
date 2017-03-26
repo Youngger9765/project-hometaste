@@ -24,7 +24,7 @@
     box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
   }
   .message_body{
-    height: 332px;
+    height: calc(100% - 150px);
     overflow-y: scroll;
     overflow-x: hidden;
     .message_room{
@@ -38,8 +38,6 @@
   .message_bottom{
     text-align: center;
     border-top: 1px solid RGBA(240, 240, 240, 1.00);
-    position: absolute;
-    bottom: 0;
     width: 100%;
     button{
       margin-bottom: 20px;

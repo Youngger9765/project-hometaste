@@ -41,7 +41,7 @@
                 <div style="font-size: 16px;" class="mtb20 mtb10_sm flex_space_between flex_vertical_center flex_wrap">
                   <span style="color: #9B9B9B;" class="db mrla_xs ml0_sm">2016/12/11</span>
                   <div class="clearfix visible-xs" style="flex-basis: 100%;"></div>
-                  <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm" name="message_button">Message</button>
+                  <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm mt20 mt0_sm" name="message_button">Message</button>
                 </div>
               </div>
             </div>
@@ -53,50 +53,4 @@
   </section>
 </div>
 
-
-<div class="message_modal">
-  <div class="message_top white">
-    <h3>Conversations</h3>
-    <p>with Mr.Chan's Kitchen</p>
-  </div>
-  <div class="message_body col-xs-12">
-    <% 10.times do %>
-        <div class="row message_room ptb15 prl5">
-          <div class="col-xs-3 prl10">
-            <div class="background_img_setting border_main_radius mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
-          </div>
-          <div class="col-xs-9">
-            <div class="align_two_side mb10">
-              <h4>Mr.chan</h4>
-              <span class="gray">1 W ago</span>
-            </div>
-            <div class="message_content">
-              <%= 'ewdwdwedwedwedwedwedwedwdwdew'.truncate(20,omission:'...') %>
-            </div>
-          </div>
-        </div>
-    <% end %>
-  </div>
-  <div class="message_bottom">
-    <button class="my_black_btn">
-      <i class="fa fa-commenting-o" aria-hidden="true"></i> New Conversation
-    </button>
-  </div>
-</div>
-
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
-    $('[name="message_button"]').click(function(){
-      $('.message_modal').show()
-    })
-    $(document).click(function(e){
-      var target = e.target;
-      if ( !$(target).is('[name="message_button"]') || $(target).is('.message_modal') && $(target).parents().is('.message_modal')) {
-        $('.message_modal').hide();
-      }
-    })
-
-
-  })
-</script>
-
+<%= render 'common/message_room' %>
