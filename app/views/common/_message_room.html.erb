@@ -1,21 +1,23 @@
 <div class="message_modal">
+
   <div class="message_top white col-xs-12">
-    <h3>Conversations</h3>
+    <h3><i class="fa fa-angle-left visible-xs visible-sm cursor_pointer"></i> Conversations</h3>
     <p>with Mr.Chan's Kitchen</p>
   </div>
   <div class="message_body col-xs-12">
     <% 10.times do %>
-        <div class="row message_room ptb15 prl5">
-          <div class="col-xs-3 prl10">
+        <% id = 1 %>
+        <div class="row message_room ptb15 prl5" id="message_room_<%= id %>">
+          <div class="col-xs-2 prl10 col-sm-1 col-md-3">
             <div class="background_img_setting border_main_radius mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
           </div>
-          <div class="col-xs-9">
+          <div class="col-xs-10 col-sm-11 col-md-9">
             <div class="align_two_side">
               <h4>Mr.chan</h4>
               <span class="gray">1 W ago</span>
             </div>
-            <div class="message_content">
-              <%= 'ewdwdwedwedwedwedwedwedwdwdew'.truncate(20,omission:'...') %>
+            <div class="message_desc">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             </div>
           </div>
         </div>
@@ -28,18 +30,75 @@
   </div>
 </div>
 
+<div class="message_content">
+  <div class="message_top white col-xs-12">
+    <div class="row">
+      <div class="col-xs-2">
+        <i class="fa fa-angle-left visible-xs visible-sm cursor_pointer"></i>
+      </div>
+      <div class="col-xs-7" style="height: 70px;">
+        <div class="background_img_setting border_main_radius" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
+        <h4 class="mtb10" style="font-size: 18px;">Mr.chan</h4>
+        <span>1 W ago</span>
+      </div>
+    </div>
+  </div>
+  <div class="message_body col-xs-12">
+    <div class="mb15">
+        <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
+        <h4 style="line-height: 70px;" class="ml10">Mr.chan</h4>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 messages">
+        <div class="message-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci animi consequuntur deserunt dolore doloremque dolorum error et, excepturi fuga impedit in inventore iure libero magnam, maxime minima mollitia necessitatibus nobis numquam perspiciatis porro provident quaerat quasi quos repellat rerum tempora tempore temporibus totam velit veniam veritatis voluptate! Corporis error eveniet harum impedit labore maxime numquam, quis quisquam ullam voluptatum. Deserunt distinctio dolores maxime mollitia pariatur repellendus sint, sit. Doloribus, impedit, modi. Ab corporis culpa, cum dicta dignissimos dolore excepturi fugit ipsum magni, maxime mollitia nemo possimus quasi quo repudiandae sit soluta veniam, voluptate. Dignissimos eaque fugiat fugit reiciendis repudiandae.</div>
+        <div class="message-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae corporis cupiditate, doloremque dolorum ducimus esse excepturi fugiat in iure laboriosam minima modi nisi non nulla officiis porro quis vitae. Assumenda consequatur eos expedita molestias nobis non odit tempore vero!</div>
+        <div class="message-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, suscipit.</div>
+        <div class="message-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, tempora!</div>
+        <div class="message-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, illum!</div>
+        <div class="message-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, nostrum.</div>
+        <div class="message-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi aut autem commodi cupiditate deleniti, dolor dolores eius eligendi ex expedita harum in inventore ipsam iste laudantium mollitia nihil numquam pariatur porro possimus, provident quaerat rerum sapiente velit voluptate voluptatem? Ad aliquid cum cupiditate distinctio eligendi eum ex fugit id illum, libero maiores modi molestiae nam, nobis nostrum obcaecati perferendis porro quidem quis reiciendis tenetur ullam, veritatis voluptate? Iusto omnis placeat quo ratione. Cum cumque delectus, doloribus dolorum ex exercitationem fugiat, iste laboriosam modi molestias, nulla odio omnis quia quibusdam quidem reiciendis rerum ullam unde? Doloremque minus perspiciatis quasi quia.</div>
+        <div class="message-right">Lorem ipsum dolor sit amet.</div>
+      </div>
+    </div>
+  </div>
+  <div class="message_bottom col-xs-12">
+    <input type="text" placeholder="Type message here...">
+  </div>
+</div>
+
+<div class="message_close">
+  &times;
+</div>
+
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
     $('[name="message_button"]').click(function(){
-      $('.message_modal').show()
+      $('.message_modal').show();
+      $('.message_close').show();
     })
     $(document).click(function(e){
-      var target = e.target;
-      if ( !$(target).is('[name="message_button"]') && !$(target).is('.message_modal') && !$(target).parents().is('.message_modal')) {
-        $('.message_modal').hide();
-      }
+      close_modal(e)
     })
+    $('.fa.fa-angle-left,.message_close').click(function(e){
+      close_modal(e)
+    })
+    function close_modal(e){
+      var target = e.target;
+      if ($('.message_content:visible').length > 0){
+        if ( $(target).is('.fa.fa-angle-left') || $(target).is('.message_close') || !$(target).is('[name="message_button"]') && !$(target).is('.message_content') && !$(target).parents('.message_content').is('.message_content')&& !$(target).is('.message_modal') && !$(target).parents('.message_modal').is('.message_modal')) {
+          $('.message_content').hide();
+        }
+      }else{
+        if ( $(target).is('.fa.fa-angle-left') || $(target).is('.message_close') || !$(target).is('[name="message_button"]') && !$(target).is('.message_modal') && !$(target).parents('.message_modal').is('.message_modal')) {
+          $('.message_modal').hide();
+          $('.message_close').hide();
+        }
+      }
+    }
 
-
+    $('[id^=message_room]').click(function(){
+      $('.message_content').show();
+      $(".message_body").scrollTop($('.messages').height() );
+    })
   })
 </script>

@@ -1,12 +1,12 @@
-.message_modal{
+@mixin message_template{
   position: fixed;
-  left: 60px;
+  left: 80px;
   bottom: 60px;
-  width: 300px;
+  width: 320px;
   height: 482px;
   border-radius: 20px;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 2000;
   background-color: #FFFFFF;
   display: none;
   -webkit-box-shadow: -3px 9px 25px 5px rgba(136,136,136,0.7);
@@ -22,17 +22,28 @@
     -webkit-box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
     -moz-box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
     box-shadow: -3px -1px 24px 5px rgba(136,136,136,1);
+    position: relative;
+    .fa-angle-left{
+      position: absolute;
+      top: 15px;
+      left: 35px;
+      font-size: 2em;
+    }
   }
+}
+.message_modal{
+  @include message_template;
   .message_body{
     height: calc(100% - 150px);
     overflow-y: scroll;
     overflow-x: hidden;
     .message_room{
+      cursor: pointer;
       border-bottom: 1px solid RGBA(240, 240, 240, 1.00);
     }
-    .message_content{
-      width:187px;
-      overflow: hidden;
+    .message_desc{
+      width:100%;
+      overflow:hidden;
     }
   }
   .message_bottom{
@@ -43,5 +54,85 @@
       margin-bottom: 20px;
       margin-top: 16px;
     }
+  }
+}
+.message_content{
+  @include message_template;
+  .message_body{
+    height: calc(100% - 130px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .message_bottom{
+    height: 60px;
+    padding: 0;
+    input{
+      border:none;
+      width: 100%;
+      height: 100%;
+      background-color: #F4F4F4;
+      outline: none;
+      padding-right: 10px;
+      padding-left: 15px;
+    }
+  }
+  .message_top{
+    text-align: left;
+  }
+  .background_img_setting{
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-top: 10px !important;
+    margin-right: 20px;
+  }
+  .message-left,.message-right{
+    width: 80%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    :after{
+      display: block;
+      content:' ';
+      clear: both;
+    }
+  }
+  .message-left{
+    background-color: #F4F4F4;
+    float: left;
+  }
+  .message-right{
+    background-color: #DDDDDD;
+    float: right;
+  }
+}
+.message_close{
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  @extend .background_red;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-size: 50px;
+  line-height: 40px;
+  display: none;
+  z-index: 1000;
+  cursor: pointer;
+  -webkit-box-shadow:-2px 2px 14px -2px rgba(136,136,136,1);
+  -moz-box-shadow:-2px 2px 14px -2px rgba(136,136,136,1);
+  box-shadow:-2px 2px 14px -2px rgba(136,136,136,1);
+}
+@media (max-width: $screen-sm-max) {
+  .message_modal,.message_content{
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    z-index: 1080;
   }
 }
