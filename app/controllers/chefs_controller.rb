@@ -189,9 +189,9 @@ class ChefsController < ApplicationController
     @star_2_num = @star_2_food_comments.size
     @star_3_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 3,4)
     @star_3_num = @star_3_food_comments.size
-    @star_4_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4,5)
+    @star_4_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4,4.5)
     @star_4_num = @star_4_food_comments.size
-    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 5,6)
+    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4.5,5)
     @star_5_num = @star_5_food_comments.size
 
     # default rating 使用
