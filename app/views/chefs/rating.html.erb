@@ -14,19 +14,13 @@
       <section class="row">
         <div class="col-xs-12 basic_bg_top">
           <div class="row" name="kitchen_banner">
-
             <div class="col-xs-12 df_sm mb15 tac tal_sm">
-
               <div class="img_upload ml30_sm p10 dib background_white border_main_radius" name="profile">
                 <label style="background-image:url(<%= @chef.user.user_photo.photo.url if @chef.user.user_photo.try(:'photo.file?') %>); cursor: default;"></label>
               </div>
-
-
               <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm"><%= @chef.restaurant.name%></h1>
             </div>
-
             <%= render 'chef_banner' %>
-
           </div>
         </div>
       </section>
@@ -61,8 +55,7 @@
         </div>
 
         <div class="col-xs-12 prl15_sm" id="chef_rating_content">
-
-              <%= render 'food_rating' %>
+          <%= render 'food_rating' %>
         </div>
 
       </div>

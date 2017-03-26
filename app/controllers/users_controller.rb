@@ -36,6 +36,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def message; end
+
 	def like
 		user_id = params[:user_id]
 		@restaurant_id = params[:restaurant_id]
@@ -78,6 +80,10 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			format.js {render 'like'}
 		end
+	end
+
+	def review
+    @food_comments = FoodComment.first(3)
 	end
 
 	def kitchen

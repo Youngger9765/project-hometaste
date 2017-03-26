@@ -14,75 +14,78 @@
           </div>
         </div>
       </section>
+    </div>
+<% end %>
 
-      <section class="row">
-        <div class="col-xs-12 basic_bg ui form">
+<div class="container">
+  <section class="row">
+    <div class="col-xs-12 basic_bg ui form">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
           <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-              <div class="row">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 p50">
-                  <div class="red_circular">
-                    <h2 class="bold red">USD $<%=@total_orders_income%></h2>
-                  </div>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Total orders:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30"><%=@total_orders_count%></h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Total revenue:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">$<%=@total_orders_income%></h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Total sale this month: </h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30">$<%= @this_month_income%></h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Rating:</h4>
-                  <h4 class="mtb20_sm mtb15 dib ml30"><%= @food_avg_summary_score%></h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Most popular item:</h4>
-                  <h4 class="mtb20_sm mtb15 dib_sm ml30_sm">
-                  <% if @most_popular_food.present?%>
-                    <%= @most_popular_food.name %> / <%= @most_popular_quantity%>
-                  <%end%>
-                  </h4>
-                </div>
-                <div class="col-xs-12">
-                  <h4 class="mtb20_sm mtb15 dib bold">Sale detail report:</h4>
-                </div>
-                <div class="col-xs-2">
-                  <h4 class="bold dib">From</h4>
-                </div>
-                <div class="col-xs-8">
-                  <div class="field">
-                    <%= date_field_tag :pick_up_date %>
-                  </div>
-                </div>
-                <div class="col-xs-1">
-                  <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
-                </div>
-                <div class="clearfix mtb20_sm"></div>
-                <div class="col-xs-2">
-                  <h4 class="bold dib">To</h4>
-                </div>
-                <div class="col-xs-8">
-                  <div class="field">
-                    <%= date_field_tag :pick_up_date %>
-                  </div>
-                </div>
-                <div class="col-xs-1">
-                  <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
-                </div>
-                <div class="col-xs-12 mtb20 tac">
-                  <button class="my_btn">Export</button>
-                </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 p50">
+              <div class="red_circular">
+                <h2 class="bold red">USD $<%=@total_orders_income%></h2>
               </div>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="mtb20_sm mtb15 dib bold">Total orders:</h4>
+              <h4 class="mtb20_sm mtb15 dib ml30"><%=@total_orders_count%></h4>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="mtb20_sm mtb15 dib bold">Total revenue:</h4>
+              <h4 class="mtb20_sm mtb15 dib ml30">$<%=@total_orders_income%></h4>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="mtb20_sm mtb15 dib bold">Total sale this month: </h4>
+              <h4 class="mtb20_sm mtb15 dib ml30">$<%= @this_month_income%></h4>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="mtb20_sm mtb15 dib bold">Rating:</h4>
+              <h4 class="mtb20_sm mtb15 dib ml30"><%= @food_avg_summary_score%></h4>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="mtb20_sm mtb15 dib bold">Most popular item:</h4>
+              <h4 class="mtb20_sm mtb15 dib_sm ml30_sm">
+                <% if @most_popular_food.present?%>
+                    <%= @most_popular_food.name %> / <%= @most_popular_quantity%>
+                <%end%>
+              </h4>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="mtb20_sm mtb15 dib bold">Sale detail report:</h4>
+            </div>
+            <div class="col-xs-2">
+              <h4 class="bold dib">From</h4>
+            </div>
+            <div class="col-xs-8">
+              <div class="field">
+                <%= date_field_tag :pick_up_date %>
+              </div>
+            </div>
+            <div class="col-xs-1">
+              <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
+            </div>
+            <div class="clearfix mtb20_sm"></div>
+            <div class="col-xs-2">
+              <h4 class="bold dib">To</h4>
+            </div>
+            <div class="col-xs-8">
+              <div class="field">
+                <%= date_field_tag :pick_up_date %>
+              </div>
+            </div>
+            <div class="col-xs-1">
+              <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
+            </div>
+            <div class="col-xs-12 mtb20 tac">
+              <button class="my_btn">Export</button>
             </div>
           </div>
         </div>
-      </section>
-
+      </div>
     </div>
-<% end %>
+  </section>
+
+</div>
+

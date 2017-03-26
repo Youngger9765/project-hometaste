@@ -90,4 +90,9 @@
       }
     }
   }
+  .basic_bg_bottom{
+    &.red:after{
+      width: 120px;
+    }
+  }
 }

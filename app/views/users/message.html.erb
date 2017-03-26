@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <section class="col-xs-12 basic_bg_top prl30_sm">
+      <div class="row">
+        <%= render 'user_banner' %>
+      </div>
+    </section>
+    <section class="col-xs-12 basic_bg prl15_sm prl30_md">
+      <div class="row">
+
+        <div class="col-xs-12 two_btn prl35 mb25 mb0_sm">
+          <div class="message_search_wrap">
+            <input type="text" class="border_black fluid not_focus_outline pr20 pl70" style="font-size: 18px; border-radius: 30px; height: 50px;">
+          </div>
+        </div>
+
+        <div class="col-xs-12 prl15_sm" id="my_purchase_content">
+          <!-- 這裡的id要用each出來的user_id 動態附上 ajax要追蹤用-->
+          <% id = 1 %>
+          <div class="black_border_block mt25_sm mrl5_sm mrl25_md pb15" id="message_modal_<%= id %>">
+
+            <div class="row df_sm">
+              <div class="col-xs-8 col-xs-offset-2 col-sm-3 col-sm-offset-0 col-md-2">
+                <div class="background_img_setting border_main_radius mt15 mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
+              </div>
+              <div class="col-xs-12 col-sm-9 col-md-10 vertical_space_around tac tan_sm">
+                <h3 class="bold mt30 mtn_sm">Mr. Chan’s Kitchen</h3>
+                <div style="font-size: 18px;" class="mt10">Where is my duck?</div>
+                <div style="font-size: 16px;" class="mtb20 mtb10_sm flex_space_between flex_vertical_center flex_wrap">
+                  <span style="color: #9B9B9B;" class="db mrla_xs ml0_sm">2016/12/11</span>
+                  <div class="clearfix visible-xs" style="flex-basis: 100%;"></div>
+                  <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm mt20 mt0_sm" name="message_button">Message</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<%= render 'common/message_room' %>
