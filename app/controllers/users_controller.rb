@@ -80,6 +80,10 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def review
+    @food_comments = FoodComment.first(3)
+	end
+
 	def kitchen
 		@liking_restaurants = @user.liking_restaurants
 		@datetime_now = Time.now.utc.localtime
