@@ -213,7 +213,7 @@ namespace :dev do
       is_reply = [true,false].sample
       if is_reply
         reply = FoodCommentReply.create(
-          user_id: User.where.not(:is_chef => true).ids.sample,
+          chef_id: comment.restaurant.chef.id,
           food_comment_id: comment.id,
           content: Faker::Lorem.paragraph,
         )

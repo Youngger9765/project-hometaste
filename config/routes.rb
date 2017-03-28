@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   resources :chefs do
     resources :foods
     resources :big_buns
+    resources :replies
     member do
       get :review
       get :approve

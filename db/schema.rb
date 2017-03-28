@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326003138) do
+ActiveRecord::Schema.define(version: 20170328012414) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 20170326003138) do
     t.text     "content",         limit: 65535
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "user_id"
+    t.integer  "chef_id"
     t.index ["food_comment_id"], name: "index_food_comment_replies_on_food_comment_id", using: :btree
   end
 

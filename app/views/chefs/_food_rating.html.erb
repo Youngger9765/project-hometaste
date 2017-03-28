@@ -14,8 +14,11 @@
         </div>
         <div class="col-md-2 col-sm-2 hidden-xs">
           <!--如果有回覆紀錄Reply字串改成Edit-->
-          <button class="my_btn comment_reply_btn flr">Reply</button>
-          <button class="my_btn comment_edit_btn flr hidden">Edit</button>
+          <% if food_comment.food_comment_replies.size == 0%>
+            <button class="my_btn comment_reply_btn flr">Reply</button>
+          <% else %>
+            <button class="my_btn comment_reply_btn flr">Edit</button>
+          <% end %>
         </div>
       </div>
       <div class="row">
@@ -36,9 +39,17 @@
           <div class="hidden comment_reply_textarea">
             <i class="gray_line"></i>
             <!--如果有回覆了就直接噴在textarea上，textarea一開始不關有沒有回覆都要被render出來，就回覆也直接噴在上面但hidden-->
-            <%= form_for foods_path, remote: true do |f| %>
-                <%= f.label :comment, 'Reply', class:'bold red' %>
-                <%= f.text_area :comment, style:'border-radius:5px;', rows:'5' %>
+            <% if food_comment and food_comment.food_comment_replies.size > 0%>
+              <% @reply = food_comment.food_comment_replies.first %>
+              <% @url = chef_reply_path(@chef,@reply,:food_comment_id => food_comment)%>
+            <% else %>
+              <% @reply = FoodCommentReply.new%>
+              <% @url = chef_replies_path(@chef,:food_comment_id => food_comment)%>
+            <% end %>
+
+            <%= form_for @reply, url:@url, remote: true do |f| %>
+                <%= f.label :content, 'Reply', class:'bold red' %>
+                <%= f.text_area :content, style:'border-radius:5px;', rows:'5' %>
                 <%= f.submit :send, class:'flr my_btn', style:'width: 115px;height: 40px;' %>
             <% end %>
           </div>
@@ -46,8 +57,11 @@
       </div>
       <div class="col-md-2 col-sm-2 visible-xs tac">
         <!--如果有回覆紀錄Reply字串改成Edit-->
-        <button class="my_btn comment_reply_btn mt20">Reply</button>
-        <button class="my_btn comment_edit_btn hidden mt20">Edit</button>
+        <% if food_comment.food_comment_replies.size == 0%>
+          <button class="my_btn comment_reply_btn mt20">Reply</button>
+        <% else %>
+          <button class="my_btn comment_edit_btn mt20">Edit</button>
+        <% end %>
       </div>
     </div>
 <% end %>
