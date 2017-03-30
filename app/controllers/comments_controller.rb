@@ -49,6 +49,35 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update_food_comment
+    food_comment = FoodComment.find(params[:food_comment_id])
+
+    if food_comment.nil?
+      @message = "please refresh page"
+    elsif !current_user
+      @message = 'Need to login first'
+    elsif current_user != food_comment.user
+      @message = "You are not allow to do this!"
+    else
+      food_comment.update!(food_comment_params)
+      restaurant = food_comment.restaurant
+
+      if food_comment.save!
+        # 更新summary_score
+        food_comment.summary_score = food_comment.get_summary_score
+        food_comment.save!
+
+        # 餐廳重新寄分
+        restaurant.update_score
+        restaurant.save!
+      end
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def find_restaurant
