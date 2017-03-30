@@ -94,6 +94,10 @@ Rails.application.routes.draw do
     end
 
     resources :comments do
+      member do
+        post :update_food_comment
+      end
+
       collection do
         post :create_food_comment
       end
