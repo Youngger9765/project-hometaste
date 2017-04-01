@@ -12,9 +12,9 @@
         </div>
 
         <div class="col-xs-12">
-          <div class="tac pt30">
+          <div class="tac pt30 load_more">
             <% if @next_page %>
-                <%= link_to "Load More", review_user_path(current_user, :page => @next_page ), :remote => true, :class => "my_btn", :id => "load-more" %>
+                <%= link_to "Load More", review_user_path(current_user, :page => @next_page ), :remote => true, :id => "load-more" %>
             <% end %>
           </div>
         </div>

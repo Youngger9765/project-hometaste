@@ -214,6 +214,7 @@ class ChefsController < ApplicationController
       @food_comments = @all_food_comments
     end
 
+    @load_more = params[:load_more]
     @food_comments = @food_comments.page(params[:page]).per(5)
     if @food_comments.last_page?
       @next_page = nil

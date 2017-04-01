@@ -58,9 +58,9 @@
           <%= render 'food_rating' %>
         </div>
         <div class="col-xs-12">
-          <div class="tac pt30">
+          <div class="tac pt30 load_more">
             <% if @next_page %>
-                <%= link_to "Load More", rating_chef_path(@chef, type: 6,:page => @next_page ), :remote => true, :class => "my_btn", :id => "load-more" %>
+                <%= link_to "Load More", rating_chef_path(@chef, type: 6,:page => @next_page, load_more: true), :remote => true, :id => "load-more" %>
             <% end %>
           </div>
         </div>
