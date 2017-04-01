@@ -1,0 +1,7 @@
+$('#user_reviews').append('<%=j render 'food_comments', local: @food_comments %>');
+
+<% if @next_page %>
+$("#load-more").attr('href','<%= review_user_path(current_user, :page => @next_page ) %> %>')
+<% else %>
+$("#load-more").hide()
+<% end %>

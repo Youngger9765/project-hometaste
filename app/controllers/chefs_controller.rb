@@ -183,7 +183,7 @@ class ChefsController < ApplicationController
   end
 
   def rating
-    star_type = params[:type]
+    @star_type = params[:type]
     @all_food_comments = @chef.restaurant.food_comments
     @star_all_num = @all_food_comments.size
     @star_1_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 1,2)
@@ -194,24 +194,31 @@ class ChefsController < ApplicationController
     @star_3_num = @star_3_food_comments.size
     @star_4_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4,4.5)
     @star_4_num = @star_4_food_comments.size
-    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4.5,5)
+    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score <= ?", 4.5,5)
     @star_5_num = @star_5_food_comments.size
 
     # default rating 使用
     @food_comments = @all_food_comments
 
-    if star_type == "5"
+    if @star_type == "5"
       @food_comments = @star_5_food_comments
-    elsif star_type == "4"
+    elsif @star_type == "4"
       @food_comments = @star_4_food_comments
-    elsif star_type == "3"
+    elsif @star_type == "3"
       @food_comments = @star_3_food_comments
-    elsif star_type == "2"
+    elsif @star_type == "2"
       @food_comments = @star_2_food_comments
-    elsif star_type == "1"
+    elsif @star_type == "1"
       @food_comments = @star_1_food_comments
-    elsif star_type == "6"
+    elsif @star_type == "6"
       @food_comments = @all_food_comments
+    end
+
+    @food_comments = @food_comments.page(params[:page]).per(5)
+    if @food_comments.last_page?
+      @next_page = nil
+    else
+      @next_page = @food_comments.next_page
     end
 
     respond_to do |format|

@@ -83,7 +83,19 @@ class UsersController < ApplicationController
 	end
 
 	def review
-    @food_comments = FoodComment.first(3)
+    @food_comments = current_user.food_comments
+
+    @food_comments = @food_comments.page(params[:page]).per(5)
+    if @food_comments.last_page?
+      @next_page = nil
+    else
+      @next_page = @food_comments.next_page
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
 	end
 
 	def kitchen

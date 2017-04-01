@@ -1,0 +1,10 @@
+var food_comment = $('#food_comment_<%= @food_comment.id %> .food_comment')
+food_comment.show().removeClass('hidden')
+food_comment.find('p').html('<%= @food_comment.comment %>')
+food_comment.find('span').html('<%= @food_comment.updated_at.localtime.strftime("%Y/%m/%d") %>')
+$('#food_comment_<%= @food_comment.id %> .comment_reply_textarea').addClass('hidden')
+$('#food_comment_<%= @food_comment.id %> .comment_edit_btn').show()
+<% if @message %>
+  alert_message('<%= @message %>')
+  $('.alert_message p').html('<%= @message %>')
+<% end %>
