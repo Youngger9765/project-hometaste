@@ -6,10 +6,10 @@ class BigBun < ApplicationRecord
   validates :stop_datetime, :presence => true
 
   belongs_to :restaurant
-  belongs_to :user
   has_one :big_bun_photo
 
   has_many :user_big_bun_ships
+  has_many :users, :through => :user_big_bun_ships
 
   accepts_nested_attributes_for :big_bun_photo,
                                 :allow_destroy => true,
