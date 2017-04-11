@@ -12,14 +12,13 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
 
   has_one :chef
-  has_one :restaurant
   has_one :user_photo
 
   has_many :orders
-  has_many :big_buns
   has_many :carts
   has_many :food_comments
   has_many :user_big_bun_ships
+  has_many :big_buns, :through => :user_big_bun_ships
 
   has_many :user_food_likings
   has_many :liking_foods , :source => :food, :through => :user_food_likings
