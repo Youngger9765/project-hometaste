@@ -11,4 +11,9 @@ class UserMailer < ApplicationMailer
     @reason = reason
     mail(:to => user.email, :subject => "[Homeaste] Refound Notify")
   end
+
+  def send_orders_reached_to_chef(chef)
+    @chef = chef
+    mail(:to => chef.user.email, :subject => "[Homeaste] Orders Build Notify")
+  end
 end

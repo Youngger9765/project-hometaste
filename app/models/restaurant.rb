@@ -207,6 +207,7 @@ class Restaurant < ApplicationRecord
 
     # 處理 bulk_buy
     bulk_buy = BulkBuy.find(bulk_buy_id)
+    restaurant = bulk_buy.restaurant
     # paid 且 處理中
     paid_process_orders = bulk_buy.orders.where(:payment_status => "paid").where(order_status: "process")
     # 今天的orders
@@ -224,6 +225,13 @@ class Restaurant < ApplicationRecord
     if total_amount < self.order_reach
       today_paid_process_orders.update(:order_status => "cancelled")
       today_delivery_orders.update(:order_status => "cancelled")
+      print("===== orders not reach, cancel orders! ===")
+    else
+      if restaurant.communication_method = "email"
+        print("===== send mail to chef when orders reach ===")
+        chef = restaurant.chef
+        UserMailer.send_orders_reached_to_chef(chef).deliver_now!
+      end
     end
 
   end
