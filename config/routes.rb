@@ -81,6 +81,9 @@ Rails.application.routes.draw do
 
       #yep
       post :yep_or_not
+
+      #report
+      get :orders_to_csv
     end
   end
 
