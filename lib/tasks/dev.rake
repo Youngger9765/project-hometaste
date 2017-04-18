@@ -28,6 +28,15 @@ namespace :dev do
 
   task :fake => :environment do
 
+
+    create_chef = true
+    users_cnt = 0
+    foods_cnt = 0
+    food_comments_cnt = 0
+    orders_cnt = 0
+    order_food_ships_cnt = 0
+
+
     # admin@admin.com
     puts('create admin')
 
@@ -46,17 +55,19 @@ namespace :dev do
     # chef@chef.com
     puts('create chef')
 
-    User.create(
-      name: "chef",
-      foodie_id: "chef",
-      email: "chef@chef.com",
-      phone_number: Faker::PhoneNumber.cell_phone,
-      password: 12345678,
-      confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
-      address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-      is_chef: true,
-      is_admin: false,
-    )
+    if create_chef
+      User.create(
+        name: "chef",
+        foodie_id: "chef",
+        email: "chef@chef.com",
+        phone_number: Faker::PhoneNumber.cell_phone,
+        password: 12345678,
+        confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
+        address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
+        is_chef: true,
+        is_admin: false,
+      )
+    end
 
     # me
     puts('create me')
@@ -76,7 +87,7 @@ namespace :dev do
     # create 50 users
     puts('create 50 users')
 
-    0.times {
+    users_cnt.times {
       User.create(
         name: Faker::Name.name,
         foodie_id: Faker::Name.name,
@@ -161,7 +172,7 @@ namespace :dev do
     # create foods
     puts('create foods')
 
-    300.times {
+    foods_cnt.times {
       Food.create(
         restaurant_id: Restaurant.all.ids.sample,
         name: Faker::Pokemon.name,
@@ -182,7 +193,7 @@ namespace :dev do
     # create food_comments
     puts('create food_comments')
 
-    500.times {
+    food_comments_cnt.times {
       restaurant_id = Restaurant.ids.sample
       food_id = Restaurant.find(restaurant_id).foods.ids.sample
 
@@ -224,7 +235,7 @@ namespace :dev do
     # create orders
     puts('create orders')
 
-    100.times {
+    orders.times {
       order = Order.create(
         user_id: User.all.ids.sample,
         restaurant_id: Restaurant.all.ids.sample,
@@ -252,7 +263,7 @@ namespace :dev do
     # create order_food_ships
     puts('create order_food_ships')
 
-    500.times {
+    order_food_ships_cnt.times {
       order = OrderFoodShip.create(
         order_id: Order.all.ids.sample,
         food_id: Food.all.ids.sample,
