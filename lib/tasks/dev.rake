@@ -29,7 +29,7 @@ namespace :dev do
   task :fake => :environment do
 
 
-    create_chef = true
+    create_chef = false
     users_cnt = 0
     foods_cnt = 0
     food_comments_cnt = 0
