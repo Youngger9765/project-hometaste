@@ -76,7 +76,7 @@ namespace :dev do
     # create 50 users
     puts('create 50 users')
 
-    50.times {
+    0.times {
       User.create(
         name: Faker::Name.name,
         foodie_id: Faker::Name.name,
