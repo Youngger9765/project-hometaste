@@ -29,6 +29,17 @@ class BigBun < ApplicationRecord
     end
   end
 
+  def availible_num
+    total = self.unit
+    ships = self.user_big_bun_ships
+    # 如果是 self 取得，就算佔據
+    self_num = ships.where(:usage => "self").size
+    # 如果是分享的，要實際用掉才算用掉
+    gift_used_num = ships.where(:usage => "gift", :is_used => 1).size
+    availible_num = total - self_num - gift_used_num
+    availible_num
+  end
+
   private
 
   def set_code
