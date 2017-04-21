@@ -107,6 +107,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :big_buns do
+    collection do
+      get :user_get_big_bun
+    end
+  end
+
 
 
   # resources :orders do

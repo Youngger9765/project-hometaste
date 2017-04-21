@@ -19,7 +19,7 @@ class BigBun < ApplicationRecord
 
   def self.available_bigbun
     bigbun = where( 'start_datetime <= ? and stop_datetime > ?',Time.current,Time.current ).first
-    if bigbun
+    if bigbun && bigbun.availible_num > 0
       prepare_time = bigbun.prepare_time.to_time.to_s(:time)
       hour = prepare_time[0..1].to_i
       min = prepare_time[3..4].to_i
