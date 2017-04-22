@@ -24,7 +24,7 @@ class ApiV1::SearchController < ApplicationController
   end
 
   def keyword
-    restaurants = Restaurant.get_around_restaurants(5000, @lat, @long)
+    restaurants = Restaurant.get_around_restaurants(5, @lat, @long)
     case @keyword
     when 'Kitchenorchef' then @restaurants = restaurants
     when 'Mostpopular'   then @foods = restaurants.get_popular_foods
