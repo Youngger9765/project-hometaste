@@ -22,5 +22,4 @@
 //= require underscore
 //= require_tree ./common
 //= require gmaps/google
-//= require gmaps
 //= require cart
