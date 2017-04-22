@@ -1,5 +1,7 @@
-<% if @foods.present? %>
+<% if @foods %>
   $("#results").html("<%=j render 'main/foods', foods: @foods %>");
 <% elsif @restaurants %>
   $("#results").html("<%=j render 'main/restaurants', restaurants: @restaurants %>");
+<% else %>
+  $("#results").html("<div class='col-xs-12 ptb50 tac'><h3 class='black'>Have no foods or restaurants. Please search again! </h2></div>");
 <% end %>

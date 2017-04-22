@@ -11,16 +11,7 @@ class MainController < ApplicationController
                  .includes(:restaurant, :cuisines, :food_photos)
                  .today_foods(@foods_ids)
     @cuisines = Cuisine.all
-
-    array = []
-    @foods.each do |food|
-      if food.get_available_bigbun
-        # 剩下的可用的bigbun 數量
-        left_num = food.get_available_bigbun.availible_num
-        array << [food, food.get_available_bigbun, left_num]
-      end
-    end
-    @food_available_bigbun_array = array
+    @food_available_bigbun_array = @foods.available_bigbun
 
     save_search_results_in_cookies
   end
