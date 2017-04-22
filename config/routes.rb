@@ -106,7 +106,8 @@ Rails.application.routes.draw do
 
   resources :big_buns do
     collection do
-      get :user_get_big_bun
+      post :user_get_big_bun
+      post :user_send_big_bun_as_gift
     end
   end
 

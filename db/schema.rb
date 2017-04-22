@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328012414) do
+ActiveRecord::Schema.define(version: 20170422040132) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -300,6 +300,7 @@ ActiveRecord::Schema.define(version: 20170328012414) do
     t.boolean  "is_used",    default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "giver_id"
     t.index ["big_bun_id"], name: "index_user_big_bun_ships_on_big_bun_id", using: :btree
     t.index ["order_id"], name: "index_user_big_bun_ships_on_order_id", using: :btree
     t.index ["user_id"], name: "index_user_big_bun_ships_on_user_id", using: :btree
