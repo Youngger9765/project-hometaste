@@ -94,7 +94,6 @@ class BigBunsController < ApplicationController
 			big_bun = BigBun.find(big_bun_id)
 			big_bun_left_num = big_bun.availible_num
 			# 提供bigbun
-			raise
 			if user_has_size == 0 && big_bun_left_num > 0
 				# self bigbun update
 				UserBigBunShip.create(	:user => user,
@@ -114,6 +113,30 @@ class BigBunsController < ApplicationController
 				@msg = "user can't get this bigbun"
 				# TODO:Ajax 補上return
 			end
+		end
+	end
+
+	def user_send_big_bun_as_gift
+		big_bun_id = params[:big_bun_id]
+		send_email = params[:email]
+		big_bun = BigBun.find(big_bun_id)
+		taker = User.find_by(:email => send_email)
+		if big_bun.present? && taker.present?
+			if current_user
+				ship = current_user.user_big_bun_ships.find_by(:big_bun_id => big_bun_id, :usage => "gift")
+				if ship.present?
+					ship.user_id = taker.id
+					ship.giver_id = current_user.id
+					ship.save!
+					# TODO:Ajax 補上return
+				end
+			else
+				@msg = "current_user error"
+				# TODO:Ajax 補上return
+			end
+		else
+			@msg = "params error"
+			# TODO:Ajax 補上return
 		end
 	end
 
