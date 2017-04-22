@@ -23,6 +23,15 @@ class MainController < ApplicationController
     @food_available_bigbun_array = array
 
     save_search_results_in_cookies
+
+
+    session[:conversations] ||= []
+
+    @users = User.all.where.not(id: current_user)
+    @conversations = Conversation.includes(:recipient, :messages)
+                                 .find(session[:conversations])
+
+
   end
 
   def terms; end
