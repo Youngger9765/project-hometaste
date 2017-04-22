@@ -24,6 +24,8 @@
 //= require gmaps/google
 //= require gmaps
 //= require cart
+//= require cable
+//= require channels/conversation
 
 
 
