@@ -36,6 +36,15 @@ class RestaurantsController < ApplicationController
     # score_rate_f = ((@restaurant.food_avg_summary_score - score_rate_i)/0.5).to_i
     # @score_rate = score_rate_i.to_s + ("_5" * score_rate_f)
 
+    array = []
+    if @restaurant.get_available_bigbun
+      # 剩下的可用的bigbun 數量
+      left_num = @restaurant.get_available_bigbun.availible_num
+      array << [@restaurant, @restaurant.get_available_bigbun, left_num]
+    end
+    @restaurant_available_bigbun_array = array
+
+
     respond_to do |format|
       format.html
       format.js

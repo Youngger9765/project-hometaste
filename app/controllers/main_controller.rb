@@ -15,7 +15,9 @@ class MainController < ApplicationController
     array = []
     @foods.each do |food|
       if food.get_available_bigbun
-        array << [food, food.get_available_bigbun]
+        # 剩下的可用的bigbun 數量
+        left_num = food.get_available_bigbun.availible_num
+        array << [food, food.get_available_bigbun, left_num]
       end
     end
     @food_available_bigbun_array = array

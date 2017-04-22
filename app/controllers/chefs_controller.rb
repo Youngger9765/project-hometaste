@@ -3,7 +3,7 @@ class ChefsController < ApplicationController
   before_action :find_chef_restaurant, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
     :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
-    :completed,:cancelled, :rating, :message]
+    :completed,:cancelled, :rating, :message,:orders_to_csv]
 
   before_action :find_user, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
@@ -13,7 +13,7 @@ class ChefsController < ApplicationController
   # before_action :is_current_user?, :except => [:new]
   # before_action :has_authority?, :except => [:new]
   before_action :user_admin?, :only => [:approve, :review]
-  before_action :find_orders, :only => [:sales,:summary, :delivering, :advance,:completed,:cancelled]
+  before_action :find_orders, :only => [:sales,:summary, :delivering, :advance,:completed,:cancelled,:orders_to_csv]
 
   def new
     @user = User.new
@@ -155,8 +155,6 @@ class ChefsController < ApplicationController
       @most_popular_quantity = food_dict.max_by{|k,v| v}[1]
       @most_popular_food = Food.find(most_popular_food_id)
     end
-         
-    # 可以導出日期區間的銷售報表 (csv)
   end
 
   def edit
@@ -270,6 +268,18 @@ class ChefsController < ApplicationController
       flash[:notice] = "Successfully cancel order"
     end
     redirect_to sales_chef_path(@chef)
+  end
+
+  def orders_to_csv
+    report_pick_up_date_from = params[:report_pick_up_date_from] + "00:00:00"
+    report_pick_up_date_to = params[:report_pick_up_date_to] + "00:00:00"
+
+    orders = @restaurant.orders.where("created_at >= ? AND created_at <= ?", report_pick_up_date_from, report_pick_up_date_to)
+    respond_to do |format|
+      format.html
+      format.csv { send_data orders.to_csv }
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
   end
 
   private
