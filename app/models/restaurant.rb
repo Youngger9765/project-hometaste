@@ -98,14 +98,15 @@ class Restaurant < ApplicationRecord
   end
 
   def self.get_around_restaurants(km = 2, *coordinate)
-    restaurant_ids = []
+    restaurant_ids = {}
     lat, long = coordinate
     all.each do |restaurant|
-      if restaurant.distance_to([lat, long], :km) && restaurant.distance_to([lat, long], :km) < km
-        restaurant_ids << restaurant.id
+      result = restaurant.distance_to([lat, long], :km)
+      if result && result < km
+        restaurant_ids[restaurant.id] = result
       end
     end
-    where(id: restaurant_ids)
+    where(id: restaurant_ids.sort_by {|_key, value| value}.map(&:first))
   end
 
   def self.filter(params, lat_long, ids = self.ids)

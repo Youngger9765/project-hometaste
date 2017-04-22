@@ -24,7 +24,7 @@ class ApiV1::SearchController < ApplicationController
   end
 
   def keyword
-    restaurants = Restaurant.get_around_restaurants(50000, @lat, @long)
+    restaurants = Restaurant.get_around_restaurants(5000, @lat, @long)
     case @keyword
     when 'Kitchenorchef' then @restaurants = restaurants
     when 'Mostpopular'   then @foods = restaurants.get_popular_foods
@@ -33,9 +33,11 @@ class ApiV1::SearchController < ApplicationController
       @foods = Food.ransack(name_cont_any: @keyword)
                    .result(distinct: true)
                    .joins(:restaurant)
+                   .includes(:restaurant)
                    .where(restaurant_id: restaurants.ids)
       if @foods.size == 0
         @restaurants = Restaurant.ransack(name_cont_any: @keyword)
+                           .includes(:restaurant_comments, :user_restaurant_likings, :cuisines)
                            .result(distinct: true)
                            .where(id: restaurants.ids)
       end

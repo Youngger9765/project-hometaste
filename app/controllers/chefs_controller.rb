@@ -22,7 +22,7 @@ class ChefsController < ApplicationController
 
   def create
     create_pass = true
-    flash[:alert] = []
+    flash[:alert] = 'Chef create success!'
 
     @chef = Chef.new(chef_params)
 
