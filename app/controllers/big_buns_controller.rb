@@ -122,7 +122,7 @@ class BigBunsController < ApplicationController
 		big_bun = BigBun.find(big_bun_id)
 		taker = User.find_by(:email => send_email)
 		if big_bun.present? && taker.present?
-			if current_user
+			if current_user && taker != current_user
 				ship = current_user.user_big_bun_ships.find_by(:big_bun_id => big_bun_id, :usage => "gift")
 				if ship.present?
 					ship.user_id = taker.id
@@ -131,7 +131,7 @@ class BigBunsController < ApplicationController
 					# TODO:Ajax 補上return
 				end
 			else
-				@msg = "current_user error"
+				@msg = "current_user or send_email error"
 				# TODO:Ajax 補上return
 			end
 		else
