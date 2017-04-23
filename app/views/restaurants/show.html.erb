@@ -218,7 +218,7 @@
 </div>
 
 <%= render 'common/add_to_cart' %>
-<% if @restaurant.get_available_bigbun.is_a?(ActiveRecord::Base) %>
+<% if @restaurant.get_available_bigbun %>
     <%= render 'common/bigbun', restaurant: @restaurant , bigbun:@restaurant.get_available_bigbun,food:nil %>
 <% end %>
 

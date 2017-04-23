@@ -6,7 +6,7 @@ class MainController < ApplicationController
     @lat = request.location.data['latitude'].to_f
     @long = request.location.data['longitude'].to_f
 
-    approved_restaurant = Restaurant.get_around_restaurants( 5 ,@lat,@long).where(:is_approved => true)
+    approved_restaurant = Restaurant.get_around_restaurants( 50000 ,@lat,@long).where(:is_approved => true)
     @foods = Food.where(:restaurant_id => approved_restaurant.ids)
                  .includes(:restaurant, :cuisines, :food_photos)
                  .today_foods(@foods_ids)

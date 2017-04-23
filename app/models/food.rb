@@ -46,11 +46,12 @@ class Food < ApplicationRecord
 
   def self.available_bigbun
     array = []
-    all.each do |food|
-      if food.get_available_bigbun
+    all.includes(:restaurant, restaurant: :big_buns).each do |food|
+      bigbun = food.get_available_bigbun
+      if bigbun
         # 剩下的可用的bigbun 數量
-        left_num = food.get_available_bigbun.availible_num
-        array << [food, food.get_available_bigbun, left_num]
+        left_num = bigbun.availible_num
+        array << [food, bigbun, left_num]
       end
     end
     array
