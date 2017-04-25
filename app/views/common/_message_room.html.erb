@@ -1,23 +1,21 @@
-<div class="message_modal">
-
   <div class="message_top white col-xs-12">
     <h3><i class="fa fa-angle-left visible-xs visible-sm cursor_pointer"></i> Conversations</h3>
-    <p>with Mr.Chan's Kitchen</p>
+    <p>with <%= @recipient.name || @customer.name%></p>
   </div>
   <div class="message_body col-xs-12">
-    <% 10.times do %>
-        <% id = 1 %>
+    <% @messages.each do |message|%>
+        <% id =@conversation.id %>
         <div class="row message_room ptb15 prl5" id="message_room_<%= id %>">
           <div class="col-xs-2 prl10 col-sm-1 col-md-3">
             <div class="background_img_setting border_main_radius mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
           </div>
           <div class="col-xs-10 col-sm-11 col-md-9">
             <div class="align_two_side">
-              <h4>Mr.chan</h4>
-              <span class="gray">1 W ago</span>
+              <h4><%=message.user.name%></h4>
+              <span class="gray"><%=message.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span>
             </div>
             <div class="message_desc">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              <%=message.body%>
             </div>
           </div>
         </div>
@@ -38,18 +36,19 @@
       </div>
       <div class="col-xs-7" style="height: 70px;">
         <div class="background_img_setting border_main_radius" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
-        <h4 class="mtb10" style="font-size: 18px;">Mr.chan</h4>
-        <span>1 W ago</span>
+        <h4 class="mtb10" style="font-size: 18px;">Mr.chan</h4> <!--TODO: 這是誰？請幫我補前端 -->
+        <span>1 W ago</span> <!-- TODO:這是什麼？請幫我補前端 -->
       </div>
     </div>
   </div>
   <div class="message_body col-xs-12">
     <div class="mb15">
-        <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
-        <h4 style="line-height: 70px;" class="ml10">Mr.chan</h4>
+        <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div> <!-- TODO:這是什麼？請幫我補前端 -->
+        <h4 style="line-height: 70px;" class="ml10">Mr.chan</h4> <!-- TODO:這是什麼？請幫我補前端 -->
     </div>
     <div class="row">
       <div class="col-xs-12 messages">
+      <!-- TODO:請幫我補前端，可參考 user_controller 的 get_conversation_messages-->
         <div class="message-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci animi consequuntur deserunt dolore doloremque dolorum error et, excepturi fuga impedit in inventore iure libero magnam, maxime minima mollitia necessitatibus nobis numquam perspiciatis porro provident quaerat quasi quos repellat rerum tempora tempore temporibus totam velit veniam veritatis voluptate! Corporis error eveniet harum impedit labore maxime numquam, quis quisquam ullam voluptatum. Deserunt distinctio dolores maxime mollitia pariatur repellendus sint, sit. Doloribus, impedit, modi. Ab corporis culpa, cum dicta dignissimos dolore excepturi fugit ipsum magni, maxime mollitia nemo possimus quasi quo repudiandae sit soluta veniam, voluptate. Dignissimos eaque fugiat fugit reiciendis repudiandae.</div>
         <div class="message-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae corporis cupiditate, doloremque dolorum ducimus esse excepturi fugiat in iure laboriosam minima modi nisi non nulla officiis porro quis vitae. Assumenda consequatur eos expedita molestias nobis non odit tempore vero!</div>
         <div class="message-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, suscipit.</div>
@@ -62,9 +61,17 @@
     </div>
   </div>
   <div class="message_bottom col-xs-12">
-    <input type="text" placeholder="Type message here...">
+    <form class="new_message">
+        <div class="col-xs-6">
+          <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
+          <input name="user_id" type="hidden" value="<%= @user.id %>">
+          <textarea name="body" class="form-control"></textarea>
+        </div>
+        <div class="col-xs-6">
+          <input type="submit" class="btn btn-success" value="Send">
+        </div>
+      </form>
   </div>
-</div>
 
 <div class="message_close">
   &times;
@@ -72,10 +79,6 @@
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
-    $('[name="message_button"]').click(function(){
-      $('.message_modal').show();
-      $('.message_close').show();
-    })
     $(document).click(function(e){
       close_modal(e)
     })

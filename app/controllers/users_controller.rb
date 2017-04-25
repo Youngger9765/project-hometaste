@@ -202,6 +202,17 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def get_conversation_messages
+		conversation_id = params[:conversation]
+		@conversation = @user.conversations.find(conversation_id)
+		@recipient = User.find(@conversation.recipient_id)
+		@messages = @conversation.messages
+
+		respond_to do |format|
+		    format.js
+		end
+	end
+
 	private
 
 	def render_js

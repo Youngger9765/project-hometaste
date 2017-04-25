@@ -49,6 +49,9 @@ Rails.application.routes.draw do
 
       post :like
       post :unlike
+
+      # conversation
+      get :get_conversation_messages
     end
   end
 
@@ -81,6 +84,9 @@ Rails.application.routes.draw do
 
       #yep
       post :yep_or_not
+
+      # conversation
+      get :get_conversation_messages
     end
   end
 
