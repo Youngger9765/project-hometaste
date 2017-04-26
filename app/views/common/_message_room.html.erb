@@ -1,33 +1,3 @@
-  <div class="message_top white col-xs-12">
-    <h3><i class="fa fa-angle-left visible-xs visible-sm cursor_pointer"></i> Conversations</h3>
-    <p>with <%= @recipient.name || @customer.name%></p>
-  </div>
-  <div class="message_body col-xs-12" >
-    <% @messages.each do |message|%>
-        <% id =@conversation.id %>
-        <div class="row message_room ptb15 prl5 messages-list" id="message_room_<%= id %>">
-          <div class="col-xs-2 prl10 col-sm-1 col-md-3">
-            <div class="background_img_setting border_main_radius mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
-          </div>
-          <div class="col-xs-10 col-sm-11 col-md-9">
-            <div class="align_two_side">
-              <h4><%=message.user.name%></h4>
-              <span class="gray"><%=message.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span>
-            </div>
-            <div class="message_desc">
-              <%=message.body%>
-            </div>
-          </div>
-        </div>
-    <% end %>
-  </div>
-  <div class="message_bottom col-xs-12">
-    <button class="my_black_btn">
-      <i class="fa fa-commenting-o" aria-hidden="true"></i> New Conversation
-    </button>
-  </div>
-</div>
-
 <div class="message_content" id="conversations-list">
   <div class="message_top white col-xs-12">
     <div class="row">
@@ -36,15 +6,15 @@
       </div>
       <div class="col-xs-7" style="height: 70px;">
         <div class="background_img_setting border_main_radius" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
-        <h4 class="mtb10" style="font-size: 18px;">Mr.chan</h4> <!--TODO: 這是誰？請幫我補前端 -->
-        <span>1 W ago</span> <!-- TODO:這是什麼？請幫我補前端 -->
+        <h4 class="mtb10" style="font-size: 18px;"><%= @recipient.name %></h4> <!--TODO: 這是誰？請幫我補前端 -->
+        <span><%=@messages.last.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span> <!-- TODO:這是什麼？請幫我補前端 -->
       </div>
     </div>
   </div>
   <div class="message_body col-xs-12" data-conversation-id="<%= @conversation.id %>">
     <div class="mb15">
         <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div> <!-- TODO:這是什麼？請幫我補前端 -->
-        <h4 style="line-height: 70px;" class="ml10">Mr.chan</h4> <!-- TODO:這是什麼？請幫我補前端 -->
+        <h4 style="line-height: 70px;" class="ml10"><%= @recipient.name %></h4> <!-- TODO:這是什麼？請幫我補前端 -->
     </div>
     <div class="row messages-list">
       <div class="col-xs-12 messages">
@@ -70,16 +40,17 @@
   </div>
   <div class="message_bottom col-xs-12">
     <form class="new_message">
-        <div class="col-xs-6">
+        <div class="col-xs-9">
           <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
           <input name="user_id" type="hidden" value="<%= @user.id %>">
-          <textarea name="body" class="form-control"></textarea>
+          <textarea name="body" class="form-control" style="margin: 0;padding: 0"></textarea>
         </div>
-        <div class="col-xs-6">
-          <input type="submit" class="btn btn-success" value="Send">
+        <div class="col-xs-3">
+          <input type="submit" class="btn btn-success" value="Send" style="background-color: red; padding-left: 10px;">
         </div>
       </form>
   </div>
+</div>
 
 <div class="message_close">
   &times;
@@ -97,7 +68,7 @@
       var target = e.target;
       if ($('.message_content:visible').length > 0){
         if ( $(target).is('.fa.fa-angle-left') || $(target).is('.message_close') || !$(target).is('[name="message_button"]') && !$(target).is('.message_content') && !$(target).parents('.message_content').is('.message_content')&& !$(target).is('.message_modal') && !$(target).parents('.message_modal').is('.message_modal')) {
-          $('.message_content').hide();
+          $('.message_content').show();
         }
       }else{
         if ( $(target).is('.fa.fa-angle-left') || $(target).is('.message_close') || !$(target).is('[name="message_button"]') && !$(target).is('.message_modal') && !$(target).parents('.message_modal').is('.message_modal')) {
@@ -107,9 +78,8 @@
       }
     }
 
-    $('[id^=message_room]').click(function(){
-      $('.message_content').show();
-      $(".message_body").scrollTop($('.messages').height() );
-    })
+
+    $('.message_content').show();
+    $(".message_body").scrollTop($('.messages').height() );
   })
 </script>
