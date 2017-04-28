@@ -94,6 +94,7 @@ class ChefsController < ApplicationController
     conversation_id = params[:conversation]
     @conversation = @user.recieved_conversations.find(conversation_id)
     @recipient = User.find(@conversation.sender_id)
+    @sender = User.find(@conversation.recipient_id)
     @messages = @conversation.messages
 
     respond_to do |format|

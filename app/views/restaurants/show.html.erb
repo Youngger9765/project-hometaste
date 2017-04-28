@@ -47,6 +47,16 @@
           <%= content_for :img_title %>
         </div>
         <div class="col-xs-12 tar social_buttons mb30_xs mb0_sm">
+
+          <!-- TODO: 聊天，暫時放這裡-->
+          <%= link_to conversations_path(user_id: @restaurant.chef.user.id), :id => "get_conversation_btn", remote: true, method: :post do%>
+            <i class="fa fa-commenting" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
+            <!-- TODO: 需隱藏 -->
+            <div style="display: none">
+              <%= link_to "Message", get_conversation_with_chef_restaurant_path, :id =>"get_message_btn", remote: true%>
+            </div>
+          <% end %>
+
           <%= link_to like_user_path(restaurant_id: @restaurant.id, user_id: current_user.try(:id)), method:'post', remote:true,
                       class:"ui button my_btn small_btn restaurant_liking_#{@restaurant.id} #{'hidden' if current_user && current_user.user_restaurant_likings.pluck(:restaurant_id).include?(@restaurant.id)}" do %>
               <i class="fa fa-heart-o white" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
@@ -232,6 +242,9 @@
   </div>
 </div>
 
+<div class="message_modal">
+</div>
+
 <%= javascript_include_tag 'semantic_ui/calendar.min' %>
 <%= stylesheet_link_tag 'semantic_ui/calendar.min' %>
 
@@ -311,6 +324,10 @@
         display: 'popup',
         href: '<%= request.original_url %>',
       }, function(response){});
+    })
+
+    $("#get_conversation_btn").on('click',function(){
+      $("#get_message_btn").click();
     })
   })
 </script>

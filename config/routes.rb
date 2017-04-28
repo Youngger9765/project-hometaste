@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
       # conversation
       get :get_conversation_messages
+
     end
   end
 
@@ -107,6 +108,10 @@ Rails.application.routes.draw do
       collection do
         post :create_food_comment
       end
+    end
+
+    member do
+      get :get_conversation_with_chef
     end
   end
 

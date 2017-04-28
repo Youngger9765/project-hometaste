@@ -6,24 +6,26 @@
       </div>
       <div class="col-xs-7" style="height: 70px;">
         <div class="background_img_setting border_main_radius" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
-        <h4 class="mtb10" style="font-size: 18px;"><%= @recipient.name %></h4> <!--TODO: 這是誰？請幫我補前端 -->
-        <span><%=@messages.last.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span> <!-- TODO:這是什麼？請幫我補前端 -->
+        <h4 class="mtb10" style="font-size: 18px;"><%= @recipient.name %></h4>
+
+        <% if @messages.size > 0%>
+          <span><%=@messages.last.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span>
+        <% end %>
       </div>
     </div>
   </div>
   <div class="message_body col-xs-12" data-conversation-id="<%= @conversation.id %>">
     <div class="mb15">
         <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div> <!-- TODO:這是什麼？請幫我補前端 -->
-        <h4 style="line-height: 70px;" class="ml10"><%= @recipient.name %></h4> <!-- TODO:這是什麼？請幫我補前端 -->
+        <h4 style="line-height: 70px;" class="ml10"><%= @recipient.name %></h4>
     </div>
     <div class="row messages-list">
       <div class="col-xs-12 messages">
         <ul>
-        <!-- TODO:請幫我補前端，可參考 user_controller 的 get_conversation_messages 取代假資料-->
           <% @messages.each do |message|%>
             <li>
               <div class="row">
-                <%if message.user_id == @user.id%>
+                <%if message.user_id == @sender.id%>
                   <% message_type = "message-sent" %>
                 <%else%>
                   <% message_type = "message-received" %>
@@ -42,7 +44,7 @@
     <form class="new_message">
         <div class="col-xs-9">
           <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
-          <input name="user_id" type="hidden" value="<%= @user.id %>">
+          <input name="user_id" type="hidden" value="<%= @sender.id %>">
           <textarea name="body" class="form-control" style="margin: 0;padding: 0"></textarea>
         </div>
         <div class="col-xs-3">
