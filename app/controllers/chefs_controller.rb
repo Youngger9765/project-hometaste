@@ -3,12 +3,13 @@ class ChefsController < ApplicationController
   before_action :find_chef_restaurant, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
     :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
-    :completed,:cancelled, :rating, :message,:orders_to_csv]
+    :completed,:cancelled, :rating, :message,:orders_to_csv,:get_conversation_messages]
+
 
   before_action :find_user, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
     :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
-    :completed,:cancelled]
+    :completed,:cancelled,:get_conversation_messages]
 
   # before_action :is_current_user?, :except => [:new]
   # before_action :has_authority?, :except => [:new]
@@ -88,6 +89,18 @@ class ChefsController < ApplicationController
   end
 
   def message
+  end
+
+  def get_conversation_messages
+    conversation_id = params[:conversation]
+    @conversation = @user.recieved_conversations.find(conversation_id)
+    @recipient = User.find(@conversation.sender_id)
+    @sender = User.find(@conversation.recipient_id)
+    @messages = @conversation.messages
+
+    respond_to do |format|
+        format.js
+    end
   end
 
   # show

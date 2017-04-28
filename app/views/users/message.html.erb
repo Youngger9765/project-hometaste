@@ -14,9 +14,10 @@
           </div>
         </div>
 
+        <% current_user.conversations.each do |conversation|%>
         <div class="col-xs-12 prl15_sm" id="my_purchase_content">
           <!-- 這裡的id要用each出來的user_id 動態附上 ajax要追蹤用-->
-          <% id = 1 %>
+          <% id = conversation.id %>
           <div class="black_border_block mt25_sm mrl5_sm mrl25_md pb15" id="message_modal_<%= id %>">
 
             <div class="row df_sm">
@@ -24,21 +25,31 @@
                 <div class="background_img_setting border_main_radius mt15 mtn_sm" style="background-image: url(<%= image_path 'tmp/product.png' %>); padding-top: 100%;"></div>
               </div>
               <div class="col-xs-12 col-sm-9 col-md-10 vertical_space_around tac tan_sm">
-                <h3 class="bold mt30 mtn_sm">Mr. Chan’s Kitchen</h3>
-                <div style="font-size: 18px;" class="mt10">Where is my duck?</div>
+                <h3 class="bold mt30 mtn_sm"><%= User.find(conversation.recipient_id).name%></h3>
+                <div style="font-size: 18px;" class="mt10">
+                  <% if conversation.messages.last.present?%>
+                    <%= conversation.messages.last.body %>
+                  </div>
                 <div style="font-size: 16px;" class="mtb20 mtb10_sm flex_space_between flex_vertical_center flex_wrap">
-                  <span style="color: #9B9B9B;" class="db mrla_xs ml0_sm">2016/12/11</span>
+                  <span style="color: #9B9B9B;" class="db mrla_xs ml0_sm">
+                    <% if conversation.messages.last.present?%>
+                      <%= conversation.messages.last.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%>
+                    <%end%>
+                  </span>
                   <div class="clearfix visible-xs" style="flex-basis: 100%;"></div>
-                  <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm mt20 mt0_sm" name="message_button">Message</button>
+                  <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm mt20 mt0_sm" name="message_button"><%= link_to "Message", get_conversation_messages_user_path(:conversation => conversation.id), :remote =>true %></button>
                 </div>
               </div>
             </div>
 
           </div>
         </div>
+        <% end %>
       </div>
     </section>
   </div>
 </div>
 
-<%= render 'common/message_room' %>
+<div class="message_modal">
+</div>
+
