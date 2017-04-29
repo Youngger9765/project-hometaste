@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422053524) do
+
+ActiveRecord::Schema.define(version: 20170429124054) do
 
   create_table "big_bun_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "big_bun_id"
@@ -310,6 +311,15 @@ ActiveRecord::Schema.define(version: 20170422053524) do
     t.index ["is_approved"], name: "index_restaurants_on_is_approved", using: :btree
     t.index ["is_live"], name: "index_restaurants_on_is_live", using: :btree
     t.index ["state"], name: "index_restaurants_on_state", using: :btree
+  end
+
+  create_table "state_tax_rate_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "state"
+    t.float    "tax_rate",   limit: 24
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "state_ref"
+    t.index ["state"], name: "index_state_tax_rate_ships_on_state", using: :btree
   end
 
   create_table "user_big_bun_ships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

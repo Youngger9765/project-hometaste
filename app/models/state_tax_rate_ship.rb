@@ -1,0 +1,2 @@
+class StateTaxRateShip < ApplicationRecord
+end
