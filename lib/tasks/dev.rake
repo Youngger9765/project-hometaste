@@ -28,7 +28,15 @@ namespace :dev do
 
   task :fake => :environment do
 
+    #  === For develope ===
+    # create_chef = true
+    # users_cnt = 10
+    # foods_cnt = 10
+    # food_comments_cnt = 30
+    # orders_cnt = 10
+    # order_food_ships_cnt = 20
 
+    #  === For Product ===
     create_chef = false
     users_cnt = 0
     foods_cnt = 0
@@ -197,22 +205,25 @@ namespace :dev do
       restaurant_id = Restaurant.ids.sample
       food_id = Restaurant.find(restaurant_id).foods.ids.sample
 
-      comment = FoodComment.create(
-        user_id: User.where.not(:is_chef => true).ids.sample,
-        food_id: food_id,
-        restaurant_id: restaurant_id,
-        comment: Faker::Lorem.paragraph,
-        taste_score: rand(1..5),
-        value_score: rand(1..5),
-        on_time_score: rand(1..5),
-        is_public: true,
-      )
+      if restaurant_id.present? && food_id.present?
+        comment = FoodComment.create(
+          user_id: User.where.not(:is_chef => true).ids.sample,
+          food_id: food_id,
+          restaurant_id: restaurant_id,
+          comment: Faker::Lorem.paragraph,
+          taste_score: rand(1..5),
+          value_score: rand(1..5),
+          on_time_score: rand(1..5),
+          is_public: true,
+        )
 
-      comment.summary_score = comment.get_summary_score
-      comment.save!
+        comment.summary_score = comment.get_summary_score
+        comment.save!
 
-      restaurant = Restaurant.find(restaurant_id)
-      restaurant.food_comments_count += 1
+        restaurant = Restaurant.find(restaurant_id)
+        restaurant.food_comments_count += 1
+      end
+
       restaurant.update_score
       restaurant.save!
     }
