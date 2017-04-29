@@ -234,7 +234,7 @@ $(document).ready ->
             price = +current_restaurant[food]['price']
             food_price += qty * price
 
-    tax_price += food_price * restaurant_tax / 100 || 0
+    tax_price += food_price * restaurant_tax || 0
     tip = parseFloat( $('input.tip_input').val() ) || 0
     total_price = (tax_price + food_price + tip) || 0
     $('[name=subtotal]').html(food_price.toFixed(2))

@@ -27,6 +27,7 @@ class Order < ApplicationRecord
   def update_order_price
     update(amount: calc_amount)
     update(subtotal: calc_subtotal)
+    update(tax: calc_tax)
   end
 
   def calc_amount
@@ -38,7 +39,7 @@ class Order < ApplicationRecord
   end
 
   def calc_tax
-    (calc_subtotal * (restaurant.tax / 100)).round(2)
+    (calc_subtotal * ( StateTaxRateShip.find_by(state_ref: restaurant.state).tax_rate)).round(3)
   end
 
   # def calc_delivery
