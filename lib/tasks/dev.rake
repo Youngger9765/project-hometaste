@@ -235,7 +235,7 @@ namespace :dev do
     # create orders
     puts('create orders')
 
-    orders.times {
+    orders_cnt.times {
       order = Order.create(
         user_id: User.all.ids.sample,
         restaurant_id: Restaurant.all.ids.sample,
