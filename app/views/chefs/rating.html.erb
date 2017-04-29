@@ -57,7 +57,13 @@
         <div class="col-xs-12 prl15_sm" id="chef_rating_content">
           <%= render 'food_rating' %>
         </div>
-
+        <div class="col-xs-12">
+          <div class="tac pt30 load_more">
+            <% if @next_page %>
+                <%= link_to "Load More", rating_chef_path(@chef, type: 6,:page => @next_page, load_more: true), :remote => true, :id => "load-more" %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -74,11 +80,9 @@
     $(document).on('click','.comment_reply_btn',function(){
       var parent = $(this).parents('.black_border_block')
       $(this).hide()
-      if (parent.find('.comment_reply_textarea,.comment_reply').hasClass('hidden')){
-        parent.find('.comment_reply_textarea').removeClass('hidden')
-      }else if (parent.find('.comment_reply_textarea').hasClass('hidden') && !parent.find('.comment_reply').hasClass('hidden')){
-        parent.find('.comment_reply_btn').hide()
-        parent.find('.comment_edit_btn').show()
+      if (parent.find('.comment_reply_textarea:hidden')){
+        parent.find('.comment_reply_textarea').show()
+        parent.find('.comment_reply').hide()
       }
     })
   })

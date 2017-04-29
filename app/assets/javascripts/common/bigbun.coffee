@@ -9,3 +9,17 @@ $(document).ready ->
 
   $(document).on 'click','.bigbun.before_prepartion', (e) ->
     e.preventDefault()
+
+  $(document).on 'click', ".bigbun_modal #redeem_now" , ->
+    parent = $(this).parents('.bigbun_modal')
+    $.ajax
+      type: 'POST',
+      url: '/big_buns/user_get_big_bun',
+      data:{ big_bun_id: parent.data('bigbun-id') }
+
+  $(document).on 'click', ".bigbun_modal #send_gift" , ->
+    parent = $(this).parents('.bigbun_modal')
+    $.ajax
+      type: 'POST',
+      url: '/big_buns/user_send_big_bun_as_gift',
+      data:{ big_bun_id: parent.data('bigbun-id') }

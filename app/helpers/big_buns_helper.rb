@@ -4,7 +4,7 @@ module BigBunsHelper
 		if !big_bun.id
 			big_bun.build_big_bun_photo
 
-		# edit
+			# edit
 		else
 			if !big_bun.big_bun_photo
 				big_bun.build_big_bun_photo
@@ -13,14 +13,16 @@ module BigBunsHelper
 			end
 		end
 
-	  big_bun
+		big_bun
 	end
 
 	def bigbun_status_class( bigbun )
-		if bigbun == 'preparing'
-			'before_prepartion'
-		elsif bigbun
-			'after_prepartion'
+		if bigbun
+			if bigbun.is_preparing?
+				'before_prepartion'
+			elsif bigbun
+				'after_prepartion'
+			end
 		end
 	end
 

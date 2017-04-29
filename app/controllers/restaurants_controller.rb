@@ -37,10 +37,11 @@ class RestaurantsController < ApplicationController
     # @score_rate = score_rate_i.to_s + ("_5" * score_rate_f)
 
     array = []
-    if @restaurant.get_available_bigbun
+    bigbun = @restaurant.get_available_bigbun
+    if bigbun
       # 剩下的可用的bigbun 數量
-      left_num = @restaurant.get_available_bigbun.availible_num
-      array << [@restaurant, @restaurant.get_available_bigbun, left_num]
+      left_num = bigbun.availible_num
+      array << [@restaurant, bigbun, left_num]
     end
     @restaurant_available_bigbun_array = array
 
@@ -49,6 +50,26 @@ class RestaurantsController < ApplicationController
       format.html
       format.js
     end
+  end
+
+  def get_conversation_with_chef
+    if current_user && current_user != @chef.user
+      @recipient = @chef.user
+      @sender = current_user
+
+      @conversation = Conversation.find_by(
+                        :recipient_id => @recipient.id,
+                        :sender_id => @sender.id)
+      @messages = @conversation.messages
+
+    else
+      # 非登入者
+    end
+
+    respond_to do |format|
+        format.js
+    end
+
   end
 
   private

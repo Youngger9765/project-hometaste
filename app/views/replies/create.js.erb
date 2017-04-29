@@ -1,0 +1,8 @@
+var comment = $('#food_comment_<%= @food_comment_reply.food_comment.id %>')
+comment.find('.comment_reply_textarea').hide()
+comment.find('textarea').val('<%= @food_comment_reply.content %>')
+comment.find('.comment_reply p').html('<%= @food_comment_reply.content %>')
+comment.find('.comment_reply span').html('<%= @food_comment_reply.updated_at.localtime.strftime("%Y/%m/%d") %>')
+comment.find('.comment_reply').show()
+comment.find('.comment_reply_btn').show()
+comment.find('.comment_reply_btn').html('Edit')

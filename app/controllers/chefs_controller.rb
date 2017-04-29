@@ -3,17 +3,18 @@ class ChefsController < ApplicationController
   before_action :find_chef_restaurant, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
     :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
-    :completed,:cancelled, :rating, :message]
+    :completed,:cancelled, :rating, :message,:orders_to_csv,:get_conversation_messages]
+
 
   before_action :find_user, :only =>[
     :show, :edit, :update, :review, :approve, :add_dish,
     :save_dish, :menu, :sales, :yep_or_not, :business, :summary,:advance,:delivering,
-    :completed,:cancelled]
+    :completed,:cancelled,:get_conversation_messages]
 
   # before_action :is_current_user?, :except => [:new]
   # before_action :has_authority?, :except => [:new]
   before_action :user_admin?, :only => [:approve, :review]
-  before_action :find_orders, :only => [:sales,:summary, :delivering, :advance,:completed,:cancelled]
+  before_action :find_orders, :only => [:sales,:summary, :delivering, :advance,:completed,:cancelled,:orders_to_csv]
 
   def new
     @user = User.new
@@ -22,7 +23,7 @@ class ChefsController < ApplicationController
 
   def create
     create_pass = true
-    flash[:alert] = []
+    flash[:alert] = 'Chef create success!'
 
     @chef = Chef.new(chef_params)
 
@@ -90,6 +91,18 @@ class ChefsController < ApplicationController
   def message
   end
 
+  def get_conversation_messages
+    conversation_id = params[:conversation]
+    @conversation = @user.recieved_conversations.find(conversation_id)
+    @recipient = User.find(@conversation.sender_id)
+    @sender = User.find(@conversation.recipient_id)
+    @messages = @conversation.messages
+
+    respond_to do |format|
+        format.js
+    end
+  end
+
   # show
   def sales
     @orders = @today_orders.where(["pick_up_time > ?", @datetime_now_to_utc])
@@ -155,8 +168,6 @@ class ChefsController < ApplicationController
       @most_popular_quantity = food_dict.max_by{|k,v| v}[1]
       @most_popular_food = Food.find(most_popular_food_id)
     end
-         
-    # 可以導出日期區間的銷售報表 (csv)
   end
 
   def edit
@@ -183,7 +194,7 @@ class ChefsController < ApplicationController
   end
 
   def rating
-    star_type = params[:type]
+    @star_type = params[:type]
     @all_food_comments = @chef.restaurant.food_comments
     @star_all_num = @all_food_comments.size
     @star_1_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 1,2)
@@ -194,24 +205,32 @@ class ChefsController < ApplicationController
     @star_3_num = @star_3_food_comments.size
     @star_4_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4,4.5)
     @star_4_num = @star_4_food_comments.size
-    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score < ?", 4.5,5)
+    @star_5_food_comments = @all_food_comments.where("summary_score >= ? AND summary_score <= ?", 4.5,5)
     @star_5_num = @star_5_food_comments.size
 
     # default rating 使用
     @food_comments = @all_food_comments
 
-    if star_type == "5"
+    if @star_type == "5"
       @food_comments = @star_5_food_comments
-    elsif star_type == "4"
+    elsif @star_type == "4"
       @food_comments = @star_4_food_comments
-    elsif star_type == "3"
+    elsif @star_type == "3"
       @food_comments = @star_3_food_comments
-    elsif star_type == "2"
+    elsif @star_type == "2"
       @food_comments = @star_2_food_comments
-    elsif star_type == "1"
+    elsif @star_type == "1"
       @food_comments = @star_1_food_comments
-    elsif star_type == "6"
+    elsif @star_type == "6"
       @food_comments = @all_food_comments
+    end
+
+    @load_more = params[:load_more]
+    @food_comments = @food_comments.page(params[:page]).per(5)
+    if @food_comments.last_page?
+      @next_page = nil
+    else
+      @next_page = @food_comments.next_page
     end
 
     respond_to do |format|
@@ -262,6 +281,18 @@ class ChefsController < ApplicationController
       flash[:notice] = "Successfully cancel order"
     end
     redirect_to sales_chef_path(@chef)
+  end
+
+  def orders_to_csv
+    report_pick_up_date_from = params[:report_pick_up_date_from] + "00:00:00"
+    report_pick_up_date_to = params[:report_pick_up_date_to] + "00:00:00"
+
+    orders = @restaurant.orders.where("created_at >= ? AND created_at <= ?", report_pick_up_date_from, report_pick_up_date_to)
+    respond_to do |format|
+      format.html
+      format.csv { send_data orders.to_csv }
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
   end
 
   private

@@ -1,7 +1,20 @@
-$('#chef_rating_content').html('<%=j render 'food_rating' %>');
+<% if @load_more %>
+  $('#chef_rating_content').append('<%=j render 'food_rating' %>');
+<% else %>
+  $('#chef_rating_content').html('<%=j render 'food_rating' %>');
+<% end %>
 $('#all_rating').html(<%= @star_all_num %>)
 $('#five_rating').html(<%= @star_5_num %>)
 $('#four_rating').html(<%= @star_4_num %>)
 $('#three_rating').html(<%= @star_3_num %>)
 $('#two_rating').html(<%= @star_2_num %>)
 $('#one_rating').html(<%= @star_1_num %>)
+
+$("#load-more").attr('href','<%= rating_chef_path(@chef, type: @star_type,:page => @next_page, load_more: true ) %>')
+
+<% if @next_page %>
+$("#load-more").attr('href','<%= rating_chef_path(@chef, type: @star_type,:page => @next_page, load_more: true ) %>')
+$("#load-more").show()
+<% else %>
+$("#load-more").hide()
+<% end %>

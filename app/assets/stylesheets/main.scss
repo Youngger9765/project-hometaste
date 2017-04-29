@@ -79,6 +79,7 @@ body.main_index{
   }
 }
 .ui.fluid.card.visible{
+  overflow: hidden;
   display: block !important;
 }
 .foods.cards .ui.fluid.card {

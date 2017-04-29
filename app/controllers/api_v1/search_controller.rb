@@ -24,23 +24,27 @@ class ApiV1::SearchController < ApplicationController
   end
 
   def keyword
-    restaurants = Restaurant.get_around_restaurants(50000, @lat, @long)
+    restaurants = Restaurant.get_around_restaurants(5, @lat, @long)
     case @keyword
-    when 'Kitchenorchef' then @restaurants = restaurants
-    when 'Mostpopular'   then @foods = restaurants.get_popular_foods
-    when 'Newinstore'    then @foods = restaurants.new_in_foods
+    when 'Kitchen or chef' then @restaurants = restaurants
+    when 'Most popular'   then @foods = restaurants.get_popular_foods
+    when 'New in store'    then @foods = restaurants.new_in_foods
     else
       @foods = Food.ransack(name_cont_any: @keyword)
                    .result(distinct: true)
                    .joins(:restaurant)
+                   .includes(:restaurant)
                    .where(restaurant_id: restaurants.ids)
       if @foods.size == 0
         @restaurants = Restaurant.ransack(name_cont_any: @keyword)
+                           .includes(:restaurant_comments, :user_restaurant_likings, :cuisines)
                            .result(distinct: true)
                            .where(id: restaurants.ids)
       end
     end
 
+
+    @food_available_bigbun_array = @foods.available_bigbun if @foods
     @sum_qty = @restaurants ? @restaurants.size : @foods.size
 
     save_results_in_cookies
@@ -53,8 +57,8 @@ class ApiV1::SearchController < ApplicationController
   private
 
   def get_keyword_and_location
-    @location = params[:location].to_s.gsub(/[^a-zA-Z0-9\-]/,'')
-    @keyword = params[:keyword].to_s.gsub(/[^a-zA-Z0-9\-]/,'')
+    @location = params[:location].to_s.gsub(/[^a-zA-Z0-9\- ]/,'')
+    @keyword = params[:keyword].to_s.gsub(/[^a-zA-Z0-9\- ]/,'')
   end
 
   def get_cookies_search_results

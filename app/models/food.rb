@@ -44,6 +44,19 @@ class Food < ApplicationRecord
     restaurant.get_available_bigbun
   end
 
+  def self.available_bigbun
+    array = []
+    all.includes(:restaurant, restaurant: :big_buns).each do |food|
+      bigbun = food.get_available_bigbun
+      if bigbun
+        # 剩下的可用的bigbun 數量
+        left_num = bigbun.availible_num
+        array << [food, bigbun, left_num]
+      end
+    end
+    array
+  end
+
   def self.filter(params, lat_long, ids = self.ids)
     sort = params['Sort By']
     distance = params['Distance']

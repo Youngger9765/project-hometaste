@@ -15,18 +15,27 @@ class BigBun < ApplicationRecord
                                 :allow_destroy => true,
                                 :reject_if => :all_blank
 
-
-
   def self.available_bigbun
     bigbun = where( 'start_datetime <= ? and stop_datetime > ?',Time.current,Time.current ).first
     if bigbun && bigbun.availible_num > 0
-      prepare_time = bigbun.prepare_time.to_time.to_s(:time)
-      hour = prepare_time[0..1].to_i
-      min = prepare_time[3..4].to_i
-      (bigbun.start_datetime + hour.hour + min.minute) < Time.current ? bigbun : 'preparing'
+      bigbun
     else
       false
     end
+  end
+
+  def is_preparing?
+    prepare_time = self.prepare_time.to_time.to_s(:time)
+    hour = prepare_time[0..1].to_i
+    min = prepare_time[3..4].to_i
+    (start_datetime + hour.hour + min.minute) > Time.current
+  end
+
+  def prepared?
+    prepare_time = self.prepare_time.to_time.to_s(:time)
+    hour = prepare_time[0..1].to_i
+    min = prepare_time[3..4].to_i
+    (start_datetime + hour.hour + min.minute) < Time.current
   end
 
   def availible_num

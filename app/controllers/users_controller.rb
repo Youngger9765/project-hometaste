@@ -83,7 +83,19 @@ class UsersController < ApplicationController
 	end
 
 	def review
-    @food_comments = FoodComment.first(3)
+    @food_comments = current_user.food_comments
+
+    @food_comments = @food_comments.page(params[:page]).per(5)
+    if @food_comments.last_page?
+      @next_page = nil
+    else
+      @next_page = @food_comments.next_page
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
 	end
 
 	def kitchen
@@ -199,6 +211,18 @@ class UsersController < ApplicationController
 		else
 			flash[:alert] = "You can't modify this order. It is already cancelled."
 			redirect_to purchase_user_path(@user)
+		end
+	end
+
+	def get_conversation_messages
+		conversation_id = params[:conversation]
+		@conversation = @user.conversations.find(conversation_id)
+		@recipient = User.find(@conversation.recipient_id)
+		@sender = current_user
+		@messages = @conversation.messages
+
+		respond_to do |format|
+		    format.js
 		end
 	end
 

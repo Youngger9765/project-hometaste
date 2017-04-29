@@ -1,0 +1,69 @@
+<% @food_comments.each do |food_comment| %>
+    <div class="black_border_block mt25_sm mrl5_sm mrl25_md" id="food_comment_<%= food_comment.id %>">
+      <div class="row df_sm">
+        <div class="col-md-3 col-sm-3 col-xs-6 col-xs-offset-3 col-sm-offset-0">
+          <div class="square_img border_main_radius mtb20 mtb0_sm" style="background-image: url(<%= image_path 'tmp/kitchen_2.png' %>"></div>
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-12 vertical_space_around tac tal_sm">
+          <h3 class="bold"><%= food_comment.food.name %></h3>
+          <h3 class="bold mtbn_sm mtb20"><%= food_comment.user.name %></h3>
+          <div class="show_rated_<%= rated_score(food_comment.summary_score) %> mt10 mtn_sm" style="font-size: 20px;"></div>
+        </div>
+        <div class="col-md-2 col-sm-2 hidden-xs">
+          <!-- 沒有 reply 才能 edit -->
+          <% if food_comment.food_comment_replies.size == 0%>
+              <button class="my_btn comment_edit_btn flr">Edit</button>
+          <%end%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" style="margin-top: 20px;">
+          <div class="align_two_side_sm">
+            <h3 class="dib">Taste :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.taste_score || 0) %>" style="font-size: 20px;"></div>
+          </div>
+          <div class="align_two_side_sm">
+            <h3 class="dib">Value :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.value_score || 0) %>" style="font-size: 20px;"></div>
+          </div>
+          <div class="align_two_side_sm">
+            <h3 class="dib">On time pick up/develiery :</h3>
+            <div class="show_rated_<%= rated_score(food_comment.on_time_score || 0) %>" style="font-size: 20px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 food_comment">
+          <i class="gray_line"></i>
+          <p style="word-break: break-all"><%= food_comment.comment%></p>
+          <span class="pull-right gray"><%= food_comment.updated_at.localtime.strftime("%Y/%m/%d")%></span>
+        </div>
+
+        <div class="hidden comment_reply_textarea col-xs-12">
+          <i class="gray_line"></i>
+          <!--如果有回覆了就直接噴在textarea上，textarea一開始不關有沒有回覆都要被render出來，就回覆也直接噴在上面但hidden-->
+          <%= form_for food_comment, url: update_food_comment_restaurant_comment_path(restaurant_id: food_comment.restaurant_id, id: food_comment.id), method: 'POST', remote: true do |f| %>
+              <%= f.label :comment, class:'bold red' %>
+              <%= f.text_area :comment, style:'border-radius:5px;', rows:'5' %>
+              <%= f.submit :send, class:'flr my_btn', style:'width: 115px;height: 40px;' %>
+          <% end %>
+        </div>
+
+        <div class="col-xs-12">
+          <% if food_comment.food_comment_replies.size > 0 %>
+              <div class="comment_reply">
+                <i class="gray_line"></i>
+                <h5 class="red bold">Reply</h5>
+                <p style="word-break: break-all"><%= food_comment.food_comment_replies.first.content %></p>
+                <span class="pull-right gray"><%= food_comment.food_comment_replies.first.updated_at.localtime.strftime("%Y/%m/%d") %></span>
+              </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-2 visible-xs tac">
+        <% if food_comment.food_comment_replies.size == 0 %>
+            <button class="my_btn comment_edit_btn mt20">Edit</button>
+        <%end%>
+      </div>
+    </div>
+<% end %>
