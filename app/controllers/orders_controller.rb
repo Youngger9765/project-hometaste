@@ -94,7 +94,6 @@ class OrdersController < ApplicationController
     @order.customer_name = current_user.name
     @order.payment_status = 'unpaid'
     @order.order_status = 'process'
-    flash[:alert] = []
 
     @error = false
     # check delivery order_min
@@ -106,7 +105,7 @@ class OrdersController < ApplicationController
       create_user_bigbun(params[:order][:'bigbun-id'])
       cookies.delete(:cart_list, path: '/')
 
-      flash[:notice] = "Successfully create order!"
+      flash[:alert] = "Successfully create order!"
       redirect_to restaurant_order_path(@restaurant,@order)
     else
       flash[:alert] << "Fail new order!"

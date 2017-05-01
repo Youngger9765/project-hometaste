@@ -11,7 +11,27 @@
   </div>
   <div class="action_bottons">
     <button class="ui button my_btn" id="redeem_now">Redeem now</button>
-    <button class="ui button my_btn_reserve">Use later</button>
+    <button class="ui button my_btn_reserve" id="use_later">Use later</button>
     <button class="ui button my_btn" id="send_gift">Send as gift</button>
   </div>
+
+
+  <div class="ui modal gift_email_modal" data-bigbun-id="<%= bigbun.id %>">
+    <i class="close icon"></i>
+    <h4 class="bold">Enter your Email</h4>
+    <i class="gray_line"></i>
+    <div class="description">
+      <div class="ui form">
+        <div class="field">
+          <input type="email">
+        </div>
+      </div>
+    </div>
+    <div class="action_bottons">
+      <button class="ui button my_btn" id="send_gift_confirmation">Confirmation</button>
+    </div>
+  </div>
+
+
 </div>
+

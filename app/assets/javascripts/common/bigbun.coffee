@@ -10,16 +10,24 @@ $(document).ready ->
   $(document).on 'click','.bigbun.before_prepartion', (e) ->
     e.preventDefault()
 
-  $(document).on 'click', ".bigbun_modal #redeem_now" , ->
+  $(document).on 'click', ".bigbun_modal #redeem_now,.bigbun_modal #use_later" , ->
     parent = $(this).parents('.bigbun_modal')
     $.ajax
       type: 'POST',
       url: '/big_buns/user_get_big_bun',
       data:{ big_bun_id: parent.data('bigbun-id') }
+    parent.modal('hide')
 
   $(document).on 'click', ".bigbun_modal #send_gift" , ->
-    parent = $(this).parents('.bigbun_modal')
+    $('.gift_email_modal').modal('show')
+
+  $(document).on 'click', "#send_gift_confirmation" , ->
+    parent = $(this).parents('.gift_email_modal')
     $.ajax
       type: 'POST',
       url: '/big_buns/user_send_big_bun_as_gift',
-      data:{ big_bun_id: parent.data('bigbun-id') }
+      data:
+        big_bun_id: parent.data('bigbun-id'),
+        email: parent.find('input').val()
+
+    parent.modal('hide')

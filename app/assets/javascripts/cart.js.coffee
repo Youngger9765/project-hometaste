@@ -87,6 +87,8 @@ $(document).ready ->
 
     info_object = get_cart_list() || {}
     if info_object["restaurant_#{restaurant_id}"]
+      init_bigbun(info_object["restaurant_#{restaurant_id}"])
+
       info_object["restaurant_#{restaurant_id}"]["bigbun_#{bigbun_id}"] =
         bigbun_code: bigbun_code,
         img_url: img_url,
@@ -101,6 +103,11 @@ $(document).ready ->
           stop_time: stop_time
 
     save_in_cookie(info_object)
+
+  init_bigbun = (restaurant) ->
+    Object.keys(restaurant).forEach (source,i,a) ->
+      if source.indexOf('bigbun') == 0
+        delete restaurant[source];
 
 
   #    需判斷today advance 區分兩個資料結構 此fucntion是處理存儲或刪除 food
@@ -170,6 +177,8 @@ $(document).ready ->
     current_restaurant = cart_list["restaurant_#{restaurant_id}"]
 
     Object.keys(current_restaurant).forEach (food,i,a) ->
+      if food.indexOf('bigbun') == 0
+        $('#bigbun_code').val(current_restaurant[food]['bigbun_code'])
       if food.indexOf('food') == -1
         return
       if advance_status
@@ -254,7 +263,6 @@ $(document).ready ->
   # bigbun add
   $(document).on 'click', ".bigbun_modal #redeem_now" , ->
     deal_bigbun_list(this)
-    $('.bigbun_modal').modal('hide')
 
   remove_qty_zero_food=() ->
     if $(this).siblings('input').val() == '0'
