@@ -52,6 +52,26 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def get_conversation_with_chef
+    if current_user && current_user != @chef.user
+      @recipient = @chef.user
+      @sender = current_user
+
+      @conversation = Conversation.find_by(
+                        :recipient_id => @recipient.id,
+                        :sender_id => @sender.id)
+      @messages = @conversation.messages
+
+    else
+      # 非登入者
+    end
+
+    respond_to do |format|
+        format.js
+    end
+
+  end
+
   private
 
   def deal_params_date(params)

@@ -49,6 +49,10 @@ Rails.application.routes.draw do
 
       post :like
       post :unlike
+
+      # conversation
+      get :get_conversation_messages
+
     end
   end
 
@@ -84,6 +88,10 @@ Rails.application.routes.draw do
 
       #report
       get :orders_to_csv
+
+      # conversation
+      get :get_conversation_messages
+
     end
   end
 
@@ -105,6 +113,10 @@ Rails.application.routes.draw do
         post :create_food_comment
       end
     end
+
+    member do
+      get :get_conversation_with_chef
+    end
   end
 
   resources :big_buns do
@@ -112,6 +124,14 @@ Rails.application.routes.draw do
       post :user_get_big_bun
       post :user_send_big_bun_as_gift
     end
+  end
+
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+
+    resources :messages, only: [:create]
   end
 
 

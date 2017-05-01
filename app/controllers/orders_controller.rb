@@ -14,6 +14,9 @@ class OrdersController < ApplicationController
     @order = Order.new
     @restaurant = Restaurant.find(params[:restaurant_id])
 
+    state = @restaurant.state
+    @tax_rate = StateTaxRateShip.find_by(:state_ref => state).tax_rate
+
     order_date = params[:date].to_date
     date_now = Time.now.localtime.to_date
 
@@ -175,9 +178,10 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:shipping_method, :shipping_place,:restaurant_id, :bulk_buy_id,
                                   :mobile_number, :email, :billing_address, :pick_up_time,
                                   :billing_city, :billing_state, :billing_zip_code,
+
                                   order_food_ships_attributes: [
-                                                                 :food_id, :quantity
-                                                               ])
+                                    :food_id, :quantity
+                                  ])
   end
 
   def get_pick_up_time
@@ -214,6 +218,8 @@ class OrdersController < ApplicationController
       amount = food_price*quantity
       total_amount += amount
     end
+
+    raise
 
     if total_amount < min_order
       @error = true

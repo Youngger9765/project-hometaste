@@ -54,6 +54,10 @@ class Restaurant < ApplicationRecord
     chef.first_name.capitalize + chef.last_name.capitalize
   end
 
+  def tax_rate
+    StateTaxRateShip.find_by(state_ref: self.state).tax_rate
+  end
+
   def get_available_bigbun
     big_buns.available_bigbun
   end

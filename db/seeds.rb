@@ -32,3 +32,65 @@ all_cuisines_name = [
 all_cuisines_name.each do |cuisine|
 	Cuisine.create!(:name => cuisine)
 end
+
+all_state_tax_rate = [
+	{state:'Alabama', tax_rate:0.04, state_ref:'AL'},
+	{state:'Alaska', tax_rate:0, state_ref:'AK'},
+	{state:'Arizona', tax_rate:0.056, state_ref:'AZ'},
+	{state:'Arkansas', tax_rate:0.065, state_ref:'AR'},
+	{state:'California', tax_rate:0.075, state_ref:'CA'},
+	{state:'Colorado', tax_rate:0.029, state_ref:'CO'},
+	{state:'Connecticut', tax_rate:0.0635, state_ref:'CT'},
+	{state:'Delaware', tax_rate:0, state_ref:'DE'},
+	{state:'Florida', tax_rate:0.06, state_ref:'FL'},
+	{state:'Georgia', tax_rate:0.04, state_ref:'GA'},
+	{state:'Hawaii', tax_rate:0.04, state_ref:'HI'},
+	{state:'Idaho', tax_rate:0.06, state_ref:'ID'},
+	{state:'Illinois', tax_rate:0.0625, state_ref:'IL'},
+	{state:'Indiana', tax_rate:0.07, state_ref:'IN'},
+	{state:'Iowa', tax_rate:0.06, state_ref:'IA'},
+	{state:'Kansas', tax_rate:0.065, state_ref:'KS'},
+	{state:'Kentucky', tax_rate:0.06, state_ref:'KY'},
+	{state:'Louisiana', tax_rate:0.04, state_ref:'LA'},
+	{state:'Maine', tax_rate:0.055, state_ref:'ME'},
+	{state:'Maryland', tax_rate:0.06, state_ref:'MD'},
+	{state:'Massachusetts', tax_rate:0.0625, state_ref:'MA'},
+	{state:'Michigan', tax_rate:0.06, state_ref:'MI'},
+	{state:'Minnesota', tax_rate:0.06875, state_ref:'MN'},
+	{state:'Mississippi', tax_rate:0.07, state_ref:'MS'},
+	{state:'Missouri', tax_rate:0.04225, state_ref:'MO'},
+	{state:'Montana', tax_rate:0, state_ref:'MT'},
+	{state:'Nebraska', tax_rate:0.055, state_ref:'NE'},
+	{state:'Nevada', tax_rate:0.0685, state_ref:'NV'},
+	{state:'New Hampshire', tax_rate:0, state_ref:'NH'},
+	{state:'New Jersey', tax_rate:0.07, state_ref:'NJ'},
+	{state:'New Mexico', tax_rate:0.05125, state_ref:'NM'},
+	{state:'New York', tax_rate:0.04, state_ref:'NY'},
+	{state:'North Carolina', tax_rate:0.0475, state_ref:'NC'},
+	{state:'North Dakota', tax_rate:0.05, state_ref:'ND'},
+	{state:'Ohio', tax_rate:0.0575, state_ref:'OH'},
+	{state:'Oklahoma', tax_rate:0.045, state_ref:'OK'},
+	{state:'Oregon', tax_rate:0, state_ref:'OR'},
+	{state:'Pennsylvania', tax_rate:0.06, state_ref:'PA'},
+	{state:'Rhode Island', tax_rate:0.07, state_ref:'RI'},
+	{state:'South Carolina', tax_rate:0.06, state_ref:'SC'},
+	{state:'South Dakota', tax_rate:0.04, state_ref:'SD'},
+	{state:'Tennessee', tax_rate:0.07, state_ref:'TN'},
+	{state:'Texas', tax_rate:0.0625, state_ref:'TX'},
+	{state:'Utah', tax_rate:0.0595, state_ref:'UT'},
+	{state:'Vermont', tax_rate:0.06, state_ref:'VT'},
+	{state:'Virginia', tax_rate:0.053, state_ref:'VA'},
+	{state:'Washington', tax_rate:0.065, state_ref:'WA'},
+	{state:'West Virginia', tax_rate:0.06, state_ref:'WV'},
+	{state:'Wisconsin', tax_rate:0.05, state_ref:'WI'},
+	{state:'Wyoming', tax_rate:0.04, state_ref:'WY'},
+	{state:'D.C.', tax_rate:0.0575, state_ref:'DC'},
+	{state:'Puerto Rico', tax_rate:0, state_ref:'PR'},
+]
+
+all_state_tax_rate.each do |state_tax_rate|
+	state = state_tax_rate[:state]
+	tax_rate = state_tax_rate[:tax_rate]
+	state_ref = state_tax_rate[:state_ref]
+	StateTaxRateShip.create!(:state => state, :tax_rate => tax_rate, :state_ref => state_ref)
+end

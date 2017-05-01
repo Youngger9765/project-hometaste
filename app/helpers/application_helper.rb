@@ -7,7 +7,8 @@ module ApplicationHelper
       price = food.price
       food_id = food.id
       restaurant_id = food.restaurant.id
-      tax = food.restaurant.tax
+      tax = food.restaurant.tax_rate
+
       if food.restaurant.delivery
         cost = food.restaurant.delivery.cost
         distance = food.restaurant.delivery.distance

@@ -26,6 +26,11 @@ class User < ApplicationRecord
   has_many :user_restaurant_likings
   has_many :liking_restaurants , :source => :restaurant, :through => :user_restaurant_likings
 
+
+  has_many :messages
+  has_many :conversations, foreign_key: :sender_id
+  has_many :recieved_conversations, foreign_key: :recipient_id, class_name: Conversation
+
   accepts_nested_attributes_for :user_photo,
                                 allow_destroy: true,
                                 reject_if: :all_blank
