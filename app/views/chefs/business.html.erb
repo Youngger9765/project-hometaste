@@ -10,7 +10,9 @@
               <%= render 'chef_photo' ,f:f ,pen_click:'pen_click' %>
               <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm"><%= @chef.restaurant.name%></h1>
             </div>
-            <%= render 'chef_banner' %>
+            <div class="col-xs-12">
+              <%= render 'chef_banner' %>
+            </div>
           </div>
         </div>
       </section>
@@ -54,35 +56,35 @@
             </div>
 
             <%= form_for @chef, url: orders_to_csv_chef_path(@chef,format: "csv"), :method => :get do |f| %>
-              <div class="col-xs-12">
-                <h4 class="mtb20_sm mtb15 dib bold">Sale detail report:</h4>
-              </div>
-              <div class="col-xs-2">
-                <h4 class="bold dib">From</h4>
-              </div>
-              <div class="col-xs-8">
-                <div class="field">
-                  <%= date_field_tag :report_pick_up_date_from %>
+                <div class="col-xs-12">
+                  <h4 class="mtb20_sm mtb15 dib bold">Sale detail report:</h4>
                 </div>
-              </div>
-              <div class="col-xs-1">
-                <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
-              </div>
-              <div class="clearfix mtb20_sm"></div>
-              <div class="col-xs-2">
-                <h4 class="bold dib">To</h4>
-              </div>
-              <div class="col-xs-8">
-                <div class="field">
-                  <%= date_field_tag :report_pick_up_date_to %>
+                <div class="col-xs-2">
+                  <h4 class="bold dib">From</h4>
                 </div>
-              </div>
-              <div class="col-xs-1">
-                <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
-              </div>
-              <div class="col-xs-12 mtb20 tac">
-                <%= f.submit "Export", :class => "my_btn", :id => "export_report_btn"%>
-              </div>
+                <div class="col-xs-8">
+                  <div class="field">
+                    <%= date_field_tag :report_pick_up_date_from %>
+                  </div>
+                </div>
+                <div class="col-xs-1">
+                  <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
+                </div>
+                <div class="clearfix mtb20_sm"></div>
+                <div class="col-xs-2">
+                  <h4 class="bold dib">To</h4>
+                </div>
+                <div class="col-xs-8">
+                  <div class="field">
+                    <%= date_field_tag :report_pick_up_date_to %>
+                  </div>
+                </div>
+                <div class="col-xs-1">
+                  <h2 class="mt0"><i class="fa fa-calendar mr10" aria-hidden="true"></i></h2>
+                </div>
+                <div class="col-xs-12 mtb20 tac">
+                  <%= f.submit "Export", :class => "my_btn", :id => "export_report_btn"%>
+                </div>
 
             <% end %>
           </div>

@@ -10,7 +10,9 @@
               <%= render 'chef_photo' ,f:f ,pen_click:'pen_click' %>
               <h1 class="bold m0 ml20_sm ml40_md ml60_lg tal_sm"><%= @chef.restaurant.name%></h1>
             </div>
+            <div class="col-xs-12">
             <%= render 'chef_banner' %>
+            </div>
           </div>
         </div>
       </section>
@@ -27,7 +29,6 @@
             <input type="text" class="border_black fluid not_focus_outline pr20 pl70" style="font-size: 18px; border-radius: 30px; height: 50px;">
           </div>
         </div>
-
 
         <% current_user.recieved_conversations.each do |conversation|%>
 
@@ -65,5 +66,4 @@
 </div>
 
 
-<div class="message_modal">
-</div>
+<div class="message_modal"></div>

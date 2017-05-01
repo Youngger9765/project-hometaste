@@ -25,6 +25,7 @@
 //= require cart
 //= require cable
 //= require channels/conversation
+//= require messages
 
 
 

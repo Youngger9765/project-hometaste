@@ -1,40 +1,38 @@
 <div class="message_content" id="conversations-list">
   <div class="message_top white col-xs-12">
     <div class="row">
-      <div class="col-xs-2">
+      <div class="col-xs-1">
         <i class="fa fa-angle-left visible-xs visible-sm cursor_pointer"></i>
       </div>
-      <div class="col-xs-7" style="height: 70px;">
+      <div class="col-xs-10" style="height: 70px;">
         <div class="background_img_setting border_main_radius" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div>
         <h4 class="mtb10" style="font-size: 18px;"><%= @recipient.name %></h4>
 
         <% if @messages.size > 0%>
-          <span><%=@messages.last.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span>
+            <span><%=@messages.last.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S")%></span>
         <% end %>
       </div>
     </div>
   </div>
   <div class="message_body col-xs-12" data-conversation-id="<%= @conversation.id %>">
     <div class="mb15">
-        <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div> <!-- TODO:這是什麼？請幫我補前端 -->
-        <h4 style="line-height: 70px;" class="ml10"><%= @recipient.name %></h4>
+      <div class="background_img_setting border_main_radius mtn_sm fll" style="background-image: url(<%= image_path 'tmp/product.png' %>);"></div> <!-- TODO:這是什麼？請幫我補前端 -->
+      <h4 style="line-height: 70px;" class="ml10"><%= @recipient.name %></h4>
     </div>
     <div class="row messages-list">
       <div class="col-xs-12 messages">
         <ul>
           <% @messages.each do |message|%>
-            <li>
-              <div class="row">
-                <%if message.user_id == @sender.id%>
-                  <% message_type = "message-sent" %>
-                <%else%>
-                  <% message_type = "message-received" %>
-                <%end%>
-                <div class="<%=message_type%>">
-                  <%=message.body%>
-                </div>
-              </div>
-            </li>
+              <li>
+                  <%if message.user_id == @sender.id%>
+                      <% message_type = "message-sent message-right" %>
+                  <%else%>
+                      <% message_type = "message-received message-left" %>
+                  <%end%>
+                  <div class="<%=message_type%>">
+                    <%=message.body%>
+                  </div>
+              </li>
           <%end%>
         </ul>
       </div>
@@ -42,46 +40,12 @@
   </div>
   <div class="message_bottom col-xs-12">
     <form class="new_message">
-        <div class="col-xs-9">
-          <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
-          <input name="user_id" type="hidden" value="<%= @sender.id %>">
-          <textarea name="body" class="form-control" style="margin: 0;padding: 0"></textarea>
-        </div>
-        <div class="col-xs-3">
-          <input type="submit" class="btn btn-success" value="Send" style="background-color: red; padding-left: 10px;">
-        </div>
-      </form>
+      <input name="conversation_id" type="hidden" value="<%= @conversation.id %>">
+      <input name="user_id" type="hidden" value="<%= @sender.id %>">
+      <textarea name="body" class="form-control"></textarea>
+      <input type="submit" class="submit" value="Send">
+    </form>
   </div>
 </div>
 
-<div class="message_close">
-  &times;
-</div>
-
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
-    $(document).click(function(e){
-      close_modal(e)
-    })
-    $('.fa.fa-angle-left,.message_close').click(function(e){
-      close_modal(e)
-    })
-    function close_modal(e){
-      var target = e.target;
-      if ($('.message_content:visible').length > 0){
-        if ( $(target).is('.fa.fa-angle-left') || $(target).is('.message_close') || !$(target).is('[name="message_button"]') && !$(target).is('.message_content') && !$(target).parents('.message_content').is('.message_content')&& !$(target).is('.message_modal') && !$(target).parents('.message_modal').is('.message_modal')) {
-          $('.message_content').show();
-        }
-      }else{
-        if ( $(target).is('.fa.fa-angle-left') || $(target).is('.message_close') || !$(target).is('[name="message_button"]') && !$(target).is('.message_modal') && !$(target).parents('.message_modal').is('.message_modal')) {
-          $('.message_modal').hide();
-          $('.message_close').hide();
-        }
-      }
-    }
-
-
-    $('.message_content').show();
-    $(".message_body").scrollTop($('.messages').height() );
-  })
-</script>
+<div class="message_close">&times;</div>
