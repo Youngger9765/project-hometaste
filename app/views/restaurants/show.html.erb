@@ -248,11 +248,20 @@
 <% end %>
 
 <div class="message_modal"></div>
+<div class="message_close">&times;</div>
 
 <%= javascript_include_tag 'semantic_ui/calendar.min' %>
 <%= javascript_include_tag 'restaurant_gmaps' %>
 <%= stylesheet_link_tag 'semantic_ui/calendar.min' %>
 
+<style>
+  .message_close{
+    bottom: 70px;
+  }
+  .message_modal, .message_content{
+    bottom:130px;
+  }
+</style>
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){

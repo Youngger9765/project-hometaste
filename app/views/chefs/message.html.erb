@@ -30,7 +30,7 @@
           </div>
         </div>
 
-        <% current_user.recieved_conversations.each do |conversation|%>
+        <% current_user.recieved_conversations.all.each do |conversation|%>
 
           <div class="col-xs-12 prl15_sm" id="my_purchase_content">
             <div class="black_border_block mt25_sm mrl5_sm mrl25_md pb15">
@@ -52,7 +52,7 @@
                       <%end%>
                     </span>
                     <div class="clearfix visible-xs" style="flex-basis: 100%;"></div>
-                    <button class="my_btn ml100_md ml50_sm mrla_xs mrn_sm mt20 mt0_sm" name="message_button"><%= link_to "Message", get_conversation_messages_chef_path(:conversation => conversation.id), :remote => true%></button>
+                      <%= link_to "Message", get_conversation_messages_chef_path(:conversation => 2),class: 'my_btn ml100_md ml50_sm mrla_xs mrn_sm mt20 mt0_sm', name: 'message_button', :remote => true%>
                   </div>
                 </div>
               </div>
@@ -67,3 +67,4 @@
 
 
 <div class="message_modal"></div>
+<div class="message_close">&times;</div>
