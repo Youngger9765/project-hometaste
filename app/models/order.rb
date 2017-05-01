@@ -35,7 +35,7 @@ class Order < ApplicationRecord
   end
 
   def calc_subtotal
-    order_food_ships.pluck(:amount).reduce(:+).to_i
+    order_food_ships.pluck(:amount).reduce(:+).to_f
   end
 
   def calc_tax
