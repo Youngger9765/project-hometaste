@@ -39,7 +39,7 @@ namespace :dev do
     #  === For Product ===
     create_chef = false
     users_cnt = 10
-    foods_cnt = 0
+    foods_cnt = 50
     food_comments_cnt = 0
     orders_cnt = 0
     order_food_ships_cnt = 0
