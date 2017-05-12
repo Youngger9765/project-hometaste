@@ -38,11 +38,12 @@ namespace :dev do
 
     #  === For Product ===
     create_chef = false
-    users_cnt = 0
+    users_cnt = 10
     foods_cnt = 0
     food_comments_cnt = 0
     orders_cnt = 0
     order_food_ships_cnt = 0
+
 
 
     # admin@admin.com
@@ -104,7 +105,8 @@ namespace :dev do
         password: Faker::Internet.password(10, 20),
         confirmed_at: Faker::Time.between(DateTime.now - 365, DateTime.now-1),
         address: Faker::Address.city + Faker::Address.street_name + Faker::Address.secondary_address,
-        is_chef: [true, false].sample,
+        # is_chef: [true, false].sample,
+        is_chef: true,
       )
     }
 
